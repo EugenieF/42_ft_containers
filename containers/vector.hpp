@@ -99,6 +99,21 @@ namespace ft
 	template <typename T, typename Allocator>
 	void	swap (vector<T,Allocator>& x, vector<T,Allocator>& y);
 
+
+
+	template<class T>
+	class vector_iterator
+	{
+		public:
+			typedef	ptrdiff_t							difference_type;
+			typedef T									value_type;
+			typedef T*									pointer;
+			typedef T&									reference;
+			typedef std::random_access_iterator_tag		iterator_category;
+
+		private:
+
+	};
 }
 
 #include "vector.tpp"
