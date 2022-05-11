@@ -1,11 +1,14 @@
 #ifndef __MAIN_HPP
-#define __MAIN_HPP
+# define __MAIN_HPP
 
-#include <iostream>
-#include <memory>
-#include <functional>
-#include <deque>
+# include <iostream>
+# include <memory>
+# include <functional>
+# include <deque>
+# include <cstddef>
 
-#include "vector.hpp"
+# include "vector.hpp"
+# include "iterator.hpp"
+# include "pair.hpp"
 
 #endif

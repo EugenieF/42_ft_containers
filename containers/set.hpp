@@ -5,7 +5,7 @@
 
 namespace ft
 {
-	template < class T, class Compare = std::less<Key>, class Alloc = std::allocator<T> >
+	template < class T, class Compare = std::less<Key>, class Allocator = std::allocator<T> >
 	class set
 	{
 		private:
@@ -61,6 +61,29 @@ namespace ft
 			iterator							upper_bound (const value_type& val) const;
 			pair<iterator,iterator>				equal_range (const value_type& val) const;
 	};
+
+	/**************    NON-MEMBER FUNCTION OVERLOADS     **************/
+	template< class Key, class Compare, class Allocator >
+	bool operator==( const set<Key,Compare,Allocator>& lhs, const set<Key,Compare,Allocator>& rhs );
+
+	template< class Key, class Compare, class Allocator >
+	bool operator!=( const set<Key,Compare,Allocator>& lhs, const set<Key,Compare,Allocator>& rhs );
+
+	template< class Key, class Compare, class Allocator >
+	bool operator<( const set<Key,Compare,Allocator>& lhs, const set<Key,Compare,Allocator>& rhs );
+
+	template< class Key, class Compare, class Allocator >
+	bool operator<=( const set<Key,Compare,Allocator>& lhs, const set<Key,Compare,Allocator>& rhs );
+
+	template< class Key, class Compare, class Allocator >
+	bool operator>( const set<Key,Compare,Allocator>& lhs, const set<Key,Compare,Allocator>& rhs );
+
+	template< class Key, class Compare, class Allocator >
+	bool operator>=( const set<Key,Compare,Allocator>& lhs, const set<Key,Compare,Allocator>& rhs );
+
+	template< class Key, class Compare, class Allocator >
+	void swap( set<Key,Compare,Allocator>& lhs, set<Key,Compare,Allocator>& rhs );
+
 }
 
 #endif

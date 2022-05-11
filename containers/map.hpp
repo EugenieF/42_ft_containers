@@ -5,7 +5,7 @@
 
 namespace ft
 {
-	template < class Key, class T, class Compare = std::less<Key>, class Alloc = std::allocator<pair<const Key,T> > >
+	template < class Key, class T, class Compare = std::less<Key>, class Allocator = std::allocator<pair<const Key,T> > >
 	class map
 	{
 		private:
@@ -71,6 +71,29 @@ namespace ft
 			pair<const_iterator,const_iterator>	equal_range (const key_type& k) const;
 			pair<iterator,iterator>             equal_range (const key_type& k);
 	};
+
+	/**************    NON-MEMBER FUNCTION OVERLOADS     **************/
+	template< class Key, class T, class Compare, class Allocator >
+	bool operator==( const map<Key,T,Compare,Allocator>& lhs, const map<Key,T,Compare,Allocator>& rhs );
+
+	template< class Key, class T, class Compare, class Allocator >
+	bool operator!=( const map<Key,T,Compare,Allocator>& lhs, const map<Key,T,Compare,Allocator>& rhs );
+
+	template< class Key, class T, class Compare, class Allocator >
+	bool operator<( const map<Key,T,Compare,Allocator>& lhs, const map<Key,T,Compare,Allocator>& rhs );
+
+	template< class Key, class T, class Compare, class Allocator >
+	bool operator<=( const map<Key,T,Compare,Allocator>& lhs, const map<Key,T,Compare,Allocator>& rhs );
+
+	template< class Key, class T, class Compare, class Allocator >
+	bool operator>( const map<Key,T,Compare,Allocator>& lhs, const map<Key,T,Compare,Allocator>& rhs );
+
+	template< class Key, class T, class Compare, class Allocator >
+	bool operator>=( const map<Key,T,Compare,Allocator>& lhs, const map<Key,T,Compare,Allocator>& rhs );
+
+	template< class Key, class T, class Compare, class Allocator >
+	void swap( map<Key,T,Compare,Allocator>& lhs, map<Key,T,Compare,Allocator>& rhs );
+
 }
 
 #endif

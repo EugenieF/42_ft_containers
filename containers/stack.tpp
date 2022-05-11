@@ -2,7 +2,7 @@
 
 /****************           MAIN           ****************/
 
-template <typename T, typename Container>
+template <class T, class Container>
 explicit	stack<T, Container>::stack (const container_type& ctnr = container_type())
 {
 	(void)ctnr;
@@ -10,13 +10,13 @@ explicit	stack<T, Container>::stack (const container_type& ctnr = container_type
 
 /****************         CAPACITY         ****************/
 
-template <typename T, typename Container>
+template <class T, class Container>
 bool	stack<T, Container>::empty() const
 {
 
 }
 
-template <typename T, typename Container>
+template <class T, class Container>
 size_type	stack<T, Container>::size() const
 {
 
@@ -24,13 +24,13 @@ size_type	stack<T, Container>::size() const
 
 /****************      ELEMENT ACCESS       ***************/
 
-template <typename T, typename Container>
+template <class T, class Container>
 value_type&		stack<T, Container>::top()
 {
 
 }
 
-template <typename T, typename Container>
+template <class T, class Container>
 const value_type&	stack<T, Container>::top() const
 {
 
@@ -38,13 +38,13 @@ const value_type&	stack<T, Container>::top() const
 
 /****************        MODIFIERS         ****************/
 
-template <typename T, typename Container>
+template <class T, class Container>
 void	stack<T, Container>::push (const value_type& val)
 {
 	(void)val;
 }
 
-template <typename T, typename Container>
+template <class T, class Container>
 void	stack<T, Container>::pop()
 {
 

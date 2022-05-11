@@ -5,25 +5,25 @@
 
 namespace ft
 {
-	template < class T, class Alloc = std::allocator<T> >
+	template < class T, class Allocator = std::allocator<T> >
 	class	vector
 	{
 		private:
 
 		public:
 			/****************          TYPEDEF         ****************/
-			typedef T					value_type;
-			typedef Alloc				allocator_type;
-			typedef	size_t				size_type;
-			typedef	ptrdiff_t			difference_type;
-			typedef	value_type&			reference;
-			typedef const value_type&	const_reference;
-			typedef	value_type*			pointer;
-			typedef	const value_type*	const_pointer;
-			// typedef ?? 				iterator;
-			// typedef ?? 				const_iterator;
-			// typedef ?? 				reverse_iterator;
-			// typedef ?? 				const_reverse_iterator;
+			typedef T									value_type;
+			typedef Allocator							allocator_type;
+			typedef	size_t								size_type;
+			typedef	ptrdiff_t							difference_type;
+			typedef	value_type&							reference;
+			typedef const value_type&					const_reference;
+			typedef	value_type*							pointer;
+			typedef	const value_type*					const_pointer;
+			// typedef ?? 									iterator;
+			// typedef ?? 									const_iterator;
+			typedef reverse_iterator<iterator>			reverse_iterator;
+			typedef reverse_iterator<const_iterator>	const_reverse_iterator;
 
 			/****************           MAIN           ****************/
 			explicit 				vector (const allocator_type& alloc = allocator_type());
@@ -77,29 +77,28 @@ namespace ft
 			void					clear();
 	};
 
-
 	/**************    NON-MEMBER FUNCTION OVERLOADS     **************/
 
-	template <typename T, typename Alloc>
-	bool	operator== (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs);
+	template <typename T, typename Allocator>
+	bool	operator== (const vector<T,Allocator>& lhs, const vector<T,Allocator>& rhs);
 
-	template <typename T, typename Alloc>
-	bool	operator!= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs);
+	template <typename T, typename Allocator>
+	bool	operator!= (const vector<T,Allocator>& lhs, const vector<T,Allocator>& rhs);
 
-	template <typename T, typename Alloc>
-	bool	operator<  (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs);
+	template <typename T, typename Allocator>
+	bool	operator<  (const vector<T,Allocator>& lhs, const vector<T,Allocator>& rhs);
 
-	template <typename T, typename Alloc>
-	bool	operator<= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs);
+	template <typename T, typename Allocator>
+	bool	operator<= (const vector<T,Allocator>& lhs, const vector<T,Allocator>& rhs);
 
-	template <typename T, typename Alloc>
-	bool	operator>  (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs);
+	template <typename T, typename Allocator>
+	bool	operator>  (const vector<T,Allocator>& lhs, const vector<T,Allocator>& rhs);
 
-	template <typename T, typename Alloc>
-	bool	operator>= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs);
+	template <typename T, typename Allocator>
+	bool	operator>= (const vector<T,Allocator>& lhs, const vector<T,Allocator>& rhs);
 
-	template <typename T, typename Alloc>
-	void	swap (vector<T,Alloc>& x, vector<T,Alloc>& y);
+	template <typename T, typename Allocator>
+	void	swap (vector<T,Allocator>& x, vector<T,Allocator>& y);
 
 }
 
