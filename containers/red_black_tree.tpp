@@ -42,6 +42,25 @@ void		red_black_tree::insert_node(nodePtr x)
 {
 	nodePtr	y = this->get_NIL();
 	nodePtr tmp = this->get_root();
+
+	while (tmp != this->get_NIL())
+	{
+		y = tmp;
+		if (x->data < tmp->data)
+			tmp = tmp->left;
+		else
+			tmp = tmp->right;
+	}
+	x->parent = y;
+	if (y == this->get_NIL())
+		this->set_root(x);
+	else if (x->data < y->data)
+		y->left = n;
+	else
+		y->right = n;
+	n->left = this->get_NIL();
+	n->right = this->get_NIL();
+	n->color = RED;
 	fix_insertion(node);
 }
 
@@ -63,6 +82,11 @@ void		red_black_tree::fix_deletion(nodePtr node)
 nodePtr		red_black_tree::get_root()
 {
 	return (this->root);
+}
+
+void	red_black_tree::set_root(nodePtr node)
+{
+	this->root = node;
 }
 
 nodePtr		red_black_tree::get_NIL()

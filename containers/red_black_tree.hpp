@@ -13,6 +13,7 @@ namespace ft
 
 	typedef struct	node
 	{
+		int		data;
 		node	*left;
 		node	*right;
 		node	*parent;
@@ -28,13 +29,15 @@ namespace ft
 			nodePtr	NIL;
 
 		public:
+			nodePtr		get_root();
+			nodePtr		get_NIL();
+			void		set_root(nodePtr node);
 			void		left_rotate(nodePtr node);
 			void		right_rotate(nodePtr node);
 			void		insert_node(int key);
 			void		fix_insertion(nodePtr node);
 			void		delete_node(int key);
 			void		fix_deletion(nodePtr node);
-			nodePtr		get_root();
 			void		transplant(nodePtr u, nodePtr v);
 			nodePtr		search_node(nodePtr node, int key);
 	}
