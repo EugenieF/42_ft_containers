@@ -5,6 +5,10 @@
 
 namespace ft
 {
+	/***********************************************************************************/
+	/*                                CONTAINER VECTOR                                 */
+	/***********************************************************************************/
+
 	template < class T, class Allocator = std::allocator<T> >
 	class	vector
 	{
@@ -12,18 +16,18 @@ namespace ft
 
 		public:
 			/****************          TYPEDEF         ****************/
-			typedef T									value_type;
-			typedef Allocator							allocator_type;
-			typedef	size_t								size_type;
-			typedef	ptrdiff_t							difference_type;
-			typedef	value_type&							reference;
-			typedef const value_type&					const_reference;
-			typedef	value_type*							pointer;
-			typedef	const value_type*					const_pointer;
-			// typedef ?? 									iterator;
-			// typedef ?? 									const_iterator;
-			typedef reverse_iterator<iterator>			reverse_iterator;
-			typedef reverse_iterator<const_iterator>	const_reverse_iterator;
+			typedef T										value_type;
+			typedef Allocator								allocator_type;
+			typedef	size_t									size_type;
+			typedef	ptrdiff_t								difference_type;
+			typedef	value_type&								reference;
+			typedef const value_type&						const_reference;
+			typedef	value_type*								pointer;
+			typedef	const value_type*						const_pointer;
+			typedef vector_iterator<T>						iterator;
+			typedef vector_iterator<T const>				const_iterator;
+			typedef ft::reverse_iterator<iterator>			reverse_iterator;
+			typedef ft::reverse_iterator<const_iterator>	const_reverse_iterator;
 
 			/****************           MAIN           ****************/
 			explicit 				vector (const allocator_type& alloc = allocator_type());
@@ -100,10 +104,15 @@ namespace ft
 	void	swap (vector<T,Allocator>& x, vector<T,Allocator>& y);
 
 
+	/***********************************************************************************/
+	/*                                  VECTOR ITERATOR                                */
+	/***********************************************************************************/
 
-	template<class T>
+	template <class T>
 	class vector_iterator
 	{
+		private:
+
 		public:
 			typedef	ptrdiff_t							difference_type;
 			typedef T									value_type;
@@ -111,9 +120,48 @@ namespace ft
 			typedef T&									reference;
 			typedef std::random_access_iterator_tag		iterator_category;
 
-		private:
-
+			vector_iterator();
+			explicit vector_iterator (iterator_type it);
+			template <class Iterator>
+  			vector_iterator (const vector_iterator<Iter>& rev_it);
+			template <class Iter>
+			vector_iterator (const vector_iterator<Iter>& rev_it);
+			iterator_type								base() const;
+			reference									operator*() const;
+			vector_iterator								operator+ (difference_type n) const;
+			vector_iterator								operator++(int);
+			vector_iterator& 							operator+= (difference_type n);
+			vector_iterator 							operator- (difference_type n) const;
+			vector_iterator& 							operator--();
+			vector_iterator  							operator--(int);
+			vector_iterator&							operator-= (difference_type n);
+			pointer										operator->() const;
+			reference									operator[] (difference_type n) const;
 	};
+	
+	template <class Iterator>
+	bool												operator== (const vector_iterator<Iterator>& lhs, const vector_iterator<Iterator>& rhs);
+
+	template <class Iterator>
+ 	bool												operator!= (const vector_iterator<Iterator>& lhs, const vector_iterator<Iterator>& rhs);
+
+	template <class Iterator>
+	bool												operator<  (const vector_iterator<Iterator>& lhs, const vector_iterator<Iterator>& rhs);
+
+	template <class Iterator>
+	bool												operator<= (const vector_iterator<Iterator>& lhs, const vector_iterator<Iterator>& rhs);
+
+	template <class Iterator>
+	bool												operator>  (const vector_iterator<Iterator>& lhs, const vector_iterator<Iterator>& rhs);
+
+	template <class Iterator>
+	bool												operator>= (const vector_iterator<Iterator>& lhs, const vector_iterator<Iterator>& rhs);
+
+	template <class Iterator>
+	vector_iterator<Iterator>							operator+ (typename vector_iterator<Iterator>::difference_type n, const vector_iterator<Iterator>& rev_it);
+
+	template <class Iterator>
+	typename vector_iterator<Iterator>::difference_type	operator- (const vector_iterator<Iterator>& lhs, const vector_iterator<Iterator>& rhs);
 }
 
 #include "vector.tpp"
