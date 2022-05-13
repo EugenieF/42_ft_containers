@@ -22,7 +22,7 @@ namespace ft
 		BLACK	= 1,
 	}	t_color;
 
-	template <typename T>
+	template <class T>
 	class	Node
 	{
 		public:
@@ -31,9 +31,9 @@ namespace ft
 			typedef Node&	reference;
 
 			value_type	data;
-			node	*left;
-			node	*right;
-			node	*parent;
+			pointer		left;
+			pointer		right;
+			pointer		parent;
 			int		color;
 
 			node();
@@ -43,11 +43,16 @@ namespace ft
 			reference	operator=(reference rhs);
 	};
 
-	typedef node	*nodePtr;
-	typedef node	&nodeRef;
-
+	template <class T, class Compare = std::less<T>, class Allocator = std::allocator<T>>
 	class	red_black_tree
 	{
+		public:
+			typedef T				value_type
+			typedef Node<T>			node;
+			typedef node*			nodePtr;
+			typedef node&			nodeRef;
+			typedef Compare					key_compare;
+			typedef Allocator				allocator_type;
 		private:
 			nodePtr	_root;
 			nodePtr	_NIL;
@@ -59,12 +64,12 @@ namespace ft
 			void		left_rotate(nodePtr node);
 			void		right_rotate(nodePtr node);
 			void		insert_node(int key);
-			void		insert_fixup(nodePtr node);
+			void		fix_insertion(nodePtr node);
 			void		delete_node(int key);
-			void		delete_fixup(nodePtr node);
+			void		fix_deletion(nodePtr node);
 			void		transplant(nodePtr u, nodePtr v);
 			nodePtr		search_node(nodePtr node, int key);
-	}
+	};
 
 }
 

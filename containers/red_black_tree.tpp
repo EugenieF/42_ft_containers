@@ -65,6 +65,8 @@ void		red_black_tree::right_rotate(nodePtr x)
 	x->parent = y;
 }
 
+/*********************      INSERTION      *********************/
+
 void		red_black_tree::insert_node(nodePtr x)
 {
 	nodePtr	y = this->get_NIL();
@@ -91,7 +93,7 @@ void		red_black_tree::insert_node(nodePtr x)
 	fix_insertion(node);
 }
 
-void		red_black_tree::insert_fixup(nodePtr node)
+void		red_black_tree::fix_insertion(nodePtr node)
 {
 	while (node->parent->color == RED)
 	{
@@ -143,20 +145,29 @@ void		red_black_tree::insert_fixup(nodePtr node)
 	this->_root->color = BLACK;
 }
 
+/***********************      DELETION      ***********************/
+
+void		red_black_tree::transplant(nodePtr node1, nodePtr node2)
+{
+	if (node1->parent == get_NIL())						// node1 is root
+		set_root(node2);
+	else if (node1 == node1->parent->left)				// node1 is left child
+		node1->parent->left = node2;
+	else
+		node1->parent->right = node2;					// node2 is right chile
+	node2->parent = node1->parent;
+}
+
 void		red_black_tree::delete_node(int key)
 {
 
 }
 
-void		red_black_tree::delete_fixup(nodePtr node)
+void		red_black_tree::fix_deletion(nodePtr node)
 {
 
 }
 
-void		red_black_tree::transplant(nodePtr u, nodePtr v)
-{
-
-}
 
 nodePtr		red_black_tree::search_node(nodePtr node, int key)
 {

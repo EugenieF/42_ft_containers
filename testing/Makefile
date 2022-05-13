@@ -6,17 +6,22 @@ CXXFLAGS = -Wall -Wextra
 NAME = gtests
 
 INCLUDE = -Igtest_incs/ -pthread
-LIBGTEST = gtest_incs/libgtest.a
+
+ifeq ($(UNAME), Darwin)
+	LIBGTEST = gtest_incs/libgtest.a
+else
+	LIBGTEST = gtest_incs/libgtest.a
+endif
 
 CXXFLAGS += $(INCLUDE)
 
 MAIN = gtest_main.cpp
 
-FILES = vectorTests #requests_gtests
+FILES = vectorTests stackTests mapTests #requests_gtests
 
 FT_CONTAINER_OBJS_PATH = ../../objs/
 
-FT_CONTAINER_DIR =
+FT_CONTAINER_DIR = 
 
 FT_CONTAINER_PATH = $(addprefix $(FT_CONTAINER_OBJS_PATH), $(FT_CONTAINER_DIR))
 # FT_CONTAINER_OBJS = $(wildcard $(foreach $(FT_CONTAINER_PATH)/*.o) #taking all the objects without the main
