@@ -5,6 +5,10 @@
 
 namespace ft
 {
+	/***********************************************************************************/
+	/*                                      MAP 	                                   */
+	/***********************************************************************************/
+
 	template < class Key, class T, class Compare = std::less<Key>, class Allocator = std::allocator<pair<const Key,T> > >
 	class map
 	{

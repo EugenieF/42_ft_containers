@@ -5,13 +5,17 @@
 
 namespace ft
 {
+	/***********************************************************************************/
+	/*                                      SET  	                                   */
+	/***********************************************************************************/
+
 	template < class T, class Compare = std::less<Key>, class Allocator = std::allocator<T> >
 	class set
 	{
 		private:
 
 		public:
-				/****************          TYPEDEF         ****************/
+			/****************          TYPEDEF         ****************/
 			typedef T						key_type;
 			typedef Compare					key_compare;
 			typedef Allocator				allocator_type;

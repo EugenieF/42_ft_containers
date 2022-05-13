@@ -25,31 +25,77 @@ namespace ft
 	/*                                    IS_INTEGRAL                                  */
 	/***********************************************************************************/
 
-	template <class InputIt1, class InputIt2>
-	bool lexicographical_compare(InputIt1 first1, InputIt1 last1, InputIt2 first2, InputIt2 last2)
+	template <class T>
+	struct is_integral
 	{
-    	for ( ; (first1 != last1) && (first2 != last2); ++first1, (void) ++first2 )
-		{
-			if (*first1 < *first2)
-				return true;
-			if (*first2 < *first1)
-				return false;
-		}
-		return (first1 == last1) && (first2 != last2);
-	}
+		
+	};
 
-	template <class InputIt1, class InputIt2, class Compare>
-	bool lexicographical_compare(InputIt1 first1, InputIt1 last1, InputIt2 first2, InputIt2 last2, Compare comp)
+	template <>
+	struct is_integral<bool>
 	{
-    	for ( ; (first1 != last1) && (first2 != last2); ++first1, (void) ++first2 )
-		{
-        	if (comp(*first1, *first2))
-				return true;
-        	if (comp(*first2, *first1))
-				return false;
-    	}
-    	return (first1 == last1) && (first2 != last2);
-	}
+		
+	};
+
+	template <>
+	struct is_integral<char>
+	{
+		
+	};
+
+	template <>
+	struct is_integral<unsigned char>
+	{
+		
+	};
+
+	template <>
+	struct is_integral<short>
+	{
+		
+	};
+
+	template <>
+	struct is_integral<unsigned short>
+	{
+		
+	};
+
+	template <>
+	struct is_integral<int>
+	{
+		
+	};
+
+	template <>
+	struct is_integral<unsigned int>
+	{
+		
+	};
+
+	template <>
+	struct is_integral<long>
+	{
+		
+	};
+
+	template <>
+	struct is_integral<unsigned long>
+	{
+		
+	};
+
+	template <>
+	struct is_integral<long long>
+	{
+		
+	};
+
+	template <>
+	struct is_integral<unsigned long long>
+	{
+		
+	};
 }
 
 #endif

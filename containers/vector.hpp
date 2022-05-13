@@ -6,7 +6,7 @@
 namespace ft
 {
 	/***********************************************************************************/
-	/*                                CONTAINER VECTOR                                 */
+	/*                                      VECTOR                                     */
 	/***********************************************************************************/
 
 	template < class T, class Allocator = std::allocator<T> >
@@ -103,65 +103,6 @@ namespace ft
 	template <typename T, typename Allocator>
 	void	swap (vector<T,Allocator>& x, vector<T,Allocator>& y);
 
-
-	/***********************************************************************************/
-	/*                                  VECTOR ITERATOR                                */
-	/***********************************************************************************/
-
-	template <class T>
-	class vector_iterator
-	{
-		private:
-
-		public:
-			typedef	ptrdiff_t							difference_type;
-			typedef T									value_type;
-			typedef T*									pointer;
-			typedef T&									reference;
-			typedef std::random_access_iterator_tag		iterator_category;
-
-			vector_iterator();
-			explicit vector_iterator (iterator_type it);
-			template <class Iterator>
-  			vector_iterator (const vector_iterator<Iter>& rev_it);
-			template <class Iter>
-			vector_iterator (const vector_iterator<Iter>& rev_it);
-			iterator_type								base() const;
-			reference									operator*() const;
-			vector_iterator								operator+ (difference_type n) const;
-			vector_iterator								operator++(int);
-			vector_iterator& 							operator+= (difference_type n);
-			vector_iterator 							operator- (difference_type n) const;
-			vector_iterator& 							operator--();
-			vector_iterator  							operator--(int);
-			vector_iterator&							operator-= (difference_type n);
-			pointer										operator->() const;
-			reference									operator[] (difference_type n) const;
-	};
-	
-	template <class Iterator>
-	bool												operator== (const vector_iterator<Iterator>& lhs, const vector_iterator<Iterator>& rhs);
-
-	template <class Iterator>
- 	bool												operator!= (const vector_iterator<Iterator>& lhs, const vector_iterator<Iterator>& rhs);
-
-	template <class Iterator>
-	bool												operator<  (const vector_iterator<Iterator>& lhs, const vector_iterator<Iterator>& rhs);
-
-	template <class Iterator>
-	bool												operator<= (const vector_iterator<Iterator>& lhs, const vector_iterator<Iterator>& rhs);
-
-	template <class Iterator>
-	bool												operator>  (const vector_iterator<Iterator>& lhs, const vector_iterator<Iterator>& rhs);
-
-	template <class Iterator>
-	bool												operator>= (const vector_iterator<Iterator>& lhs, const vector_iterator<Iterator>& rhs);
-
-	template <class Iterator>
-	vector_iterator<Iterator>							operator+ (typename vector_iterator<Iterator>::difference_type n, const vector_iterator<Iterator>& rev_it);
-
-	template <class Iterator>
-	typename vector_iterator<Iterator>::difference_type	operator- (const vector_iterator<Iterator>& lhs, const vector_iterator<Iterator>& rhs);
 }
 
 #include "vector.tpp"

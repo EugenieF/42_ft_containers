@@ -5,11 +5,9 @@
 
 namespace ft
 {
-	struct input_iterator_tag {};
-	struct output_iterator_tag {};
-	struct forward_iterator_tag: public input_iterator_tag {};
-	struct bidirectional_iterator_tag: public forward_iterator_tag {};
-	struct random_access_iterator_tag: public bidirectional_iterator_tag {};
+	/***********************************************************************************/
+	/*                                    ITERATOR 	                                   */
+	/***********************************************************************************/
 
 	template <class Category, class T, class Distance = std::ptrdiff_t, class Pointer = T*, class Reference = T& >
 	struct iterator
@@ -21,6 +19,11 @@ namespace ft
 		typedef Reference										reference;
 		typedef Category										iterator_category;
 	};
+
+
+	/***********************************************************************************/
+	/*                                  ITERATOR TRAITS 	                           */
+	/***********************************************************************************/
 
 	template< class Iterator >
 	struct iterator_traits
@@ -34,7 +37,7 @@ namespace ft
 	};
 
 	template< class T >
-	struct iterator_traits<T*>
+	struct iterator_traits < T* >
 	{
 		/***********************          TYPEDEF         ***********************/
 		typedef	ptrdiff_t										difference_type;
@@ -45,7 +48,7 @@ namespace ft
 	};
 
 	template< class T >
-	struct iterator_traits<const T*>
+	struct iterator_traits < const T* >
 	{
 		/***********************          TYPEDEF         ***********************/
 		typedef	ptrdiff_t										difference_type;
@@ -54,6 +57,11 @@ namespace ft
 		typedef T& const										reference;
 		typedef std::random_access_iterator_tag					iterator_category;
 	};
+
+
+	/***********************************************************************************/
+	/*                                 REVERSE ITERATOR  	                           */
+	/***********************************************************************************/
 
 	template <class Iterator>
 	class reverse_iterator
@@ -89,23 +97,24 @@ namespace ft
 	};
 
 	/**************    NON-MEMBER FUNCTION OVERLOADS     **************/
-	template <class Iterator>
-	bool														operator== (const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs);
 
-	template <class Iterator>
- 	bool														operator!= (const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs);
+	template <class Iterator1, class Iterator2>
+	bool														operator== (const reverse_iterator<Iterator1>& lhs, const reverse_iterator<Iterator2>& rhs);
 
-	template <class Iterator>
-	bool														operator<  (const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs);
+	template <class Iterator1, class Iterator2>
+ 	bool														operator!= (const reverse_iterator<Iterator1>& lhs, const reverse_iterator<Iterator2>& rhs);
 
-	template <class Iterator>
-	bool														operator<= (const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs);
+	template <class Iterator1, class Iterator2>
+	bool														operator<  (const reverse_iterator<Iterator1>& lhs, const reverse_iterator<Iterator2>& rhs);
 
-	template <class Iterator>
-	bool														operator>  (const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs);
+	template <class Iterator1, class Iterator2>
+	bool														operator<= (const reverse_iterator<Iterator1>& lhs, const reverse_iterator<Iterator2>& rhs);
 
-	template <class Iterator>
-	bool														operator>= (const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs);
+	template <class Iterator1, class Iterator2>
+	bool														operator>  (const reverse_iterator<Iterator1>& lhs, const reverse_iterator<Iterator2>& rhs);
+
+	template <class Iterator1, class Iterator2>
+	bool														operator>= (const reverse_iterator<Iterator1>& lhs, const reverse_iterator<Iterator2>& rhs);
 
 	template <class Iterator>
 	reverse_iterator<Iterator>									operator+ (typename reverse_iterator<Iterator>::difference_type n, const reverse_iterator<Iterator>& rev_it);
