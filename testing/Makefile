@@ -1,23 +1,27 @@
-SHELL = /bin/sh
+SHELL		= /bin/sh
 
-CXX = c++
-CXXFLAGS = -Wall -Wextra
+UNAME		=	$(shell uname)
 
-NAME = gtests
+CXX			= c++
 
-INCLUDE = -Igtest_incs/ -pthread
+CXXFLAGS	= -Wall -Wextra
+
+NAME		= gtests
+
+INCLUDE		= -Igtest_incs/ -pthread
 
 ifeq ($(UNAME), Darwin)
-	LIBGTEST = gtest_incs/libgtest.a
+	CXXFLAGS += -std=c++11
+	LIBGTEST = gtest_incs/libgtest_mac.a
 else
 	LIBGTEST = gtest_incs/libgtest.a
 endif
 
 CXXFLAGS += $(INCLUDE)
 
-MAIN = gtest_main.cpp
+MAIN		= gtest_main.cpp
 
-FILES = vectorTests stackTests mapTests #requests_gtests
+FILES		= vectorTests stackTests mapTests
 
 FT_CONTAINER_OBJS_PATH = ../../objs/
 
