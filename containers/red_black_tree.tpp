@@ -1,5 +1,32 @@
 #include "red_black_tree.hpp"
 
+node::node(): data(NULL), left(NULL), right(NULL), parent(NULL), color(RED) {}
+
+node::node(): {}
+
+node::~node(): {}
+
+node::node(node const &copy) {}
+
+node	&node::operator() {}
+
+red_black_tree::red_black_tree(): _root(NULL), _NIL(NULL) {}
+
+nodePtr		red_black_tree::get_root()
+{
+	return (this->_root);
+}
+
+void	red_black_tree::set_root(nodePtr node)
+{
+	this->_root = node;
+}
+
+nodePtr		red_black_tree::get_NIL()
+{
+	return (this->_NIL);
+}
+
 void	red_black_tree::left_rotate(nodePtr x)
 {
 	nodePtr y;
@@ -64,9 +91,56 @@ void		red_black_tree::insert_node(nodePtr x)
 	fix_insertion(node);
 }
 
-void		red_black_tree::fix_insertion(nodePtr node)
+void		red_black_tree::insert_fixup(nodePtr node)
 {
-
+	while (node->parent->color == RED)
+	{
+		if (node->parent == node->parent->parent->left)		// node->parent is left child
+		{
+			nodePtr y = node->parent->parent->right			// uncle of node
+			if (y->color == RED)							// Case 1
+			{
+				node->parent->color = BLACK;
+				y->color = BLACK;
+				node->parent->parent->color = RED;
+				node = node->parent->parent;
+			}
+			else
+			{
+				if (node == node->parent->right)			//Case 2
+				{
+					node = node->parent;
+					left_rotate(node);
+				}
+				node->parent->color = BLACK;				//Case 3
+				node->parent->parent->color = RED;
+				right_rotate(node->parent->parent);
+			}
+		}
+		else												// node->parent is right child
+		{
+			nodePtr y = node->parent->parent->left			// uncle of node
+			if (y->color == RED)							// Case 1
+			{
+				node->parent->color = BLACK;
+				y->color = BLACK;
+				node->parent->parent->color = RED;
+				node = node->parent->parent;
+			}
+			else
+			{
+				if (node == node->parent->left)				//Case 2
+				{
+					node = node->parent;
+					right_rotate(node);
+				}
+				node->parent->color = BLACK;				//Case 3
+				node->parent->parent->color = RED;
+				left_rotate(node->parent->parent);
+			}
+		}
+	}
+	this->_root->color = BLACK;
 }
 
 void		red_black_tree::delete_node(int key)
@@ -74,24 +148,9 @@ void		red_black_tree::delete_node(int key)
 
 }
 
-void		red_black_tree::fix_deletion(nodePtr node)
+void		red_black_tree::delete_fixup(nodePtr node)
 {
 
-}
-
-nodePtr		red_black_tree::get_root()
-{
-	return (this->root);
-}
-
-void	red_black_tree::set_root(nodePtr node)
-{
-	this->root = node;
-}
-
-nodePtr		red_black_tree::get_NIL()
-{
-	return (this->NIL);
 }
 
 void		red_black_tree::transplant(nodePtr u, nodePtr v)
