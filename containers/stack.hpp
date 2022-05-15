@@ -14,24 +14,27 @@ namespace ft
 	{
 		public:
 			/****************          TYPEDEF         ****************/
-			typename T			value_type;
-			typename Container	container_type;
-			typename size_t		size_type;
+			typedef typename T			value_type;
+			typedef typename size_t		size_type;
+			typedef Container			container_type;
+
+		protected:
+			Container					c;
 
 			/****************           MAIN           ****************/
-			explicit			stack (const container_type& ctnr = container_type());
+			explicit					stack (const container_type& ctnr = container_type());
 
 			/****************         CAPACITY         ****************/
-			bool				empty() const;
-			size_type			size() const;
+			bool						empty() const;
+			size_type					size() const;
 
 			/****************      ELEMENT ACCESS       ***************/
-			value_type&			top();
-			const value_type&	top() const;
+			value_type&					top();
+			const value_type&			top() const;
 
 			/****************        MODIFIERS         ****************/
-			void				push (const value_type& val);
-			void				pop();
+			void						push (const value_type& val);
+			void						pop();
 	};
 
 	/**************    NON-MEMBER FUNCTION OVERLOADS     **************/

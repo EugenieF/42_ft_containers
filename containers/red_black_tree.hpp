@@ -51,8 +51,8 @@ namespace ft
 			typedef Node<T>			node;
 			typedef node*			nodePtr;
 			typedef node&			nodeRef;
-			typedef Compare					key_compare;
-			typedef Allocator				allocator_type;
+			typedef Compare			key_compare;
+			typedef Allocator		allocator_type;
 		private:
 			nodePtr	_root;
 			nodePtr	_NIL;
@@ -61,11 +61,13 @@ namespace ft
 			nodePtr		get_root();
 			nodePtr		get_NIL();
 			void		set_root(nodePtr node);
+			nodePtr		get_minimum(nodePtr node)
+			nodePtr		get_maximum(nodePtr node)
 			void		left_rotate(nodePtr node);
 			void		right_rotate(nodePtr node);
-			void		insert_node(int key);
+			void		insert_node(nodePtr x);
 			void		fix_insertion(nodePtr node);
-			void		delete_node(int key);
+			void		delete_node(nodePtr x);
 			void		fix_deletion(nodePtr node);
 			void		transplant(nodePtr u, nodePtr v);
 			nodePtr		search_node(nodePtr node, int key);

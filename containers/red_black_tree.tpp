@@ -27,6 +27,26 @@ nodePtr		red_black_tree::get_NIL()
 	return (this->_NIL);
 }
 
+nodePtr	red_black_tree::get_minimum(nodePtr node)
+{
+	nodePtr	current;
+
+	current = node;
+	while (current->left != get_NIL())
+		current = current->left;
+	return (current);
+}
+
+nodePtr	red_black_tree::get_maximum(nodePtr node)
+{
+	nodePtr	current;
+
+	current = node;
+	while (current->right != get_NIL())
+		current = current->right;
+	return (current);
+}
+
 void	red_black_tree::left_rotate(nodePtr x)
 {
 	nodePtr y;
@@ -158,14 +178,118 @@ void		red_black_tree::transplant(nodePtr node1, nodePtr node2)
 	node2->parent = node1->parent;
 }
 
-void		red_black_tree::delete_node(int key)
+void		red_black_tree::delete_node(nodePtr z)
 {
-
+	nodePtr	x;
+	nodePtr	y;
+	int		y_origin_color;
+	
+	y = z;
+	y_origin_color = y->color;
+	if (z->left == get_NIL())							// no left child
+	{
+		x = z->right;
+		transplant(z, z->right);
+	}
+	else if (z->right == get_NIL())						// no right child
+	{
+		x = z->left;
+		transplant(z, z->left);
+	}
+	else												// has both children
+	{
+		y = get_minimum(z->right);
+		y_origin_color = y->color;
+		x = y->right;
+		if (y->parent == z)
+			x->parent = y;
+		else
+		{
+			transplant(y, y->right);
+			y->right = z->right;
+			y->right->parent = y;
+		}
+		transplant(z, y);
+		y->left = z->left;
+		y->left->parent = y;
+		y->color = z->color;
+	}
+	if (y_origin_color == BLACK)
+		fix_deletion(x);
 }
 
 void		red_black_tree::fix_deletion(nodePtr node)
 {
+	nodePtr	y;
 
+	while (node != get_root() && node->color == BLACK)
+	{
+		if (node == node->parent->left)
+		{
+			y = node->parent->right;
+			if (y->color == RED)						// Case 1
+			{
+				y->color = BLACK;
+				node->parent->color = RED;
+				left_rotate(node->parent);
+				y = node->parent->right;
+			}
+			if (y->left->color == BLACK
+				&& y->right->color == BLACK)			// Case 2
+			{
+				y->color = RED;
+				node = node->parent;
+			}
+			else
+			{
+				if (y->right->color == BLACK)			// Case 3
+				{
+					y->left->color = BLACK;
+					y->color = RED;
+					right_rotate(y);
+					y = node->parent->right;
+				}
+				y->color = node->parent->color;			// Case 4
+				node->parent->color = BLACK;
+				y->right->color = BLACK;
+				left_rotate(node->parent);
+				node = get_root();
+			}
+		}
+		else
+		{
+			y = node->parent->left;
+			if (y->color == RED)						// Case 1
+			{
+				y->color = BLACK;
+				node->parent->color = RED;
+				right_rotate(node->parent);
+				y = node->parent->left;
+			}
+			if (y->right->color == BLACK
+				&& y->left->color == BLACK)				// Case 2
+			{
+				y->color = RED;
+				node = node->parent;
+			}
+			else
+			{
+				if (y->left->color == BLACK)			// Case 3
+				{
+					y->right->color = BLACK;
+					y->color = RED;
+					left_rotate(y);
+					y = node->parent->left;
+				}
+				y->color = node->parent->color;			// Case 4
+				node->parent->color = BLACK;
+				y->left->color = BLACK;
+				right_rotate(node->parent);
+				node = get_root();
+			}
+		}
+	}
+	node->color = BLACK;
 }
 
 
