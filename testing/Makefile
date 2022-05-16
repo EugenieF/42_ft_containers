@@ -21,7 +21,7 @@ CXXFLAGS += $(INCLUDE)
 
 MAIN		= gtest_main.cpp
 
-FILES		= vectorTests stackTests mapTests
+FILES		=  ftStackTests #ftStackTests
 
 FT_CONTAINER_OBJS_PATH = ../../objs/
 

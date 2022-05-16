@@ -1,10 +1,11 @@
 #include "gtest/gtest.h"
-#include "mainTests.hpp"
+#include "../containers/main.hpp"
+#include <stack>
 
 TEST(StackInt, PushStack)
 {
 	std::cout << std::endl << BLUE_B << "   TEST STACK   " << RESET << std::endl;
-	std::stack<int> stack;
+	ft::stack<int> stack;
 	stack.push(1);
 	EXPECT_EQ(stack.top(), 1);
 	stack.push(2);

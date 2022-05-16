@@ -3,7 +3,7 @@
 /****************           MAIN           ****************/
 
 template <class T, class Container>
-explicit	stack<T, Container>::stack (const container_type& ctnr = container_type())
+ft::stack<T, Container>::stack (const container_type& ctnr)
 {
 	(void)ctnr;
 }
@@ -11,13 +11,13 @@ explicit	stack<T, Container>::stack (const container_type& ctnr = container_type
 /****************         CAPACITY         ****************/
 
 template <class T, class Container>
-bool	stack<T, Container>::empty() const
+bool	ft::stack<T, Container>::empty() const
 {
 
 }
 
 template <class T, class Container>
-size_type	stack<T, Container>::size() const
+typename ft::stack<T, Container>::size_type	ft::stack<T, Container>::size() const
 {
 
 }
@@ -25,13 +25,13 @@ size_type	stack<T, Container>::size() const
 /****************      ELEMENT ACCESS       ***************/
 
 template <class T, class Container>
-value_type&		stack<T, Container>::top()
+typename ft::stack<T, Container>::value_type&		ft::stack<T, Container>::top()
 {
 
 }
 
 template <class T, class Container>
-const value_type&	stack<T, Container>::top() const
+const typename ft::stack<T, Container>::value_type&	ft::stack<T, Container>::top() const
 {
 
 }
@@ -39,13 +39,13 @@ const value_type&	stack<T, Container>::top() const
 /****************        MODIFIERS         ****************/
 
 template <class T, class Container>
-void	stack<T, Container>::push (const value_type& val)
+void	ft::stack<T, Container>::push (const ft::stack<T, Container>::value_type& val)
 {
 	(void)val;
 }
 
 template <class T, class Container>
-void	stack<T, Container>::pop()
+void	ft::stack<T, Container>::pop()
 {
 
 }
@@ -53,42 +53,42 @@ void	stack<T, Container>::pop()
 /*********     NON-MEMBER FUNCTION OVERLOADS     **********/
 
 template <class T, class Container>
-bool operator== (const stack<T,Container>& lhs, const stack<T,Container>& rhs)
+bool operator== (const ft::stack<T,Container>& lhs, const ft::stack<T,Container>& rhs)
 {
 	(void)lhs;
 	(void)rhs;
 }
 
 template <class T, class Container>
-bool operator!= (const stack<T,Container>& lhs, const stack<T,Container>& rhs)
+bool operator!= (const ft::stack<T,Container>& lhs, const ft::stack<T,Container>& rhs)
 {
 	(void)lhs;
 	(void)rhs;
 }
 
 template <class T, class Container>
-bool operator<  (const stack<T,Container>& lhs, const stack<T,Container>& rhs)
+bool operator<  (const ft::stack<T,Container>& lhs, const ft::stack<T,Container>& rhs)
 {
 	(void)lhs;
 	(void)rhs;
 }
 
 template <class T, class Container>
-bool operator<= (const stack<T,Container>& lhs, const stack<T,Container>& rhs)
+bool operator<= (const ft::stack<T,Container>& lhs, const ft::stack<T,Container>& rhs)
 {
 	(void)lhs;
 	(void)rhs;
 }
 
 template <class T, class Container>
-bool operator>  (const stack<T,Container>& lhs, const stack<T,Container>& rhs)
+bool operator>  (const ft::stack<T,Container>& lhs, const ft::stack<T,Container>& rhs)
 {
 	(void)lhs;
 	(void)rhs;
 }
 
 template <class T, class Container>
-bool operator>= (const stack<T,Container>& lhs, const stack<T,Container>& rhs)
+bool operator>= (const ft::stack<T,Container>& lhs, const ft::stack<T,Container>& rhs)
 {
 	(void)lhs;
 	(void)rhs;

@@ -1,5 +1,5 @@
-#ifndef __MAIN_HPP__
-# define __MAIN_HPP__
+#ifndef __MAINTESTS_HPP__
+# define __MAINTESTS_HPP__
 
 # define BLUE_B "\033[40;1;38;5;117m"
 # define RESET "\033[0m"
@@ -10,10 +10,6 @@
 # include <deque>
 # include <cstddef>
 # include <iterator>
-
-# include "stack.hpp"
-// # include "vector.hpp"
-// # include "iterator.hpp"
-// # include "pair.hpp"
+# include <stack>
 
 #endif
