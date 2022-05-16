@@ -23,55 +23,63 @@ namespace ft
 			typedef Container						container_type;
 
 		protected:
-			Container					c;
+			Container								c;
 
 		public:
 			/****************           MAIN           ****************/
-			explicit					stack (const container_type& ctnr = Container());
-			// stack						&operator=(const stack& other);
+			explicit								stack (const container_type& ctnr = Container());
 
 			/****************         CAPACITY         ****************/
-			bool						empty() const;
-			size_type					size() const;
+			bool									empty() const;
+			size_type								size() const;
 
 			/****************      ELEMENT ACCESS       ***************/
-			value_type&					top();
-			const value_type&			top() const;
+			value_type&								top();
+			const value_type&						top() const;
 
 			/****************        MODIFIERS         ****************/
-			void						push (const value_type& val);
-			void						pop();
+			void									push (const value_type& val);
+			void									pop();
 
-			template <class T1, class Container1>
-			friend bool operator== (const stack<T1, Container1>& lhs, const stack<T1, Container1>& rhs);
+			/****************     FRIEND FUNCTIONS     ****************/
+			template <class Tn, class ContainerN>
+			friend bool operator== (const stack<Tn, ContainerN>& lhs, const stack<Tn, ContainerN>& rhs);
+
+			template <class Tn, class ContainerN>
+			friend bool operator!= (const stack<Tn, ContainerN>& lhs, const stack<Tn, ContainerN>& rhs);
+
+			template <class Tn, class ContainerN>
+			friend bool operator< (const stack<Tn, ContainerN>& lhs, const stack<Tn, ContainerN>& rhs);
+
+			template <class Tn, class ContainerN>
+			friend bool operator<= (const stack<Tn, ContainerN>& lhs, const stack<Tn, ContainerN>& rhs);
+
+			template <class Tn, class ContainerN>
+			friend bool operator> (const stack<Tn, ContainerN>& lhs, const stack<Tn, ContainerN>& rhs);
+
+			template <class Tn, class ContainerN>
+			friend bool operator>= (const stack<Tn, ContainerN>& lhs, const stack<Tn, ContainerN>& rhs);
 	};
 
 	/**************    NON-MEMBER FUNCTION OVERLOADS     **************/
 
 	template <class T, class Container>
-	bool operator== (const stack<T,Container>& lhs, const stack<T,Container>& rhs)
-	{ return (lhs.c == rhs.c); };
+	bool operator== (const stack<T,Container>& lhs, const stack<T,Container>& rhs);
 
 	template <class T, class Container>
-	bool operator!= (const stack<T,Container>& lhs, const stack<T,Container>& rhs)
-	{ return (lhs.c != rhs.c); };
+	bool operator!= (const stack<T,Container>& lhs, const stack<T,Container>& rhs);
 
 	template <class T, class Container>
-	bool operator<  (const stack<T,Container>& lhs, const stack<T,Container>& rhs)
-	{ return (lhs.c < rhs.c); };
+	bool operator<  (const stack<T,Container>& lhs, const stack<T,Container>& rhs);
 
 	template <class T, class Container>
-	bool operator<= (const stack<T,Container>& lhs, const stack<T,Container>& rhs)
-	{ return (lhs.c <= rhs.c); };
+	bool operator<= (const stack<T,Container>& lhs, const stack<T,Container>& rhs);
 
 	template <class T, class Container>
-	bool operator>  (const stack<T,Container>& lhs, const stack<T,Container>& rhs)
-	{ return (lhs.c > rhs.c); };
+	bool operator>  (const stack<T,Container>& lhs, const stack<T,Container>& rhs);
 
 	template <class T, class Container>
-	bool operator>= (const stack<T,Container>& lhs, const stack<T,Container>& rhs)
-	{ return (lhs.c >= rhs.c); };
-
+	bool operator>= (const stack<T,Container>& lhs, const stack<T,Container>& rhs);
 }
 
 #include "stack.tpp"

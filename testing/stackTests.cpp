@@ -5,16 +5,11 @@
 template < class T >
 void	pushAndTopTest(T &stack)
 {
-	stack.push(1);
-	EXPECT_EQ(stack.top(), 1);
-	stack.push(2);
-	EXPECT_EQ(stack.top(), 2);
-	stack.push(3);
-	EXPECT_EQ(stack.top(), 3);
-	stack.push(4);
-	EXPECT_EQ(stack.top(), 4);
-	stack.push(5);
-	EXPECT_EQ(stack.top(), 5);
+	for (int i = 1; i < 6; i++)
+	{
+		stack.push(i);
+		EXPECT_EQ(stack.top(), i);
+	}
 }
 
 template < class T >
@@ -138,6 +133,7 @@ void	runTests(T &stack)
 	sizeTest(stack);
 	emptyTest(stack);
 	constructorTest(stack);
+	operatorEqualTest(stack);
 	operatorNotEqualTest(stack);
 	operatorSupEqualTest(stack);
 	operatorSupTest(stack);
@@ -145,16 +141,16 @@ void	runTests(T &stack)
 	operatorInfTest(stack);
 }
 
-TEST(StackInt, RealStackInt)
+TEST(StackInt, StdStackInt)
 {
-	std::cout << std::endl << BLUE_B << "   REAL STACK   " << RESET << std::endl;
+	std::cout << std::endl << ORANGE_B << "\t\t\t\t\t\t  [ STD::STACK ] " << RESET << std::endl;
 	std::stack<int> stack;
 	runTests(stack);
 }
 
 TEST(FtStackInt, FtStackInt)
 {
-	std::cout << std::endl << BLUE_B << "    FT STACK    " << RESET << std::endl;
+	std::cout << std::endl << BLUE_B << "\t\t\t\t\t\t   [ FT::STACK ] " << RESET << std::endl;
 	ft::stack<int> stack;
 	runTests(stack);
 }
