@@ -4,14 +4,14 @@ UNAME		=	$(shell uname)
 
 CXX			= c++
 
-CXXFLAGS	= -Wall -Wextra
+CXXFLAGS	= -Wall -Wextra -std=c++11
 
 NAME		= gtests
 
 INCLUDE		= -Igtest_incs/ -pthread
 
 ifeq ($(UNAME), Darwin)
-	CXXFLAGS += -std=c++11
+	CXXFLAGS += 
 	LIBGTEST = gtest_incs/libgtest_mac.a
 else
 	LIBGTEST = gtest_incs/libgtest.a
@@ -21,7 +21,7 @@ CXXFLAGS += $(INCLUDE)
 
 MAIN		= gtest_main.cpp
 
-FILES		=  ftStackTests #ftStackTests
+FILES		=  stackTests
 
 FT_CONTAINER_OBJS_PATH = ../../objs/
 

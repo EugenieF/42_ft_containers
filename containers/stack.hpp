@@ -27,7 +27,8 @@ namespace ft
 
 		public:
 			/****************           MAIN           ****************/
-			explicit					stack (const container_type& ctnr = container_type());
+			explicit					stack (const container_type& ctnr = Container());
+			// stack						&operator=(const stack& other);
 
 			/****************         CAPACITY         ****************/
 			bool						empty() const;
@@ -40,27 +41,36 @@ namespace ft
 			/****************        MODIFIERS         ****************/
 			void						push (const value_type& val);
 			void						pop();
+
+			template <class T1, class Container1>
+			friend bool operator== (const stack<T1, Container1>& lhs, const stack<T1, Container1>& rhs);
 	};
 
 	/**************    NON-MEMBER FUNCTION OVERLOADS     **************/
 
 	template <class T, class Container>
-	bool operator== (const stack<T,Container>& lhs, const stack<T,Container>& rhs);
+	bool operator== (const stack<T,Container>& lhs, const stack<T,Container>& rhs)
+	{ return (lhs.c == rhs.c); };
 
 	template <class T, class Container>
-	bool operator!= (const stack<T,Container>& lhs, const stack<T,Container>& rhs);
+	bool operator!= (const stack<T,Container>& lhs, const stack<T,Container>& rhs)
+	{ return (lhs.c != rhs.c); };
 
 	template <class T, class Container>
-	bool operator<  (const stack<T,Container>& lhs, const stack<T,Container>& rhs);
+	bool operator<  (const stack<T,Container>& lhs, const stack<T,Container>& rhs)
+	{ return (lhs.c < rhs.c); };
 
 	template <class T, class Container>
-	bool operator<= (const stack<T,Container>& lhs, const stack<T,Container>& rhs);
+	bool operator<= (const stack<T,Container>& lhs, const stack<T,Container>& rhs)
+	{ return (lhs.c <= rhs.c); };
 
 	template <class T, class Container>
-	bool operator>  (const stack<T,Container>& lhs, const stack<T,Container>& rhs);
+	bool operator>  (const stack<T,Container>& lhs, const stack<T,Container>& rhs)
+	{ return (lhs.c > rhs.c); };
 
 	template <class T, class Container>
-	bool operator>= (const stack<T,Container>& lhs, const stack<T,Container>& rhs);
+	bool operator>= (const stack<T,Container>& lhs, const stack<T,Container>& rhs)
+	{ return (lhs.c >= rhs.c); };
 
 }
 
