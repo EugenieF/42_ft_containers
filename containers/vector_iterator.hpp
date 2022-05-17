@@ -13,6 +13,7 @@ namespace ft
 	class vector_iterator
 	{
 		private:
+			pointer										_current;
 
 		public:
 			/****************          TYPEDEF         ****************/
@@ -29,7 +30,7 @@ namespace ft
   			vector_iterator (const vector_iterator<Iter>& it);
 			template <class Iter>
 			vector_iterator (const vector_iterator<Iter>& it);
-			iterator_type							base() const;
+			pointer									base() const;
 			reference								operator*() const;
 			vector_iterator							operator+ (difference_type n) const;
 			vector_iterator							operator++(int);

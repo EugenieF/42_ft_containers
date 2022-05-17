@@ -6,7 +6,7 @@
 #    By: efrancon <efrancon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/01 18:11:52 by efrancon          #+#    #+#              #
-#    Updated: 2022/05/10 11:56:52 by efrancon         ###   ########.fr        #
+#    Updated: 2022/05/17 12:04:33 by efrancon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,8 @@ SRCS			= main.cpp
 OBJS_DIR		= ./objs
 
 OBJS			= $(addprefix $(OBJS_DIR)/, $(SRCS:.cpp=.o))
+
+TEST_DIR		= testing
 
 DEP				= $(addprefix $(OBJS_DIR)/, $(SRCS:.cpp=.d))
 
@@ -42,6 +44,8 @@ $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.cpp
 		@printf "$(UP)"
 
 all:		$(NAME)
+
+test:	$(MAKE) --no-print-directory -C $(TEST_DIR)
 
 clean:
 		@$(RM) $(OBJS_DIR)

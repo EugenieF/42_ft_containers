@@ -1,6 +1,6 @@
 SHELL		= /bin/sh
 
-UNAME		=	$(shell uname)
+UNAME		= $(shell uname)
 
 CXX			= c++
 
@@ -11,7 +11,6 @@ NAME		= gtests
 INCLUDE		= -Igtest_incs/ -pthread
 
 ifeq ($(UNAME), Darwin)
-	CXXFLAGS += 
 	LIBGTEST = gtest_incs/libgtest_mac.a
 else
 	LIBGTEST = gtest_incs/libgtest.a
@@ -21,31 +20,29 @@ CXXFLAGS += $(INCLUDE)
 
 MAIN		= gtest_main.cpp
 
-FILES		=  stackTests vectorTests mapTests
+FILES		= stackTests vectorTests mapTests
 
-FT_CONTAINER_OBJS_PATH = ../../objs/
+SRCS 		= $(addsuffix .cpp, $(FILES))
+OBJS 		= $(addsuffix .o, $(FILES))
+# OBJS			= ${addprefix ${OBJS_DIR}/, ${SRCS:.cpp=.o}}
 
-FT_CONTAINER_DIR = 
+OBJS_DIR	= objs
 
-FT_CONTAINER_PATH = $(addprefix $(FT_CONTAINER_OBJS_PATH), $(FT_CONTAINER_DIR))
-# FT_CONTAINER_OBJS = $(wildcard $(foreach $(FT_CONTAINER_PATH)/*.o) #taking all the objects without the main
-FT_CONTAINER_OBJS = $(foreach dir, $(FT_CONTAINER_PATH) ,$(wildcard $(dir)/*.o))
+RM			= rm -rf
 
-SRCS = $(addsuffix .cpp, $(FILES))
-OBJS = $(addsuffix .o, $(FILES))
-
-FT_CONTAINER_GOOD = $(filter-out $(FT_CONTAINER_PATH), $(FT_CONTAINER_OBJS))
 all: $(NAME)
 	./$(NAME)
 
+${OBJS_DIR}/%.o: %.cpp
+	@mkdir -p ${OBJS_DIR}
+	@${CXX} ${CXXFLAGS} $(MAIN) $(LIBGTEST) -c $< -o $@
+
 $(NAME): $(OBJS)
-	@# echo $(FT_CONTAINER_OBJS)
-	@# echo $(FT_CONTAINER_GOOD)
 	@echo "Linking $(NAME)"
-	@$(CXX) $(CXXFLAGS) $(MAIN) $(FT_CONTAINER_GOOD) $(OBJS) $(LIBGTEST) -o $(NAME)
+	@$(CXX) $(CXXFLAGS) $(MAIN) $(OBJS) $(LIBGTEST) -o $(NAME)
 
 clean:
-	$(RM) $(OBJS)
+	$(RM) $(OBJS_DIR)
 
 fclean: clean
 	$(RM) $(NAME)

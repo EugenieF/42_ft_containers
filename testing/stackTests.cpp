@@ -1,9 +1,9 @@
-#include "gtest/gtest.h"
 #include "mainTests.hpp"
-#include "../containers/main.hpp"
+
+/*************    Int test    *************/
 
 template < class T >
-void	pushAndTopTest(T &stack)
+void	pushAndTopIntTest(T &stack)
 {
 	for (int i = 1; i < 6; i++)
 	{
@@ -13,7 +13,7 @@ void	pushAndTopTest(T &stack)
 }
 
 template < class T >
-void	popAndTopTest(T &stack)
+void	popAndTopIntTest(T &stack)
 {
 	for (int i = 1; i < 5; i++)
 		stack.pop();
@@ -45,7 +45,7 @@ void	sizeTest(T &stack)
 }
 
 template < class T >
-void	emptyTest(T &stack)
+void	emptyIntTest(T &stack)
 {
 	EXPECT_EQ(stack.empty(), false);
 	for (int i = 1; i < 101; i++)
@@ -57,7 +57,7 @@ void	emptyTest(T &stack)
 
 
 template < class T >
-void	constructorTest(T &stack)
+void	constructorIntTest(T &stack)
 {
 	T	copy(stack);
 	EXPECT_EQ(copy.top(), 1);
@@ -125,20 +125,66 @@ void	operatorInfTest(T &stack)
 	EXPECT_EQ(stack < copy, true);
 }
 
+/*************   Float test   *************/
+
 template < class T >
-void	runTests(T &stack)
+void	pushAndTopFloatTest(T &stack)
 {
-	pushAndTopTest(stack);
-	popAndTopTest(stack);
+	float x = 1.0f;
+
+	for (int i = 1; i < 6; i++)
+	{
+		stack.push(x + 0.5f);
+		EXPECT_EQ(stack.top(), x + 0.5f);
+	}
+}
+
+template < class T >
+void	popAndTopFloatTest(T &stack)
+{
+	float x = 1.0f;
+
+	for (int i = 1; i < 5; i++)
+		stack.pop();
+	EXPECT_EQ(stack.top(), x);
+	for (int i = 1; i < 10; i++)
+		stack.push(x + 0.5f);
+	for (int i = 1; i < 6; i++)
+		stack.pop();
+	EXPECT_EQ(stack.top(), 3.5f);
+	for (int i = 1; i < 6; i++)
+		stack.pop();
+}
+
+/*************  Global test   *************/
+
+template < class T >
+void	intTests(T &stack)
+{
+	pushAndTopIntTest(stack);
+	popAndTopIntTest(stack);
 	sizeTest(stack);
-	emptyTest(stack);
-	constructorTest(stack);
+	emptyIntTest(stack);
+	constructorIntTest(stack);
 	operatorEqualTest(stack);
 	operatorNotEqualTest(stack);
 	operatorSupEqualTest(stack);
 	operatorSupTest(stack);
 	operatorInfEqualTest(stack);
 	operatorInfTest(stack);
+}
+
+template < class T >
+void	floatTests(T &stack)
+{
+	pushAndTopFloatTest(stack);
+}
+
+template < class T >
+void	runTests(T &stack)
+{
+	intTests(stack);
+	floatTests(stack);
 }
 
 TEST(StackInt, StdStackInt)
@@ -148,9 +194,23 @@ TEST(StackInt, StdStackInt)
 	runTests(stack);
 }
 
-TEST(FtStackInt, FtStackInt)
+TEST(StackFloat, StdStackFloat)
+{
+	std::cout << std::endl << ORANGE_B << "\t\t\t\t\t\t  [ STD::STACK ] " << RESET << std::endl;
+	std::stack<float> stack;
+	runTests(stack);
+}
+
+TEST(StackInt, FtStackInt)
 {
 	std::cout << std::endl << BLUE_B << "\t\t\t\t\t\t   [ FT::STACK ] " << RESET << std::endl;
 	ft::stack<int> stack;
+	runTests(stack);
+}
+
+TEST(StackFloat, FtStackFloat)
+{
+	std::cout << std::endl << BLUE_B << "\t\t\t\t\t\t   [ FT::STACK ] " << RESET << std::endl;
+	ft::stack<float> stack;
 	runTests(stack);
 }

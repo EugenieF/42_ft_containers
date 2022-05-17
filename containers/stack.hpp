@@ -42,23 +42,23 @@ namespace ft
 			void									pop();
 
 			/****************     FRIEND FUNCTIONS     ****************/
-			template <class Tn, class ContainerN>
-			friend bool operator== (const stack<Tn, ContainerN>& lhs, const stack<Tn, ContainerN>& rhs);
+			template <class Tx, class ContainerX>
+			friend bool operator== (const stack<Tx, ContainerX>& lhs, const stack<Tx, ContainerX>& rhs);
 
-			template <class Tn, class ContainerN>
-			friend bool operator!= (const stack<Tn, ContainerN>& lhs, const stack<Tn, ContainerN>& rhs);
+			template <class Tx, class ContainerX>
+			friend bool operator!= (const stack<Tx, ContainerX>& lhs, const stack<Tx, ContainerX>& rhs);
 
-			template <class Tn, class ContainerN>
-			friend bool operator< (const stack<Tn, ContainerN>& lhs, const stack<Tn, ContainerN>& rhs);
+			template <class Tx, class ContainerX>
+			friend bool operator< (const stack<Tx, ContainerX>& lhs, const stack<Tx, ContainerX>& rhs);
 
-			template <class Tn, class ContainerN>
-			friend bool operator<= (const stack<Tn, ContainerN>& lhs, const stack<Tn, ContainerN>& rhs);
+			template <class Tx, class ContainerX>
+			friend bool operator<= (const stack<Tx, ContainerX>& lhs, const stack<Tx, ContainerX>& rhs);
 
-			template <class Tn, class ContainerN>
-			friend bool operator> (const stack<Tn, ContainerN>& lhs, const stack<Tn, ContainerN>& rhs);
+			template <class Tx, class ContainerX>
+			friend bool operator> (const stack<Tx, ContainerX>& lhs, const stack<Tx, ContainerX>& rhs);
 
-			template <class Tn, class ContainerN>
-			friend bool operator>= (const stack<Tn, ContainerN>& lhs, const stack<Tn, ContainerN>& rhs);
+			template <class Tx, class ContainerX>
+			friend bool operator>= (const stack<Tx, ContainerX>& lhs, const stack<Tx, ContainerX>& rhs);
 	};
 
 	/**************    NON-MEMBER FUNCTION OVERLOADS     **************/
