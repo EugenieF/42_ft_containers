@@ -33,11 +33,12 @@ namespace ft
 			pointer									base() const;
 			reference								operator*() const;
 			vector_iterator							operator+ (difference_type n) const;
+			vector_iterator							operator++();
 			vector_iterator							operator++(int);
-			vector_iterator& 						operator+= (difference_type n);
-			vector_iterator 						operator- (difference_type n) const;
 			vector_iterator& 						operator--();
 			vector_iterator  						operator--(int);
+			vector_iterator& 						operator+= (difference_type n);
+			vector_iterator 						operator- (difference_type n) const;
 			vector_iterator&						operator-= (difference_type n);
 			pointer									operator->() const;
 			reference								operator[] (difference_type n) const;

@@ -20,21 +20,24 @@ CXXFLAGS += $(INCLUDE)
 
 MAIN		= gtest_main.cpp
 
-FILES		= stackTests # vectorTests mapTests
+FILES		= stackTests #vectorTests mapTests
 
-SRCS 		= $(addsuffix .cpp, $(FILES))
-OBJS 		= $(addsuffix .o, $(FILES))
-# OBJS			= ${addprefix ${OBJS_DIR}/, ${SRCS:.cpp=.o}}
+FILES_PATH	= $(addprefix $(SRCS_DIR)/, $(FILES))
+SRCS 		= $(addsuffix .cpp, $(FILES_PATH))
+OBJS 		= $(addsuffix .o, $(FILES_PATH))
 
 OBJS_DIR	= objs
+SRCS_DIR	= srcs
 
 RM			= rm -rf
 
 all: $(NAME)
 	./$(NAME)
 
+
 $(NAME): $(OBJS)
 	@echo "Linking $(NAME)"
+	# @mkdir -p $(OBJS_DIR)
 	@$(CXX) $(CXXFLAGS) $(MAIN) $(OBJS) $(LIBGTEST) -o $(NAME)
 
 clean:

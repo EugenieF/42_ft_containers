@@ -76,6 +76,11 @@ namespace ft
 		typedef iterator_traits<Iterator>::pointer				pointer;
 		typedef iterator_traits<Iterator>::reference			reference;
 
+		private:
+		pointer													_current;
+
+		public:
+
 		/****************           MAIN           ****************/
 		reverse_iterator();
 		explicit reverse_iterator (iterator_type it);
@@ -86,11 +91,12 @@ namespace ft
 		iterator_type											base() const;
 		reference												operator*() const;
 		reverse_iterator										operator+ (difference_type n) const;
+		reverse_iterator										operator++();
 		reverse_iterator										operator++(int);
-		reverse_iterator& 										operator+= (difference_type n);
-		reverse_iterator 										operator- (difference_type n) const;
 		reverse_iterator& 										operator--();
 		reverse_iterator  										operator--(int);
+		reverse_iterator& 										operator+= (difference_type n);
+		reverse_iterator 										operator- (difference_type n) const;
 		reverse_iterator&										operator-= (difference_type n);
 		pointer													operator->() const;
 		reference												operator[] (difference_type n) const;
