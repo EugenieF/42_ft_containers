@@ -46,6 +46,12 @@ namespace ft
 			rbtree_iterator								operator++(int);
 			rbtree_iterator& 							operator--();
 			rbtree_iterator  							operator--(int);
+
+		private:
+			nodePtr										_minimum(nodePtr node);		
+			nodePtr										_maximum(nodePtr node);		
+			nodePtr										_predecessor(nodePtr node);
+			nodePtr										_successor(nodePtr node);
 	};
 	
 	template <class Tx, class Ty, class Ux, class Uy>
