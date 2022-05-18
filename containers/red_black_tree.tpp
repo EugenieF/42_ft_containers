@@ -1,16 +1,40 @@
 #include "red_black_tree.hpp"
+using namespace ft;
 
-node::node(): data(NULL), left(NULL), right(NULL), parent(NULL), color(RED) {}
+/****************            CLASS NODE           ***************/
 
-node::node(): {}
+template <class T>
+node<T>::node():
+	data(NULL), color(RED), left(NULL), right(NULL), parent(NULL) {}
 
-node::~node(): {}
+template <class T>
+node<T>::node(const typename node<T>::value_type &x):
+	data(x), color(RED), left(NULL), right(NULL), parent(NULL) {}
 
-node::node(node const &copy) {}
+template <class T>
+node<T>::~node(): {}
 
-node	&node::operator() {}
+template <class T>
+node<T>::node(typename node<T>::const_reference other):
+	data(other.data), color(other.color), left(other.left), right(other.right), parent(other.parent) {}
 
-red_black_tree::red_black_tree(): _root(NULL), _NIL(NULL) {}
+template <class T>
+typename node<T>::reference	operator=(typename node<T>::const_reference rhs)
+{
+	if (this != &rhs)
+	{
+		this->data = rhs.data;
+		this->color = rhs.color;
+		this->left = rhs.left;
+		this->right = rhs.right;
+		this->parent = rhs.parent;
+	}
+	return (*this);
+}
+
+/****************       CLASS RED BLACK TREE       ***************/
+
+red_black_tree::red_black_tree(): _root(NULL), _nil(NULL) {}
 
 nodePtr		red_black_tree::get_root()
 {
@@ -22,9 +46,9 @@ void	red_black_tree::set_root(nodePtr node)
 	this->_root = node;
 }
 
-nodePtr		red_black_tree::get_NIL()
+nodePtr		red_black_tree::get_nil()
 {
-	return (this->_NIL);
+	return (this->_nil);
 }
 
 nodePtr	red_black_tree::get_minimum(nodePtr node)
@@ -32,7 +56,7 @@ nodePtr	red_black_tree::get_minimum(nodePtr node)
 	nodePtr	current;
 
 	current = node;
-	while (current->left != get_NIL())
+	while (current->left != get_nil())
 		current = current->left;
 	return (current);
 }
@@ -42,7 +66,7 @@ nodePtr	red_black_tree::get_maximum(nodePtr node)
 	nodePtr	current;
 
 	current = node;
-	while (current->right != get_NIL())
+	while (current->right != get_nil())
 		current = current->right;
 	return (current);
 }
@@ -89,10 +113,10 @@ void		red_black_tree::right_rotate(nodePtr x)
 
 void		red_black_tree::insert_node(nodePtr x)
 {
-	nodePtr	y = this->get_NIL();
+	nodePtr	y = this->get_nil();
 	nodePtr tmp = this->get_root();
 
-	while (tmp != this->get_NIL())
+	while (tmp != this->get_nil())
 	{
 		y = tmp;
 		if (x->data < tmp->data)
@@ -101,14 +125,14 @@ void		red_black_tree::insert_node(nodePtr x)
 			tmp = tmp->right;
 	}
 	x->parent = y;
-	if (y == this->get_NIL())
+	if (y == this->get_nil())
 		this->set_root(x);
 	else if (x->data < y->data)
 		y->left = n;
 	else
 		y->right = n;
-	n->left = this->get_NIL();
-	n->right = this->get_NIL();
+	n->left = this->get_nil();
+	n->right = this->get_nil();
 	n->color = RED;
 	fix_insertion(node);
 }
@@ -169,7 +193,7 @@ void		red_black_tree::fix_insertion(nodePtr node)
 
 void		red_black_tree::transplant(nodePtr node1, nodePtr node2)
 {
-	if (node1->parent == get_NIL())						// node1 is root
+	if (node1->parent == get_nil())						// node1 is root
 		set_root(node2);
 	else if (node1 == node1->parent->left)				// node1 is left child
 		node1->parent->left = node2;
@@ -186,12 +210,12 @@ void		red_black_tree::delete_node(nodePtr z)
 	
 	y = z;
 	y_origin_color = y->color;
-	if (z->left == get_NIL())							// no left child
+	if (z->left == get_nil())							// no left child
 	{
 		x = z->right;
 		transplant(z, z->right);
 	}
-	else if (z->right == get_NIL())						// no right child
+	else if (z->right == get_nil())						// no right child
 	{
 		x = z->left;
 		transplant(z, z->left);

@@ -1,15 +1,16 @@
 #include "vector.hpp"
+using namespace ft;
 
 /****************           MAIN           ****************/
 
 template <class T, class Allocator>
-explicit	vector<T, Allocator>::vector (const allocator_type& alloc = allocator_type())
+vector<T, Allocator>::vector (const typename vector<T, Allocator>::allocator_type& alloc)
 {
 	(void)alloc;
 }
 
 template <class T, class Allocator>
-explicit	vector<T, Allocator>::vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type())
+vector<T, Allocator>::vector (typename vector<T, Allocator>::size_type n, const typename vector<T, Allocator>::value_type& val, const typename vector<T, Allocator>::allocator_type& alloc)
 {
 	(void)n;
 	(void)val;
@@ -17,7 +18,7 @@ explicit	vector<T, Allocator>::vector (size_type n, const value_type& val = valu
 }
 
 template <class T, class Allocator, class InputIterator>
-vector<T, Allocator>::vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type())
+vector<T, Allocator>::vector (InputIterator first, InputIterator last, const typename vector<T, Allocator>::allocator_type& alloc)
 {
 	(void)first;
 	(void)last;
@@ -25,7 +26,7 @@ vector<T, Allocator>::vector (InputIterator first, InputIterator last, const all
 }
 
 template <class T, class Allocator>
-vector<T, Allocator>::vector (const vector& x)
+vector<T, Allocator>::vector (const vector<T, Allocator>& x)
 {
 	(void)x;
 }
@@ -37,7 +38,7 @@ vector<T, Allocator>::~vector()
 }
 
 template <class T, class Allocator>
-vector<T, Allocator>::vector& operator= (const vector& x)
+vector<T, Allocator>::vector& operator= (const vector<T, Allocator>& x)
 {
 	(void)x;
 }
@@ -46,49 +47,49 @@ vector<T, Allocator>::vector& operator= (const vector& x)
 /****************        ITERATORS         ****************/
 
 template <class T, class Allocator>
-iterator	begin()
+typename vector<T, Allocator>::iterator	vector<T, Allocator>::begin()
 {
 
 }
 
 template <class T, class Allocator>
-const_iterator	begin() const
+typename vector<T, Allocator>::const_iterator	vector<T, Allocator>::begin() const
 {
 
 }
 
 template <class T, class Allocator>
-iterator	end()
+typename vector<T, Allocator>::iterator	vector<T, Allocator>::end()
 {
 
 }
 
 template <class T, class Allocator>
-const_iterato	end() const
+typename vector<T, Allocator>::const_iterator	vector<T, Allocator>::end() const
 {
 
 }
 
 template <class T, class Allocator>
-reverse_iterat	rbegin()
+typename vector<T, Allocator>::reverse_iterator	vector<T, Allocator>::rbegin()
 {
 
 }
 
 template <class T, class Allocator>
-const_reverse_itera	rbegin() const
+typename vector<T, Allocator>::const_reverse_iterator	vector<T, Allocator>::rbegin() const
 {
 
 }
 
 template <class T, class Allocator>
-reverse_iterator		rend()
+typename vector<T, Allocator>::reverse_iterator	vector<T, Allocator>::rend()
 {
 
 }
 
 template <class T, class Allocator>
-const_reverse_iterator	rend() const
+typename vector<T, Allocator>::const_reverse_iterator	vector<T, Allocator>::rend() const
 {
 
 }
@@ -97,26 +98,26 @@ const_reverse_iterator	rend() const
 /****************         CAPACITY         ****************/
 
 template <class T, class Allocator>
-size_typ	vector<T, Allocator>::size() const
+typename vector<T, Allocator>::size_type	vector<T, Allocator>::size() const
 {
 
 }
 
 template <class T, class Allocator>
-size_typ	vector<T, Allocator>::max_size() const
+typename vector<T, Allocator>::size_type	vector<T, Allocator>::max_size() const
 {
 
 }
 
 template <class T, class Allocator>
-void	vector<T, Allocator>::resize (size_type n, value_type val = value_type())
+void	vector<T, Allocator>::resize (typename vector<T, Allocator>::size_type n, typename vector<T, Allocator>::value_type val)
 {
 	(void)n;
 	(void)val;
 }
 
 template <class T, class Allocator>
-size_type	vector<T, Allocator>::capacity() const
+typename vector<T, Allocator>::size_type	vector<T, Allocator>::capacity() const
 {
 
 }
@@ -128,7 +129,7 @@ bool 	vector<T, Allocator>::empty() const
 }
 
 template <class T, class Allocator>
-void	vector<T, Allocator>::reserve (size_type n)
+void	vector<T, Allocator>::reserve (typename vector<T, Allocator>::size_type n)
 {
 	(void)n;
 }
@@ -137,49 +138,49 @@ void	vector<T, Allocator>::reserve (size_type n)
 /****************      ELEMENT ACCESS       ***************/
 
 template <class T, class Allocator>
-reference		vector<T, Allocator>::operator[](size_type pos)
+typename vector<T, Allocator>::reference	vector<T, Allocator>::operator[](typename vector<T, Allocator>::size_type pos)
 {
 	(void)pos;
 }
 
 template <class T, class Allocator>
-const_reference	vector<T, Allocator>::operator[] (size_type n) const
+typename vector<T, Allocator>::const_reference		vector<T, Allocator>::operator[] (typename vector<T, Allocator>::size_type n) const
 {
 	(void)n;
 }
 
 template <class T, class Allocator>
-reference		vector<T, Allocator>::at(size_type pos)
+typename vector<T, Allocator>::reference	vector<T, Allocator>::at(typename vector<T, Allocator>::size_type pos)
 {
 	(void)pos;
 }
 
 template <class T, class Allocator>
-const_reference	vector<T, Allocator>::at(size_type pos) const
+typename vector<T, Allocator>::const_reference		vector<T, Allocator>::at(typename vector<T, Allocator>::size_type pos) const
 {
 	(void)pos;
 }
 
 template <class T, class Allocator>
-reference		vector<T, Allocator>::front()
+typename vector<T, Allocator>::reference		vector<T, Allocator>::front()
 {
 
 }
 
 template <class T, class Allocator>
-const_reference	vector<T, Allocator>::front() const
+typename vector<T, Allocator>::const_reference	vector<T, Allocator>::front() const
 {
 
 }
 
 template <class T, class Allocator>
-reference		vector<T, Allocator>::back()
+typename vector<T, Allocator>::reference		vector<T, Allocator>::back()
 {
 
 }
 
 template <class T, class Allocator>
-const_reference	vector<T, Allocator>::back() const
+typename vector<T, Allocator>::const_reference	vector<T, Allocator>::back() const
 {
 
 }
@@ -187,14 +188,14 @@ const_reference	vector<T, Allocator>::back() const
 /****************        MODIFIERS         ****************/
 
 template <class T, class Allocator>
-void	vector<T, Allocator>assign(size_type cout, const T& value)
+void	vector<T, Allocator>assign(typename vector<T, Allocator>::size_type cout, const T& value)
 {
 	(void)cout;
 	(void)value;
 }
 
 template <class T, class Allocator>
-void	vector<T, Allocator>push_back (const value_type& val)
+void	vector<T, Allocator>push_back (const typename vector<T, Allocator>::value_type& val)
 {
 	(void)val;
 }
@@ -206,14 +207,14 @@ void	vector<T, Allocator>pop_back()
 }
 
 template <class T, class Allocator>
-iterator	vector<T, Allocator>insert (iterator position, const value_type& val);
+typename vector<T, Allocator>::iterator		vector<T, Allocator>insert (typename vector<T, Allocator>::iterator position, const typename vector<T, Allocator>::value_type& val);
 {
 	(void)position;
 	(void)val;
 }
 
 template <class T, class Allocator>
-void	vector<T, Allocator>insert (iterator position, size_type n, const value_type& val);
+void	vector<T, Allocator>insert (typename vector<T, Allocator>::iterator position, typename vector<T, Allocator>::size_type n, const typename vector<T, Allocator>::value_type& val);
 {
 	(void)position;
 	(void)n;
@@ -221,7 +222,7 @@ void	vector<T, Allocator>insert (iterator position, size_type n, const value_typ
 }
 
 template <class T, class Allocator, class InputIterator>
-void	vector<T, Allocator>insert (iterator position, InputIterator first, InputIterator last)
+void	vector<T, Allocator>insert (typename vector<T, Allocator>::iterator position, InputIterator first, InputIterator last)
 {
 	(void)position;
 	(void)first;
@@ -229,20 +230,20 @@ void	vector<T, Allocator>insert (iterator position, InputIterator first, InputIt
 }
 
 template <class T, class Allocator>
-iterator	vector<T, Allocator>erase (iterator position)
+typename vector<T, Allocator>::iterator	vector<T, Allocator>erase (typename vector<T, Allocator>::iterator position)
 {
 	(void)position;
 }
 
 template <class T, class Allocator>
-iterator	vector<T, Allocator>erase (iterator first, iterator last)
+typename vector<T, Allocator>::iterator	vector<T, Allocator>erase (typename vector<T, Allocator>::iterator first, typename vector<T, Allocator>::iterator last)
 {
 	(void)first;
 	(void)last;
 }
 
 template <class T, class Allocator>
-void	vector<T, Allocator>swap (vector& x)
+void	vector<T, Allocator>swap (vector<T, Allocator>& x)
 {
 	(void)x;
 }
@@ -256,49 +257,49 @@ void	vector<T, Allocator>clear()
 /**************    NON-MEMBER FUNCTION OVERLOADS     **************/
 
 template <class T, class Allocator>
-bool	operator== (const vector<T,Allocator>& lhs, const vector<T,Allocator>& rhs)
+bool	ft:operator== (const vector<T,Allocator>& lhs, const vector<T,Allocator>& rhs)
 {
 	(void)lhs;
 	(void)rhs;
 }
 
 template <class T, class Allocator>
-bool	operator!= (const vector<T,Allocator>& lhs, const vector<T,Allocator>& rhs)
+bool	ft:operator!= (const vector<T,Allocator>& lhs, const vector<T,Allocator>& rhs)
 {
 	(void)lhs;
 	(void)rhs;
 }
 
 template <class T, class Allocator>
-bool	operator<  (const vector<T,Allocator>& lhs, const vector<T,Allocator>& rhs)
+bool	ft:operator<  (const vector<T,Allocator>& lhs, const vector<T,Allocator>& rhs)
 {
 	(void)lhs;
 	(void)rhs;
 }
 
 template <class T, class Allocator>
-bool	operator<= (const vector<T,Allocator>& lhs, const vector<T,Allocator>& rhs)
+bool	ft:operator<= (const vector<T,Allocator>& lhs, const vector<T,Allocator>& rhs)
 {
 	(void)lhs;
 	(void)rhs;
 }
 
 template <class T, class Allocator>
-bool	operator>  (const vector<T,Allocator>& lhs, const vector<T,Allocator>& rhs)
+bool	ft:operator>  (const vector<T,Allocator>& lhs, const vector<T,Allocator>& rhs)
 {
 	(void)lhs;
 	(void)rhs;
 }
 
 template <class T, class Allocator>
-bool	operator>= (const vector<T,Allocator>& lhs, const vector<T,Allocator>& rhs)
+bool	ft:operator>= (const vector<T,Allocator>& lhs, const vector<T,Allocator>& rhs)
 {
 	(void)lhs;
 	(void)rhs;
 }
 
 template <class T, class Allocator>
-void	swap (vector<T,Allocator>& x, vector<T,Allocator>& y)
+void	ft:swap (vector<T,Allocator>& x, vector<T,Allocator>& y)
 {
 	(void)x;
 	(void)y;

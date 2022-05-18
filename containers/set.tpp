@@ -1,5 +1,5 @@
 #include "set.hpp"
-
+using namespace ft;
 
 /****************           MAIN           ****************/
 

@@ -26,51 +26,54 @@ namespace ft
 	class	Node
 	{
 		public:
-			typedef T		value_type;
-			typedef Node*	pointer;
-			typedef Node&	reference;
+			typedef T			value_type;
+			typedef Node*		pointer;
+			typedef Node const *const_pointer;
+			typedef Node&		reference;
+			typedef Node const	&const_reference;
 
-			value_type	data;
-			pointer		left;
-			pointer		right;
-			pointer		parent;
-			int		color;
+			value_type			data;
+			value_type			color;
+			pointer				left;
+			pointer				right;
+			pointer				parent;
 
 			node();
 			node(data);
 			~node();
-			node(reference copy);
-			reference	operator=(reference rhs);
+			node(const_reference other);
+			reference	operator=(const_reference rhs);
 	};
 
 	template <class T, class Compare = std::less<T>, class Allocator = std::allocator<T>>
 	class	red_black_tree
 	{
 		public:
-			typedef T				value_type
-			typedef Node<T>			node;
-			typedef node*			nodePtr;
-			typedef node&			nodeRef;
-			typedef Compare			key_compare;
-			typedef Allocator		allocator_type;
+			typedef T			value_type
+			typedef Node<T>		node;
+			typedef node*		nodePtr;
+			typedef node&		nodeRef;
+			typedef Compare		key_compare;
+			typedef Allocator	allocator_type;
+
 		private:
-			nodePtr	_root;
-			nodePtr	_NIL;
+			nodePtr				_root;
+			nodePtr				_nil;
 
 		public:
-			nodePtr		get_root();
-			nodePtr		get_NIL();
-			void		set_root(nodePtr node);
-			nodePtr		get_minimum(nodePtr node)
-			nodePtr		get_maximum(nodePtr node)
-			void		left_rotate(nodePtr node);
-			void		right_rotate(nodePtr node);
-			void		insert_node(nodePtr x);
-			void		fix_insertion(nodePtr node);
-			void		delete_node(nodePtr x);
-			void		fix_deletion(nodePtr node);
-			void		transplant(nodePtr u, nodePtr v);
-			nodePtr		search_node(nodePtr node, int key);
+			nodePtr				get_root();
+			nodePtr				get_nil();
+			void				set_root(nodePtr node);
+			nodePtr				get_minimum(nodePtr node)
+			nodePtr				get_maximum(nodePtr node)
+			void				left_rotate(nodePtr node);
+			void				right_rotate(nodePtr node);
+			void				insert_node(nodePtr x);
+			void				fix_insertion(nodePtr node);
+			void				delete_node(nodePtr x);
+			void				fix_deletion(nodePtr node);
+			void				transplant(nodePtr u, nodePtr v);
+			nodePtr				search_node(nodePtr node, int key);
 	};
 
 }

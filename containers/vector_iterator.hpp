@@ -26,22 +26,21 @@ namespace ft
 			/****************           MAIN           ****************/
 			vector_iterator();
 			vector_iterator (iterator_type it);
-			template <class Iterator>
-  			vector_iterator (const vector_iterator<Iter>& it);
-			template <class Iter>
-			vector_iterator (const vector_iterator<Iter>& it);
+  			vector_iterator (const vector_iterator& it);
+			~vector_iterator();
+			vector_iterator&						operator=( const vector_iterator<U>& other );
 			pointer									base() const;
 			reference								operator*() const;
-			vector_iterator							operator+ (difference_type n) const;
-			vector_iterator							operator++();
-			vector_iterator							operator++(int);
-			vector_iterator& 						operator--();
-			vector_iterator  						operator--(int);
-			vector_iterator& 						operator+= (difference_type n);
-			vector_iterator 						operator- (difference_type n) const;
-			vector_iterator&						operator-= (difference_type n);
 			pointer									operator->() const;
 			reference								operator[] (difference_type n) const;
+			vector_iterator&						operator++();
+			vector_iterator							operator++(int);
+			vector_iterator& 						operator+= (difference_type n);
+			vector_iterator							operator+ (difference_type n) const;
+			vector_iterator& 						operator--();
+			vector_iterator  						operator--(int);
+			vector_iterator&						operator-= (difference_type n);
+			vector_iterator 						operator- (difference_type n) const;
 	};
 	
 	/**************    NON-MEMBER FUNCTION OVERLOADS     **************/
@@ -65,7 +64,7 @@ namespace ft
 	bool											operator>= (const vector_iterator<T>& lhs, const vector_iterator<U>& rhs);
 
 	template <class T>
-	vector_iterator<T>								operator+ (typename vector_iterator<T>::difference_type n, const vector_iterator<T>& it);
+	vector_iterator<T>								operator+ (typename vector_iterator<T>::difference_type n, const vector_iterator<T>& vec_it);
 
 	template <class T>
 	typename vector_iterator<T>::difference_type	operator- (const vector_iterator<T>& lhs, const vector_iterator<T>& rhs);

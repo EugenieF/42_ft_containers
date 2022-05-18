@@ -1,21 +1,20 @@
 #include "stack.hpp"
-using namespace ft;
 
 /****************           MAIN           ****************/
 
 template <class T, class Container>
-stack<T, Container>::stack (const typename stack<T, Container>::container_type& ctnr): c(ctnr) {}
+ft::stack<T, Container>::stack (const typename ft::stack<T, Container>::container_type& ctnr): c(ctnr) {}
 
 /****************         CAPACITY         ****************/
 
 template <class T, class Container>
-bool	stack<T, Container>::empty() const
+bool	ft::stack<T, Container>::empty() const
 {
 	return (this->c.empty());
 }
 
 template <class T, class Container>
-typename stack<T, Container>::size_type		stack<T, Container>::size() const
+typename ft::stack<T, Container>::size_type	ft::stack<T, Container>::size() const
 {
 	return (this->c.size());
 }
@@ -23,13 +22,13 @@ typename stack<T, Container>::size_type		stack<T, Container>::size() const
 /****************      ELEMENT ACCESS       ***************/
 
 template <class T, class Container>
-typename stack<T, Container>::value_type&	stack<T, Container>::top()
+typename ft::stack<T, Container>::value_type&		ft::stack<T, Container>::top()
 {
 	return (this->c.back());
 }
 
 template <class T, class Container>
-const typename stack<T, Container>::value_type&		stack<T, Container>::top() const
+const typename ft::stack<T, Container>::value_type&	ft::stack<T, Container>::top() const
 {
 	return (this->c.back());
 }
@@ -37,13 +36,13 @@ const typename stack<T, Container>::value_type&		stack<T, Container>::top() cons
 /****************        MODIFIERS         ****************/
 
 template <class T, class Container>
-void	stack<T, Container>::push (const stack<T, Container>::value_type& val)
+void	ft::stack<T, Container>::push (const ft::stack<T, Container>::value_type& val)
 {
 	this->c.push_back(val);
 }
 
 template <class T, class Container>
-void	stack<T, Container>::pop()
+void	ft::stack<T, Container>::pop()
 {
 	this->c.pop_back();
 }
@@ -51,37 +50,37 @@ void	stack<T, Container>::pop()
 /*********     NON-MEMBER FUNCTION OVERLOADS     **********/
 
 template <class T, class Container>
-bool ft::operator== (const stack<T, Container>& lhs, const stack<T, Container>& rhs)
+bool ft::operator== (const ft::stack<T, Container>& lhs, const ft::stack<T, Container>& rhs)
 {
 	return (lhs.c == rhs.c);
 }
 
 template <class T, class Container>
-bool ft::operator!= (const stack<T,Container>& lhs, const stack<T,Container>& rhs)
+bool ft::operator!= (const ft::stack<T,Container>& lhs, const ft::stack<T,Container>& rhs)
 {
 	return (lhs.c != rhs.c);
 }
 
 template <class T, class Container>
-bool ft::operator<  (const stack<T,Container>& lhs, const stack<T,Container>& rhs)
+bool ft::operator<  (const ft::stack<T,Container>& lhs, const ft::stack<T,Container>& rhs)
 {
 	return (lhs.c < rhs.c);
 }
 
 template <class T, class Container>
-bool ft::operator<= (const stack<T,Container>& lhs, const stack<T,Container>& rhs)
+bool ft::operator<= (const ft::stack<T,Container>& lhs, const ft::stack<T,Container>& rhs)
 {
 	return (lhs.c <= rhs.c);
 }
 
 template <class T, class Container>
-bool ft::operator>  (const stack<T,Container>& lhs, const stack<T,Container>& rhs)
+bool ft::operator>  (const ft::stack<T,Container>& lhs, const ft::stack<T,Container>& rhs)
 {
 	return (lhs.c > rhs.c);
 }
 
 template <class T, class Container>
-bool ft::operator>= (const stack<T,Container>& lhs, const stack<T,Container>& rhs)
+bool ft::operator>= (const ft::stack<T,Container>& lhs, const ft::stack<T,Container>& rhs)
 {
 	return (lhs.c >= rhs.c);
 }
