@@ -1,5 +1,5 @@
-#ifndef __RED_BLACK_TREE_ITERATOR__
-# define __RED_BLACK_TREE_ITERATOR__
+#ifndef __RED_BLACK_TREE_ITERATOR_HPP__
+# define __RED_BLACK_TREE_ITERATOR_HPP__
 
 #include "main.hpp"
 
@@ -38,18 +38,14 @@ namespace ft
   			rbtree_iterator (const rbtree_iterator& rbtree_it);
 			~rbtree_iterator();
 			rbtree_iterator&							operator=( const rbtree_iterator<U>& other );
-			reference									operator*() const;
+			reference									operator*();
 			const_reference								operator*() const;
-			pointer										operator->() const;
+			pointer										operator->();
 			const_pointer								operator->() const;
 			rbtree_iterator&							operator++();
 			rbtree_iterator								operator++(int);
-			rbtree_iterator								operator+ (difference_type n) const;
-			rbtree_iterator& 							operator+= (difference_type n);
 			rbtree_iterator& 							operator--();
 			rbtree_iterator  							operator--(int);
-			rbtree_iterator 							operator- (difference_type n) const;
-			rbtree_iterator&							operator-= (difference_type n);
 	};
 	
 	template <class Tx, class Ty, class Ux, class Uy>
@@ -57,24 +53,6 @@ namespace ft
 
 	template <class Tx, class Ty, class Ux, class Uy>
  	bool												operator!= (const rbtree_iterator<Tx, Ty>& lhs, const rbtree_iterator<Ux, Uy>& rhs);
-
-	template <class Tx, class Ty, class Ux, class Uy>
-	bool												operator<  (const rbtree_iterator<Tx, Ty>& lhs, const rbtree_iterator<Ux, Uy>& rhs);
-
-	template <class Tx, class Ty, class Ux, class Uy>
-	bool												operator<= (const rbtree_iterator<Tx, Ty>& lhs, const rbtree_iterator<Ux, Uy>& rhs);
-
-	template <class Tx, class Ty, class Ux, class Uy>
-	bool												operator>  (const rbtree_iterator<Tx, Ty>& lhs, const rbtree_iterator<Ux, Uy>& rhs);
-
-	template <class Tx, class Ty, class Ux, class Uy>
-	bool												operator>= (const rbtree_iterator<Tx, Ty>& lhs, const rbtree_iterator<Ux, Uy>& rhs);
-
-	template <class Tx, class Ty>
-	rbtree_iterator<Tx, Ty>								operator+ (typename rbtree_iterator<Tx, Ty>::difference_type n, const rbtree_iterator<Tx, Ty>& it);
-
-	template <class Tx, class Ty>
-	typename rbtree_iterator<Tx, Ty>::difference_type	operator- (const rbtree_iterator<Tx, Ty>& lhs, const rbtree_iterator<Tx, Ty>& rhs);
 }
 
 #endif

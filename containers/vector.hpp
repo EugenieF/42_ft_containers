@@ -12,8 +12,6 @@ namespace ft
 	template < class T, class Allocator = std::allocator<T> >
 	class	vector
 	{
-		private:
-
 		public:
 			/****************          TYPEDEF         ****************/
 			typedef T										value_type;
@@ -29,6 +27,12 @@ namespace ft
 			typedef ft::reverse_iterator<iterator>			reverse_iterator;
 			typedef ft::reverse_iterator<const_iterator>	const_reverse_iterator;
 
+		private:
+			iterator										_begin;
+			iterator										_end;
+			allocator_type									_alloc;
+
+		public:
 			/****************           MAIN           ****************/
 			explicit 				vector (const allocator_type& alloc = allocator_type());
 			explicit 				vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type());
