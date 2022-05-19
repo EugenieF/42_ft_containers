@@ -49,49 +49,49 @@ vector<T, Allocator>::vector& operator= (const vector<T, Allocator>& x)
 template <class T, class Allocator>
 typename vector<T, Allocator>::iterator	vector<T, Allocator>::begin()
 {
-
+	return (iterator(this->_begin));
 }
 
 template <class T, class Allocator>
 typename vector<T, Allocator>::const_iterator	vector<T, Allocator>::begin() const
 {
-
+	return (const_iterator(this->_begin));
 }
 
 template <class T, class Allocator>
 typename vector<T, Allocator>::iterator	vector<T, Allocator>::end()
 {
-
+	return (iterator(this->_end));
 }
 
 template <class T, class Allocator>
 typename vector<T, Allocator>::const_iterator	vector<T, Allocator>::end() const
 {
-
+	return (const_iterator(this->_end));
 }
 
 template <class T, class Allocator>
 typename vector<T, Allocator>::reverse_iterator	vector<T, Allocator>::rbegin()
 {
-
+	return (reverse_iterator(this->_end));
 }
 
 template <class T, class Allocator>
 typename vector<T, Allocator>::const_reverse_iterator	vector<T, Allocator>::rbegin() const
 {
-
+	return (const_reverse_iterator(this->_end));
 }
 
 template <class T, class Allocator>
 typename vector<T, Allocator>::reverse_iterator	vector<T, Allocator>::rend()
 {
-
+	return (reverse_iterator(this->_begin));
 }
 
 template <class T, class Allocator>
 typename vector<T, Allocator>::const_reverse_iterator	vector<T, Allocator>::rend() const
 {
-
+	return (const_reverse_iterator(this->_begin));
 }
 
 

@@ -23,11 +23,7 @@ typename node<T>::reference	node<T>::operator=(typename node<T>::const_reference
 {
 	if (this != &rhs)
 	{
-		this->data = rhs.data;
-		this->color = rhs.color;
-		this->left = rhs.left;
-		this->right = rhs.right;
-		this->parent = rhs.parent;
+
 	}
 	return (*this);
 }
@@ -55,79 +51,91 @@ typename red_black_tree<T, Compare, Allocator>::nodePtr		red_black_tree<T, Compa
 	return (this->_nil);
 }
 
+
+template <class T, class Compare, class Allocator>
+typename red_black_tree<T, Compare, Allocator>::nodePtr	red_black_tree<T, Compare, Allocator>::get_minimum() const
+{
+	return (this->_get_minimum(this->get_root()));
+}
+
+template <class T, class Compare, class Allocator>
+typename red_black_tree<T, Compare, Allocator>::nodePtr	red_black_tree<T, Compare, Allocator>::get_maximum() const
+{
+	return (this->_get_maximum(this->get_root()));
+}
+
 /************************        ITERATORS         ************************/
 
 template <class T, class Compare, class Allocator>
 typename red_black_tree<T, Compare, Allocator>::iterator	red_black_tree<T, Compare, Allocator>::begin()
 {
-
+	return (iterator(this->get_minimum(), this->get_root(), this->get_nil()));
 }
 
 template <class T, class Compare, class Allocator>
 typename red_black_tree<T, Compare, Allocator>::const_iterator	red_black_tree<T, Compare, Allocator>::begin() const
 {
-
+	return (const_iterator(this->get_minimum(), this->get_root(), this->get_nil()));
 }
 
 template <class T, class Compare, class Allocator>
 typename red_black_tree<T, Compare, Allocator>::iterator	red_black_tree<T, Compare, Allocator>::end()
 {
-
+	return (iterator(this->get_nil(), this->get_root(), this->get_nil()));
 }
 
 template <class T, class Compare, class Allocator>
 typename red_black_tree<T, Compare, Allocator>::const_iterator	red_black_tree<T, Compare, Allocator>::end() const
 {
-
+	return (const_iterator(this->get_nil(), this->get_root(), this->get_nil()));
 }
 
 template <class T, class Compare, class Allocator>
 typename red_black_tree<T, Compare, Allocator>::reverse_iterator	red_black_tree<T, Compare, Allocator>::rbegin()
 {
-
+	return (reverse_iterator(this->end()));
 }
 
 template <class T, class Compare, class Allocator>
 typename red_black_tree<T, Compare, Allocator>::const_reverse_iterator	red_black_tree<T, Compare, Allocator>::rbegin() const
 {
-
+	return (const_reverse_iterator(this->end()));
 }
 
 template <class T, class Compare, class Allocator>
 typename red_black_tree<T, Compare, Allocator>::reverse_iterator	red_black_tree<T, Compare, Allocator>::rend()
 {
-
+	return (reverse_iterator(this->begin));
 }
 
 template <class T, class Compare, class Allocator>
 typename red_black_tree<T, Compare, Allocator>::const_reverse_iterator	red_black_tree<T, Compare, Allocator>::rend() const
 {
-
+	return (const_reverse_iterator(this->begin()));
 }
-
 
 /********************        PRIVATE FUNCTIONS         ********************/
 
 template <class T, class Compare, class Allocator>
 typename red_black_tree<T, Compare, Allocator>::nodePtr	red_black_tree<T, Compare, Allocator>::_get_minimum(typename red_black_tree<T, Compare, Allocator>::nodePtr node)
 {
-	typename red_black_tree<T, Compare, Allocator>::nodePtr	current;
-
-	current = node;
-	while (current->left != get_nil())
-		current = current->left;
-	return (current);
+	if (node != get_nil())
+	{
+		while (node->left != get_nil())
+			node = node->left;
+	}
+	return (node);
 }
 
 template <class T, class Compare, class Allocator>
 typename red_black_tree<T, Compare, Allocator>::nodePtr	red_black_tree<T, Compare, Allocator>::_get_maximum(typename red_black_tree<T, Compare, Allocator>::nodePtr node)
 {
-	typename red_black_tree<T, Compare, Allocator>::nodePtr	current;
-
-	current = node;
-	while (current->right != get_nil())
-		current = current->right;
-	return (current);
+	if (node != get_nil())
+	{
+		while (node->right != get_nil())
+			node = node->right;
+	}
+	return (node);
 }
 
 template <class T, class Compare, class Allocator>

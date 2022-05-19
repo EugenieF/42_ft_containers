@@ -30,6 +30,7 @@ namespace ft
 		private:
 			iterator										_begin;
 			iterator										_end;
+			iterator										_end_capacity;
 			allocator_type									_alloc;
 
 		public:

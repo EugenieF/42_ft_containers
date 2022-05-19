@@ -76,6 +76,8 @@ namespace ft
 			nodePtr										get_root();
 			nodePtr										get_nil();
 			void										set_root(nodePtr node);
+			nodePtr										get_minimum() const;
+			nodePtr										get_maximum() const;
 
 		/****************        ITERATORS         ****************/
 			iterator									begin();
