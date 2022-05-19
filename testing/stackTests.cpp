@@ -233,7 +233,9 @@ void	runStringTests(T &stack)
 
 TEST(Stack, StdStack)
 {
-	std::cout << std::endl << ORANGE_B << "\t\t\t\t\t\t  [ STD::STACK ] " << RESET << std::endl;
+	std::cout << std::endl << ORANGE_B;
+	std::cout << "                                      ";
+	std::cout << "          [ STD::STACK ] " << RESET << std::endl;
 
 	std::stack<int> intStack;
 	runIntTests(intStack);
@@ -251,7 +253,9 @@ TEST(Stack, StdStack)
 
 TEST(Stack, FtStack)
 {
-	std::cout << std::endl << BLUE_B << "\t\t\t\t\t\t   [ FT::STACK ] " << RESET << std::endl;
+	std::cout << std::endl << BLUE_B;
+	std::cout << "                                      ";
+	std::cout << "           [ FT::STACK ] " << RESET << std::endl;
 
 	ft::stack<int> intStack;
 	runIntTests(intStack);

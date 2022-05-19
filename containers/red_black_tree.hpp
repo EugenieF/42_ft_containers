@@ -23,23 +23,23 @@ namespace ft
 	}	t_color;
 
 	template <class T>
-	class	Node
+	class	node
 	{
 		public:
-			typedef T			value_type;
-			typedef Node*		pointer;
-			typedef Node const *const_pointer;
-			typedef Node&		reference;
-			typedef Node const	&const_reference;
+			typedef T								value_type;
+			typedef node*							pointer;
+			typedef node const *					const_pointer;
+			typedef node&							reference;
+			typedef node const&						const_reference;
 
-			value_type			data;
-			value_type			color;
-			pointer				left;
-			pointer				right;
-			pointer				parent;
+			value_type								data;
+			value_type								color;
+			pointer									left;
+			pointer									right;
+			pointer									parent;
 
 			node();
-			node(data);
+			node(value_type const &value);
 			~node();
 			node(const_reference other);
 			reference	operator=(const_reference rhs);
@@ -49,31 +49,55 @@ namespace ft
 	class	red_black_tree
 	{
 		public:
-			typedef T			value_type
-			typedef Node<T>		node;
-			typedef node*		nodePtr;
-			typedef node&		nodeRef;
-			typedef Compare		key_compare;
-			typedef Allocator	allocator_type;
+			typedef T									value_type
+			typedef node<T>								node;
+			typedef node*								nodePtr;
+			typedef node&								nodeRef;
+			typedef red_black_tree&						reference;
+			typedef red_black_tree*						pointer;
+			typedef Compare								key_compare;
+			typedef Allocator							allocator_type;
+			typedef rbtree_iterator<T, node>			iterator;
+			typedef rbtree_iterator<T const, node>		const_iterator;
+			typedef reverse_iterator<iterator>			reverse_iterator;
+			typedef reverse_iterator<const_iterator>	const_reverse_iterator;
 
 		private:
-			nodePtr				_root;
-			nodePtr				_nil;
+			nodePtr										_root;
+			nodePtr										_nil;
+			allocator_type								_alloc;
 
 		public:
-			nodePtr				get_root();
-			nodePtr				get_nil();
-			void				set_root(nodePtr node);
-			nodePtr				get_minimum(nodePtr node)
-			nodePtr				get_maximum(nodePtr node)
-			void				left_rotate(nodePtr node);
-			void				right_rotate(nodePtr node);
-			void				insert_node(nodePtr x);
-			void				fix_insertion(nodePtr node);
-			void				delete_node(nodePtr x);
-			void				fix_deletion(nodePtr node);
-			void				transplant(nodePtr u, nodePtr v);
-			nodePtr				search_node(nodePtr node, int key);
+		/****************           MAIN           ****************/
+			red_black_tree();
+			~red_black_tree();
+			red_black_tree(red_black_tree const &other);
+			reference									operator=(reference const rhs);
+			nodePtr										get_root();
+			nodePtr										get_nil();
+			void										set_root(nodePtr node);
+
+		/****************        ITERATORS         ****************/
+			iterator									begin();
+			const_iterator								begin() const;
+			iterator									end();
+			const_iterator								end() const;
+			reverse_iterator							rbegin();
+			const_reverse_iterator						rbegin() const;
+			reverse_iterator							rend();
+			const_reverse_iterator						rend() const;
+
+		private:
+			nodePtr										_get_minimum(nodePtr node)
+			nodePtr										_get_maximum(nodePtr node)
+			void										_left_rotate(nodePtr node);
+			void										_right_rotate(nodePtr node);
+			void										_insert_node(nodePtr x);
+			void										_fix_insertion(nodePtr node);
+			void										_delete_node(nodePtr x);
+			void										_fix_deletion(nodePtr node);
+			void										_transplant(nodePtr u, nodePtr v);
+			nodePtr										_search_node(nodePtr node, value_type value);
 	};
 
 }

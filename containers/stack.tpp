@@ -15,7 +15,7 @@ bool	stack<T, Container>::empty() const
 }
 
 template <class T, class Container>
-typename stack<T, Container>::size_type		stack<T, Container>::size() const
+ typename stack<T, Container>::size_type		stack<T, Container>::size() const
 {
 	return (this->c.size());
 }

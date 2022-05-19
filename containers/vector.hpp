@@ -24,8 +24,8 @@ namespace ft
 			typedef	const value_type*						const_pointer;
 			typedef vector_iterator<T>						iterator;
 			typedef vector_iterator<T const>				const_iterator;
-			typedef ft::reverse_iterator<iterator>			reverse_iterator;
-			typedef ft::reverse_iterator<const_iterator>	const_reverse_iterator;
+			typedef reverse_iterator<iterator>				reverse_iterator;
+			typedef reverse_iterator<const_iterator>		const_reverse_iterator;
 
 		private:
 			iterator										_begin;

@@ -34,10 +34,10 @@ namespace ft
 		public:
 			/****************           MAIN           ****************/
 			rbtree_iterator();
-			rbtree_iterator (iterator_type it);
+			rbtree_iterator (nodePtr ptr, nodePtr root, nodePtr nil);
   			rbtree_iterator (const rbtree_iterator& rbtree_it);
 			~rbtree_iterator();
-			rbtree_iterator&							operator=( const rbtree_iterator<U>& other );
+			rbtree_iterator&							operator=(const rbtree_iterator& other);
 			reference									operator*();
 			const_reference								operator*() const;
 			pointer										operator->();

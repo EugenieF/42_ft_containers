@@ -8,18 +8,18 @@ node<T>::node():
 	data(NULL), color(RED), left(NULL), right(NULL), parent(NULL) {}
 
 template <class T>
-node<T>::node(const typename node<T>::value_type &x):
-	data(x), color(RED), left(NULL), right(NULL), parent(NULL) {}
+node<T>::node(const typename node<T>::value_type &value):
+	data(value), color(RED), left(NULL), right(NULL), parent(NULL) {}
 
 template <class T>
-node<T>::~node(): {}
+node<T>::~node() {}
 
 template <class T>
 node<T>::node(typename node<T>::const_reference other):
 	data(other.data), color(other.color), left(other.left), right(other.right), parent(other.parent) {}
 
 template <class T>
-typename node<T>::reference	operator=(typename node<T>::const_reference rhs)
+typename node<T>::reference	node<T>::operator=(typename node<T>::const_reference rhs)
 {
 	if (this != &rhs)
 	{
@@ -34,26 +34,84 @@ typename node<T>::reference	operator=(typename node<T>::const_reference rhs)
 
 /****************       CLASS RED BLACK TREE       ***************/
 
-red_black_tree::red_black_tree(): _root(NULL), _nil(NULL) {}
+template <class T, class Compare, class Allocator>
+red_black_tree<T, Compare, Allocator>::red_black_tree(): _root(NULL), _nil(NULL) {}
 
-nodePtr		red_black_tree::get_root()
+template <class T, class Compare, class Allocator>
+typename red_black_tree<T, Compare, Allocator>::nodePtr		red_black_tree<T, Compare, Allocator>::red_black_tree::get_root()
 {
 	return (this->_root);
 }
 
-void	red_black_tree::set_root(nodePtr node)
+template <class T, class Compare, class Allocator>
+void	red_black_tree<T, Compare, Allocator>::red_black_tree::set_root(typename red_black_tree<T, Compare, Allocator>::nodePtr node)
 {
 	this->_root = node;
 }
 
-nodePtr		red_black_tree::get_nil()
+template <class T, class Compare, class Allocator>
+typename red_black_tree<T, Compare, Allocator>::nodePtr		red_black_tree<T, Compare, Allocator>::red_black_tree::get_nil()
 {
 	return (this->_nil);
 }
 
-nodePtr	red_black_tree::get_minimum(nodePtr node)
+/************************        ITERATORS         ************************/
+
+template <class T, class Compare, class Allocator>
+typename red_black_tree<T, Compare, Allocator>::iterator	red_black_tree<T, Compare, Allocator>::begin()
 {
-	nodePtr	current;
+
+}
+
+template <class T, class Compare, class Allocator>
+typename red_black_tree<T, Compare, Allocator>::const_iterator	red_black_tree<T, Compare, Allocator>::begin() const
+{
+
+}
+
+template <class T, class Compare, class Allocator>
+typename red_black_tree<T, Compare, Allocator>::iterator	red_black_tree<T, Compare, Allocator>::end()
+{
+
+}
+
+template <class T, class Compare, class Allocator>
+typename red_black_tree<T, Compare, Allocator>::const_iterator	red_black_tree<T, Compare, Allocator>::end() const
+{
+
+}
+
+template <class T, class Compare, class Allocator>
+typename red_black_tree<T, Compare, Allocator>::reverse_iterator	red_black_tree<T, Compare, Allocator>::rbegin()
+{
+
+}
+
+template <class T, class Compare, class Allocator>
+typename red_black_tree<T, Compare, Allocator>::const_reverse_iterator	red_black_tree<T, Compare, Allocator>::rbegin() const
+{
+
+}
+
+template <class T, class Compare, class Allocator>
+typename red_black_tree<T, Compare, Allocator>::reverse_iterator	red_black_tree<T, Compare, Allocator>::rend()
+{
+
+}
+
+template <class T, class Compare, class Allocator>
+typename red_black_tree<T, Compare, Allocator>::const_reverse_iterator	red_black_tree<T, Compare, Allocator>::rend() const
+{
+
+}
+
+
+/********************        PRIVATE FUNCTIONS         ********************/
+
+template <class T, class Compare, class Allocator>
+typename red_black_tree<T, Compare, Allocator>::nodePtr	red_black_tree<T, Compare, Allocator>::_get_minimum(typename red_black_tree<T, Compare, Allocator>::nodePtr node)
+{
+	typename red_black_tree<T, Compare, Allocator>::nodePtr	current;
 
 	current = node;
 	while (current->left != get_nil())
@@ -61,9 +119,10 @@ nodePtr	red_black_tree::get_minimum(nodePtr node)
 	return (current);
 }
 
-nodePtr	red_black_tree::get_maximum(nodePtr node)
+template <class T, class Compare, class Allocator>
+typename red_black_tree<T, Compare, Allocator>::nodePtr	red_black_tree<T, Compare, Allocator>::_get_maximum(typename red_black_tree<T, Compare, Allocator>::nodePtr node)
 {
-	nodePtr	current;
+	typename red_black_tree<T, Compare, Allocator>::nodePtr	current;
 
 	current = node;
 	while (current->right != get_nil())
@@ -71,9 +130,10 @@ nodePtr	red_black_tree::get_maximum(nodePtr node)
 	return (current);
 }
 
-void	red_black_tree::left_rotate(nodePtr x)
+template <class T, class Compare, class Allocator>
+void	red_black_tree<T, Compare, Allocator>::_left_rotate(typename red_black_tree<T, Compare, Allocator>::nodePtr x)
 {
-	nodePtr y;
+	typename red_black_tree<T, Compare, Allocator>::nodePtr y;
 
 	y = x->right;
 	x->right = y->left;
@@ -90,9 +150,10 @@ void	red_black_tree::left_rotate(nodePtr x)
 	x->parent = y;
 }
 
-void		red_black_tree::right_rotate(nodePtr x)
+template <class T, class Compare, class Allocator>
+void	red_black_tree<T, Compare, Allocator>::_right_rotate(typename red_black_tree<T, Compare, Allocator>::nodePtr x)
 {
-	nodePtr y;
+	typename red_black_tree<T, Compare, Allocator>::nodePtr y;
 
 	y = x->left;
 	x->left = y->right;
@@ -111,7 +172,8 @@ void		red_black_tree::right_rotate(nodePtr x)
 
 /*********************      INSERTION      *********************/
 
-void		red_black_tree::insert_node(nodePtr x)
+template <class T, class Compare, class Allocator>
+void	red_black_tree<T, Compare, Allocator>::_insert_node(nodePtr x)
 {
 	nodePtr	y = this->get_nil();
 	nodePtr tmp = this->get_root();
@@ -137,7 +199,8 @@ void		red_black_tree::insert_node(nodePtr x)
 	fix_insertion(node);
 }
 
-void		red_black_tree::fix_insertion(nodePtr node)
+template <class T, class Compare, class Allocator>
+void	red_black_tree<T, Compare, Allocator>::_fix_insertion(nodePtr node)
 {
 	while (node->parent->color == RED)
 	{
@@ -191,7 +254,8 @@ void		red_black_tree::fix_insertion(nodePtr node)
 
 /***********************      DELETION      ***********************/
 
-void		red_black_tree::transplant(nodePtr node1, nodePtr node2)
+template <class T, class Compare, class Allocator>
+void	red_black_tree<T, Compare, Allocator>::_transplant(nodePtr node1, nodePtr node2)
 {
 	if (node1->parent == get_nil())						// node1 is root
 		set_root(node2);
@@ -202,7 +266,8 @@ void		red_black_tree::transplant(nodePtr node1, nodePtr node2)
 	node2->parent = node1->parent;
 }
 
-void		red_black_tree::delete_node(nodePtr z)
+template <class T, class Compare, class Allocator>
+void	red_black_tree<T, Compare, Allocator>::_delete_node(nodePtr z)
 {
 	nodePtr	x;
 	nodePtr	y;
@@ -242,7 +307,8 @@ void		red_black_tree::delete_node(nodePtr z)
 		fix_deletion(x);
 }
 
-void		red_black_tree::fix_deletion(nodePtr node)
+template <class T, class Compare, class Allocator>
+void	red_black_tree<T, Compare, Allocator>::_fix_deletion(nodePtr node)
 {
 	nodePtr	y;
 
@@ -316,8 +382,8 @@ void		red_black_tree::fix_deletion(nodePtr node)
 	node->color = BLACK;
 }
 
-
-nodePtr		red_black_tree::search_node(nodePtr node, int key)
+template <class T, class Compare, class Allocator>
+typename red_black_tree<T, Compare, Allocator>::nodePtr		red_black_tree<T, Compare, Allocator>::_search_node(nodePtr node, value_type value)
 {
 
 }

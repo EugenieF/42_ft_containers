@@ -13,14 +13,38 @@ namespace ft
 	class map
 	{
 		private:
+			typedef red_black_tree<T, Compare, Allocator>	tree_type;
 
 		public:
 			/****************          TYPEDEF         ****************/
-			typedef Key						key_type;
-			typedef T						mapped_type;
-			typedef std::pair<const Key, T>	value_type;
-			typedef Compare					key_compare;
-			typedef Allocator				allocator_type;
+			typedef Key										key_type;
+			typedef T										mapped_type;
+			typedef std::pair<const Key, T>					value_type;
+			typedef Compare									key_compare;
+			typedef Allocator								allocator_type;
+			typedef typename tree_type::iterator			iterator;
+			typedef typename tree_type::const_iterator		const_iterator;
+
+		private:
+			allocator_type									_alloc;
+			key_compare										_key_comp;
+			tree_type										_rbtree;
+
+		public:
+			class	value_compare: public std::binary_function<value_type, value_type, bool>
+			{
+				public:
+
+				protected:
+					value_compare(key_compare comp);
+					key_compare		_comp;
+
+				public:
+					bool operator()(const value_type& lhs, const value_type& rhs) const
+					{
+						comp(lhs.first, rhs.first);
+					};
+			};
 
 			/****************           MAIN           ****************/
 			explicit map (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type());
