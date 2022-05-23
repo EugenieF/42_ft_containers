@@ -18,30 +18,36 @@ namespace ft
 			typedef Allocator								allocator_type;
 			typedef	size_t									size_type;
 			typedef	ptrdiff_t								difference_type;
-			typedef	value_type&								reference;
-			typedef const value_type&						const_reference;
-			typedef	value_type*								pointer;
-			typedef	const value_type*						const_pointer;
-			typedef vector_iterator<T>						iterator;
-			typedef vector_iterator<T const>				const_iterator;
-			typedef reverse_iterator<iterator>				reverse_iterator;
-			typedef reverse_iterator<const_iterator>		const_reverse_iterator;
+			typedef	Allocator::reference					reference;
+			typedef Allocator::const_reference				const_reference;
+			typedef	Allocator::pointer						pointer;
+			typedef	Allocator::const_pointer				const_pointer;
+			typedef ft::vector_iterator<T>					iterator;
+			typedef ft::vector_iterator<T const>			const_iterator;
+		//	typedef T *										iterator;
+		//	typedef T const *								const_iterator;
+			typedef ft::reverse_iterator<iterator>			reverse_iterator;
+			typedef ft::reverse_iterator<const_iterator>	const_reverse_iterator;
 
 		private:
-			iterator										_begin;
-			iterator										_end;
-			iterator										_end_capacity;
 			allocator_type									_alloc;
+			pointer											_data;
+			size_type										_size;
+			size_type										_capacity;
 
 		public:
 			/****************           MAIN           ****************/
 			explicit 				vector (const allocator_type& alloc = allocator_type());
-			explicit 				vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type());
+			explicit 				vector (size_type n, const value_type& value = value_type(), const allocator_type& alloc = allocator_type());
 			template <class InputIterator>
 			vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type());
 			vector (const vector& x);
 			~vector();
 			vector& operator=(const vector& x);
+			void					assign(size_type count, const T& value);
+			template <class InputIt>
+			void					assign(InputIt first, InputIt last);
+			allocator_type			get_allocator() const;
 
 			/****************        ITERATORS         ****************/
 			iterator				begin();
@@ -72,7 +78,6 @@ namespace ft
 			const_reference			back() const;
 			
 			/****************        MODIFIERS         ****************/
-			void					assign(size_type cout, const T& value);
 			void					push_back (const value_type& val);
 			void					pop_back();
 			iterator				insert (iterator position, const value_type& val);	
@@ -83,6 +88,12 @@ namespace ft
 			iterator				erase (iterator first, iterator last);
 			void					swap (vector& x);
 			void					clear();
+
+		private:
+			/****************    PRIVATE FUNCTIONS    ****************/
+			size_t					_manage_capacity(size_type insert_size)
+			void					_destroy_range(iterator first, iterator last)
+			void					_relocate_range(iterator position, iterator relocation)
 	};
 
 	/**************    NON-MEMBER FUNCTION OVERLOADS     **************/
