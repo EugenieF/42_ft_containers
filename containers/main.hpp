@@ -12,9 +12,10 @@
 # include <cstddef>
 # include <iterator>
 
+# include "algorithm.hpp"
+# include "iterator.hpp"
+# include "vector_iterator.hpp"
+# include "vector.hpp"
 # include "stack.hpp"
-// # include "vector.hpp"
-// # include "iterator.hpp"
-// # include "pair.hpp"
 
 #endif

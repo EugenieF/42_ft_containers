@@ -12,9 +12,6 @@ namespace ft
 	template <class T>
 	class vector_iterator
 	{
-		private:
-			pointer										_current;
-
 		public:
 			/****************          TYPEDEF         ****************/
 			typedef	ptrdiff_t							difference_type;
@@ -25,22 +22,25 @@ namespace ft
 
 			/****************           MAIN           ****************/
 			vector_iterator();
-			vector_iterator (iterator_type it);
+			vector_iterator (pointer it);
   			vector_iterator (const vector_iterator& it);
 			~vector_iterator();
-			vector_iterator&						operator=( const vector_iterator<U>& other );
-			pointer									base() const;
-			reference								operator*() const;
-			pointer									operator->() const;
-			reference								operator[] (difference_type n) const;
-			vector_iterator&						operator++();
-			vector_iterator							operator++(int);
-			vector_iterator& 						operator+= (difference_type n);
-			vector_iterator							operator+ (difference_type n) const;
-			vector_iterator& 						operator--();
-			vector_iterator  						operator--(int);
-			vector_iterator&						operator-= (difference_type n);
-			vector_iterator 						operator- (difference_type n) const;
+			vector_iterator&							operator=(const vector_iterator& other);
+			pointer										base() const;
+			reference									operator*() const;
+			pointer										operator->() const;
+			reference									operator[] (difference_type n) const;
+			vector_iterator&							operator++();
+			vector_iterator								operator++(int);
+			vector_iterator& 							operator+= (difference_type n);
+			vector_iterator								operator+ (difference_type n) const;
+			vector_iterator& 							operator--();
+			vector_iterator  							operator--(int);
+			vector_iterator&							operator-= (difference_type n);
+			vector_iterator 							operator- (difference_type n) const;
+
+		private:
+			pointer										_current;
 	};
 	
 	/**************    NON-MEMBER FUNCTION OVERLOADS     **************/

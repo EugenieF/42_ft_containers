@@ -1,5 +1,5 @@
-#ifndef __RED_BLACK_TREE_ITERATOR_HPP__
-# define __RED_BLACK_TREE_ITERATOR_HPP__
+#ifndef __RBTREE_ITERATOR_HPP__
+# define __RBTREE_ITERATOR_HPP__
 
 #include "main.hpp"
 

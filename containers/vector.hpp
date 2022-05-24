@@ -18,10 +18,10 @@ namespace ft
 			typedef Allocator								allocator_type;
 			typedef	size_t									size_type;
 			typedef	ptrdiff_t								difference_type;
-			typedef	Allocator::reference					reference;
-			typedef Allocator::const_reference				const_reference;
-			typedef	Allocator::pointer						pointer;
-			typedef	Allocator::const_pointer				const_pointer;
+			typedef	typename Allocator::reference			reference;
+			typedef typename Allocator::const_reference		const_reference;
+			typedef	typename Allocator::pointer				pointer;
+			typedef	typename Allocator::const_pointer		const_pointer;
 			typedef ft::vector_iterator<T>					iterator;
 			typedef ft::vector_iterator<T const>			const_iterator;
 		//	typedef T *										iterator;
@@ -45,8 +45,8 @@ namespace ft
 			~vector();
 			vector& operator=(const vector& x);
 			void					assign(size_type count, const T& value);
-			template <class InputIt>
-			void					assign(InputIt first, InputIt last);
+			template <class InputIterator>
+			void					assign(InputIterator first, InputIterator last);
 			allocator_type			get_allocator() const;
 
 			/****************        ITERATORS         ****************/
@@ -69,7 +69,7 @@ namespace ft
 
 			/****************      ELEMENT ACCESS       ***************/
 			reference				operator[](size_type pos);
-			const_reference			operator[] (size_type n) const;
+			const_reference			operator[] (size_type pos) const;
 			reference				at(size_type pos);
 			const_reference			at(size_type pos) const;
 			reference				front();
@@ -91,9 +91,9 @@ namespace ft
 
 		private:
 			/****************    PRIVATE FUNCTIONS    ****************/
-			size_t					_manage_capacity(size_type insert_size)
-			void					_destroy_range(iterator first, iterator last)
-			void					_relocate_range(iterator position, iterator relocation)
+			void					_manage_capacity(size_type insert_size);
+			void					_destroy_range(iterator first, iterator last);
+			void					_relocate_range(iterator position, iterator relocation);
 	};
 
 	/**************    NON-MEMBER FUNCTION OVERLOADS     **************/

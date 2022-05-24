@@ -17,7 +17,7 @@ template <class T>
 vector_iterator<T>::~vector_iterator() {}
 
 template <class T>
-vector_iterator<T>&		vector_iterator<T>::operator=( const vector_iterator<T>& other )
+vector_iterator<T>&	vector_iterator<T>::operator=(const vector_iterator<T>& other)
 {
 	if (this != &other)
 		this->_current = other._current;
@@ -25,9 +25,9 @@ vector_iterator<T>&		vector_iterator<T>::operator=( const vector_iterator<T>& ot
 }
 
 template <class T>
-vector_iterator<T>::pointer		vector_iterator<T>::base() const
+typename vector_iterator<T>::pointer	vector_iterator<T>::base() const
 {
-	return (this->_curent);
+	return (this->_current);
 }
 
 /****************          ACCESS OPERATORS         ***************/

@@ -1,40 +1,79 @@
 #include "mainTests.hpp"
 
-template < class T >
-void	pushTest(T &vector)
+template < class T, class U >
+void	pushBackAndBackTest(T vector, U x, U y)
 {
-	vector.push_back(1);
-	EXPECT_EQ(vector[0], 1);
-	vector.push_back(2);
-	EXPECT_EQ(vector[1], 2);
+	for (int i = 1; i < 6; i++)
+	{
+		x += y;
+		vector.push_back(x);
+		EXPECT_EQ(vector.back(), x);
+	}
 }
+
+template < class T, class U >
+void	sizeTest(T vector, U x)
+{
+	EXPECT_EQ(vector.size(), (unsigned long)0);
+	vector.push_back(x);
+	EXPECT_EQ(vector.size(), (unsigned long)1);
+	for (int i = 2; i < 6; i++)
+		vector.push_back(x);
+	EXPECT_EQ(vector.size(), (unsigned long)5);
+	for (int i = 6; i < 21; i++)
+		vector.push_back(x);
+	EXPECT_EQ(vector.size(), (unsigned long)20);
+	for (int i = 21; i < 101; i++)
+		vector.push_back(x);
+	EXPECT_EQ(vector.size(), (unsigned long)100);
+	// for (int i = 1; i < 101; i++)
+	// 	vector.pop();
+	// EXPECT_EQ(vector.size(), (unsigned long)0);
+}
+
 
 template < class T >
-void	sizeTest(T &vector)
+void	runIntTests(T &vector)
 {
-	EXPECT_EQ(vector.size(), (unsigned long)2);
-	for (int i = 3; i < 11; i++)
-		vector.push_back(i);
-	EXPECT_EQ(vector.size(), (unsigned long)10);
+	pushBackAndBackTest(vector, 0, 1);
+	sizeTest(vector, 2);
 }
 
-template < class T >
-void	runTests(T &vector)
+TEST(Vector, StdVector)
 {
-	pushTest(vector);
-	sizeTest(vector);
+	std::cout << std::endl << ORANGE_B;
+	std::cout << "                                      ";
+	std::cout << "          [ STD::VECTOR ] " << RESET << std::endl;
+
+	std::vector<int> intVector;
+	runIntTests(intVector);
+
+	// std::vector<float> floatVector;
+	// runFloatTests(floatVector);
+
+	// std::vector<double> doubleVector;
+	// runDoubleTests(doubleVector);
+
+	// std::vector<std::string> stringVector;
+	// runStringTests(stringVector);
 }
 
-TEST(VectorInt, StdVectorInt)
-{
-	std::cout << std::endl << ORANGE_B << "\t\t\t\t\t\t [ STD::VECTOR ] " << RESET << std::endl;
-	std::vector<int> vector;
-	runTests( vector);
-}
 
-TEST(VectorInt, FtVectorInt)
+TEST(Vector, FtVector)
 {
-	std::cout << std::endl << BLUE_B << "\t\t\t\t\t\t  [ FT::VECTOR ] " << RESET << std::endl;
-	// ft::vector<int> vector;
-	// runTests( vector);
+	std::cout << std::endl << BLUE_B;
+	std::cout << "                                      ";
+	std::cout << "           [ FT::VECTOR ] " << RESET << std::endl;
+
+	ft::vector<int> intVector;
+	runIntTests(intVector);
+
+	// ft::vector<float> floatVector;
+	// runFloatTests(floatVector);
+
+	// ft::vector<double> doubleVector;
+	// runDoubleTests(doubleVector);
+
+	// ft::vector<std::string> stringVector;
+	// runStringTests(stringVector);
 }
