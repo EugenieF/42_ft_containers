@@ -7,6 +7,7 @@ void	pushBackAndBackTest(T vector, U x, U y)
 	{
 		x += y;
 		vector.push_back(x);
+		std::cout << " *********************** i = " << i << std::endl;
 		EXPECT_EQ(vector.back(), x);
 	}
 }
@@ -45,8 +46,8 @@ TEST(Vector, StdVector)
 	std::cout << "                                      ";
 	std::cout << "          [ STD::VECTOR ] " << RESET << std::endl;
 
-	std::vector<int> intVector;
-	runIntTests(intVector);
+	// std::vector<int> intVector;
+	// runIntTests(intVector);
 
 	// std::vector<float> floatVector;
 	// runFloatTests(floatVector);

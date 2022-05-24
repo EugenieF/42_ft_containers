@@ -14,6 +14,7 @@
 
 # include "algorithm.hpp"
 # include "iterator.hpp"
+# include "type_traits.hpp"
 # include "vector_iterator.hpp"
 # include "vector.hpp"
 # include "stack.hpp"

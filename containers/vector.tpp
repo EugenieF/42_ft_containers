@@ -16,8 +16,7 @@ vector<T, Allocator>::vector (size_t n, const T& value, const Allocator& alloc):
 
 template <class T, class Allocator>
 template <class InputIterator>
-// typename ft::enable_if<ft::is_integral<InputIterator>::value>
-vector<T, Allocator>::vector (InputIterator first, InputIterator last, const Allocator& alloc):
+vector<T, Allocator>::vector (InputIterator first, InputIterator last, const Allocator& alloc, typename ft::enable_if<!(ft::is_integral<InputIterator>::value)>::type*):
 	_alloc(alloc), _data(NULL), _size(0), _capacity(0)
 {
 	this->assign(first, last);
@@ -56,7 +55,8 @@ void	vector<T, Allocator>::assign(size_t count, const T& value)
 
 template <class T, class Allocator>
 template <class InputIterator>
-void	vector<T, Allocator>::assign(InputIterator first, InputIterator last)
+typename ft::enable_if<!(ft::is_integral<InputIterator>::value), void>::type
+		vector<T, Allocator>::assign(InputIterator first, InputIterator last)
 {
 	this->clear();
 	this->insert(this->begin(), first, last);
@@ -257,7 +257,7 @@ template <class T, class Allocator>
 typename vector<T, Allocator>::iterator		vector<T, Allocator>::insert (typename vector<T, Allocator>::iterator position, const T& value)
 {
 	this->insert(position, 1, value);
-	typename vector<T, Allocator>::difference_type index = std::distance(this->begin(), position);
+	typename vector<T, Allocator>::difference_type index = position - this->begin();
 	return (&this->_data[index]);
 }
 
@@ -269,19 +269,25 @@ void	vector<T, Allocator>::insert (typename vector<T, Allocator>::iterator posit
 
 	this->_manage_capacity(n);
 
-	index = std::distance(this->begin(), position);
+	index = position - this->begin();
+	this->_size += n;
 	ptr = typename vector<T, Allocator>::iterator(&this->_data[index]);
 
 	this->_relocate_range(ptr, ptr + n);
-	for (size_t i = 0; i < n; i++, ptr++)
-		this->_alloc.construct(&(*ptr), value);
 
-	this->_size += n;
+	for (size_t i = 0; i < n; i++, ptr++)
+	{
+		this->_alloc.construct(&(*ptr), value);
+		// std::cout << "*ptr = " << *ptr << std::endl;
+	}
+	std::cout << "HELLO: data[0] = " << this->_data[0] << std::endl;
+
 }
 
 template <class T, class Allocator>
 template <class InputIterator>
-void	vector<T, Allocator>::insert (typename vector<T, Allocator>::iterator position, InputIterator first, InputIterator last)
+typename ft::enable_if<!(ft::is_integral<InputIterator>::value), void>::type
+		vector<T, Allocator>::insert (typename vector<T, Allocator>::iterator position, InputIterator first, InputIterator last)
 {
 	typename vector<T, Allocator>::difference_type 	index;
 	typename vector<T, Allocator>::iterator			ptr;
@@ -354,7 +360,7 @@ void	vector<T, Allocator>::_manage_capacity(size_t extra_size)
 	if (this->_size + extra_size < this->_capacity)
 		return ;
 	new_capacity = this->_capacity;
-	while (this->_size + extra_size > new_capacity)
+	while (this->_size + extra_size >= new_capacity)
 	{
 		if (!new_capacity)
 			new_capacity++;
@@ -386,7 +392,10 @@ void	vector<T, Allocator>::_relocate_range(typename vector<T, Allocator>::iterat
 	typename vector<T, Allocator>::iterator		ptr;
 
 	if (this->empty() || position == this->end())
+	{
+		std::cout << "++++++++++++++++++++++++++++++++++" << std::endl;
 		return ;
+	}
 	vector<T, Allocator>	tmp(position, this->end());
 	this->_destroy_range(position, this->end());
 

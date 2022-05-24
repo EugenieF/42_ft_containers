@@ -3,6 +3,8 @@
 
 #include "main.hpp"
 
+#include <type_traits> // to test
+
 namespace ft
 {
 	/***********************************************************************************/
@@ -40,13 +42,14 @@ namespace ft
 			explicit 				vector (const allocator_type& alloc = allocator_type());
 			explicit 				vector (size_type n, const value_type& value = value_type(), const allocator_type& alloc = allocator_type());
 			template <class InputIterator>
-			vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type());
+			vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(), typename ft::enable_if<!(ft::is_integral<InputIterator>::value)>::type* = NULL);
 			vector (const vector& x);
 			~vector();
 			vector& operator=(const vector& x);
 			void					assign(size_type count, const T& value);
 			template <class InputIterator>
-			void					assign(InputIterator first, InputIterator last);
+			typename ft::enable_if<!(ft::is_integral<InputIterator>::value), void>::type
+									assign(InputIterator first, InputIterator last);
 			allocator_type			get_allocator() const;
 
 			/****************        ITERATORS         ****************/
@@ -82,8 +85,9 @@ namespace ft
 			void					pop_back();
 			iterator				insert (iterator position, const value_type& val);	
     		void					insert (iterator position, size_type n, const value_type& val);	
-			template <class InputIterator>
-    		void					insert (iterator position, InputIterator first, InputIterator last);
+			template <typename InputIterator>
+    		typename ft::enable_if<!(ft::is_integral<InputIterator>::value), void>::type
+									insert (iterator position, InputIterator first, InputIterator last);
 			iterator				erase (iterator position);
 			iterator				erase (iterator first, iterator last);
 			void					swap (vector& x);
