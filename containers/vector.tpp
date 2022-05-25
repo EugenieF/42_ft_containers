@@ -24,7 +24,7 @@ vector<T, Allocator>::vector (InputIterator first, InputIterator last, const All
 
 template <class T, class Allocator>
 vector<T, Allocator>::vector (const vector<T, Allocator>& x):
-	_data(NULL), _size(0), _capacity(0)
+	_alloc(x._alloc), _data(NULL), _size(0), _capacity(0)
 {
 	*this = x;
 }
@@ -218,31 +218,31 @@ typename vector<T, Allocator>::const_reference		vector<T, Allocator>::at(typenam
 template <class T, class Allocator>
 typename vector<T, Allocator>::reference		vector<T, Allocator>::front()
 {
-	return (*this->begin());
+	return (*this->_data);
 }
 
 template <class T, class Allocator>
 typename vector<T, Allocator>::const_reference	vector<T, Allocator>::front() const
 {
-	return (*this->begin());
+	return (*this->_data);
 }
 
 template <class T, class Allocator>
 typename vector<T, Allocator>::reference		vector<T, Allocator>::back()
 {
-	return (*(this->end() - 1));
+	return (this->_data[this->_size - 1]);
 }
 
 template <class T, class Allocator>
 typename vector<T, Allocator>::const_reference	vector<T, Allocator>::back() const
 {
-	return (*(this->end() - 1));
+	return (this->_data[this->_size - 1]);
 }
 	
 /****************        MODIFIERS         ****************/
 
 template <class T, class Allocator>
-void	vector<T, Allocator>::push_back (const typename vector<T, Allocator>::value_type& value)
+void	vector<T, Allocator>::push_back (typename vector<T, Allocator>::value_type const &value)
 {
 	this->insert(this->end(), value);		// Insert value before position
 }
@@ -267,21 +267,19 @@ void	vector<T, Allocator>::insert (typename vector<T, Allocator>::iterator posit
 	typename vector<T, Allocator>::difference_type	index;
 	typename vector<T, Allocator>::iterator			ptr;
 
-	this->_manage_capacity(n);
-
 	index = position - this->begin();
-	this->_size += n;
+	this->_manage_capacity(n);
 	ptr = typename vector<T, Allocator>::iterator(&this->_data[index]);
 
 	this->_relocate_range(ptr, ptr + n);
+	this->_size += n;
 
 	for (size_t i = 0; i < n; i++, ptr++)
 	{
 		this->_alloc.construct(&(*ptr), value);
-		// std::cout << "*ptr = " << *ptr << std::endl;
+		// std::cout << "value = " << value << std::endl;
 	}
-	std::cout << "HELLO: data[0] = " << this->_data[0] << std::endl;
-
+	// std::cout << "HELLO: data[0] = " << this->_data[0] << std::endl;
 }
 
 template <class T, class Allocator>
@@ -293,17 +291,18 @@ typename ft::enable_if<!(ft::is_integral<InputIterator>::value), void>::type
 	typename vector<T, Allocator>::iterator			ptr;
 	typename vector<T, Allocator>::difference_type	insert_size;
 
+	index = std::distance(this->begin(), position);
 	insert_size = last - first;
 	this->_manage_capacity(insert_size);
 
-	index = std::distance(this->begin(), position);
 	ptr = typename vector<T, Allocator>::iterator(&this->_data[index]);
 
 	this->_relocate_range(ptr, ptr + insert_size);
+	this->_size += insert_size;
+
 	for (; first != last; first++, ptr++)
 		this->_alloc.construct(&(*ptr), *first);
 
-	this->_size += insert_size;
 }
 
 template <class T, class Allocator>
@@ -392,13 +391,10 @@ void	vector<T, Allocator>::_relocate_range(typename vector<T, Allocator>::iterat
 	typename vector<T, Allocator>::iterator		ptr;
 
 	if (this->empty() || position == this->end())
-	{
-		std::cout << "++++++++++++++++++++++++++++++++++" << std::endl;
 		return ;
-	}
-	vector<T, Allocator>	tmp(position, this->end());
+	vector<T>	tmp(position, this->end());
+	// std::cout << "DEBUG" << std::endl;
 	this->_destroy_range(position, this->end());
-
 	for (ptr = tmp.begin(); ptr != tmp.end(); ptr++, relocation++)
 		this->_alloc.construct(&(*relocation), *ptr);
 }
