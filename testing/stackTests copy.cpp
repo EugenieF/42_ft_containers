@@ -231,22 +231,6 @@ void	runStringTests(T &stack)
 	operatorInfTest(stack, testX);
 }
 
-class stackTest: public ::testing::Test
-{
-	protected:
-		void	SetUp() override
-		{
-			for (int i = 1; i < 6; i++)
-			{
-				intStdStack.push(i);
-				intFtStack.push(i);
-			}
-		}
-
-		std::stack<int> intStdStack;
-		ft::stack<int> intFtStack;
-};
-
 TEST(Stack, StdStack)
 {
 	std::cout << std::endl << ORANGE_B;
