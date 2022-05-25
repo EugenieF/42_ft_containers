@@ -39,49 +39,49 @@ set<Key, Compare, Allocator>::set& operator= (const set& x)
 template< class Key, class Compare, class Allocator >
 iterator	set<Key, Compare, Allocator>::begin()
 {
-
+    return (this->_rbtree.begin());
 }
 
 template< class Key, class Compare, class Allocator >
 const_iterato	set<Key, Compare, Allocator>::begin() const
 {
-
+    return (this->_rbtree.begin());
 }
 
 template< class Key, class Compare, class Allocator >
 iterator	set<Key, Compare, Allocator>::end()
 {
-
+    return (this->_rbtree.end());
 }
 
 template< class Key, class Compare, class Allocator >
 const_iterator	set<Key, Compare, Allocator>::end() const
 {
-
+    return (this->_rbtree.end());
 }
 
 template< class Key, class Compare, class Allocator >
 reverse_iterator	set<Key, Compare, Allocator>::rbegin()
 {
-
+    return (this->_rbtree.rbegin());
 }
 
 template< class Key, class Compare, class Allocator >
 const_reverse_iterator	set<Key, Compare, Allocator>::rbegin() const
 {
-
+    return (this->_rbtree.rbegin());
 }
 
 template< class Key, class Compare, class Allocator >
 reverse_iterator	set<Key, Compare, Allocator>::rend()
 {
-
+    return (this->_rbtree.rend());
 }
 
 template< class Key, class Compare, class Allocator >
 const_reverse_iterator	set<Key, Compare, Allocator>::rend() const
 {
-
+    return (this->_rbtree.rend());
 }
 
 

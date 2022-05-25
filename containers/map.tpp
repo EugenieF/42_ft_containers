@@ -4,13 +4,14 @@ using namespace ft;
 /****************           MAIN           ****************/
 
 template <class Key, class T, class Compare, class Allocator>
-explicit map<Key, T, Compare, Allocator>::map (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
+map<Key, T, Compare, Allocator>::map (const Compare& comp, const Allocator& alloc)
 {
 
 }
 
-template <class Key, class T, class Compare, class Allocator, class InputIterator>
-map<Key, T, Compare, Allocator>::map (InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
+template <class Key, class T, class Compare, class Allocator>
+template <class InputIterator>
+map<Key, T, Compare, Allocator>::map (InputIterator first, InputIterator last, const Compare& comp, const Allocator& alloc)
 {
 
 }
@@ -18,7 +19,7 @@ map<Key, T, Compare, Allocator>::map (InputIterator first, InputIterator last, c
 template <class Key, class T, class Compare, class Allocator>
 map<Key, T, Compare, Allocator>::map (const map& x)
 {
-
+    *this x;
 }
 
 template <class Key, class T, class Compare, class Allocator>
@@ -28,60 +29,64 @@ map<Key, T, Compare, Allocator>::~map()
 }
 
 template <class Key, class T, class Compare, class Allocator>
-map& map<Key, T, Compare, Allocator>::operator= (const map& x)
+map<Key, T, Compare, Allocator>&    map<Key, T, Compare, Allocator>::operator= (const map<Key, T, Compare, Allocator>& x)
 {
+    if (this != &x)
+    {
 
+    }
+    return (*this);
 }
 
 
 /****************        ITERATORS         ****************/
 
 template <class Key, class T, class Compare, class Allocator>
-iterator	map<Key, T, Compare, Allocator>::begin()
+typename map<Key, T, Compare, Allocator>::iterator	map<Key, T, Compare, Allocator>::begin()
 {
-
+    return (this->_rbtree.begin());
 }
 
 template <class Key, class T, class Compare, class Allocator>
-const_iterator	map<Key, T, Compare, Allocator>::begin() const
+typename map<Key, T, Compare, Allocator>::const_iterator	map<Key, T, Compare, Allocator>::begin() const
 {
-
+    return (this->_rbtree.begin());
 }
 
 template <class Key, class T, class Compare, class Allocator>
-iterator	map<Key, T, Compare, Allocator>::end()
+typename map<Key, T, Compare, Allocator>::iterator	map<Key, T, Compare, Allocator>::end()
 {
-
+    return (this->_rbtree.end());
 }
 
 template <class Key, class T, class Compare, class Allocator>
-const_iterator	map<Key, T, Compare, Allocator>::end() const
+typename map<Key, T, Compare, Allocator>::const_iterator	map<Key, T, Compare, Allocator>::end() const
 {
-
+    return (this->_rbtree.end());
 }
 
 template <class Key, class T, class Compare, class Allocator>
-reverse_iterator		map<Key, T, Compare, Allocator>::rbegin()
+typename map<Key, T, Compare, Allocator>::reverse_iterator		map<Key, T, Compare, Allocator>::rbegin()
 {
-
+    return (this->_rbtree.rbegin());
 }
 
 template <class Key, class T, class Compare, class Allocator>
-const_reverse_iterator	map<Key, T, Compare, Allocator>::rbegin() const
+typename map<Key, T, Compare, Allocator>::const_reverse_iterator	map<Key, T, Compare, Allocator>::rbegin() const
 {
-
+    return (this->_rbtree.rbegin());
 }
 
 template <class Key, class T, class Compare, class Allocator>
-reverse_iterator	map<Key, T, Compare, Allocator>::rend()
+typename map<Key, T, Compare, Allocator>::reverse_iterator	map<Key, T, Compare, Allocator>::rend()
 {
-
+    return (this->_rbtree.rend());
 }
 
 template <class Key, class T, class Compare, class Allocator>
-const_reverse_iterator	map<Key, T, Compare, Allocator>::rend() const
+typename map<Key, T, Compare, Allocator>::const_reverse_iterator	map<Key, T, Compare, Allocator>::rend() const
 {
-
+    return (this->_rbtree.rend());
 }
 
 
@@ -90,26 +95,28 @@ const_reverse_iterator	map<Key, T, Compare, Allocator>::rend() const
 template <class Key, class T, class Compare, class Allocator>
 bool	map<Key, T, Compare, Allocator>::empty() const
 {
-
+    if (!this->_size)
+        return (true);
+    return (false);
 }
 
 template <class Key, class T, class Compare, class Allocator>
-size_type	map<Key, T, Compare, Allocator>::size() const
+size_t	map<Key, T, Compare, Allocator>::size() const
 {
-
+    return (this->_size);
 }
 
 template <class Key, class T, class Compare, class Allocator>
-size_type	map<Key, T, Compare, Allocator>::max_size() const
+size_t	map<Key, T, Compare, Allocator>::max_size() const
 {
-
+    return (this->_alloc.max_size());
 }
 
 
 /****************      ELEMENT ACCESS       ***************/
 
 template <class Key, class T, class Compare, class Allocator>
-mapped_type&	map<Key, T, Compare, Allocator>::operator[] (const key_type& k)
+T&	map<Key, T, Compare, Allocator>::operator[] (const Key& k)
 {
 
 }
@@ -117,43 +124,44 @@ mapped_type&	map<Key, T, Compare, Allocator>::operator[] (const key_type& k)
 /****************        MODIFIERS         ****************/
 
 template <class Key, class T, class Compare, class Allocator>
-pair<iterator,bool>		map<Key, T, Compare, Allocator>::insert (const value_type& val)
+pair<iterator,bool>		map<Key, T, Compare, Allocator>::insert (const typename map<Key, T, Compare, Allocator>::value_type& val)
 {
 
 }
 
 template <class Key, class T, class Compare, class Allocator>
-iterator	map<Key, T, Compare, Allocator>::insert (iterator position, const value_type& val)
+typename map<Key, T, Compare, Allocator>::iterator	map<Key, T, Compare, Allocator>::insert (typename map<Key, T, Compare, Allocator>::iterator position, const typename map<Key, T, Compare, Allocator>::value_type& val)
 {
 
 }
 
-template <class Key, class T, class Compare, class Allocator, class InputIterator>
+template <class Key, class T, class Compare, class Allocator>
+template <class InputIterator>
 void	map<Key, T, Compare, Allocator>::insert (InputIterator first, InputIterator last)
 {
 
 }
 
 template <class Key, class T, class Compare, class Allocator>
-void	map<Key, T, Compare, Allocator>::erase (iterator position)
+void	map<Key, T, Compare, Allocator>::erase (typename map<Key, T, Compare, Allocator>::iterator position)
 {
 
 }
 
 template <class Key, class T, class Compare, class Allocator>
-size_type	map<Key, T, Compare, Allocator>::erase (const key_type& k)
+size_t	map<Key, T, Compare, Allocator>::erase (const Key& k)
 {
 
 }
 
 template <class Key, class T, class Compare, class Allocator>
-void	map<Key, T, Compare, Allocator>::erase (iterator first, iterator last)
+void	map<Key, T, Compare, Allocator>::erase (typename map<Key, T, Compare, Allocator>::iterator first, typename map<Key, T, Compare, Allocator>::iterator last)
 {
 
 }
 
 template <class Key, class T, class Compare, class Allocator>
-void	map<Key, T, Compare, Allocator>::swap (map& x)
+void	map<Key, T, Compare, Allocator>::swap (map<Key, T, Compare, Allocator>& x)
 {
 
 }
@@ -168,13 +176,13 @@ void	map<Key, T, Compare, Allocator>::clear()
 /****************        OBSERVERS         ****************/
 
 template <class Key, class T, class Compare, class Allocator>
-key_compare		map<Key, T, Compare, Allocator>::key_comp() const
+typename map<Key, T, Compare, Allocator>::key_compare       map<Key, T, Compare, Allocator>::key_comp() const
 {
 
 }
 
 template <class Key, class T, class Compare, class Allocator>
-value_compare	map<Key, T, Compare, Allocator>::value_comp() const
+typename map<Key, T, Compare, Allocator>::value_compare     map<Key, T, Compare, Allocator>::value_comp() const
 {
 
 }
@@ -183,55 +191,55 @@ value_compare	map<Key, T, Compare, Allocator>::value_comp() const
 /****************        OPERATIONS        ****************/
 
 template <class Key, class T, class Compare, class Allocator>
-iterator	map<Key, T, Compare, Allocator>::find (const key_type& k)
+typename map<Key, T, Compare, Allocator>::iterator	map<Key, T, Compare, Allocator>::find (const Key& k)
 {
 
 }
 
 template <class Key, class T, class Compare, class Allocator>
-const_iterator	map<Key, T, Compare, Allocator>::find (const key_type& k) const
+typename map<Key, T, Compare, Allocator>::const_iterator	map<Key, T, Compare, Allocator>::find (const Key& k) const
 {
 
 }
 
 template <class Key, class T, class Compare, class Allocator>
-size_type	map<Key, T, Compare, Allocator>::count (const key_type& k) const
+size_t  map<Key, T, Compare, Allocator>::count (const Key& k) const
 {
 
 }
 
 template <class Key, class T, class Compare, class Allocator>
-iterator	map<Key, T, Compare, Allocator>::lower_bound (const key_type& k)
+typename map<Key, T, Compare, Allocator>::iterator	map<Key, T, Compare, Allocator>::lower_bound (const Key& k)
 {
 
 }
 
 template <class Key, class T, class Compare, class Allocator>
-const_iterator	map<Key, T, Compare, Allocator>::lower_bound (const key_type& k) const
+typename map<Key, T, Compare, Allocator>::const_iterator	map<Key, T, Compare, Allocator>::lower_bound (const Key& k) const
 {
 
 }
 
 template <class Key, class T, class Compare, class Allocator>
-iterator	map<Key, T, Compare, Allocator>::upper_bound (const key_type& k)
+typename map<Key, T, Compare, Allocator>::iterator	map<Key, T, Compare, Allocator>::upper_bound (const Key& k)
 {
 
 }
 
 template <class Key, class T, class Compare, class Allocator>
-const_iterator	map<Key, T, Compare, Allocator>::upper_bound (const key_type& k) const
+typename map<Key, T, Compare, Allocator>::const_iterator	map<Key, T, Compare, Allocator>::upper_bound (const Key& k) const
 {
 
 }
 
 template <class Key, class T, class Compare, class Allocator>
-pair<const_iterator,const_iterator>	map<Key, T, Compare, Allocator>::equal_range (const key_type& k) const
+pair<const_iterator,const_iterator>	map<Key, T, Compare, Allocator>::equal_range (const Key& k) const
 {
 
 }
 
 template <class Key, class T, class Compare, class Allocator>
-pair<iterator,iterator> 	map<Key, T, Compare, Allocator>::equal_range (const key_type& k)
+pair<iterator,iterator> 	map<Key, T, Compare, Allocator>::equal_range (const Key& k)
 {
 
 }
@@ -240,43 +248,43 @@ pair<iterator,iterator> 	map<Key, T, Compare, Allocator>::equal_range (const key
 /**************    NON-MEMBER FUNCTION OVERLOADS     **************/
 
 template <class Key, class T, class Compare, class Allocator>
-bool operator==( const map<Key,T,Compare,Allocator>& lhs, const map<Key,T,Compare,Allocator>& rhs )
+bool ft::operator==( const map<Key,T,Compare,Allocator>& lhs, const map<Key,T,Compare,Allocator>& rhs )
 {
 
 }
 
 template <class Key, class T, class Compare, class Allocator>
-bool operator!=( const map<Key,T,Compare,Allocator>& lhs, const map<Key,T,Compare,Allocator>& rhs )
+bool ft::operator!=( const map<Key,T,Compare,Allocator>& lhs, const map<Key,T,Compare,Allocator>& rhs )
 {
 
 }
 
 template <class Key, class T, class Compare, class Allocator>
-bool operator<( const map<Key,T,Compare,Allocator>& lhs, const map<Key,T,Compare,Allocator>& rhs )
+bool ft::operator<( const map<Key,T,Compare,Allocator>& lhs, const map<Key,T,Compare,Allocator>& rhs )
 {
 
 }
 
 template <class Key, class T, class Compare, class Allocator>
-bool operator<=( const map<Key,T,Compare,Allocator>& lhs, const map<Key,T,Compare,Allocator>& rhs )
+bool ft::operator<=( const map<Key,T,Compare,Allocator>& lhs, const map<Key,T,Compare,Allocator>& rhs )
 {
 
 }
 
 template <class Key, class T, class Compare, class Allocator>
-bool operator>( const map<Key,T,Compare,Allocator>& lhs, const map<Key,T,Compare,Allocator>& rhs )
+bool ft::operator>( const map<Key,T,Compare,Allocator>& lhs, const map<Key,T,Compare,Allocator>& rhs )
 {
 
 }
 
 template <class Key, class T, class Compare, class Allocator>
-bool operator>=( const map<Key,T,Compare,Allocator>& lhs, const map<Key,T,Compare,Allocator>& rhs )
+bool ft::operator>=( const map<Key,T,Compare,Allocator>& lhs, const map<Key,T,Compare,Allocator>& rhs )
 {
 
 }
 
 template <class Key, class T, class Compare, class Allocator>
-void swap( map<Key,T,Compare,Allocator>& lhs, map<Key,T,Compare,Allocator>& rhs )
+void ft::swap( map<Key,T,Compare,Allocator>& lhs, map<Key,T,Compare,Allocator>& rhs )
 {
 
 }

@@ -31,7 +31,11 @@ OBJS_DIR	= objs
 RM			= rm -rf
 
 all: $(NAME)
+ifeq ($(UNAME), Darwin)
 	./$(NAME)
+else
+	valgrind ./$(NAME)
+endif
 
 $(NAME): $(OBJS)
 	@echo "Linking $(NAME)"

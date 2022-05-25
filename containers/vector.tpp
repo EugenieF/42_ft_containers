@@ -418,7 +418,7 @@ bool	ft::operator!= (const vector<T,Allocator>& lhs, const vector<T,Allocator>& 
 template <class T, class Allocator>
 bool	ft::operator<  (const vector<T,Allocator>& lhs, const vector<T,Allocator>& rhs)
 {
-	ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+	return (ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
 }
 
 template <class T, class Allocator>
