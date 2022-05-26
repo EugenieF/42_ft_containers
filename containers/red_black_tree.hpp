@@ -49,7 +49,7 @@ namespace ft
 	class	red_black_tree
 	{
 		public:
-			typedef T									value_type
+			typedef T									value_type;
 			typedef node<T>								node;
 			typedef node*								nodePtr;
 			typedef node&								nodeRef;
@@ -57,12 +57,14 @@ namespace ft
 			typedef red_black_tree*						pointer;
 			typedef Compare								key_compare;
 			typedef Allocator							allocator_type;
+			typedef	size_t								size_type;
 			typedef rbtree_iterator<T, node>			iterator;
 			typedef rbtree_iterator<T const, node>		const_iterator;
 			typedef reverse_iterator<iterator>			reverse_iterator;
 			typedef reverse_iterator<const_iterator>	const_reverse_iterator;
 
 		private:
+			size_type									_size;		
 			nodePtr										_root;
 			nodePtr										_nil;
 			allocator_type								_alloc;
@@ -89,7 +91,20 @@ namespace ft
 			reverse_iterator							rend();
 			const_reverse_iterator						rend() const;
 
+		/****************         CAPACITY         ****************/
+			size_type									size() const;
+			size_type									max_size() const;
+
+		/****************        MODIFIERS         ****************/
+			pair<iterator,bool>								insert (const value_type& val);
+			iterator										insert (iterator position, const value_type& val);
+			void											erase (iterator position);
+			size_type										erase (const value_type& k);
+			void											swap (map& x);
+			void											clear();
+
 		private:
+		/****************     PRIVATE FUNCTIONS     ****************/
 			nodePtr										_get_minimum(nodePtr node)
 			nodePtr										_get_maximum(nodePtr node)
 			void										_left_rotate(nodePtr node);

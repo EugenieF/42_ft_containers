@@ -18,5 +18,6 @@
 # include "vector_iterator.hpp"
 # include "vector.hpp"
 # include "stack.hpp"
+# include "utility.hpp"
 
 #endif

@@ -5,11 +5,11 @@ using namespace ft;
 
 template <class T, class Allocator>
 vector<T, Allocator>::vector (const Allocator& alloc):
-	_alloc(alloc), _data(NULL), _size(0), _capacity(0) {}
+	_data(NULL), _size(0), _capacity(0), _alloc(alloc) {}
 
 template <class T, class Allocator>
 vector<T, Allocator>::vector (size_t n, const T& value, const Allocator& alloc):
-	_alloc(alloc), _data(NULL), _size(0), _capacity(0)
+	_data(NULL), _size(0), _capacity(0), _alloc(alloc)
 {
 	this->assign(n, value);
 }
@@ -17,14 +17,14 @@ vector<T, Allocator>::vector (size_t n, const T& value, const Allocator& alloc):
 template <class T, class Allocator>
 template <class InputIterator>
 vector<T, Allocator>::vector (InputIterator first, InputIterator last, const Allocator& alloc, typename ft::enable_if<!(ft::is_integral<InputIterator>::value)>::type*):
-	_alloc(alloc), _data(NULL), _size(0), _capacity(0)
+	_data(NULL), _size(0), _capacity(0), _alloc(alloc)
 {
 	this->assign(first, last);
 }
 
 template <class T, class Allocator>
 vector<T, Allocator>::vector (const vector<T, Allocator>& x):
-	_alloc(x._alloc), _data(NULL), _size(0), _capacity(0)
+	_data(NULL), _size(0), _capacity(0), _alloc(x._alloc)
 {
 	*this = x;
 }

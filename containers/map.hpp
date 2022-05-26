@@ -9,7 +9,8 @@ namespace ft
 	/*                                      MAP 	                                   */
 	/***********************************************************************************/
 
-	template < class Key, class T, class Compare = std::less<Key>, class Allocator = std::allocator<pair<const Key,T> > >
+	// template < class Key, class T, class Compare = std::less<Key>, class Allocator = std::allocator<ft::pair<const Key,T> > >
+	template < class Key, class T, class Compare = std::less<Key>, class Allocator = std::allocator<std::pair<const Key,T> > >
 	class map
 	{
 		private:
@@ -34,16 +35,16 @@ namespace ft
 			typedef ft::reverse_iterator<const_iterator>	const_reverse_iterator;
 
 		private:
-			allocator_type									_alloc;
-			key_compare										_key_comp;
 			tree_type										_rbtree;
+			key_compare										_key_comp;
+			allocator_type									_alloc;
 
 		public:
 			class	value_compare: public std::binary_function<value_type, value_type, bool>
 			{
 				protected:
-					value_compare(key_compare comp);
-					key_compare		_comp;
+					key_compare		comp;
+					value_compare(key_compare c);
 
 				public:
 					bool operator()(const value_type& lhs, const value_type& rhs) const
@@ -74,7 +75,6 @@ namespace ft
 			bool											empty() const;
 			size_type										size() const;
 			size_type										max_size() const;
-
 
 			/****************      ELEMENT ACCESS       ***************/
 			mapped_type&									operator[] (const key_type& k);

@@ -114,6 +114,20 @@ typename red_black_tree<T, Compare, Allocator>::const_reverse_iterator	red_black
 	return (const_reverse_iterator(this->begin()));
 }
 
+/**********************           CAPACITY          **********************/
+
+template <class T, class Compare, class Allocator>
+size_t	red_black_tree<T, Compare, Allocator>::size() const
+{
+	return (this->_size);
+}
+
+template <class T, class Compare, class Allocator>
+size_t	red_black_tree<T, Compare, Allocator>::max_size() const
+{
+	return (this->_alloc.max_size());
+}
+
 /********************        PRIVATE FUNCTIONS         ********************/
 
 template <class T, class Compare, class Allocator>
