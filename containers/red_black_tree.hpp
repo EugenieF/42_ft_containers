@@ -96,17 +96,25 @@ namespace ft
 			size_type									max_size() const;
 
 		/****************        MODIFIERS         ****************/
-			pair<iterator,bool>								insert (const value_type& val);
-			iterator										insert (iterator position, const value_type& val);
-			void											erase (iterator position);
-			size_type										erase (const value_type& k);
-			void											swap (map& x);
-			void											clear();
+			pair<iterator,bool>							insert (const value_type& val);
+			iterator									insert (iterator position, const value_type& val);
+			void										erase (iterator position);
+			size_type									erase (const value_type& k);
+			void										swap (red_black_tree& x);
+			void										clear();
+
+		/****************        OPERATIONS        ****************/
+			iterator									lower_bound (const value_type& k);
+			const_iterator								lower_bound (const value_type& k) const;
+			iterator									upper_bound (const value_type& k);
+			const_iterator								upper_bound (const value_type& k) const;
+			pair<const_iterator,const_iterator>			equal_range (const value_type& k) const;
+			pair<iterator,iterator>             		equal_range (const value_type& k);
 
 		private:
 		/****************     PRIVATE FUNCTIONS     ****************/
-			nodePtr										_get_minimum(nodePtr node)
-			nodePtr										_get_maximum(nodePtr node)
+			nodePtr										_get_minimum(nodePtr node);
+			nodePtr										_get_maximum(nodePtr node);
 			void										_left_rotate(nodePtr node);
 			void										_right_rotate(nodePtr node);
 			void										_insert_node(nodePtr x);

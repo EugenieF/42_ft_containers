@@ -9,15 +9,14 @@ namespace ft
 	/*                                      MAP 	                                   */
 	/***********************************************************************************/
 
-	// template < class Key, class T, class Compare = std::less<Key>, class Allocator = std::allocator<ft::pair<const Key,T> > >
-	template < class Key, class T, class Compare = std::less<Key>, class Allocator = std::allocator<std::pair<const Key,T> > >
+	template < class Key, class T, class Compare = std::less<Key>, class Allocator = std::allocator<ft::pair<const Key,T> > >
 	class map
 	{
 		private:
 			typedef red_black_tree<T, Compare, Allocator>	tree_type;
 
 		public:
-			/****************          TYPEDEF         ****************/
+			/********************      MEMBER TYPES     **************************/
 			typedef Key										key_type;
 			typedef T										mapped_type;
 			typedef std::pair<const Key, T>					value_type;
@@ -40,6 +39,7 @@ namespace ft
 			allocator_type									_alloc;
 
 		public:
+			/*********************      MEMBER CLASS     *********************/
 			class	value_compare: public std::binary_function<value_type, value_type, bool>
 			{
 				protected:
@@ -47,19 +47,23 @@ namespace ft
 					value_compare(key_compare c);
 
 				public:
-					bool operator()(const value_type& lhs, const value_type& rhs) const
+					bool operator()(const value_type& lhs, const value_type& rhs) const;
 					{
 						comp(lhs.first, rhs.first);
 					};
 			};
 
-			/****************           MAIN           ****************/
+			/*******************      MEMBER FUNCTIONS     *******************/
+
+									/*----  MAIN  ----*/
+
 			explicit map (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type());
 			template <class InputIterator>
   			map (InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type());
 			map (const map& x);
 			~map();
 			map& operator= (const map& x);
+			allocator_type get_allocator() const;
 
 			/****************        ITERATORS         ****************/
 			iterator 										begin();
