@@ -369,22 +369,6 @@ void	vector<T, Allocator>::_manage_capacity(size_t extra_size)
 	this->reserve(new_capacity);
 }
 
-// template <class T, class Allocator>
-// void	vector<T, Allocator>::_relocate_range(typename vector<T, Allocator>::iterator ptr, typename vector<T, Allocator>::iterator prev_end)
-// {
-// 	typename vector<T, Allocator>::pointer			elem_to_relocate;
-// 	typename vector<T, Allocator>::const_reference	new_position;
-
-// 	if (ptr == prev_end)
-// 		return ;
-// 	for (int i = 0; this->end() - i != ptr; i++)
-// 	{
-// 		elem_to_relocate = *(prev_end - i - 1);
-// 		new_position = &(*(this->end() - i - 1));
-// 		this->_alloc.construct(new_position, elem_to_relocate);
-// 	}
-// }
-
 template <class T, class Allocator>
 void	vector<T, Allocator>::_relocate_range(typename vector<T, Allocator>::iterator position, typename vector<T, Allocator>::iterator relocation)
 {

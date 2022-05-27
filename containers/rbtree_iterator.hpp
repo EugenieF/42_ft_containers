@@ -22,19 +22,19 @@ namespace ft
 			typedef T const &							const_reference;
 			typedef std::bidirectional_iterator_tag		iterator_category;
 			typedef Node								node;
-			typedef Node*								nodePtr;
+			typedef Node*								node_ptr;
 			typedef Node&								nodeRef;
 
-			nodePtr										current;
+			node_ptr									current;
 
 		private:
-			nodePtr										_root;
-			nodePtr										_nil;
+			node_ptr									_root;
+			node_ptr									_nil;
 
 		public:
 			/****************           MAIN           ****************/
 			rbtree_iterator();
-			rbtree_iterator (nodePtr ptr, nodePtr root, nodePtr nil);
+			rbtree_iterator (node_ptr ptr, node_ptr root, node_ptr nil);
   			rbtree_iterator (const rbtree_iterator& rbtree_it);
 			~rbtree_iterator();
 			rbtree_iterator&							operator=(const rbtree_iterator& other);
@@ -48,10 +48,10 @@ namespace ft
 			rbtree_iterator  							operator--(int);
 
 		private:
-			nodePtr										_minimum(nodePtr node);		
-			nodePtr										_maximum(nodePtr node);		
-			nodePtr										_predecessor(nodePtr node);
-			nodePtr										_successor(nodePtr node);
+			node_ptr									_minimum(node_ptr node);		
+			node_ptr									_maximum(node_ptr node);		
+			node_ptr									_predecessor(node_ptr node);
+			node_ptr									_successor(node_ptr node);
 	};
 	
 	template <class Tx, class Ty, class Ux, class Uy>

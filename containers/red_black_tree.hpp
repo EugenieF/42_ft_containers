@@ -33,7 +33,7 @@ namespace ft
 			typedef node const&						const_reference;
 
 			value_type								data;
-			value_type								color;
+			int										color;
 			pointer									left;
 			pointer									right;
 			pointer									parent;
@@ -51,7 +51,7 @@ namespace ft
 		public:
 			typedef T									value_type;
 			typedef node<T>								node;
-			typedef node*								nodePtr;
+			typedef node*								node_ptr;
 			typedef node&								nodeRef;
 			typedef red_black_tree&						reference;
 			typedef red_black_tree*						pointer;
@@ -64,22 +64,24 @@ namespace ft
 			typedef reverse_iterator<const_iterator>	const_reverse_iterator;
 
 		private:
-			size_type									_size;		
-			nodePtr										_root;
-			nodePtr										_nil;
+			node_ptr									_root;
+			node_ptr									_nil;
+			size_type									_size;
+			key_compare									_key_comp;
 			allocator_type								_alloc;
 
 		public:
 		/****************           MAIN           ****************/
-			red_black_tree();
-			~red_black_tree();
+			red_black_tree(const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type());
 			red_black_tree(red_black_tree const &other);
+			~red_black_tree();
 			reference									operator=(reference const rhs);
-			nodePtr										get_root();
-			nodePtr										get_nil();
-			void										set_root(nodePtr node);
-			nodePtr										get_minimum() const;
-			nodePtr										get_maximum() const;
+			allocator_type								get_allocator() const;
+			node_ptr									get_root();
+			node_ptr									get_nil();
+			void										set_root(node_ptr node);
+			node_ptr									get_minimum() const;
+			node_ptr									get_maximum() const;
 
 		/****************        ITERATORS         ****************/
 			iterator									begin();
@@ -113,16 +115,19 @@ namespace ft
 
 		private:
 		/****************     PRIVATE FUNCTIONS     ****************/
-			nodePtr										_get_minimum(nodePtr node);
-			nodePtr										_get_maximum(nodePtr node);
-			void										_left_rotate(nodePtr node);
-			void										_right_rotate(nodePtr node);
-			void										_insert_node(nodePtr x);
-			void										_fix_insertion(nodePtr node);
-			void										_delete_node(nodePtr x);
-			void										_fix_deletion(nodePtr node);
-			void										_transplant(nodePtr u, nodePtr v);
-			nodePtr										_search_node(nodePtr node, value_type value);
+			node_ptr									_create_node(value_type data);
+			void										_remove_node(node_ptr node);
+
+			void										_rbtree_left_rotate(node_ptr node);
+			void										_rbtree_right_rotate(node_ptr node);
+			void										_rbtree_insert_node(node_ptr x);
+			void										_rbtree_fix_insertion(node_ptr node);
+			void										_rbtree_delete_node(node_ptr x);
+			void										_rbtree_fix_deletion(node_ptr node);
+			node_ptr									_rbtree_get_minimum(node_ptr node);
+			node_ptr									_rbtree_get_maximum(node_ptr node);
+			void										_rbtree_transplant(node_ptr u, node_ptr v);
+			node_ptr									_rbtree_search_node(node_ptr node, value_type value);
 	};
 
 }
