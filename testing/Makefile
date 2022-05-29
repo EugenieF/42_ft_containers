@@ -8,7 +8,9 @@ CXXFLAGS	= -Wall -Wextra -std=c++11
 
 NAME		= gtests
 
-INCLUDE		= -Igtest_incs/ -pthread
+INCLUDE		= -Igtest_incs/ -pthread -I$(CONTAINERS)
+
+CONTAINERS	= ../containers
 
 ifeq ($(UNAME), Darwin)
 	LIBGTEST = gtest_incs/libgtest_mac.a

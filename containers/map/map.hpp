@@ -60,9 +60,9 @@ namespace ft
 			explicit map (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type());
 			template <class InputIterator>
   			map (InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type());
-			map (const map& x);
+			map (const map& other);
 			~map();
-			map& operator= (const map& x);
+			map& operator= (const map& other);
 			allocator_type get_allocator() const;
 
 			/****************        ITERATORS         ****************/
@@ -133,5 +133,7 @@ namespace ft
 	void swap( map<Key,T,Compare,Allocator>& lhs, map<Key,T,Compare,Allocator>& rhs );
 
 }
+
+# include "map.tpp"
 
 #endif

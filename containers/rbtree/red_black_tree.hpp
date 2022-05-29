@@ -72,11 +72,12 @@ namespace ft
 
 		public:
 		/****************           MAIN           ****************/
-			red_black_tree(const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type());
-			red_black_tree(red_black_tree const &other);
+			explicit red_black_tree(const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type());
+			red_black_tree(reference const other);
 			~red_black_tree();
-			reference									operator=(reference const rhs);
+			reference									operator=(reference const other);
 			allocator_type								get_allocator() const;
+			key_compare									key_comp() const;
 			node_ptr									get_root();
 			node_ptr									get_nil();
 			void										set_root(node_ptr node);
@@ -116,11 +117,11 @@ namespace ft
 		private:
 		/****************     PRIVATE FUNCTIONS     ****************/
 			node_ptr									_create_node(value_type data);
-			void										_remove_node(node_ptr node);
+			void										_delete_node(node_ptr node);
 
 			void										_rbtree_left_rotate(node_ptr node);
 			void										_rbtree_right_rotate(node_ptr node);
-			void										_rbtree_insert_node(node_ptr x);
+			iterator									_rbtree_insert_node(iterator node_position, node_ptr insert_node);
 			void										_rbtree_fix_insertion(node_ptr node);
 			void										_rbtree_delete_node(node_ptr x);
 			void										_rbtree_fix_deletion(node_ptr node);
@@ -129,8 +130,10 @@ namespace ft
 			void										_rbtree_transplant(node_ptr u, node_ptr v);
 			node_ptr									_rbtree_search_node(node_ptr node, value_type value);
 	};
-
 }
+
+# include "rbtree_public.tpp"
+# include "rbtree_private.tpp"
 
 #endif
 

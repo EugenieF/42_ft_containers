@@ -61,4 +61,6 @@ namespace ft
  	bool												operator!= (const rbtree_iterator<Tx, Ty>& lhs, const rbtree_iterator<Ux, Uy>& rhs);
 }
 
+# include "rbtree_iterator.tpp"
+
 #endif
