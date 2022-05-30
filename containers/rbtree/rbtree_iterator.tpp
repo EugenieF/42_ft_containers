@@ -7,7 +7,7 @@ template <class T, class Node>
 rbtree_iterator<T, Node>::rbtree_iterator(): current(NULL), _root(NULL), _nil(NULL) {}
 
 template <class T, class Node>
-rbtree_iterator<T, Node>::rbtree_iterator (rbtree_iterator<T, Node>::nodePtr ptr, rbtree_iterator<T, Node>::nodePtr root, rbtree_iterator<T, Node>::nodePtr nil):
+rbtree_iterator<T, Node>::rbtree_iterator (rbtree_iterator<T, Node>::node_ptr ptr, rbtree_iterator<T, Node>::node_ptr root, rbtree_iterator<T, Node>::node_ptr nil):
 	current(ptr), _root(root), _nil(nil) {}
 
 template <class T, class Node>
@@ -67,7 +67,7 @@ rbtree_iterator<T, Node>&	rbtree_iterator<T, Node>::operator++()
 template <class T, class Node>
 rbtree_iterator<T, Node>		rbtree_iterator<T, Node>::operator++(int)
 {
-	rbtree_iterator<T, Node> prev(*this);
+	rbtree_iterator<T, Node>	prev(*this);
 	this->current = this->_successor(this->current);
 	return (prev);
 }
@@ -82,7 +82,7 @@ rbtree_iterator<T, Node>& 	rbtree_iterator<T, Node>::operator--()
 template <class T, class Node>
 rbtree_iterator<T, Node>  	rbtree_iterator<T, Node>::operator--(int)
 {
-	rbtree_iterator<T, Node> prev(*this);
+	rbtree_iterator<T, Node>	prev(*this);
 	this->current = this->_predecessor(this->current);
 	return (prev);
 }
@@ -92,21 +92,21 @@ rbtree_iterator<T, Node>  	rbtree_iterator<T, Node>::operator--(int)
 template <class Tx, class Ty, class Ux, class Uy>
 bool	operator== (const rbtree_iterator<Tx, Ty>& lhs, const rbtree_iterator<Ux, Uy>& rhs)
 {
-	return (lhs.current == rhs.current)
+	return (lhs.current == rhs.current);
 }
 
 template <class Tx, class Ty, class Ux, class Uy>
 bool	operator!= (const rbtree_iterator<Tx, Ty>& lhs, const rbtree_iterator<Ux, Uy>& rhs)
 {
-	return (lhs.current != rhs.current)
+	return (lhs.current != rhs.current);
 }
 
-/**************    NON-MEMBER FUNCTION OVERLOADS     **************/
+/**************           PRIVATE FUNCTIONS          **************/
 
 template <class T, class Node>
-typename rbtree_iterator<T, Node>::nodePtr		_minimum(nodePtr node)
+typename rbtree_iterator<T, Node>::node_ptr		rbtree_iterator<T, Node>::_minimum(node_ptr node)
 {
-	if (node != get_nil())
+	if (node != this->get_nil())
 	{
 		while (node->left != this->get_nil())
 			node = node->left;
@@ -115,9 +115,9 @@ typename rbtree_iterator<T, Node>::nodePtr		_minimum(nodePtr node)
 }
 
 template <class T, class Node>
-typename rbtree_iterator<T, Node>::nodePtr		_maximum(typename rbtree_iterator<T, Node>::nodePtr node)
+typename rbtree_iterator<T, Node>::node_ptr		rbtree_iterator<T, Node>::_maximum(typename rbtree_iterator<T, Node>::node_ptr node)
 {
-	if (node != get_nil())
+	if (node != this->get_nil())
 	{
 		while (node->right != this->get_nil())
 			node = node->right;
@@ -126,13 +126,16 @@ typename rbtree_iterator<T, Node>::nodePtr		_maximum(typename rbtree_iterator<T,
 }
 
 template <class T, class Node>
-typename rbtree_iterator<T, Node>::nodePtr		_successor(typename rbtree_iterator<T, Node>::nodePtr node)
+typename rbtree_iterator<T, Node>::node_ptr		rbtree_iterator<T, Node>::_successor(typename rbtree_iterator<T, Node>::node_ptr node)
 {
+	typedef typename rbtree_iterator<T, Node>::node_ptr	node_ptr;
+	
+	node_ptr	successor;
+
 	if (node->right != this->get_nil())
 		return (this->_minimum(node->right));
-
-	typename rbtree_iterator<T, Node>::nodePtr successor = node->parent;
-	while (successor != get_nil() && node == successor->right)
+	successor = node->parent;
+	while (successor != this->get_nil() && node == successor->right)
 	{
 		node = successor;
 		successor = successor->parent;
@@ -141,15 +144,18 @@ typename rbtree_iterator<T, Node>::nodePtr		_successor(typename rbtree_iterator<
 }
 
 template <class T, class Node>
-typename rbtree_iterator<T, Node>::nodePtr		_predecessor(typename rbtree_iterator<T, Node>::nodePtr node)
+typename rbtree_iterator<T, Node>::node_ptr		rbtree_iterator<T, Node>::_predecessor(typename rbtree_iterator<T, Node>::node_ptr node)
 {
-	if (node == get_nil())	
+	typedef typename rbtree_iterator<T, Node>::node_ptr	node_ptr;
+
+	node_ptr	predecessor;
+
+	if (node == this->get_nil())	
 		return (this->_maximum(this->get_root()));
 	if (node->left != this->get_nil())
 		return (this->_maximum(node->left));
-
-	typename rbtree_iterator<T, Node>::nodePtr predecessor = node->parent;
-	while (predecessor != get_nil() && node == predecessor->left)
+	predecessor = node->parent;
+	while (predecessor != this->get_nil() && node == predecessor->left)
 	{
 		node = predecessor;
 		predecessor = predecessor->parent;

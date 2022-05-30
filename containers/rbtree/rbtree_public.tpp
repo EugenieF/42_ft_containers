@@ -2,39 +2,6 @@
 using namespace ft;
 
 /***********************************************************************************/
-/*                                    CLASS NODE                                   */
-/***********************************************************************************/
-
-template <class T>
-node<T>::node():
-	data(NULL), color(RED), left(NULL), right(NULL), parent(NULL) {}
-
-template <class T>
-node<T>::node(const typename node<T>::value_type &value):
-	data(value), color(RED), left(NULL), right(NULL), parent(NULL) {}
-
-template <class T>
-node<T>::~node() {}
-
-template <class T>
-node<T>::node(typename node<T>::const_reference other):
-	data(other.data), color(other.color), left(other.left), right(other.right), parent(other.parent) {}
-
-template <class T>
-typename node<T>::reference	node<T>::operator=(typename node<T>::const_reference rhs)
-{
-	if (this != &rhs)
-	{
-		this->data = rhs.data;
-		this->color = rhs.color;
-		this->left = rhs.left;
-		this->right = rhs.right;
-		this->parent = rhs.parent;
-	}
-	return (*this);
-}
-
-/***********************************************************************************/
 /*                              CLASS RED BLACK TREE                               */
 /***********************************************************************************/
 
@@ -42,15 +9,19 @@ template <class T, class Compare, class Allocator>
 red_black_tree<T, Compare, Allocator>::red_black_tree(const key_compare& comp, const allocator_type& alloc):
 	_root(NULL), _nil(NULL), _size(0), _key_comp(comp), _alloc(alloc)
 {
+	typedef typename red_black_tree<T, Compare, Allocator>::value_type	value_type;
+
 	this->_nil = this->_create_node(value_type());
 	this->_nil->color = BLACK;
 	this->_root = this->_nil;
 }
 
 template <class T, class Compare, class Allocator>
-red_black_tree<T, Compare, Allocator>::red_black_tree(red_black_tree<T, Compare, Allocator> const &other):
+red_black_tree<T, Compare, Allocator>::red_black_tree(red_black_tree<T, Compare, Allocator> const& other):
 	_size(0), _key_comp(other.key_comp()), _alloc(other.get_allocator())
 {
+	typedef typename red_black_tree<T, Compare, Allocator>::value_type	value_type;
+
 	this->_nil = this->_create_node(value_type());
 	this->_nil->color = BLACK;
 	this->_root = this->_nil;
@@ -65,9 +36,12 @@ red_black_tree<T, Compare, Allocator>::~red_black_tree()
 }
 
 template <class T, class Compare, class Allocator>
-typename red_black_tree<T, Compare, Allocator>::reference	red_black_tree<T, Compare, Allocator>::operator=(typename red_black_tree<T, Compare, Allocator>::reference const other)
+red_black_tree<T, Compare, Allocator>&	red_black_tree<T, Compare, Allocator>::operator=(
+	red_black_tree<T, Compare, Allocator> const& other)
 {
-	typename red_black_tree<T, Compare, Allocator>::iterator	ptr;
+	typedef typename red_black_tree<T, Compare, Allocator>::iterator	iterator;
+	
+	iterator	ptr;
 
 	if (this != &other)
 	{
@@ -125,48 +99,64 @@ typename red_black_tree<T, Compare, Allocator>::node_ptr	red_black_tree<T, Compa
 template <class T, class Compare, class Allocator>
 typename red_black_tree<T, Compare, Allocator>::iterator	red_black_tree<T, Compare, Allocator>::begin()
 {
+	typedef typename red_black_tree<T, Compare, Allocator>::iterator	iterator;
+
 	return (iterator(this->get_minimum(), this->get_root(), this->get_nil()));
 }
 
 template <class T, class Compare, class Allocator>
 typename red_black_tree<T, Compare, Allocator>::const_iterator	red_black_tree<T, Compare, Allocator>::begin() const
 {
+	typedef typename red_black_tree<T, Compare, Allocator>::const_iterator	const_iterator;
+
 	return (const_iterator(this->get_minimum(), this->get_root(), this->get_nil()));
 }
 
 template <class T, class Compare, class Allocator>
 typename red_black_tree<T, Compare, Allocator>::iterator	red_black_tree<T, Compare, Allocator>::end()
 {
+	typedef typename red_black_tree<T, Compare, Allocator>::iterator	iterator;
+
 	return (iterator(this->get_nil(), this->get_root(), this->get_nil()));
 }
 
 template <class T, class Compare, class Allocator>
 typename red_black_tree<T, Compare, Allocator>::const_iterator	red_black_tree<T, Compare, Allocator>::end() const
 {
+	typedef typename red_black_tree<T, Compare, Allocator>::const_iterator	const_iterator;
+
 	return (const_iterator(this->get_nil(), this->get_root(), this->get_nil()));
 }
 
 template <class T, class Compare, class Allocator>
 typename red_black_tree<T, Compare, Allocator>::reverse_iterator	red_black_tree<T, Compare, Allocator>::rbegin()
 {
+	typedef typename red_black_tree<T, Compare, Allocator>::reverse_iterator	reverse_iterator;
+
 	return (reverse_iterator(this->end()));
 }
 
 template <class T, class Compare, class Allocator>
 typename red_black_tree<T, Compare, Allocator>::const_reverse_iterator	red_black_tree<T, Compare, Allocator>::rbegin() const
 {
+	typedef typename red_black_tree<T, Compare, Allocator>::const_reverse_iterator	const_reverse_iterator;
+
 	return (const_reverse_iterator(this->end()));
 }
 
 template <class T, class Compare, class Allocator>
 typename red_black_tree<T, Compare, Allocator>::reverse_iterator	red_black_tree<T, Compare, Allocator>::rend()
 {
+	typedef typename red_black_tree<T, Compare, Allocator>::reverse_iterator	reverse_iterator;
+
 	return (reverse_iterator(this->begin()));
 }
 
 template <class T, class Compare, class Allocator>
 typename red_black_tree<T, Compare, Allocator>::const_reverse_iterator	red_black_tree<T, Compare, Allocator>::rend() const
 {
+	typedef typename red_black_tree<T, Compare, Allocator>::const_reverse_iterator	const_reverse_iterator;
+
 	return (const_reverse_iterator(this->begin()));
 }
 
@@ -224,7 +214,8 @@ typename red_black_tree<T, Compare, Allocator>::iterator	red_black_tree<T, Compa
 }
 
 template <class T, class Compare, class Allocator>
-void	red_black_tree<T, Compare, Allocator>::erase (typename red_black_tree<T, Compare, Allocator>::iterator node_position)
+void	red_black_tree<T, Compare, Allocator>::erase (
+	typename red_black_tree<T, Compare, Allocator>::iterator node_position)
 {
 	if (node_position != this->end())
 		this->_delete_node(node_position.current);
@@ -257,7 +248,9 @@ void	red_black_tree<T, Compare, Allocator>::swap (red_black_tree<T, Compare, All
 template <class T, class Compare, class Allocator>
 void	red_black_tree<T, Compare, Allocator>::clear()
 {
-	typename red_black_tree<T, Compare, Allocator>::iterator	ptr;
+	typedef	typename red_black_tree<T, Compare, Allocator>::iterator	iterator;
+	
+	iterator	ptr;
 
 	for (ptr = this->begin(); ptr != this->end(); ptr++)
 		this->erase(ptr);
@@ -268,7 +261,10 @@ void	red_black_tree<T, Compare, Allocator>::clear()
 template <class T, class Compare, class Allocator>
 typename red_black_tree<T, Compare, Allocator>::iterator	red_black_tree<T, Compare, Allocator>::lower_bound (const T& value) // greater or equal >=
 {
-	typename red_black_tree<T, Compare, Allocator>::iterator	ptr;
+	typedef typename red_black_tree<T, Compare, Allocator>::iterator	iterator;
+	
+	iterator	ptr;
+
 	for (ptr = this->begin(); ptr != this->end(); ptr++)
 	{
 		if (this->_key_comp(ptr.current->data, value) == false)
@@ -280,7 +276,10 @@ typename red_black_tree<T, Compare, Allocator>::iterator	red_black_tree<T, Compa
 template <class T, class Compare, class Allocator>
 typename red_black_tree<T, Compare, Allocator>::const_iterator		red_black_tree<T, Compare, Allocator>::lower_bound (const T& value) const
 {
-	typename red_black_tree<T, Compare, Allocator>::const_iterator	ptr;
+	typedef typename red_black_tree<T, Compare, Allocator>::const_iterator	const_iterator;
+	
+	const_iterator	ptr;
+
 	for (ptr = this->begin(); ptr != this->end(); ptr++)
 	{
 		if (this->_key_comp(ptr.current->data, value) == false)
@@ -292,10 +291,13 @@ typename red_black_tree<T, Compare, Allocator>::const_iterator		red_black_tree<T
 template <class T, class Compare, class Allocator>
 typename red_black_tree<T, Compare, Allocator>::iterator	red_black_tree<T, Compare, Allocator>::upper_bound (const T& value) // greater >
 {
-	typename red_black_tree<T, Compare, Allocator>::iterator	ptr;
+	typedef typename red_black_tree<T, Compare, Allocator>::iterator	iterator;
+	
+	iterator	ptr;
+
 	for (ptr = this->begin(); ptr != this->end(); ptr++)
 	{
-		if (this->_key_comp(ptr.current->data, value) == false && this->_key_comp(k, ptr.current->data) == true)
+		if (this->_key_comp(ptr.current->data, value) == false && this->_key_comp(value, ptr.current->data) == true)
 			break ;
 	}
 	return (ptr);
@@ -304,10 +306,13 @@ typename red_black_tree<T, Compare, Allocator>::iterator	red_black_tree<T, Compa
 template <class T, class Compare, class Allocator>
 typename red_black_tree<T, Compare, Allocator>::const_iterator	red_black_tree<T, Compare, Allocator>::upper_bound (const T& value) const
 {
-	typename red_black_tree<T, Compare, Allocator>::const_iterator	ptr;
+	typedef typename red_black_tree<T, Compare, Allocator>::const_iterator	const_iterator;
+	
+	const_iterator	ptr;
+
 	for (ptr = this->begin(); ptr != this->end(); ptr++)
 	{
-		if (this->_key_comp(ptr.current->data, value) == false && this->_key_comp(k, ptr.current->data) == true)
+		if (this->_key_comp(ptr.current->data, value) == false && this->_key_comp(value, ptr.current->data) == true)
 			break ;
 	}
 	return (ptr);
@@ -317,6 +322,7 @@ template <class T, class Compare, class Allocator>
 pair<typename red_black_tree<T, Compare, Allocator>::iterator,typename red_black_tree<T, Compare, Allocator>::iterator>		red_black_tree<T, Compare, Allocator>::equal_range (const T& value)
 {
 	typedef typename red_black_tree<T, Compare, Allocator>::iterator	iterator;
+
 	iterator	lower_bound;
 	iterator	upper_bound;
 
@@ -329,6 +335,7 @@ template <class T, class Compare, class Allocator>
 pair<typename red_black_tree<T, Compare, Allocator>::const_iterator,typename red_black_tree<T, Compare, Allocator>::const_iterator>		red_black_tree<T, Compare, Allocator>::equal_range (const T& value) const
 {
 	typedef typename red_black_tree<T, Compare, Allocator>::iterator	const_iterator;
+
 	const_iterator	lower_bound;
 	const_iterator	upper_bound;
 
@@ -350,7 +357,7 @@ typename red_black_tree<T, Compare, Allocator>::iterator	red_black_tree<T, Compa
 }
 
 template <class T, class Compare, class Allocator>
-typename red_black_tree<T, Compare, Allocator>::const_iterator	red_black_tree<T, Compare, Allocator>::search_node(T const &value)
+typename red_black_tree<T, Compare, Allocator>::const_iterator	red_black_tree<T, Compare, Allocator>::search_node(T const &value) const
 {
 	typedef typename red_black_tree<T, Compare, Allocator>::const_iterator	const_iterator;
 

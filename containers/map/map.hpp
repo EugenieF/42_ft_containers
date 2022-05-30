@@ -28,8 +28,8 @@ namespace ft
 			typedef typename Allocator::const_reference		const_reference;
 			typedef	typename Allocator::pointer				pointer;
 			typedef	typename Allocator::const_pointer		const_pointer;
-			typedef typename ft::enable_if::iterator		iterator;
-			typedef typename ft::enable_if::const_iterator	const_iterator;
+			typedef typename tree_type::iterator			iterator;
+			typedef typename tree_type::const_iterator		const_iterator;
 			typedef ft::reverse_iterator<iterator>			reverse_iterator;
 			typedef ft::reverse_iterator<const_iterator>	const_reverse_iterator;
 
@@ -48,9 +48,6 @@ namespace ft
 
 				public:
 					bool operator()(const value_type& lhs, const value_type& rhs) const;
-					{
-						comp(lhs.first, rhs.first);
-					};
 			};
 
 			/*******************      MEMBER FUNCTIONS     *******************/
@@ -106,8 +103,8 @@ namespace ft
 			const_iterator									lower_bound (const key_type& key) const;
 			iterator										upper_bound (const key_type& key);
 			const_iterator									upper_bound (const key_type& key) const;
-			pair<const_iterator,const_iterator>				equal_range (const key_type& key) const;
-			pair<iterator,iterator>             			equal_range (const key_type& key);
+			ft::pair<iterator,iterator>             		equal_range (const key_type& key);
+			ft::pair<const_iterator,const_iterator>			equal_range (const key_type& key) const;
 			
 		private:
 			/*******************       PRIVATE FUNCTIONS      *******************/

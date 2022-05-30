@@ -5,22 +5,19 @@ using namespace ft;
 
 template <class Key, class T, class Compare, class Allocator>
 map<Key, T, Compare, Allocator>::map (const Compare& comp, const Allocator& alloc):
-    _rbtree(comp, alloc), _key_comp(comp), _alloc(alloc)
-{
-
-}
+    _rbtree(comp, alloc), _key_comp(comp), _alloc(alloc) {}
 
 template <class Key, class T, class Compare, class Allocator>
 template <class InputIterator>
 map<Key, T, Compare, Allocator>::map (InputIterator first, InputIterator last, const Compare& comp, const Allocator& alloc):
     _rbtree(comp, alloc), _key_comp(comp), _alloc(alloc)
 {
-        this->insert(first, last);
+    this->insert(first, last);
 }
 
 template <class Key, class T, class Compare, class Allocator>
 map<Key, T, Compare, Allocator>::map (const map<Key, T, Compare, Allocator>& other):
-	_rbtree(x.key_comp(), x.get_allocator()), _key_comp(x.key_comp()), _alloc(x.get_allocator())
+	_rbtree(other.key_comp(), other.get_allocator()), _key_comp(other.key_comp()), _alloc(other.get_allocator())
 {
     this->insert(other.begin(), other.end());
 }
@@ -52,7 +49,8 @@ template <class Key, class T, class Compare, class Allocator>
 map<Key, T, Compare, Allocator>::value_compare::value_compare(Compare c): comp(c) {}
 
 template <class Key, class T, class Compare, class Allocator>
-bool map<Key, T, Compare, Allocator>::value_compare::operator()(const typename map<Key, T, Compare, Allocator>::value_type& lhs, const typename map<Key, T, Compare, Allocator>::value_type& rhs) const
+bool map<Key, T, Compare, Allocator>::value_compare::operator()(
+	const typename map<Key, T, Compare, Allocator>::value_type& lhs, const typename map<Key, T, Compare, Allocator>::value_type& rhs) const
 {
     return (comp(lhs.first, rhs.first));
 };
@@ -155,14 +153,14 @@ template <class Key, class T, class Compare, class Allocator>
 ft::pair<typename map<Key, T, Compare, Allocator>::iterator,bool>   map<Key, T, Compare, Allocator>::insert (
 	const typename map<Key, T, Compare, Allocator>::value_type& val)
 {
-	return (this->rbtree.insert(val));
+	return (this->_rbtree.insert(val));
 }
 
 template <class Key, class T, class Compare, class Allocator>
 typename map<Key, T, Compare, Allocator>::iterator	map<Key, T, Compare, Allocator>::insert (
 	typename map<Key, T, Compare, Allocator>::iterator position, const typename map<Key, T, Compare, Allocator>::value_type& val)
 {
-	return (this->rbtree.insert(position, val));
+	return (this->_rbtree.insert(position, val));
 }
 
 template <class Key, class T, class Compare, class Allocator>
@@ -170,7 +168,7 @@ template <class InputIterator>
 void	map<Key, T, Compare, Allocator>::insert (InputIterator first, InputIterator last)
 {
 	for (; first != last; first++)
-		this->rbtree.insert(*first);
+		this->_rbtree.insert(*first);
 }
 
 template <class Key, class T, class Compare, class Allocator>
@@ -198,12 +196,12 @@ void	map<Key, T, Compare, Allocator>::erase (
 	{
 		to_erase = first;
 		first++;
-		this->rbtree.erase(to_erase);
+		this->_rbtree.erase(to_erase);
 	}
 	// for (; first != last; first++)
 	// {
 	// 	to_erase = first;
-	// 	this->rbtree.erase(to_erase);  // <-- does this work ?
+	// 	this->_rbtree.erase(to_erase);  // <-- does this work ?
 	// }
 }
 
@@ -230,7 +228,7 @@ typename map<Key, T, Compare, Allocator>::key_compare   map<Key, T, Compare, All
 template <class Key, class T, class Compare, class Allocator>
 typename map<Key, T, Compare, Allocator>::value_compare		map<Key, T, Compare, Allocator>::value_comp() const
 {
-    return (value_compare());
+    return (map<Key, T, Compare, Allocator>::value_compare());
 }
 
 /*****************************        OPERATIONS        *****************************/

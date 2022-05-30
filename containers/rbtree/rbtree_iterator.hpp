@@ -17,13 +17,11 @@ namespace ft
 			typedef	ptrdiff_t							difference_type;
 			typedef T									value_type;
 			typedef T*									pointer;
-			typedef T const *							const_pointer;
+			typedef T const*							const_pointer;
 			typedef T&									reference;
-			typedef T const &							const_reference;
+			typedef T const&							const_reference;
 			typedef std::bidirectional_iterator_tag		iterator_category;
-			typedef Node								node;
 			typedef Node*								node_ptr;
-			typedef Node&								nodeRef;
 
 			node_ptr									current;
 
