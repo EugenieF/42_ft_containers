@@ -19,7 +19,7 @@ namespace ft
 			/********************      MEMBER TYPES     **************************/
 			typedef Key										key_type;
 			typedef T										mapped_type;
-			typedef std::pair<const Key, T>					value_type;
+			typedef ft::pair<const Key, T>					value_type;
 			typedef Compare									key_compare;
 			typedef Allocator								allocator_type;
 			typedef	size_t									size_type;
@@ -55,7 +55,7 @@ namespace ft
 
 			/*******************      MEMBER FUNCTIONS     *******************/
 
-									/*----  MAIN  ----*/
+							/*-----------   MAIN   -----------*/
 
 			explicit map (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type());
 			template <class InputIterator>
@@ -65,7 +65,7 @@ namespace ft
 			map& operator= (const map& other);
 			allocator_type get_allocator() const;
 
-			/****************        ITERATORS         ****************/
+							/*---------  ITERATORS  ----------*/
 			iterator 										begin();
 			const_iterator									begin() const;
 			iterator										end();
@@ -75,42 +75,47 @@ namespace ft
 			reverse_iterator								rend();
 			const_reverse_iterator							rend() const;
 
-			/****************         CAPACITY         ****************/
+							/*----------  CAPACITY  ----------*/
 			bool											empty() const;
 			size_type										size() const;
 			size_type										max_size() const;
 
-			/****************      ELEMENT ACCESS       ***************/
-			mapped_type&									operator[] (const key_type& k);
+							/*-------  ELEMENT ACCESS  -------*/
+			mapped_type&									operator[] (const key_type& key);
 
-			/****************        MODIFIERS         ****************/
+							/*----------  MODIFIERS  ---------*/
 			pair<iterator,bool>								insert (const value_type& val);
 			iterator										insert (iterator position, const value_type& val);
 			template <class InputIterator>
 			void											insert (InputIterator first, InputIterator last);
 			void											erase (iterator position);
-			size_type										erase (const key_type& k);
+			size_type										erase (const key_type& key);
 			void											erase (iterator first, iterator last);
-			void											swap (map& x);
+			void											swap (map& other);
 			void											clear();
 
-			/****************        OBSERVERS         ****************/
+							/*---------  OBSERVERS  ----------*/
 			key_compare										key_comp() const;
 			value_compare									value_comp() const;
 
-			/****************        OPERATIONS        ****************/
-			iterator										find (const key_type& k);
-			const_iterator									find (const key_type& k) const;
-			size_type										count (const key_type& k) const;
-			iterator										lower_bound (const key_type& k);
-			const_iterator									lower_bound (const key_type& k) const;
-			iterator										upper_bound (const key_type& k);
-			const_iterator									upper_bound (const key_type& k) const;
-			pair<const_iterator,const_iterator>				equal_range (const key_type& k) const;
-			pair<iterator,iterator>             			equal_range (const key_type& k);
+							/*---------  OPERATIONS  ---------*/
+			iterator										find (const key_type& key);
+			const_iterator									find (const key_type& key) const;
+			size_type										count (const key_type& key) const;
+			iterator										lower_bound (const key_type& key);
+			const_iterator									lower_bound (const key_type& key) const;
+			iterator										upper_bound (const key_type& key);
+			const_iterator									upper_bound (const key_type& key) const;
+			pair<const_iterator,const_iterator>				equal_range (const key_type& key) const;
+			pair<iterator,iterator>             			equal_range (const key_type& key);
+			
+		private:
+			/*******************       PRIVATE FUNCTIONS      *******************/
+			ft::pair<const key_type, mapped_type>			_get_value_type(const key_type& key) const;
+
 	};
 
-	/**************    NON-MEMBER FUNCTION OVERLOADS     **************/
+	/********************         NON-MEMBER FUNCTION OVERLOADS          ********************/
 	template< class Key, class T, class Compare, class Allocator >
 	bool operator==( const map<Key,T,Compare,Allocator>& lhs, const map<Key,T,Compare,Allocator>& rhs );
 

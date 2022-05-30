@@ -99,28 +99,31 @@ namespace ft
 			size_type									max_size() const;
 
 		/****************        MODIFIERS         ****************/
-			pair<iterator,bool>							insert (const value_type& val);
-			iterator									insert (iterator position, const value_type& val);
+			pair<iterator,bool>							insert (const value_type& value);
+			iterator									insert (iterator position, const value_type& value);
 			void										erase (iterator position);
-			size_type									erase (const value_type& k);
+			size_type									erase (const value_type& value);
 			void										swap (red_black_tree& x);
 			void										clear();
 
 		/****************        OPERATIONS        ****************/
-			iterator									lower_bound (const value_type& k);
-			const_iterator								lower_bound (const value_type& k) const;
-			iterator									upper_bound (const value_type& k);
-			const_iterator								upper_bound (const value_type& k) const;
-			pair<const_iterator,const_iterator>			equal_range (const value_type& k) const;
-			pair<iterator,iterator>             		equal_range (const value_type& k);
+			iterator									search_node(const value_type& value);
+			const_iterator								search_node(const value_type& value) const;
+			iterator									lower_bound (const value_type& value);
+			const_iterator								lower_bound (const value_type& value) const;
+			iterator									upper_bound (const value_type& value);
+			const_iterator								upper_bound (const value_type& value) const;
+			pair<const_iterator,const_iterator>			equal_range (const value_type& value) const;
+			pair<iterator,iterator>             		equal_range (const value_type& value);
 
 		private:
 		/****************     PRIVATE FUNCTIONS     ****************/
-			node_ptr									_create_node(value_type data);
+			node_ptr									_create_node(const value_type& value);
 			void										_delete_node(node_ptr node);
 
 			void										_rbtree_left_rotate(node_ptr node);
 			void										_rbtree_right_rotate(node_ptr node);
+			iterator									_rbtree_get_parent(node_ptr position, const value_type& value);
 			iterator									_rbtree_insert_node(iterator node_position, node_ptr insert_node);
 			void										_rbtree_fix_insertion(node_ptr node);
 			void										_rbtree_delete_node(node_ptr x);
@@ -128,7 +131,8 @@ namespace ft
 			node_ptr									_rbtree_get_minimum(node_ptr node);
 			node_ptr									_rbtree_get_maximum(node_ptr node);
 			void										_rbtree_transplant(node_ptr u, node_ptr v);
-			node_ptr									_rbtree_search_node(node_ptr node, value_type value);
+			iterator									_rbtree_search_node(node_ptr node, const value_type& value);
+			const iterator								_rbtree_search_node(node_ptr node, const value_type& value) const;
 	};
 }
 
