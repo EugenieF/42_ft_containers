@@ -2,7 +2,6 @@
 # define __UTILITY_HPP__
 
 # include "main.hpp"
-# include <ostream>
 
 namespace ft
 {
@@ -25,7 +24,15 @@ namespace ft
 		pair(const first_type& x, const second_type& y);
 		template <class U, class V>
 		pair(const pair<U, V>& pr);
-		pair& operator= (const pair& pr);
+		pair& operator= (const pair& other)
+		{
+			 if (this != &other)
+   			{
+        		this->first = other.first;
+      			this->second = other.second;
+    		}
+    		return (*this);
+		}
 
 		operator pair<const T1, const T2>(void) const
 		{

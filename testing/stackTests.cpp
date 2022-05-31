@@ -231,20 +231,28 @@ void	runStringTests(T &stack)
 	operatorInfTest(stack, testX);
 }
 
-class stackTest: public ::testing::Test
+class stdStackTest: public ::testing::Test
 {
 	protected:
 		void	SetUp() override
 		{
 			for (int i = 1; i < 6; i++)
-			{
-				intStdStack.push(i);
-				intFtStack.push(i);
-			}
+				intStack.push(i);
 		}
 
-		std::stack<int> intStdStack;
-		ft::stack<int> intFtStack;
+		std::stack<int> intStack;
+};
+
+class ftStackTest: public ::testing::Test
+{
+	protected:
+		void	SetUp() override
+		{
+			for (int i = 1; i < 6; i++)
+				intStack.push(i);
+		}
+
+		ft::stack<int> intStack;
 };
 
 TEST(Stack, StdStack)

@@ -3,11 +3,11 @@
 template < class T >
 void	insertTest(T map)
 {
-	map.insert(std::pair<int, int>(1, 1));
+	map.insert(ft::pair<int, int>(1, 1));
 	EXPECT_EQ(map[1], 1);
-	map.insert(std::pair<int, int>(2, 2));
+	map.insert(ft::pair<int, int>(2, 2));
 	EXPECT_EQ(map[2], 2);
-	map.insert(std::pair<int, int>(3, 3));
+	map.insert(ft::pair<int, int>(3, 3));
 	EXPECT_EQ(map[3], 3);
 }
 
@@ -16,7 +16,7 @@ void	sizeTest(T map)
 {
 	EXPECT_EQ(map.size(), (unsigned long)0);
 	for (int i = 0; i < 10; i++)
-		map.insert(std::pair<int, int>(i, i));
+		map.insert(ft::pair<int, int>(i, i));
 	EXPECT_EQ(map.size(), (unsigned long)10);
 }
 
@@ -62,5 +62,5 @@ TEST(Map, FtMap)
 
 	ft::map<int,int> intIntMap;
 	// debugTest(intVector, 1);
-	// runIntIntTests(intIntMap);
+	runIntIntTests(intIntMap);
 }

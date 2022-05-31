@@ -102,13 +102,13 @@ rbtree_iterator<T, Node>  	rbtree_iterator<T, Node>::operator--(int)
 /**************    NON-MEMBER FUNCTION OVERLOADS     **************/
 
 template <class Tx, class Ty, class Ux, class Uy>
-bool	operator== (const rbtree_iterator<Tx, Ty>& lhs, const rbtree_iterator<Ux, Uy>& rhs)
+bool	ft::operator== (const rbtree_iterator<Tx, Ty>& lhs, const rbtree_iterator<Ux, Uy>& rhs)
 {
 	return (lhs.current == rhs.current);
 }
 
 template <class Tx, class Ty, class Ux, class Uy>
-bool	operator!= (const rbtree_iterator<Tx, Ty>& lhs, const rbtree_iterator<Ux, Uy>& rhs)
+bool	ft::operator!= (const rbtree_iterator<Tx, Ty>& lhs, const rbtree_iterator<Ux, Uy>& rhs)
 {
 	return (lhs.current != rhs.current);
 }

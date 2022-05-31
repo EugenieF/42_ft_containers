@@ -8,14 +8,15 @@ using namespace ft;
 
 template <class T, class Allocator, class Compare>
 typename red_black_tree<T, Allocator, Compare>::node_ptr	red_black_tree<T, Allocator, Compare>::_create_node(
-	T value)
+	const typename red_black_tree<T, Allocator, Compare>::value_type &value)
 {
 	typedef typename red_black_tree<T, Allocator, Compare>::node_ptr	node_ptr;
 	
 	node_ptr	new_node;
 
 	new_node = this->_alloc.allocate(1);
-	this->_alloc.construct(new_node, node(value));
+	// this->_alloc.construct(new_node, node(value));
+	this->_alloc.construct(new_node, value);
 	return (new_node);
 }
 

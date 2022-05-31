@@ -6,7 +6,7 @@ using namespace ft;
 /***********************************************************************************/
 
 template <class T, class Allocator, class Compare>
-red_black_tree<T, Allocator, Compare>::red_black_tree(const Allocator& alloc, const Compare& comp):
+red_black_tree<T, Allocator, Compare>::red_black_tree(const typename red_black_tree<T, Allocator, Compare>::allocator_type& alloc, const Compare& comp):
 	_root(NULL), _nil(NULL), _size(0), _alloc(alloc), _key_comp(comp)
 {
 	typedef typename red_black_tree<T, Allocator, Compare>::value_type	value_type;

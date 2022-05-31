@@ -6,7 +6,9 @@
 # define RESET "\033[0m"
 
 # include <iostream>
+# include <ostream>
 # include <memory>
+# include <stdexcept>
 # include <functional>
 # include <deque>
 # include <cstddef>

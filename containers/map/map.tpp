@@ -145,8 +145,9 @@ T&	map<Key, T, Compare, Allocator>::operator[] (const Key& key)
 	ft::pair<iterator, bool>	insert_pair;
 	value_type					value;
 
-	value = this->_get_value_type(key);
-	insert_pair = this->insert(value);
+	// value = this->_get_value_type(key);
+	// insert_pair = this->insert(value);
+	insert_pair = this->insert(ft::make_pair(key, mapped_type()));
 	return (insert_pair.first->second);			// To dig deeper
 }
 

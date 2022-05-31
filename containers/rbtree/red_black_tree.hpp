@@ -24,7 +24,8 @@ namespace ft
 			typedef ft::node<T>								node;
 			typedef ft::node<T>*							node_ptr;
 			typedef Compare									key_compare;
-			typedef Allocator								allocator_type;
+			// typedef Allocator								allocator_type;
+			typedef typename Allocator::template rebind<ft::node<value_type> >::other	allocator_type;
 			typedef	size_t									size_type;
 			typedef ft::rbtree_iterator<T, node>			iterator;
 			typedef ft::rbtree_iterator<T const, node>		const_iterator;
@@ -86,8 +87,8 @@ namespace ft
 
 		private:
 		/****************     PRIVATE FUNCTIONS     ****************/
-			// node_ptr									_create_node(const value_type& value);
-			node_ptr									_create_node(value_type value = value_type());
+			node_ptr									_create_node(const value_type& value);
+			// node_ptr									_create_node(value_type value = value_type());
 			void										_delete_node(node_ptr node);
 
 			void										_rbtree_left_rotate(node_ptr node);

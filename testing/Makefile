@@ -4,7 +4,7 @@ UNAME		= $(shell uname)
 
 CXX			= c++
 
-CXXFLAGS	= -Wall -Wextra -std=c++11
+CXXFLAGS	= -Wall -std=c++11 #-Wextra 
 
 NAME		= gtests
 
