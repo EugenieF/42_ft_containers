@@ -1,4 +1,5 @@
 #include "utility.hpp"
+using namespace ft;
 
 /****************           MAIN           ****************/
 
@@ -20,7 +21,7 @@ pair<T1, T2>& pair<T1, T2>::operator= (const pair<T1, T2>& other)
         this->first = other.first;
         this->second = other.second;
     }
-    return (*this)
+    return (*this);
 }
 
 /**************    NON-MEMBER FUNCTION OVERLOADS     **************/
@@ -48,13 +49,13 @@ bool operator<(const pair<T1,T2>& lhs, const pair<T1,T2>& rhs)
 {
 	if (lhs.first < rhs.first)
         return (true);
-    return (!(rhs.first < lhs.first) && lhs.second < rhs.second)
+    return (!(rhs.first < lhs.first) && lhs.second < rhs.second);
 }
 
 template <class T1, class T2>
 bool operator<=(const pair<T1,T2>& lhs, const pair<T1,T2>& rhs)
 {
-	return (!(rhs < lhs))
+	return (!(rhs < lhs));
 }
 
 template <class T1, class T2>

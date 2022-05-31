@@ -16,13 +16,13 @@ namespace ft
 			- Both children of a red node are black i.e., there can't be consecutive red nodes.
 			- All the simple paths from a node to descendant leaves contain the same number of black nodes. */
 
-	template <class T, class Compare = std::less<T>, class Allocator = std::allocator<ft::node<T>>>
+	template <class T,  class Allocator, class Compare = std::less<T>>
 	class	red_black_tree
 	{
 		public:
 			typedef T										value_type;
-			typedef node<T>									node;
-			typedef node*									node_ptr;
+			typedef ft::node<T>								node;
+			typedef ft::node<T>*							node_ptr;
 			typedef Compare									key_compare;
 			typedef Allocator								allocator_type;
 			typedef	size_t									size_type;
@@ -35,19 +35,19 @@ namespace ft
 			node_ptr										_root;
 			node_ptr										_nil;
 			size_type										_size;
-			key_compare										_key_comp;
 			allocator_type									_alloc;
+			key_compare										_key_comp;
 
 		public:
 		/****************           MAIN           ****************/
-			explicit red_black_tree(const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type());
+			explicit red_black_tree(const allocator_type& alloc = allocator_type(), const key_compare& comp = key_compare());
 			red_black_tree(red_black_tree const& other);
 			~red_black_tree();
 			red_black_tree&								operator=(red_black_tree const& other);
 			allocator_type								get_allocator() const;
 			key_compare									key_comp() const;
-			node_ptr									get_root();
-			node_ptr									get_nil();
+			node_ptr									get_root() const;
+			node_ptr									get_nil() const;
 			void										set_root(node_ptr node);
 			node_ptr									get_minimum() const;
 			node_ptr									get_maximum() const;
@@ -86,7 +86,8 @@ namespace ft
 
 		private:
 		/****************     PRIVATE FUNCTIONS     ****************/
-			node_ptr									_create_node(const value_type& value);
+			// node_ptr									_create_node(const value_type& value);
+			node_ptr									_create_node(value_type value = value_type());
 			void										_delete_node(node_ptr node);
 
 			void										_rbtree_left_rotate(node_ptr node);
@@ -96,8 +97,8 @@ namespace ft
 			void										_rbtree_fix_insertion(node_ptr node);
 			void										_rbtree_delete_node(node_ptr x);
 			void										_rbtree_fix_deletion(node_ptr node);
-			node_ptr									_rbtree_get_minimum(node_ptr node);
-			node_ptr									_rbtree_get_maximum(node_ptr node);
+			node_ptr									_rbtree_get_minimum(node_ptr node) const;
+			node_ptr									_rbtree_get_maximum(node_ptr node) const;
 			void										_rbtree_transplant(node_ptr u, node_ptr v);
 			iterator									_rbtree_search_node(node_ptr node, const value_type& value);
 			const_iterator								_rbtree_search_node(node_ptr node, const value_type& value) const;

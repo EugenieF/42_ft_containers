@@ -70,6 +70,6 @@ namespace ft
 	typename vector_iterator<T>::difference_type	operator- (const vector_iterator<T>& lhs, const vector_iterator<T>& rhs);
 }
 
-#include "vector_iterator.tpp"
+#include "iterator.tpp"
 
 #endif

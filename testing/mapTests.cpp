@@ -1,7 +1,7 @@
 #include "mainTests.hpp"
 
 template < class T >
-void	insertTest(T &map)
+void	insertTest(T map)
 {
 	map.insert(std::pair<int, int>(1, 1));
 	EXPECT_EQ(map[1], 1);
@@ -12,31 +12,55 @@ void	insertTest(T &map)
 }
 
 template < class T >
-void	sizeTest(T &map)
+void	sizeTest(T map)
 {
-	EXPECT_EQ(map.size(), (unsigned long)3);
-	for (int i = 4; i < 11; i++)
+	EXPECT_EQ(map.size(), (unsigned long)0);
+	for (int i = 0; i < 10; i++)
 		map.insert(std::pair<int, int>(i, i));
 	EXPECT_EQ(map.size(), (unsigned long)10);
 }
 
+/*****************************************************************/
+/*       				     RUN TEST           			     */
+/*****************************************************************/
+
 template < class T >
-void	runTests(T &map)
+void	runIntIntTests(T &map)
 {
 	insertTest(map);
 	sizeTest(map);
 }
 
-TEST(MapInt, StdMapInt)
-{
-	std::cout << std::endl << ORANGE_B << "\t\t\t\t\t\t    [ STD::MAP ] " << RESET << std::endl;
-	std::map<int, int> map;
-	runTests(map);
-}
+// TEST(Map, StdMap)
+// {
+// 	std::cout << std::endl << ORANGE_B;
+// 	std::cout << "                                      ";
+// 	std::cout << "          [ STD::MAP ] " << RESET << std::endl;
 
-TEST(MapInt, FtMapInt)
+// 	std::map<int,int> intIntMap;
+// 	runIntIntTests(intIntMap);
+// }
+
+// template < class T, class U >
+// void	debugTest(T &map, U x)
+// {
+// 	std::cout << " >>>> DEBUG TEST <<<< " << std::endl;
+// 	map.push_back(x);
+// 	EXPECT_EQ(map.back(), x);
+// 	EXPECT_EQ(map.front(), x);
+// 	x++;
+// 	map.insert(x);
+// 	EXPECT_EQ(map.back(), x);
+// 	EXPECT_EQ(map.front(), x - 1);
+// }
+
+TEST(Map, FtMap)
 {
-	std::cout << std::endl << BLUE_B << "\t\t\t\t\t\t     [ FT::MAP ] " << RESET << std::endl;
-	// ft::map<int, int> map;
-	// runTests(map);
+	std::cout << std::endl << BLUE_B;
+	std::cout << "                                      ";
+	std::cout << "           [ FT::MAP ] " << RESET << std::endl;
+
+	ft::map<int,int> intIntMap;
+	// debugTest(intVector, 1);
+	// runIntIntTests(intIntMap);
 }

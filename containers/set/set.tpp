@@ -4,82 +4,92 @@ using namespace ft;
 /****************           MAIN           ****************/
 
 template< class Key, class Compare, class Allocator >
-explicit set<Key, Compare, Allocator>::set (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
+set<Key, Compare, Allocator>::set (const key_compare& comp, const allocator_type& alloc):
+	_rbtree(comp, alloc), _key_comp(comp), _alloc(alloc) {}
+
+template< class Key, class Compare, class Allocator >
+template< class InputIterator >
+set<Key, Compare, Allocator>::set (InputIterator first, InputIterator last, const Compare& comp, const Allocator& alloc):
+	_rbtree(comp, alloc), _key_comp(comp), _alloc(alloc)
 {
-
-}
-
-template< class Key, class Compare, class Allocator, class InputIterator>
-set<Key, Compare, Allocator>::set (InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
-{
-
+	this->insert(first, last);
 }
 
 template< class Key, class Compare, class Allocator >
-set<Key, Compare, Allocator>::set (const set& x)
+set<Key, Compare, Allocator>::set (const set<Key, Compare, Allocator>& other):
+	_rbtree(other.key_comp(), other.get_allocator()), _key_comp(other.key_comp()), _alloc(other.get_allocator())
 {
-
+	this->insert(other.begin(), other.end());
 }
 
 template< class Key, class Compare, class Allocator >
 set<Key, Compare, Allocator>::~set()
-{
+{}
 
+template< class Key, class Compare, class Allocator >
+set<Key, Compare, Allocator>&	set<Key, Compare, Allocator>::operator= (const set<Key, Compare, Allocator>& other)
+{
+	if (this != &other)
+	{
+		this->_rbtree = other._rbtree;
+		this->_key_comp = other._key_comp;
+		this->_alloc = other._alloc;
+	}
+	return (*this);
 }
 
 template< class Key, class Compare, class Allocator >
-set<Key, Compare, Allocator>::set& operator= (const set& x)
+typename set<Key, Compare, Allocator>::allocator_type	set<Key, Compare, Allocator>::get_allocator() const
 {
-
+	return (this->_alloc);
 }
-
 
 /****************        ITERATORS         ****************/
 
 template< class Key, class Compare, class Allocator >
-iterator	set<Key, Compare, Allocator>::begin()
+typename set<Key, Compare, Allocator>::iterator	set<Key, Compare, Allocator>::begin()
 {
     return (this->_rbtree.begin());
 }
 
 template< class Key, class Compare, class Allocator >
-const_iterato	set<Key, Compare, Allocator>::begin() const
+typename set<Key, Compare, Allocator>::const_iterator	set<Key, Compare, Allocator>::begin() const
 {
     return (this->_rbtree.begin());
 }
 
 template< class Key, class Compare, class Allocator >
-iterator	set<Key, Compare, Allocator>::end()
+typename set<Key, Compare, Allocator>::iterator	set<Key, Compare, Allocator>::end()
 {
     return (this->_rbtree.end());
 }
 
 template< class Key, class Compare, class Allocator >
-const_iterator	set<Key, Compare, Allocator>::end() const
+typename set<Key, Compare, Allocator>::const_iterator	set<Key, Compare, Allocator>::end() const
 {
     return (this->_rbtree.end());
 }
 
 template< class Key, class Compare, class Allocator >
-reverse_iterator	set<Key, Compare, Allocator>::rbegin()
+typename set<Key, Compare, Allocator>::reverse_iterator	set<Key, Compare, Allocator>::rbegin()
 {
     return (this->_rbtree.rbegin());
 }
 
 template< class Key, class Compare, class Allocator >
-const_reverse_iterator	set<Key, Compare, Allocator>::rbegin() const
+typename set<Key, Compare, Allocator>::const_reverse_iterator	set<Key, Compare, Allocator>::rbegin() const
 {
     return (this->_rbtree.rbegin());
 }
 
 template< class Key, class Compare, class Allocator >
-reverse_iterator	set<Key, Compare, Allocator>::rend()
+typename set<Key, Compare, Allocator>::reverse_iterator	set<Key, Compare, Allocator>::rend()
 {
     return (this->_rbtree.rend());
 }
 
 template< class Key, class Compare, class Allocator >
-const_reverse_iterator	set<Key, Compare, Allocator>::rend() const
+typename set<Key, Compare, Allocator>::const_reverse_iterator	set<Key, Compare, Allocator>::rend() const
 {
     return (this->_rbtree.rend());
 }
@@ -111,41 +121,44 @@ size_t	set<Key, Compare, Allocator>::max_size() const
 /****************        MODIFIERS         ****************/
 
 template< class Key, class Compare, class Allocator >
-ft::pair<iterator,bool>		set<Key, Compare, Allocator>::insert (typename set<Key, Compare, Allocator>::value_type const& value)
+ft::pair<typename set<Key, Compare, Allocator>::iterator,bool>		set<Key, Compare, Allocator>::insert (
+	typename set<Key, Compare, Allocator>::value_type const& value)
 {
 	return (this->_rbtree.insert(value));
 }
 
 template< class Key, class Compare, class Allocator >
-iterator	set<Key, Compare, Allocator>::insert (
+typename set<Key, Compare, Allocator>::iterator	set<Key, Compare, Allocator>::insert (
 	typename set<Key, Compare, Allocator>::iterator position, typename set<Key, Compare, Allocator>::value_type const& value)
 {
-	return (this->_rbtree.insert(position, val)); // Not sure
+	return (this->_rbtree.insert(position, value)); // Not sure
 }
 
-template< class Key, class Compare, class Allocator, class InputIterator>
+template< class Key, class Compare, class Allocator >
+template< class InputIterator >
 void	set<Key, Compare, Allocator>::insert (InputIterator first, InputIterator last)
 {
-
+	for (; first != last; first++)
+		this->_rbtree.insert(*first);
 }
 
 template< class Key, class Compare, class Allocator >
 void	set<Key, Compare, Allocator>::erase (typename set<Key, Compare, Allocator>::iterator position)
 {
-
+	this->_rbtree.erase(position);
 }
 
 template< class Key, class Compare, class Allocator >
 size_t	set<Key, Compare, Allocator>::erase (typename set<Key, Compare, Allocator>::value_type const& value)
 {
-
+	return (this->_rbtree.erase(value));
 }
 
 template< class Key, class Compare, class Allocator >
 void	set<Key, Compare, Allocator>::erase (
 	typename set<Key, Compare, Allocator>::iterator first, typename set<Key, Compare, Allocator>::iterator last)
 {
-	typedef typename map<Key, T, Compare, Allocator>::iterator	iterator;
+	typedef typename set<Key, Compare, Allocator>::iterator	iterator;
 
 	iterator	to_erase;
 
@@ -153,7 +166,7 @@ void	set<Key, Compare, Allocator>::erase (
 	{
 		to_erase = first;
 		first++;
-		this->rbtree.erase(to_erase);
+		this->_rbtree.erase(to_erase);
 	}
 }
 

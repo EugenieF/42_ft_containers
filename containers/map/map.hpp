@@ -12,9 +12,6 @@ namespace ft
 	template < class Key, class T, class Compare = std::less<Key>, class Allocator = std::allocator<ft::pair<const Key,T> > >
 	class map
 	{
-		private:
-			typedef red_black_tree<T, Compare, Allocator>	tree_type;
-
 		public:
 			/********************      MEMBER TYPES     **************************/
 			typedef Key										key_type;
@@ -24,6 +21,25 @@ namespace ft
 			typedef Allocator								allocator_type;
 			typedef	size_t									size_type;
 			typedef	ptrdiff_t								difference_type;
+
+			/*********************      MEMBER CLASS     *********************/
+			class	value_compare: public std::binary_function<value_type, value_type, bool>
+			{
+				private:
+					friend class map;				// to investigate...
+
+				protected:
+					key_compare		comp;
+					value_compare(key_compare c);
+
+				public:
+					bool operator()(const value_type& lhs, const value_type& rhs) const;
+			};
+
+		private:
+			typedef red_black_tree<value_type, allocator_type, value_compare>	tree_type;
+	
+		public:
 			typedef	typename Allocator::reference			reference;
 			typedef typename Allocator::const_reference		const_reference;
 			typedef	typename Allocator::pointer				pointer;
@@ -39,17 +55,6 @@ namespace ft
 			allocator_type									_alloc;
 
 		public:
-			/*********************      MEMBER CLASS     *********************/
-			class	value_compare: public std::binary_function<value_type, value_type, bool>
-			{
-				protected:
-					key_compare		comp;
-					value_compare(key_compare c);
-
-				public:
-					bool operator()(const value_type& lhs, const value_type& rhs) const;
-			};
-
 			/*******************      MEMBER FUNCTIONS     *******************/
 
 							/*-----------   MAIN   -----------*/

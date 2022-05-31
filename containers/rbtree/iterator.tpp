@@ -1,4 +1,4 @@
-#include "rbtree_iterator.hpp"
+#include "iterator.hpp"
 using namespace ft;
 
 /****************           MAIN           ****************/
@@ -27,6 +27,18 @@ rbtree_iterator<T, Node>&	rbtree_iterator<T, Node>::operator=(const rbtree_itera
 		this->_nil = other._nil;
 	}
 	return (*this);
+}
+
+template <class T, class Node>
+typename rbtree_iterator<T, Node>::node_ptr		rbtree_iterator<T, Node>::_get_root() const
+{
+	return (this->_root);
+}
+
+template <class T, class Node>
+typename rbtree_iterator<T, Node>::node_ptr		rbtree_iterator<T, Node>::_get_nil() const
+{
+	return (this->_nil);
 }
 
 /****************          ACCESS OPERATORS         ***************/
@@ -106,9 +118,9 @@ bool	operator!= (const rbtree_iterator<Tx, Ty>& lhs, const rbtree_iterator<Ux, U
 template <class T, class Node>
 typename rbtree_iterator<T, Node>::node_ptr		rbtree_iterator<T, Node>::_minimum(node_ptr node)
 {
-	if (node != this->get_nil())
+	if (node != this->_get_nil())
 	{
-		while (node->left != this->get_nil())
+		while (node->left != this->_get_nil())
 			node = node->left;
 	}
 	return (node);
@@ -117,9 +129,9 @@ typename rbtree_iterator<T, Node>::node_ptr		rbtree_iterator<T, Node>::_minimum(
 template <class T, class Node>
 typename rbtree_iterator<T, Node>::node_ptr		rbtree_iterator<T, Node>::_maximum(typename rbtree_iterator<T, Node>::node_ptr node)
 {
-	if (node != this->get_nil())
+	if (node != this->_get_nil())
 	{
-		while (node->right != this->get_nil())
+		while (node->right != this->_get_nil())
 			node = node->right;
 	}
 	return (node);
@@ -132,10 +144,10 @@ typename rbtree_iterator<T, Node>::node_ptr		rbtree_iterator<T, Node>::_successo
 	
 	node_ptr	successor;
 
-	if (node->right != this->get_nil())
+	if (node->right != this->_get_nil())
 		return (this->_minimum(node->right));
 	successor = node->parent;
-	while (successor != this->get_nil() && node == successor->right)
+	while (successor != this->_get_nil() && node == successor->right)
 	{
 		node = successor;
 		successor = successor->parent;
@@ -150,12 +162,12 @@ typename rbtree_iterator<T, Node>::node_ptr		rbtree_iterator<T, Node>::_predeces
 
 	node_ptr	predecessor;
 
-	if (node == this->get_nil())	
-		return (this->_maximum(this->get_root()));
-	if (node->left != this->get_nil())
+	if (node == this->_get_nil())	
+		return (this->_maximum(this->_get_root()));
+	if (node->left != this->_get_nil())
 		return (this->_maximum(node->left));
 	predecessor = node->parent;
-	while (predecessor != this->get_nil() && node == predecessor->left)
+	while (predecessor != this->_get_nil() && node == predecessor->left)
 	{
 		node = predecessor;
 		predecessor = predecessor->parent;

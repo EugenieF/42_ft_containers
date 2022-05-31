@@ -1,7 +1,8 @@
 #ifndef __UTILITY_HPP__
 # define __UTILITY_HPP__
 
-#include "main.hpp"
+# include "main.hpp"
+# include <ostream>
 
 namespace ft
 {
@@ -26,6 +27,10 @@ namespace ft
 		pair(const pair<U, V>& pr);
 		pair& operator= (const pair& pr);
 
+		operator pair<const T1, const T2>(void) const
+		{
+			return (pair<const T1, const T2>(this->first, this->second));
+		}
 	};
 
 	/**************    NON-MEMBER FUNCTION OVERLOADS     **************/
@@ -50,5 +55,7 @@ namespace ft
 	template <class T1, class T2>
 	bool					operator>=(const pair<T1,T2>& lhs, const pair<T1,T2>& rhs);
 }
+
+# include "utility.tpp"
 
 #endif

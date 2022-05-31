@@ -46,6 +46,8 @@ namespace ft
 			rbtree_iterator  							operator--(int);
 
 		private:
+			node_ptr									_get_root() const;
+			node_ptr									_get_nil() const;
 			node_ptr									_minimum(node_ptr node);		
 			node_ptr									_maximum(node_ptr node);		
 			node_ptr									_predecessor(node_ptr node);
@@ -59,6 +61,6 @@ namespace ft
  	bool												operator!= (const rbtree_iterator<Tx, Ty>& lhs, const rbtree_iterator<Ux, Uy>& rhs);
 }
 
-# include "rbtree_iterator.tpp"
+# include "iterator.tpp"
 
 #endif

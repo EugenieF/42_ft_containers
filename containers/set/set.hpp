@@ -46,6 +46,7 @@ namespace ft
 			set (const set& x);
 			~set();
 			set& operator= (const set& x);
+			allocator_type get_allocator() const;
 
 			/****************        ITERATORS         ****************/
 			iterator 										begin();

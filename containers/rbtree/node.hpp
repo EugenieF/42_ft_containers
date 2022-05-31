@@ -39,7 +39,7 @@ namespace ft
 	};
 }
 
-# include "rbtree_node.tpp"
+# include "node.tpp"
 
 #endif
 
