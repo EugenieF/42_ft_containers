@@ -8,15 +8,15 @@ using namespace ft;
 
 template <class T, class Allocator, class Compare>
 typename red_black_tree<T, Allocator, Compare>::node_ptr	red_black_tree<T, Allocator, Compare>::_create_node(
-	const typename red_black_tree<T, Allocator, Compare>::value_type &value)
+	const typename red_black_tree<T, Allocator, Compare>::value_type &value, int color)
 {
 	typedef typename red_black_tree<T, Allocator, Compare>::node_ptr	node_ptr;
 	
 	node_ptr	new_node;
 
 	new_node = this->_alloc.allocate(1);
-	// this->_alloc.construct(new_node, node(value));
-	this->_alloc.construct(new_node, value);
+	this->_alloc.construct(new_node, node(value, color, this->_nil, this->_nil, this->_nil));
+	// this->_alloc.construct(new_node, value);
 	return (new_node);
 }
 
@@ -24,7 +24,8 @@ template <class T, class Allocator, class Compare>
 void	red_black_tree<T, Allocator, Compare>::_delete_node(
 	typename red_black_tree<T, Allocator, Compare>::node_ptr node)
 {
-	this->_rbtree_delete_node(node);
+	if (node != this->get_nil())
+		this->_rbtree_delete_node(node);
 	this->_alloc.destroy(node);
 	this->_alloc.deallocate(node, 1);
 }
@@ -36,7 +37,9 @@ typename red_black_tree<T, Allocator, Compare>::node_ptr	red_black_tree<T, Alloc
 	if (node != this->get_nil())
 	{
 		while (node->left != this->get_nil())
+		{
 			node = node->left;
+		}
 	}
 	return (node);
 }
@@ -118,8 +121,11 @@ ft::pair<typename red_black_tree<T, Allocator, Compare>::node_ptr,bool>		red_bla
 			current = current->left;
 		else if (this->_key_comp(current->data, value))
 			current = current->right;
-		else 
+		else
+		{
+			std::cout << "KEY ALREADY EXIST" << std::endl;
 			return (ft::make_pair(current, false)); // Key already exist !
+		}
 	}
 	return (ft::make_pair(parent, true));
 }
@@ -134,7 +140,8 @@ typename red_black_tree<T, Allocator, Compare>::iterator	red_black_tree<T, Alloc
 	node_ptr	insert_node;
 	iterator	node_iterator;
 
-	insert_node = this->_create_node(value);
+	std::cout << " insert: value = [" << value.first << ", " << value.second << "]" << std::endl;
+	insert_node = this->_create_node(value, RED);
 	insert_node->parent = parent;
 	if (parent == this->get_nil())
 		this->set_root(insert_node);
@@ -231,6 +238,8 @@ void	red_black_tree<T, Allocator, Compare>::_rbtree_delete_node(
 	node_ptr	y;
 	int			y_origin_color;
 	
+	if (z == _nil)
+		std::cout << " --> In DELETE_NODE " << std::endl;
 	y = z;
 	y_origin_color = y->color;
 	if (z->left == get_nil())							// no left child

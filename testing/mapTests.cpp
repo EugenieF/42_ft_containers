@@ -41,18 +41,23 @@ void	runIntIntTests(T &map)
 // 	runIntIntTests(intIntMap);
 // }
 
-// template < class T, class U >
-// void	debugTest(T &map, U x)
-// {
-// 	std::cout << " >>>> DEBUG TEST <<<< " << std::endl;
-// 	map.push_back(x);
-// 	EXPECT_EQ(map.back(), x);
-// 	EXPECT_EQ(map.front(), x);
-// 	x++;
-// 	map.insert(x);
-// 	EXPECT_EQ(map.back(), x);
-// 	EXPECT_EQ(map.front(), x - 1);
-// }
+template < class T, class U >
+void	debugTest(T &map, U x)
+{
+	std::cout << " >>>> DEBUG TEST <<<< " << std::endl << std::endl;
+	map.insert(ft::pair<int, int>(1, 1));
+	EXPECT_EQ(map[1], 1);
+	std::cout << " map[1] = " << map[1] << std::endl << std::endl;
+	map.insert(ft::pair<int, int>(2, 2));
+	EXPECT_EQ(map[2], 2);
+	std::cout << " map[2] = " << map[2] << std::endl << std::endl;
+	map.insert(ft::pair<int, int>(3, 3));
+	// EXPECT_EQ(map[3], 3);
+	std::cout << " size : " << map.size() << std::endl;
+	std::cout << "map[3] = " << map[3] << std::endl << std::endl;
+	std::cout << " size : " << map.size() << std::endl;
+	std::cout << "END DEBUG" << std::endl;
+}
 
 TEST(Map, FtMap)
 {
@@ -61,6 +66,6 @@ TEST(Map, FtMap)
 	std::cout << "           [ FT::MAP ] " << RESET << std::endl;
 
 	ft::map<int,int> intIntMap;
-	// debugTest(intVector, 1);
-	runIntIntTests(intIntMap);
+	debugTest(intIntMap, 1);
+	// runIntIntTests(intIntMap);
 }

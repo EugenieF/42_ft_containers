@@ -236,11 +236,21 @@ class stdStackTest: public ::testing::Test
 	protected:
 		void	SetUp() override
 		{
-			for (int i = 1; i < 6; i++)
-				intStack.push(i);
+			for (int i = 0; i < 10; i++)
+				intTenStack.push(i);
 		}
 
-		std::stack<int> intStack;
+		std::stack<int> intEmptyStack;
+		std::stack<int> intTenStack;
+
+		std::stack<float> floatEmptyStack;
+		std::stack<float> floatTenStack;
+
+		std::stack<double> doubleEmptyStack;
+		std::stack<double> doubleTenStack;
+
+		std::stack<std::string> stringEmptyStack;
+		std::stack<std::string> stringTenStack;
 };
 
 class ftStackTest: public ::testing::Test
@@ -248,48 +258,94 @@ class ftStackTest: public ::testing::Test
 	protected:
 		void	SetUp() override
 		{
-			for (int i = 1; i < 6; i++)
-				intStack.push(i);
+			for (int i = 0; i < 10; i++)
+				intTenStack.push(i);
 		}
 
-		ft::stack<int> intStack;
+		ft::stack<int> intEmptyStack;
+		ft::stack<int> intTenStack;
+
+		ft::stack<float> floatEmptyStack;
+		ft::stack<float> floatTenStack;
+
+		ft::stack<double> doubleEmptyStack;
+		ft::stack<double> doubleTenStack;
+
+		ft::stack<std::string> stringEmptyStack;
+		ft::stack<std::string> stringTenStack;
 };
 
-TEST(Stack, StdStack)
+TEST_F(stdStackTest, isEmptyInitially)
 {
 	std::cout << std::endl << ORANGE_B;
 	std::cout << "                                      ";
 	std::cout << "          [ STD::STACK ] " << RESET << std::endl;
 
-	std::stack<int> intStack;
-	runIntTests(intStack);
-
-	std::stack<float> floatStack;
-	runFloatTests(floatStack);
-
-	std::stack<double> doubleStack;
-	runDoubleTests(doubleStack);
-
-	std::stack<std::string> stringStack;
-	runStringTests(stringStack);
+	EXPECT_EQ(intEmptyStack.size(), (unsigned long)0);
 }
 
+TEST_F(stdStackTest, hasTenInitially)
+{
+	std::cout << std::endl << ORANGE_B;
+	std::cout << "                                      ";
+	std::cout << "          [ STD::STACK ] " << RESET << std::endl;
 
-TEST(Stack, FtStack)
+	EXPECT_EQ(intTenStack.size(), (unsigned long)10);
+}
+
+TEST_F(ftStackTest, isEmptyInitially)
 {
 	std::cout << std::endl << BLUE_B;
 	std::cout << "                                      ";
 	std::cout << "           [ FT::STACK ] " << RESET << std::endl;
 
-	ft::stack<int> intStack;
-	runIntTests(intStack);
-
-	ft::stack<float> floatStack;
-	runFloatTests(floatStack);
-
-	ft::stack<double> doubleStack;
-	runDoubleTests(doubleStack);
-
-	ft::stack<std::string> stringStack;
-	runStringTests(stringStack);
+	EXPECT_EQ(intEmptyStack.size(), (unsigned long)0);
 }
+
+TEST_F(ftStackTest, hasTenInitially)
+{
+	std::cout << std::endl << BLUE_B;
+	std::cout << "                                      ";
+	std::cout << "           [ FT::STACK ] " << RESET << std::endl;
+
+	EXPECT_EQ(intTenStack.size(), (unsigned long)10);
+}
+
+// TEST(Stack, StdStack)
+// {
+// 	std::cout << std::endl << ORANGE_B;
+// 	std::cout << "                                      ";
+// 	std::cout << "          [ STD::STACK ] " << RESET << std::endl;
+
+// 	std::stack<int> intStack;
+// 	runIntTests(intStack);
+
+// 	std::stack<float> floatStack;
+// 	runFloatTests(floatStack);
+
+// 	std::stack<double> doubleStack;
+// 	runDoubleTests(doubleStack);
+
+// 	std::stack<std::string> stringStack;
+// 	runStringTests(stringStack);
+// }
+
+
+// TEST(Stack, FtStack)
+// {
+// 	std::cout << std::endl << BLUE_B;
+// 	std::cout << "                                      ";
+// 	std::cout << "           [ FT::STACK ] " << RESET << std::endl;
+
+// 	ft::stack<int> intStack;
+// 	runIntTests(intStack);
+
+// 	ft::stack<float> floatStack;
+// 	runFloatTests(floatStack);
+
+// 	ft::stack<double> doubleStack;
+// 	runDoubleTests(doubleStack);
+
+// 	ft::stack<std::string> stringStack;
+// 	runStringTests(stringStack);
+// }

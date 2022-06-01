@@ -11,8 +11,7 @@ red_black_tree<T, Allocator, Compare>::red_black_tree(const typename red_black_t
 {
 	typedef typename red_black_tree<T, Allocator, Compare>::value_type	value_type;
 
-	this->_nil = this->_create_node(value_type());
-	this->_nil->color = BLACK;
+	this->_nil = this->_create_node(value_type(), BLACK);
 	this->_root = this->_nil;
 }
 
@@ -22,8 +21,7 @@ red_black_tree<T, Allocator, Compare>::red_black_tree(red_black_tree<T, Allocato
 {
 	typedef typename red_black_tree<T, Allocator, Compare>::value_type	value_type;
 
-	this->_nil = this->_create_node(value_type());
-	this->_nil->color = BLACK;
+	this->_nil = this->_create_node(value_type(), BLACK);
 	this->_root = this->_nil;
 	*this = other;
 }
@@ -33,6 +31,7 @@ red_black_tree<T, Allocator, Compare>::~red_black_tree()
 {
 	this->clear();
 	this->_delete_node(this->_nil);
+	std::cout << " *** DEBUG *** " << std::endl;
 }
 
 template <class T, class Allocator, class Compare>
@@ -191,6 +190,7 @@ ft::pair<typename red_black_tree<T, Allocator, Compare>::iterator,bool>		red_bla
 		node_position = iterator(insert_pair.first, this->get_root(), this->get_nil());
 		return (ft::make_pair(node_position, false));
 	}
+	std::cout << " DEBUG ! " << std::endl;
 	node_position = this->_rbtree_insert_node(insert_pair.first, value);
 	return (ft::make_pair(node_position, true));
 }
@@ -252,8 +252,11 @@ void	red_black_tree<T, Allocator, Compare>::clear()
 	
 	iterator	ptr;
 
-	for (ptr = this->begin(); ptr != this->end(); ptr++)
+	ptr = this->begin();
+	for (; ptr != this->end(); ptr++)
+	{
 		this->erase(ptr);
+	}
 }
 
 /**********************          OPERATIONS          **********************/

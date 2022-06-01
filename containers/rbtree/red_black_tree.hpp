@@ -87,7 +87,7 @@ namespace ft
 
 		private:
 		/****************     PRIVATE FUNCTIONS     ****************/
-			node_ptr									_create_node(const value_type& value);
+			node_ptr									_create_node(const value_type& value, int color);
 			// node_ptr									_create_node(value_type value = value_type());
 			void										_delete_node(node_ptr node);
 

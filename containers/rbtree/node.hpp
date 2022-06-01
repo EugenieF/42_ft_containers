@@ -33,6 +33,7 @@ namespace ft
 
 			node();
 			node(value_type const &value);
+			node(value_type const &value, int color, pointer left, pointer right, pointer parent);
 			~node();
 			node(const_reference other);
 			reference	operator=(const_reference rhs);
