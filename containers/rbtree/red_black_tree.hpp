@@ -88,7 +88,7 @@ namespace ft
 		private:
 		/****************     PRIVATE FUNCTIONS     ****************/
 			// node_ptr									_create_node(const value_type& value, int color);
-			node_ptr									_create_node(value_type value = value_type(), int color = RED);
+			node_ptr									_create_node(const value_type& value = value_type(), int color = RED);
 			void										_delete_node(node_ptr node);
 
 			void										_rbtree_left_rotate(node_ptr node);
