@@ -8,7 +8,7 @@ using namespace ft;
 
 template <class T, class Allocator, class Compare>
 typename red_black_tree<T, Allocator, Compare>::node_ptr	red_black_tree<T, Allocator, Compare>::_create_node(
-	const typename red_black_tree<T, Allocator, Compare>::value_type &value, int color)
+	typename red_black_tree<T, Allocator, Compare>::value_type value, int color)
 {
 	typedef typename red_black_tree<T, Allocator, Compare>::node_ptr	node_ptr;
 	

@@ -24,20 +24,8 @@ namespace ft
 		pair(const first_type& x, const second_type& y);
 		template <class U, class V>
 		pair(const pair<U, V>& pr);
-		pair& operator=(const pair& other)
-		{
-			if (this != &other)
-   			{
-        		first = other.first;
-      			second = other.second;
-    		}
-    		return (*this);
-		}
-
-		operator pair<const T1, const T2>(void) const
-		{
-			return (pair<const T1, const T2>(this->first, this->second));
-		}
+		pair& operator=(const pair& other) = default;
+		operator pair<const T1, const T2>(void) const;
 	};
 
 	/**************    NON-MEMBER FUNCTION OVERLOADS     **************/

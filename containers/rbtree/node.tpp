@@ -15,14 +15,14 @@ node<T>::node():
 
 
 template <class T>
-node<T>::node(const typename node<T>::value_type &value):
+node<T>::node(typename node<T>::value_type value):
 	data(value), color(RED), left(NULL), right(NULL), parent(NULL)
 {
 	// data = value;
 }
 
 template <class T>
-node<T>::node(const typename node<T>::value_type &value, int color,
+node<T>::node(typename node<T>::value_type value, int color,
 	typename node<T>::pointer left, typename node<T>::pointer right, typename node<T>::pointer parent):
 	data(value), color(color), left(left), right(right), parent(parent)
 {
