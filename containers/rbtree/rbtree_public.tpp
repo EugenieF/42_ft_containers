@@ -31,7 +31,7 @@ red_black_tree<T, Allocator, Compare>::~red_black_tree()
 {
 	this->clear();
 	this->_delete_node(this->_nil);
-	std::cout << " *** DEBUG *** " << std::endl;
+	// std::cout << " *** DEBUG *** " << std::endl;
 }
 
 template <class T, class Allocator, class Compare>

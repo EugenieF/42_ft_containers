@@ -4,7 +4,7 @@ UNAME		= $(shell uname)
 
 CXX			= c++
 
-CXXFLAGS	= -Wall -std=c++11 #-Wextra 
+CXXFLAGS	= -Wall -Wextra #-std=c++11 
 
 NAME		= gtests
 
@@ -22,7 +22,7 @@ CXXFLAGS += $(INCLUDE)
 
 MAIN		= gtest_main.cpp
 
-FILES		=  stackTests # mapTests vectorTests
+FILES		= mapTests # stackTests # vectorTests
 
 SRCS 		= $(addsuffix .cpp, $(FILES))
 OBJS 		= $(addsuffix .o, $(FILES))
@@ -36,7 +36,8 @@ all: $(NAME)
 ifeq ($(UNAME), Darwin)
 	./$(NAME)
 else
-	valgrind ./$(NAME)
+	./$(NAME)
+# valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME)
 endif
 
 $(NAME): $(OBJS)

@@ -6,13 +6,11 @@ using namespace ft;
 template <class Key, class T, class Compare, class Allocator>
 map<Key, T, Compare, Allocator>::map (const Compare& comp, const Allocator& alloc):
     _rbtree(alloc, comp), _key_comp(comp), _alloc(alloc) {}
-    // _key_comp(comp), _alloc(alloc) {}
 
 template <class Key, class T, class Compare, class Allocator>
 template <class InputIterator>
 map<Key, T, Compare, Allocator>::map (InputIterator first, InputIterator last, const Compare& comp, const Allocator& alloc):
     _rbtree(alloc, comp), _key_comp(comp), _alloc(alloc)
-	// _key_comp(comp), _alloc(alloc)
 {
     this->insert(first, last);
 }
@@ -20,7 +18,6 @@ map<Key, T, Compare, Allocator>::map (InputIterator first, InputIterator last, c
 template <class Key, class T, class Compare, class Allocator>
 map<Key, T, Compare, Allocator>::map (const map<Key, T, Compare, Allocator>& other):
 	_rbtree(other.get_allocator(), other.key_comp()), _key_comp(other.key_comp()), _alloc(other.get_allocator())
-	// _key_comp(other.key_comp()), _alloc(other.get_allocator())
 {
     this->insert(other.begin(), other.end());
 }
