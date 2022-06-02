@@ -31,7 +31,6 @@ red_black_tree<T, Allocator, Compare>::~red_black_tree()
 {
 	this->clear();
 	this->_delete_node(this->_nil);
-	// std::cout << " *** DEBUG *** " << std::endl;
 }
 
 template <class T, class Allocator, class Compare>
@@ -190,8 +189,11 @@ ft::pair<typename red_black_tree<T, Allocator, Compare>::iterator,bool>		red_bla
 		node_position = iterator(insert_pair.first, this->get_root(), this->get_nil());
 		return (ft::make_pair(node_position, false));
 	}
-	std::cout << " DEBUG ! " << std::endl;
+	// std::cout << " DEBUG ! " << std::endl;
 	node_position = this->_rbtree_insert_node(insert_pair.first, value);
+	
+	this->print();
+	std::cout << std::endl << std::endl;
 	return (ft::make_pair(node_position, true));
 }
 

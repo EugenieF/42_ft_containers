@@ -46,13 +46,13 @@ void	debugTest(T &map)
 {
 	std::cout << " >>>> DEBUG TEST <<<< " << std::endl << std::endl;
 	map.insert(ft::pair<int, int>(1, 1));
-	// EXPECT_EQ(map[1], 1);
+	EXPECT_EQ(map[1], 1);
 	// std::cout << " map[1] = " << map[1] << std::endl << std::endl;
-	// map.insert(ft::pair<int, int>(2, 2));
-	// EXPECT_EQ(map[2], 2);
+	map.insert(ft::pair<int, int>(2, 2));
+	EXPECT_EQ(map[2], 2);
 	// std::cout << " map[2] = " << map[2] << std::endl << std::endl;
-	// map.insert(ft::pair<int, int>(3, 3));
-	// // EXPECT_EQ(map[3], 3);
+	map.insert(ft::pair<int, int>(3, 3));
+	EXPECT_EQ(map[3], 3);
 	// std::cout << " size : " << map.size() << std::endl;
 	// std::cout << "map[3] = " << map[3] << std::endl << std::endl;
 	// std::cout << " size : " << map.size() << std::endl;
@@ -66,6 +66,6 @@ TEST(Map, FtMap)
 	std::cout << "           [ FT::MAP ] " << RESET << std::endl;
 
 	ft::map<int, int> intIntMap;
-	// debugTest(intIntMap);
+	debugTest(intIntMap);
 	// runIntIntTests(intIntMap);
 }

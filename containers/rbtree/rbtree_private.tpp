@@ -123,10 +123,11 @@ ft::pair<typename red_black_tree<T, Allocator, Compare>::node_ptr,bool>		red_bla
 			current = current->right;
 		else
 		{
-			std::cout << "KEY ALREADY EXIST" << std::endl;
+			// std::cout << "KEY ALREADY EXIST" << std::endl;
 			return (ft::make_pair(current, false)); // Key already exist !
 		}
 	}
+	// std::cout << "parent : " << parent->data << std::endl;
 	return (ft::make_pair(parent, true));
 }
 
@@ -140,7 +141,7 @@ typename red_black_tree<T, Allocator, Compare>::iterator	red_black_tree<T, Alloc
 	node_ptr	insert_node;
 	iterator	node_iterator;
 
-	std::cout << " insert: value = [" << value.first << ", " << value.second << "]" << std::endl;
+	// std::cout << " insert: value = [" << value.first << ", " << value.second << "]" << std::endl;
 	insert_node = this->_create_node(value, RED);
 	insert_node->parent = parent;
 	if (parent == this->get_nil())

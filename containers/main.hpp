@@ -7,6 +7,8 @@
 
 # include <iostream>
 # include <ostream>
+# include <string>
+# include <sstream>
 # include <memory>
 # include <stdexcept>
 # include <functional>
