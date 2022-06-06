@@ -361,3 +361,10 @@ ft::pair<const Key, T>	map<Key, T, Compare, Allocator>::_get_value_type(const Ke
  
 	return (ft::make_pair(key, mapped_type()));
 }
+
+// TO DEBUG
+template <class Key, class T, class Compare, class Allocator>
+void	map<Key, T, Compare, Allocator>::print(void)
+{
+	this->_rbtree.print();
+}

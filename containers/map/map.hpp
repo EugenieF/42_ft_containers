@@ -115,6 +115,10 @@ namespace ft
 			/*******************       PRIVATE FUNCTIONS      *******************/
 			ft::pair<const key_type, mapped_type>			_get_value_type(const key_type& key) const;
 
+
+		// TO DEBUG:
+		public:
+			void											print(void);
 	};
 
 	/********************         NON-MEMBER FUNCTION OVERLOADS          ********************/

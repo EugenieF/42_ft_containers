@@ -104,26 +104,10 @@ namespace ft
 			iterator									_rbtree_search_node(node_ptr node, const value_type& value);
 			const_iterator								_rbtree_search_node(node_ptr node, const value_type& value) const;
 
-
-
-			void	print(void)
-			{
-				std::stringstream buffer;
-				this->_print(this->_root, buffer, true, "");
-				std::cout << buffer.str();
-			}
-
-			void	_print(node_ptr node, std::stringstream &buffer, bool is_tail, std::string prefix)
-			{
-				if (node->right != this->_nil)
-					this->_print(node->right, buffer, false, std::string(prefix).append(is_tail != 0 ? "│   " : "    "));
-				buffer << prefix << (is_tail != 0 ? "└── " : "┌── ");
-				if (node->color == RED)
-					buffer << "\033[31m";
-				buffer << node->data << "\033[0m" << std::endl;
-				if (node->left != this->_nil)
-					this->_print(node->left, buffer, true, std::string(prefix).append(is_tail != 0 ? "    " : "│   "));
-			}
+		// To debug:
+			void										_print(node_ptr node, std::stringstream &buffer, bool is_tail, std::string prefix);
+		public:
+			void										print(void);
 	};
 }
 

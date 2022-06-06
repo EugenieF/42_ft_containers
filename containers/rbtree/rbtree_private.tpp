@@ -37,9 +37,7 @@ typename red_black_tree<T, Allocator, Compare>::node_ptr	red_black_tree<T, Alloc
 	if (node != this->get_nil())
 	{
 		while (node->left != this->get_nil())
-		{
 			node = node->left;
-		}
 	}
 	return (node);
 }
@@ -66,10 +64,10 @@ void	red_black_tree<T, Allocator, Compare>::_rbtree_left_rotate(
 
 	y = x->right;
 	x->right = y->left;
-	if (y->left)
+	if (y->left != this->get_nil())
 		y->left->parent = x;
 	y->parent = x->parent;
-	if (!x->parent)
+	if (x->parent == this->get_nil())
 		this->_root = y;
 	else if (x == x->parent->left)
 		x->parent->left = y;
@@ -89,10 +87,10 @@ void	red_black_tree<T, Allocator, Compare>::_rbtree_right_rotate(
 
 	y = x->left;
 	x->left = y->right;
-	if (y->right)
+	if (y->right != this->get_nil())
 		y->right->parent = x;
 	y->parent = x->parent;
-	if (!x->parent)
+	if (x->parent == this->get_nil())
 		this->_root = y;
 	else if (x == x->parent->right)
 		x->parent->right = y;
@@ -141,7 +139,6 @@ typename red_black_tree<T, Allocator, Compare>::iterator	red_black_tree<T, Alloc
 	node_ptr	insert_node;
 	iterator	node_iterator;
 
-	// std::cout << " insert: value = [" << value.first << ", " << value.second << "]" << std::endl;
 	insert_node = this->_create_node(value, RED);
 	insert_node->parent = parent;
 	if (parent == this->get_nil())
@@ -150,6 +147,7 @@ typename red_black_tree<T, Allocator, Compare>::iterator	red_black_tree<T, Alloc
 		parent->left = insert_node;
 	else
 		parent->right = insert_node;
+	this->print(); // print before fixation
 	this->_rbtree_fix_insertion(insert_node);
 	this->_size++;
 	node_iterator = iterator(insert_node, this->get_root(), this->get_nil());
@@ -225,7 +223,7 @@ void	red_black_tree<T, Allocator, Compare>::_rbtree_transplant(
 	else if (node1 == node1->parent->left)				// node1 is left child
 		node1->parent->left = node2;
 	else
-		node1->parent->right = node2;					// node2 is right chile
+		node1->parent->right = node2;					// node2 is right child
 	node2->parent = node1->parent;
 }
 
@@ -239,16 +237,14 @@ void	red_black_tree<T, Allocator, Compare>::_rbtree_delete_node(
 	node_ptr	y;
 	int			y_origin_color;
 	
-	if (z == _nil)
-		std::cout << " --> In DELETE_NODE " << std::endl;
 	y = z;
 	y_origin_color = y->color;
-	if (z->left == get_nil())							// no left child
+	if (z->left == this->get_nil())							// no left child
 	{
 		x = z->right;
 		this->_rbtree_transplant(z, z->right);
 	}
-	else if (z->right == get_nil())						// no right child
+	else if (z->right == this->get_nil())						// no right child
 	{
 		x = z->left;
 		this->_rbtree_transplant(z, z->left);
@@ -259,7 +255,7 @@ void	red_black_tree<T, Allocator, Compare>::_rbtree_delete_node(
 		y_origin_color = y->color;
 		x = y->right;
 		if (y->parent == z)
-			x->parent = y;
+			x->parent = z;
 		else
 		{
 			this->_rbtree_transplant(y, y->right);
@@ -271,9 +267,10 @@ void	red_black_tree<T, Allocator, Compare>::_rbtree_delete_node(
 		y->left->parent = y;
 		y->color = z->color;
 	}
+	this->_size--;
+	this->print();
 	if (y_origin_color == BLACK)
 		this->_rbtree_fix_deletion(x);
-	this->_size--;
 }
 
 template <class T, class Allocator, class Compare>
@@ -315,7 +312,7 @@ void	red_black_tree<T, Allocator, Compare>::_rbtree_fix_deletion(
 				node->parent->color = BLACK;
 				y->right->color = BLACK;
 				this->_rbtree_left_rotate(node->parent);
-				node = get_root();
+				node = this->get_root();
 			}
 		}
 		else
@@ -347,7 +344,7 @@ void	red_black_tree<T, Allocator, Compare>::_rbtree_fix_deletion(
 				node->parent->color = BLACK;
 				y->left->color = BLACK;
 				this->_rbtree_right_rotate(node->parent);
-				node = get_root();
+				node = this->get_root();
 			}
 		}
 	}
@@ -368,9 +365,9 @@ typename red_black_tree<T, Allocator, Compare>::iterator	red_black_tree<T, Alloc
 	current_node = node;
 	while (current_node != this->get_nil())
 	{
-		if (this->_key_comp(current_node->current, value))
+		if (this->_key_comp(current_node->data, value))
 			current_node = current_node->left;
-		else if (this->_key_comp(value, current_node->current))
+		else if (this->_key_comp(value, current_node->data))
 			current_node = current_node->right;
 		else
 			break ;
@@ -392,13 +389,37 @@ typename red_black_tree<T, Allocator, Compare>::const_iterator	red_black_tree<T,
 	current_node = node;
 	while (current_node != this->get_nil())
 	{
-		if (this->_key_comp(current_node->current, value))
+		if (this->_key_comp(current_node->data, value))
 			current_node = current_node->left;
-		else if (this->_key_comp(value, current_node->current))
+		else if (this->_key_comp(value, current_node->data))
 			current_node = current_node->right;
 		else
 			break ;
 	}
 	node_position = const_iterator(current_node, this->get_root(), this->get_nil());
 	return (node_position);
+}
+
+template <class T, class Allocator, class Compare>
+void	red_black_tree<T, Allocator, Compare>::print(void)
+{
+	if (this->size() < 1)
+		return ;
+	std::stringstream	buffer;
+	this->_print(this->_root, buffer, true, "");
+	std::cout << buffer.str() << std::endl;
+}
+
+template <class T, class Allocator, class Compare>
+void	red_black_tree<T, Allocator, Compare>::_print(
+	typename red_black_tree<T, Allocator, Compare>::node_ptr node, std::stringstream &buffer, bool is_tail, std::string prefix)
+{
+	if (node->right != this->_nil)
+		this->_print(node->right, buffer, false, std::string(prefix).append(is_tail != 0 ? "│   " : "    "));
+	buffer << prefix << (is_tail != 0 ? "└── " : "┌── ");
+	if (node->color == RED)
+		buffer << "\033[31m";
+	buffer << node->data << "\033[0m" << std::endl;
+	if (node->left != this->_nil)
+		this->_print(node->left, buffer, true, std::string(prefix).append(is_tail != 0 ? "    " : "│   "));
 }
