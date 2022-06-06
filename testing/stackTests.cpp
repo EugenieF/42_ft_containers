@@ -29,7 +29,7 @@ class stdStackTest: public ::testing::Test
 			for (int i = 0; i < 10; i++, floatX += 1.0f)
 				floatFilledStack.push(floatX);
 
-			float 	doubleX = 0.00;
+			double	doubleX = 0.00;
 			for (int i = 0; i < 10; i++, doubleX += 1.00)
 				doubleFilledStack.push(doubleX);
 		}
@@ -60,7 +60,7 @@ class ftStackTest: public ::testing::Test
 			for (int i = 0; i < 10; i++, floatX += 1.0f)
 				floatFilledStack.push(floatX);
 
-			float 	doubleX = 0.00;
+			double	doubleX = 0.00;
 			for (int i = 0; i < 10; i++, doubleX += 1.00)
 				doubleFilledStack.push(doubleX);
 		}	

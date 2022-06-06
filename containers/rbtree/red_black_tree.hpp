@@ -104,10 +104,12 @@ namespace ft
 			iterator									_rbtree_search_node(node_ptr node, const value_type& value);
 			const_iterator								_rbtree_search_node(node_ptr node, const value_type& value) const;
 
-		// To debug:
-			void										_print(node_ptr node, std::stringstream &buffer, bool is_tail, std::string prefix);
+
+		/*********************      TO DEBUG      *********************/
 		public:
 			void										print(void);
+		private:
+			void										_print(node_ptr node, std::stringstream &buffer, bool is_tail, std::string prefix);
 	};
 }
 

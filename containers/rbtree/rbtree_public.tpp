@@ -189,11 +189,7 @@ ft::pair<typename red_black_tree<T, Allocator, Compare>::iterator,bool>		red_bla
 		node_position = iterator(insert_pair.first, this->get_root(), this->get_nil());
 		return (ft::make_pair(node_position, false));
 	}
-	std::cout << " DEBUG ! parent : " << insert_pair.first->data << std::endl;
 	node_position = this->_rbtree_insert_node(insert_pair.first, value);
-	
-	this->print();
-	std::cout << std::endl << std::endl;
 	return (ft::make_pair(node_position, true));
 }
 

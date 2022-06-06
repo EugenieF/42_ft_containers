@@ -112,6 +112,8 @@ ft::pair<typename red_black_tree<T, Allocator, Compare>::node_ptr,bool>		red_bla
 	node_ptr	parent = this->get_nil();
 	node_ptr	current = position;
 
+	if (current == this->get_nil()) // To dig a bit more
+		current = this->get_root();
 	while (current != this->get_nil())
 	{
 		parent = current;
@@ -125,7 +127,6 @@ ft::pair<typename red_black_tree<T, Allocator, Compare>::node_ptr,bool>		red_bla
 			return (ft::make_pair(current, false)); // Key already exist !
 		}
 	}
-	// std::cout << "parent : " << parent->data << std::endl;
 	return (ft::make_pair(parent, true));
 }
 
@@ -147,7 +148,7 @@ typename red_black_tree<T, Allocator, Compare>::iterator	red_black_tree<T, Alloc
 		parent->left = insert_node;
 	else
 		parent->right = insert_node;
-	this->print(); // print before fixation
+	// this->print(); // print before fixation
 	this->_rbtree_fix_insertion(insert_node);
 	this->_size++;
 	node_iterator = iterator(insert_node, this->get_root(), this->get_nil());
@@ -268,7 +269,7 @@ void	red_black_tree<T, Allocator, Compare>::_rbtree_delete_node(
 		y->color = z->color;
 	}
 	this->_size--;
-	this->print();
+	// this->print();
 	if (y_origin_color == BLACK)
 		this->_rbtree_fix_deletion(x);
 }
@@ -399,6 +400,8 @@ typename red_black_tree<T, Allocator, Compare>::const_iterator	red_black_tree<T,
 	node_position = const_iterator(current_node, this->get_root(), this->get_nil());
 	return (node_position);
 }
+
+/************************************       DEBUG       ************************************/
 
 template <class T, class Allocator, class Compare>
 void	red_black_tree<T, Allocator, Compare>::print(void)
