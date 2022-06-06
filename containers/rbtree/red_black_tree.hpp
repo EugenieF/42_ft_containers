@@ -90,10 +90,11 @@ namespace ft
 			// node_ptr									_create_node(const value_type& value, int color);
 			node_ptr									_create_node(const value_type& value = value_type(), int color = RED);
 			void										_delete_node(node_ptr node);
+			void										_check_hint(node_ptr position, const value_type& value);
+			ft::pair<node_ptr,bool>						_get_parent(node_ptr hint, const value_type& value);
 
 			void										_rbtree_left_rotate(node_ptr node);
 			void										_rbtree_right_rotate(node_ptr node);
-			ft::pair<node_ptr,bool>						_rbtree_get_parent(node_ptr position, const value_type& value);
 			iterator									_rbtree_insert_node(node_ptr parent, const value_type& value);
 			void										_rbtree_fix_insertion(node_ptr node);
 			void										_rbtree_delete_node(node_ptr x);

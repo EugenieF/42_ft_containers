@@ -1,73 +1,7 @@
 #include "mainTests.hpp"
 
 /**************************************************************/
-/*                         CLASS TEST                         */
-/**************************************************************/
-
-class stdStackTest: public ::testing::Test
-{
-	protected:
-		std::stack<int> intEmptyStack;
-		std::stack<int> intFilledStack;
-
-		std::stack<float> floatEmptyStack;
-		std::stack<float> floatFilledStack;
-
-		std::stack<double> doubleEmptyStack;
-		std::stack<double> doubleFilledStack;
-
-		std::stack<std::string> stringEmptyStack;
-		std::stack<std::string> stringFilledStack;
-
-		void	SetUp() override
-		{
-			int		intX = 0;
-			for (int i = 0; i < 10; i++, intX++)
-				intFilledStack.push(intX);
-
-			float 	floatX = 0.0f;
-			for (int i = 0; i < 10; i++, floatX += 1.0f)
-				floatFilledStack.push(floatX);
-
-			double	doubleX = 0.00;
-			for (int i = 0; i < 10; i++, doubleX += 1.00)
-				doubleFilledStack.push(doubleX);
-		}
-};
-
-class ftStackTest: public ::testing::Test
-{
-	protected:
-		ft::stack<int> intEmptyStack;
-		ft::stack<int> intFilledStack;
-
-		ft::stack<float> floatEmptyStack;
-		ft::stack<float> floatFilledStack;
-
-		ft::stack<double> doubleEmptyStack;
-		ft::stack<double> doubleFilledStack;
-
-		ft::stack<std::string> stringEmptyStack;
-		ft::stack<std::string> stringFilledStack;
-
-		void	SetUp() override
-		{
-			int		intX = 0;
-			for (int i = 0; i < 10; i++, intX++)
-				intFilledStack.push(intX);
-
-			float 	floatX = 0.0f;
-			for (int i = 0; i < 10; i++, floatX += 1.0f)
-				floatFilledStack.push(floatX);
-
-			double	doubleX = 0.00;
-			for (int i = 0; i < 10; i++, doubleX += 1.00)
-				doubleFilledStack.push(doubleX);
-		}	
-};
-
-/**************************************************************/
-/*                          RUN TEST                          */
+/*                       RUN STACK TEST                       */
 /**************************************************************/
 
 TEST_F(stdStackTest, initSizeStack)
@@ -84,32 +18,26 @@ TEST_F(stdStackTest, initSizeStack)
 
 	EXPECT_EQ(doubleEmptyStack.size(), (unsigned long)0);
 	EXPECT_EQ(doubleFilledStack.size(), (unsigned long)10);
+
+	EXPECT_EQ(stringEmptyStack.size(), (unsigned long)0);
+	EXPECT_EQ(stringFilledStack.size(), (unsigned long)10);
 }
 
 TEST_F(stdStackTest, pushInEmptyStack)
 {
-	int	intX = 0;
 	for (int i = 0; i < 10; i++)
 	{
-		intX += 1;
-		intEmptyStack.push(intX);
-		EXPECT_EQ(intEmptyStack.top(), intX);
-	}
+		intEmptyStack.push(intX[i]);
+		EXPECT_EQ(intEmptyStack.top(), intX[i]);
 	
-	float	floatX = 0.0f;
-	for (int i = 0; i < 10; i++)
-	{
-		floatX += 1.0f;
-		floatEmptyStack.push(floatX);
-		EXPECT_EQ(floatEmptyStack.top(), floatX);
-	}
+		floatEmptyStack.push(floatX[i]);
+		EXPECT_EQ(floatEmptyStack.top(), floatX[i]);
 
-	double	doubleX = 0.00;
-	for (int i = 0; i < 10; i++)
-	{
-		doubleX += 1.00;
-		doubleEmptyStack.push(doubleX);
-		EXPECT_EQ(doubleEmptyStack.top(), doubleX);
+		doubleEmptyStack.push(doubleX[i]);
+		EXPECT_EQ(doubleEmptyStack.top(), doubleX[i]);
+
+		stringEmptyStack.push(stringX[i]);
+		EXPECT_EQ(stringEmptyStack.top(), stringX[i]);
 	}
 }
 
@@ -127,32 +55,26 @@ TEST_F(ftStackTest, initSizeStack)
 
 	EXPECT_EQ(doubleEmptyStack.size(), (unsigned long)0);
 	EXPECT_EQ(doubleFilledStack.size(), (unsigned long)10);
+
+	EXPECT_EQ(stringEmptyStack.size(), (unsigned long)0);
+	EXPECT_EQ(stringFilledStack.size(), (unsigned long)10);
 }
 
 TEST_F(ftStackTest, pushInEmptyStack)
 {
-	int	intX = 0;
 	for (int i = 0; i < 10; i++)
 	{
-		intX += 1;
-		intEmptyStack.push(intX);
-		EXPECT_EQ(intEmptyStack.top(), intX);
-	}
+		intEmptyStack.push(intX[i]);
+		EXPECT_EQ(intEmptyStack.top(), intX[i]);
 
-	float	floatX = 0.0f;
-	for (int i = 0; i < 10; i++)
-	{
-		floatX += 1.0f;
-		floatEmptyStack.push(floatX);
-		EXPECT_EQ(floatEmptyStack.top(), floatX);
-	}
+		floatEmptyStack.push(floatX[i]);
+		EXPECT_EQ(floatEmptyStack.top(), floatX[i]);
 
-	double	doubleX = 0.00;
-	for (int i = 0; i < 10; i++)
-	{
-		doubleX += 1.00;
-		doubleEmptyStack.push(doubleX);
-		EXPECT_EQ(doubleEmptyStack.top(), doubleX);
+		doubleEmptyStack.push(doubleX[i]);
+		EXPECT_EQ(doubleEmptyStack.top(), doubleX[i]);
+
+		stringEmptyStack.push(stringX[i]);
+		EXPECT_EQ(stringEmptyStack.top(), stringX[i]);
 	}
 }
 

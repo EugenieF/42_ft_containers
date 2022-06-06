@@ -183,7 +183,7 @@ ft::pair<typename red_black_tree<T, Allocator, Compare>::iterator,bool>		red_bla
 	ft::pair<node_ptr,bool>		insert_pair;
 	iterator					node_position;
 
-	insert_pair = _rbtree_get_parent(this->get_root(), value);
+	insert_pair = _get_parent(this->get_root(), value);
 	if (insert_pair.second == false)
 	{
 		node_position = iterator(insert_pair.first, this->get_root(), this->get_nil());
@@ -203,7 +203,7 @@ typename red_black_tree<T, Allocator, Compare>::iterator	red_black_tree<T, Alloc
 	ft::pair<node_ptr,bool>		insert_pair;
 	iterator					node_position;
 
-	insert_pair = _rbtree_get_parent(position.current, value);
+	insert_pair = _get_parent(position.current, value);
 	if (insert_pair.second == false)
 		node_position = iterator(insert_pair.first, this->get_root(), this->get_nil());		// Key already exist
 	else

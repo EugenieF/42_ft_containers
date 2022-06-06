@@ -102,18 +102,26 @@ void	red_black_tree<T, Allocator, Compare>::_rbtree_right_rotate(
 
 /************************************       INSERTION       ************************************/
 
+template <class T, class Allocator, class Compare>
+void	red_black_tree<T, Allocator, Compare>::_check_hint(
+	typename red_black_tree<T, Allocator, Compare>::node_ptr position, const T& value)
+{
+	if (position == this->get_nil()
+		|| (this->_key_comp(value, position->left->data) && this->_key_comp(value, position->parent->data))		// smaller than left and parent
+		|| (this->_key_comp(position->right->data, value) && this->_key_comp(position->parent->data, value)))	// greater than right and parent
+		position = this->get_root();
+}
 
 template <class T, class Allocator, class Compare>
-ft::pair<typename red_black_tree<T, Allocator, Compare>::node_ptr,bool>		red_black_tree<T, Allocator, Compare>::_rbtree_get_parent (
-	typename red_black_tree<T, Allocator, Compare>::node_ptr position, const T& value)
+ft::pair<typename red_black_tree<T, Allocator, Compare>::node_ptr,bool>		red_black_tree<T, Allocator, Compare>::_get_parent (
+	typename red_black_tree<T, Allocator, Compare>::node_ptr hint, const T& value)
 {
 	typedef typename red_black_tree<T, Allocator, Compare>::node_ptr	node_ptr;
 
 	node_ptr	parent = this->get_nil();
-	node_ptr	current = position;
+	node_ptr	current = hint;
 
-	if (current == this->get_nil()) // To dig a bit more
-		current = this->get_root();
+	this->_check_hint(current, value);
 	while (current != this->get_nil())
 	{
 		parent = current;
@@ -124,7 +132,7 @@ ft::pair<typename red_black_tree<T, Allocator, Compare>::node_ptr,bool>		red_bla
 		else
 		{
 			// std::cout << "KEY ALREADY EXIST" << std::endl;
-			return (ft::make_pair(current, false)); // Key already exist !
+			return (ft::make_pair(current, false));		// Key already exist !
 		}
 	}
 	return (ft::make_pair(parent, true));
