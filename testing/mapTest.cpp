@@ -1,26 +1,29 @@
 #include "mainTests.hpp"
 
 /*****************************************************************/
-/*       				     RUN TEST           			     */
+/*       			     RUN STD::MAP TEST      			     */
 /*****************************************************************/
 
-TEST_F(stdMapTest, initSizeStack)
+TEST_F(stdMapTest, initSizeMap)
 {
 	std::cout << std::endl << ORANGE_B;
-	std::cout << "                                      ";
+	std::cout << "                                        ";
 	std::cout << "          [ STD::MAP ] " << RESET << std::endl;
 
-	EXPECT_EQ(intIntEmptyMap.size(), (unsigned long)0);
-	EXPECT_EQ(intIntFilledMap.size(), (unsigned long)10);
+	size_t	expectedEmptyMapSize = (size_t)0;
+	size_t	expectedFilledMapSize = (size_t)10;
 
-	EXPECT_EQ(intFloatEmptyMap.size(), (unsigned long)0);
-	EXPECT_EQ(intFloatFilledMap.size(), (unsigned long)10);
+	EXPECT_EQ(intIntEmptyMap.size(), expectedEmptyMapSize);
+	EXPECT_EQ(intIntFilledMap.size(), expectedFilledMapSize);
 
-	EXPECT_EQ(intDoubleEmptyMap.size(), (unsigned long)0);
-	EXPECT_EQ(intDoubleFilledMap.size(), (unsigned long)10);
+	EXPECT_EQ(intFloatEmptyMap.size(), expectedEmptyMapSize);
+	EXPECT_EQ(intFloatFilledMap.size(), expectedFilledMapSize);
 
-	EXPECT_EQ(intStringEmptyMap.size(), (unsigned long)0);
-	EXPECT_EQ(intStringFilledMap.size(), (unsigned long)10);
+	EXPECT_EQ(intDoubleEmptyMap.size(), expectedEmptyMapSize);
+	EXPECT_EQ(intDoubleFilledMap.size(), expectedFilledMapSize);
+
+	EXPECT_EQ(intStringEmptyMap.size(), expectedEmptyMapSize);
+	EXPECT_EQ(intStringFilledMap.size(), expectedFilledMapSize);
 }
 
 TEST_F(stdMapTest, insertInEmptyMap)
@@ -41,23 +44,54 @@ TEST_F(stdMapTest, insertInEmptyMap)
 	}
 }
 
-TEST_F(ftMapTest, initSizeStack)
+TEST_F(stdMapTest, eraseOneInFilledMap)
+{
+	size_t	ret;
+	size_t	expectedRet = (size_t)1;
+	size_t	expectedSize = (size_t)9;
+
+
+	ret = intIntFilledMap.erase(intX[2]);
+	EXPECT_EQ(ret, expectedRet);
+	EXPECT_EQ(intIntFilledMap.size(), expectedSize);
+
+	ret = intFloatFilledMap.erase(intX[2]);
+	EXPECT_EQ(ret, expectedRet);
+	EXPECT_EQ(intFloatFilledMap.size(), expectedSize);
+
+	ret = intDoubleFilledMap.erase(intX[2]);
+	EXPECT_EQ(ret, expectedRet);
+	EXPECT_EQ(intDoubleFilledMap.size(), expectedSize);
+
+	ret = intStringFilledMap.erase(intX[2]);
+	EXPECT_EQ(ret, expectedRet);
+	EXPECT_EQ(intStringFilledMap.size(), expectedSize);
+}
+
+/*****************************************************************/
+/*       			      RUN FT::MAP TEST      			     */
+/*****************************************************************/
+
+TEST_F(ftMapTest, initSizeMap)
 {
 	std::cout << std::endl << BLUE_B;
-	std::cout << "                                      ";
+	std::cout << "                                        ";
 	std::cout << "           [ FT::MAP ] " << RESET << std::endl;
 
-	EXPECT_EQ(intIntEmptyMap.size(), (unsigned long)0);
-	EXPECT_EQ(intIntFilledMap.size(), (unsigned long)10);
+	size_t	expectedEmptyMapSize = (size_t)0;
+	size_t	expectedFilledMapSize = (size_t)10;
 
-	EXPECT_EQ(intFloatEmptyMap.size(), (unsigned long)0);
-	EXPECT_EQ(intFloatFilledMap.size(), (unsigned long)10);
+	EXPECT_EQ(intIntEmptyMap.size(), expectedEmptyMapSize);
+	EXPECT_EQ(intIntFilledMap.size(), expectedFilledMapSize);
 
-	EXPECT_EQ(intDoubleEmptyMap.size(), (unsigned long)0);
-	EXPECT_EQ(intDoubleFilledMap.size(), (unsigned long)10);
+	EXPECT_EQ(intFloatEmptyMap.size(), expectedEmptyMapSize);
+	EXPECT_EQ(intFloatFilledMap.size(), expectedFilledMapSize);
 
-	EXPECT_EQ(intStringEmptyMap.size(), (unsigned long)0);
-	EXPECT_EQ(intStringFilledMap.size(), (unsigned long)10);
+	EXPECT_EQ(intDoubleEmptyMap.size(), expectedEmptyMapSize);
+	EXPECT_EQ(intDoubleFilledMap.size(), expectedFilledMapSize);
+
+	EXPECT_EQ(intStringEmptyMap.size(), expectedEmptyMapSize);
+	EXPECT_EQ(intStringFilledMap.size(), expectedFilledMapSize);
 }
 
 TEST_F(ftMapTest, insertInEmptyMap)
@@ -78,24 +112,26 @@ TEST_F(ftMapTest, insertInEmptyMap)
 	}
 }
 
-// template < class T >
-// void	debugTest(T &map)
-// {
-// 	std::cout << " >>>> DEBUG TEST <<<< " << std::endl << std::endl;
-// 	map.insert(ft::pair<int, int>(1, 1));
-// 	EXPECT_EQ(map[1], 1);
-// 	std::cout << " map[1] = " << map[1] << std::endl << std::endl;
-// 	map.insert(ft::pair<int, int>(2, 2));
-// 	EXPECT_EQ(map[2], 2);
-// 	std::cout << " map[2] = " << map[2] << std::endl << std::endl;
-// 	map.insert(ft::pair<int, int>(3, 3));
-// 	EXPECT_EQ(map[3], 3);
-// 	std::cout << "map[3] = " << map[3] << std::endl << std::endl;
-// 	map.insert(ft::pair<int, int>(4, 4));
-// 	EXPECT_EQ(map[4], 4);
-// 	std::cout << "map[4] = " << map[4] << std::endl << std::endl;
-// 	map.erase(2);
-// 	map.print();
-// 	std::cout << " size : " << map.size() << std::endl;
-// 	std::cout << " >>>> END DEBUG <<<<" << std::endl;
-// }
+TEST_F(ftMapTest, eraseOneInFilledMap)
+{
+	size_t	ret;
+	size_t	expectedRet = (size_t)1;
+	size_t	expectedSize = (size_t)9;
+
+
+	ret = intIntFilledMap.erase(intX[2]);
+	EXPECT_EQ(ret, expectedRet);
+	EXPECT_EQ(intIntFilledMap.size(), expectedSize);
+
+	ret = intFloatFilledMap.erase(intX[2]);
+	EXPECT_EQ(ret, expectedRet);
+	EXPECT_EQ(intFloatFilledMap.size(), expectedSize);
+
+	ret = intDoubleFilledMap.erase(intX[2]);
+	EXPECT_EQ(ret, expectedRet);
+	EXPECT_EQ(intDoubleFilledMap.size(), expectedSize);
+
+	ret = intStringFilledMap.erase(intX[2]);
+	EXPECT_EQ(ret, expectedRet);
+	EXPECT_EQ(intStringFilledMap.size(), expectedSize);
+}

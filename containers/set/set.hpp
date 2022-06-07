@@ -12,11 +12,8 @@ namespace ft
 	template < class Key, class Compare = std::less<Key>, class Allocator = std::allocator<Key> >
 	class set
 	{
-		private:
-			typedef red_black_tree<Key, Compare, Allocator>	tree_type;
-
 		public:
-			/****************          TYPEDEF         ****************/
+			/********************      MEMBER TYPES     **************************/
 			typedef Key										key_type;
 			typedef Key										value_type;
 			typedef Compare									key_compare;
@@ -24,6 +21,11 @@ namespace ft
 			typedef Allocator								allocator_type;
 			typedef	size_t									size_type;
 			typedef	ptrdiff_t								difference_type;
+
+		private:
+			typedef red_black_tree<value_type, allocator_type, value_compare>	tree_type;
+
+		public:
 			typedef	typename Allocator::reference			reference;
 			typedef typename Allocator::const_reference		const_reference;
 			typedef	typename Allocator::pointer				pointer;
@@ -34,12 +36,13 @@ namespace ft
 			typedef ft::reverse_iterator<const_iterator>	const_reverse_iterator;
 
 		private:
-			allocator_type									_alloc;
-			key_compare										_key_comp;
 			tree_type										_rbtree;
+			key_compare										_key_comp;
+			allocator_type									_alloc;
 
 		public:
-			/****************           MAIN           ****************/
+			/*******************      MEMBER FUNCTIONS     *******************/
+							/*-----------   MAIN   -----------*/
 			explicit set (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type());
 			template <class InputIterator>
 			set (InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type());
@@ -48,7 +51,7 @@ namespace ft
 			set& operator= (const set& x);
 			allocator_type get_allocator() const;
 
-			/****************        ITERATORS         ****************/
+							/*---------  ITERATORS  ----------*/
 			iterator 										begin();
 			const_iterator									begin() const;
 			iterator										end();
@@ -58,12 +61,12 @@ namespace ft
 			reverse_iterator								rend();
 			const_reverse_iterator							rend() const;
 
-			/****************         CAPACITY         ****************/
+							/*----------  CAPACITY  ----------*/
 			bool											empty() const;
 			size_type										size() const;
 			size_type										max_size() const;
 
-			/****************        MODIFIERS         ****************/
+							/*----------  MODIFIERS  ---------*/
 			ft::pair<iterator,bool>							insert (const value_type& val);
 			iterator										insert (iterator position, const value_type& val);
 			template <class InputIterator>
@@ -74,11 +77,11 @@ namespace ft
 			void											swap (set& other);
 			void											clear();
 
-			/****************        OBSERVERS         ****************/
+							/*---------  OBSERVERS  ----------*/
 			key_compare										key_comp() const;
 			value_compare									value_comp() const;
 
-			/****************        OPERATIONS        ****************/
+							/*---------  OPERATIONS  ---------*/
 			iterator										find (const key_type& key);
 			const_iterator									find (const key_type& key) const;
 			size_type										count (const key_type& key) const;
@@ -88,6 +91,10 @@ namespace ft
 			const_iterator									upper_bound (const key_type& key) const;
 			ft::pair<iterator,iterator>						equal_range (const key_type& key);
 			ft::pair<const_iterator,const_iterator>			equal_range (const key_type& key) const;
+
+			/*********************         TO DEBUG         *********************/
+		public:
+			void											print(void);
 	};
 
 	/**************    NON-MEMBER FUNCTION OVERLOADS     **************/

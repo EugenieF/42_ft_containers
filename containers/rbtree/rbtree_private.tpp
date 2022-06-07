@@ -5,6 +5,14 @@ using namespace ft;
 /*                                   PRIVATE FUNCTIONS                                    */
 /******************************************************************************************/
 
+template <class T, class Allocator, class Compare>
+void	red_black_tree<T, Allocator, Compare>::_init_nil()
+{
+	typedef typename red_black_tree<T, Allocator, Compare>::value_type	value_type;
+
+	this->_nil = this->_alloc.allocate(1);
+	this->_alloc.construct(this->_nil, node(value_type(), BLACK, this->_nil, this->_nil, this->_nil));
+}
 
 template <class T, class Allocator, class Compare>
 typename red_black_tree<T, Allocator, Compare>::node_ptr	red_black_tree<T, Allocator, Compare>::_create_node(
@@ -16,7 +24,6 @@ typename red_black_tree<T, Allocator, Compare>::node_ptr	red_black_tree<T, Alloc
 
 	new_node = this->_alloc.allocate(1);
 	this->_alloc.construct(new_node, node(value, color, this->_nil, this->_nil, this->_nil));
-	// this->_alloc.construct(new_node, value);
 	return (new_node);
 }
 
@@ -53,6 +60,8 @@ typename red_black_tree<T, Allocator, Compare>::node_ptr	red_black_tree<T, Alloc
 	}
 	return (node);
 }
+
+/************************************      ROTATION      ************************************/
 
 template <class T, class Allocator, class Compare>
 void	red_black_tree<T, Allocator, Compare>::_rbtree_left_rotate(
@@ -228,7 +237,7 @@ void	red_black_tree<T, Allocator, Compare>::_rbtree_transplant(
 	typename red_black_tree<T, Allocator, Compare>::node_ptr node1, typename red_black_tree<T, Allocator, Compare>::node_ptr node2)
 {
 	if (node1->parent == this->get_nil())						// node1 is root
-		this->set_root(node2);
+		this->_root = node2;
 	else if (node1 == node1->parent->left)				// node1 is left child
 		node1->parent->left = node2;
 	else
@@ -238,47 +247,47 @@ void	red_black_tree<T, Allocator, Compare>::_rbtree_transplant(
 
 template <class T, class Allocator, class Compare>
 void	red_black_tree<T, Allocator, Compare>::_rbtree_delete_node(
-	typename red_black_tree<T, Allocator, Compare>::node_ptr z)
+	typename red_black_tree<T, Allocator, Compare>::node_ptr node)
 {
 	typedef typename red_black_tree<T, Allocator, Compare>::node_ptr	node_ptr;
 
 	node_ptr	x;
 	node_ptr	y;
-	int			y_origin_color;
+	int			node_origin_color;
 	
-	y = z;
-	y_origin_color = y->color;
-	if (z->left == this->get_nil())							// no left child
+	y = node;
+	node_origin_color = node->color;
+	if (node->left == this->get_nil())							// no left child
 	{
-		x = z->right;
-		this->_rbtree_transplant(z, z->right);
+		x = node->right;
+		this->_rbtree_transplant(node, node->right);
 	}
-	else if (z->right == this->get_nil())						// no right child
+	else if (node->right == this->get_nil())						// no right child
 	{
-		x = z->left;
-		this->_rbtree_transplant(z, z->left);
+		x = node->left;
+		this->_rbtree_transplant(node, node->left);
 	}
 	else												// has both children
 	{
-		y = this->_rbtree_get_minimum(z->right);
-		y_origin_color = y->color;
+		y = this->_rbtree_get_minimum(node->right);
+		node_origin_color = y->color;
 		x = y->right;
-		if (y->parent == z)
-			x->parent = z;
+		if (y->parent == node)
+			x->parent = y; //////
 		else
 		{
 			this->_rbtree_transplant(y, y->right);
-			y->right = z->right;
+			y->right = node->right;
 			y->right->parent = y;
 		}
-		this->_rbtree_transplant(z, y);
-		y->left = z->left;
+		this->_rbtree_transplant(node, y);
+		y->left = node->left;
 		y->left->parent = y;
-		y->color = z->color;
+		y->color = node->color;
 	}
 	this->_size--;
 	// this->print();
-	if (y_origin_color == BLACK)
+	if (node_origin_color == BLACK)
 		this->_rbtree_fix_deletion(x);
 }
 
@@ -374,9 +383,9 @@ typename red_black_tree<T, Allocator, Compare>::iterator	red_black_tree<T, Alloc
 	current_node = node;
 	while (current_node != this->get_nil())
 	{
-		if (this->_key_comp(current_node->data, value))
+		if (this->_key_comp(value, current_node->data))
 			current_node = current_node->left;
-		else if (this->_key_comp(value, current_node->data))
+		else if (this->_key_comp(current_node->data, value))
 			current_node = current_node->right;
 		else
 			break ;
@@ -384,6 +393,8 @@ typename red_black_tree<T, Allocator, Compare>::iterator	red_black_tree<T, Alloc
 	node_position = iterator(current_node, this->get_root(), this->get_nil());
 	return (node_position);
 }
+
+/************************************       SEARCH       ************************************/
 
 template <class T, class Allocator, class Compare>
 typename red_black_tree<T, Allocator, Compare>::const_iterator	red_black_tree<T, Allocator, Compare>::_rbtree_search_node(
@@ -398,9 +409,9 @@ typename red_black_tree<T, Allocator, Compare>::const_iterator	red_black_tree<T,
 	current_node = node;
 	while (current_node != this->get_nil())
 	{
-		if (this->_key_comp(current_node->data, value))
+		if (this->_key_comp(value, current_node->data))
 			current_node = current_node->left;
-		else if (this->_key_comp(value, current_node->data))
+		else if (this->_key_comp(current_node->data, value))
 			current_node = current_node->right;
 		else
 			break ;
@@ -409,7 +420,7 @@ typename red_black_tree<T, Allocator, Compare>::const_iterator	red_black_tree<T,
 	return (node_position);
 }
 
-/************************************       DEBUG       ************************************/
+/************************************       PRINT        ************************************/
 
 template <class T, class Allocator, class Compare>
 void	red_black_tree<T, Allocator, Compare>::print(void)
@@ -425,12 +436,13 @@ template <class T, class Allocator, class Compare>
 void	red_black_tree<T, Allocator, Compare>::_print(
 	typename red_black_tree<T, Allocator, Compare>::node_ptr node, std::stringstream &buffer, bool is_tail, std::string prefix)
 {
-	if (node->right != this->_nil)
+	std::cout << "_print " << node->data << std::endl;
+	if (node != this->_nil && node->right != this->_nil)
 		this->_print(node->right, buffer, false, std::string(prefix).append(is_tail != 0 ? "│   " : "    "));
 	buffer << prefix << (is_tail != 0 ? "└── " : "┌── ");
 	if (node->color == RED)
 		buffer << "\033[31m";
 	buffer << node->data << "\033[0m" << std::endl;
-	if (node->left != this->_nil)
+	if (node != this->_nil && node->left != this->_nil)
 		this->_print(node->left, buffer, true, std::string(prefix).append(is_tail != 0 ? "    " : "│   "));
 }

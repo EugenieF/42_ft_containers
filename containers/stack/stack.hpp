@@ -10,16 +10,16 @@ namespace ft
 	/*                                     STACK  	                                   */
 	/***********************************************************************************/
 
-	// template < class T, class Container = ft::vector<T> >
-	template < class T, class Container = std::vector<T> >
+	template < class T, class Container = ft::vector<T> >
+	// template < class T, class Container = std::vector<T> >
 	class stack
 	{
 		public:
 			/****************          TYPEDEF         ****************/
-			// typedef typename Container::value_type	value_type;
-			// typedef typename Container::size_t		size_type;
-			typedef T								value_type;
-			typedef	size_t							size_type;
+			typedef typename Container::value_type	value_type;
+			typedef typename Container::size_type	size_type;
+			// typedef T								value_type;
+			// typedef	size_t							size_type;
 			typedef Container						container_type;
 
 		protected:
@@ -59,6 +59,9 @@ namespace ft
 
 			template <class Tx, class ContainerX>
 			friend bool operator>= (const stack<Tx, ContainerX>& lhs, const stack<Tx, ContainerX>& rhs);
+
+			/*********************         TO DEBUG         *********************/
+			void											print(void);
 	};
 
 	/**************    NON-MEMBER FUNCTION OVERLOADS     **************/

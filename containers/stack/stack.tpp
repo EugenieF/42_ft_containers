@@ -85,3 +85,11 @@ bool ft::operator>= (const stack<T,Container>& lhs, const stack<T,Container>& rh
 {
 	return (lhs.c >= rhs.c);
 }
+
+/*********************         	 PRINT          *********************/
+
+template <class T, class Container>
+void	stack<T, Container>::print(void)
+{
+	this->c.print();
+}

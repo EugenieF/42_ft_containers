@@ -4,20 +4,20 @@ using namespace ft;
 /****************           MAIN           ****************/
 
 template< class Key, class Compare, class Allocator >
-set<Key, Compare, Allocator>::set (const key_compare& comp, const allocator_type& alloc):
-	_rbtree(comp, alloc), _key_comp(comp), _alloc(alloc) {}
+set<Key, Compare, Allocator>::set (const Compare& comp, const Allocator& alloc):
+	_rbtree(alloc, comp), _key_comp(comp), _alloc(alloc) {}
 
 template< class Key, class Compare, class Allocator >
 template< class InputIterator >
 set<Key, Compare, Allocator>::set (InputIterator first, InputIterator last, const Compare& comp, const Allocator& alloc):
-	_rbtree(comp, alloc), _key_comp(comp), _alloc(alloc)
+	_rbtree(alloc, comp), _key_comp(comp), _alloc(alloc)
 {
 	this->insert(first, last);
 }
 
 template< class Key, class Compare, class Allocator >
 set<Key, Compare, Allocator>::set (const set<Key, Compare, Allocator>& other):
-	_rbtree(other.key_comp(), other.get_allocator()), _key_comp(other.key_comp()), _alloc(other.get_allocator())
+	_rbtree(other.get_allocator(), other.key_comp()), _key_comp(other.key_comp()), _alloc(other.get_allocator())
 {
 	this->insert(other.begin(), other.end());
 }
@@ -117,19 +117,18 @@ size_t	set<Key, Compare, Allocator>::max_size() const
     return (this->_rbtree.max_size());
 }
 
-
 /****************        MODIFIERS         ****************/
 
 template< class Key, class Compare, class Allocator >
 ft::pair<typename set<Key, Compare, Allocator>::iterator,bool>		set<Key, Compare, Allocator>::insert (
-	typename set<Key, Compare, Allocator>::value_type const& value)
+	const typename set<Key, Compare, Allocator>::value_type& value)
 {
 	return (this->_rbtree.insert(value));
 }
 
 template< class Key, class Compare, class Allocator >
 typename set<Key, Compare, Allocator>::iterator	set<Key, Compare, Allocator>::insert (
-	typename set<Key, Compare, Allocator>::iterator position, typename set<Key, Compare, Allocator>::value_type const& value)
+	typename set<Key, Compare, Allocator>::iterator position, const typename set<Key, Compare, Allocator>::value_type& value)
 {
 	return (this->_rbtree.insert(position, value)); // Not sure
 }
@@ -149,7 +148,7 @@ void	set<Key, Compare, Allocator>::erase (typename set<Key, Compare, Allocator>:
 }
 
 template< class Key, class Compare, class Allocator >
-size_t	set<Key, Compare, Allocator>::erase (typename set<Key, Compare, Allocator>::value_type const& value)
+size_t	set<Key, Compare, Allocator>::erase (const typename set<Key, Compare, Allocator>::value_type& value)
 {
 	return (this->_rbtree.erase(value));
 }
@@ -181,7 +180,6 @@ void	set<Key, Compare, Allocator>::clear()
 {
     this->_rbtree.clear();
 }
-
 
 /****************        OBSERVERS         ****************/
 
@@ -314,4 +312,12 @@ template< class Key, class Compare, class Allocator >
 void	ft::swap( set<Key,Compare,Allocator>& lhs, set<Key,Compare,Allocator>& rhs )
 {
 	lhs.swap(rhs);
+}
+
+/************************************       DEBUG       ************************************/
+
+template< class Key, class Compare, class Allocator >
+void	set<Key, Compare, Allocator>::print(void)
+{
+	this->_rbtree.print();
 }

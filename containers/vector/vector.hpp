@@ -98,6 +98,10 @@ namespace ft
 			void					_manage_capacity(size_type insert_size);
 			void					_destroy_range(iterator first, iterator last);
 			void					_relocate_range(iterator position, iterator relocation);
+
+			/****************         TO DEBUG         ****************/
+		public:
+			void											print(void);
 	};
 
 	/**************    NON-MEMBER FUNCTION OVERLOADS     **************/

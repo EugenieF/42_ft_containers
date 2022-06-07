@@ -22,7 +22,7 @@ CXXFLAGS += $(INCLUDE)
 
 MAIN		= gtest_main.cpp
 
-FILES		= mapTest stackTest vectorTest
+FILES		=  stackTest vectorTest # setTest #  mapTest 
 
 SRCS 		= $(addsuffix .cpp, $(FILES))
 OBJS 		= $(addsuffix .o, $(FILES))

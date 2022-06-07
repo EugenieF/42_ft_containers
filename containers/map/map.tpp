@@ -128,7 +128,6 @@ size_t	map<Key, T, Compare, Allocator>::max_size() const
     return (this->_rbtree.max_size());
 }
 
-
 /**********************************      ELEMENT ACCESS       *********************************/
 
 /* Returns a reference to the value that is mapped to a key equivalent to key,

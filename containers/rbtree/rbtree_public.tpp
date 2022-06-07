@@ -9,9 +9,7 @@ template <class T, class Allocator, class Compare>
 red_black_tree<T, Allocator, Compare>::red_black_tree(const typename red_black_tree<T, Allocator, Compare>::allocator_type& alloc, const Compare& comp):
 	_root(NULL), _nil(NULL), _size(0), _alloc(alloc), _key_comp(comp)
 {
-	typedef typename red_black_tree<T, Allocator, Compare>::value_type	value_type;
-
-	this->_nil = this->_create_node(value_type(), BLACK);
+	this->_init_nil();
 	this->_root = this->_nil;
 }
 
@@ -19,9 +17,7 @@ template <class T, class Allocator, class Compare>
 red_black_tree<T, Allocator, Compare>::red_black_tree(red_black_tree<T, Allocator, Compare>const& other):
 	_size(0), _alloc(other.get_allocator()), _key_comp(other.key_comp())
 {
-	typedef typename red_black_tree<T, Allocator, Compare>::value_type	value_type;
-
-	this->_nil = this->_create_node(value_type(), BLACK);
+	this->_init_nil();
 	this->_root = this->_nil;
 	*this = other;
 }
@@ -252,7 +248,11 @@ void	red_black_tree<T, Allocator, Compare>::clear()
 
 	ptr = this->begin();
 	for (; ptr != this->end(); ptr++)
-		this->erase(ptr);
+	{
+		// this->erase(ptr);
+		// std::cout << "IN CLEAR: " << ptr.current->data << std::endl;
+		this->_delete_node(ptr.current);
+	}
 }
 
 /**********************          OPERATIONS          **********************/

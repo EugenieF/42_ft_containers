@@ -377,7 +377,6 @@ void	vector<T, Allocator>::_relocate_range(typename vector<T, Allocator>::iterat
 	if (this->empty() || position == this->end())
 		return ;
 	vector<T>	tmp(position, this->end());
-	// std::cout << "DEBUG" << std::endl;
 	this->_destroy_range(position, this->end());
 	for (ptr = tmp.begin(); ptr != tmp.end(); ptr++, relocation++)
 		this->_alloc.construct(&(*relocation), *ptr);
@@ -427,4 +426,23 @@ template <class T, class Allocator>
 void	ft::swap (vector<T,Allocator>& x, vector<T,Allocator>& y)
 {
 	x.swap(y);
+}
+
+/*********************           PRINT           *********************/
+
+template <class T, class Allocator>
+void	vector<T, Allocator>::print(void)
+{
+	std::stringstream	buffer;
+	size_t				i;
+
+	buffer << "[ ";
+	for (i = 0; i < this->size(); i++)
+	{
+		buffer << this->at(i);
+		if (i < this->size() - 1)
+			buffer << ", ";
+	}
+	buffer << " ]";
+	std::cout << buffer.str() << std::endl;
 }
