@@ -111,9 +111,9 @@ typename map<Key, T, Compare, Allocator>::const_reverse_iterator	map<Key, T, Com
 template <class Key, class T, class Compare, class Allocator>
 bool	map<Key, T, Compare, Allocator>::empty() const
 {
-    if (!this->_size)
-        return (true);
-    return (false);
+    if (this->size())
+    	return (false);
+    return (true);
 }
 
 template <class Key, class T, class Compare, class Allocator>

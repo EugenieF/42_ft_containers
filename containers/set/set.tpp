@@ -100,9 +100,9 @@ typename set<Key, Compare, Allocator>::const_reverse_iterator	set<Key, Compare, 
 template< class Key, class Compare, class Allocator >
 bool	set<Key, Compare, Allocator>::empty() const
 {
-    if (!this->_size)
-        return (true);
-    return (false);
+    if (this->size())
+    	return (false);
+    return (true);
 }
 
 template< class Key, class Compare, class Allocator >

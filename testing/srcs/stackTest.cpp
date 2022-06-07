@@ -26,6 +26,21 @@ TEST_F(stdStackTest, initSizeStack)
 	EXPECT_EQ(stringFilledStack.size(), expectedFilledMapSize);
 }
 
+TEST_F(stdStackTest, isEmptyStack)
+{
+	EXPECT_EQ(intEmptyStack.empty(), true);
+	EXPECT_EQ(intFilledStack.empty(), false);
+
+	EXPECT_EQ(floatEmptyStack.empty(), true);
+	EXPECT_EQ(floatFilledStack.empty(), false);
+
+	EXPECT_EQ(doubleEmptyStack.empty(), true);
+	EXPECT_EQ(doubleFilledStack.empty(), false);
+
+	EXPECT_EQ(stringEmptyStack.empty(), true);
+	EXPECT_EQ(stringFilledStack.empty(), false);
+}
+
 TEST_F(stdStackTest, pushInEmptyStack)
 {
 	for (int i = 0; i < 10; i++)
@@ -87,6 +102,21 @@ TEST_F(ftStackTest, initSizeStack)
 
 	EXPECT_EQ(stringEmptyStack.size(), expectedEmptyMapSize);
 	EXPECT_EQ(stringFilledStack.size(), expectedFilledMapSize);
+}
+
+TEST_F(ftStackTest, isEmptyStack)
+{
+	EXPECT_EQ(intEmptyStack.empty(), true);
+	EXPECT_EQ(intFilledStack.empty(), false);
+
+	EXPECT_EQ(floatEmptyStack.empty(), true);
+	EXPECT_EQ(floatFilledStack.empty(), false);
+
+	EXPECT_EQ(doubleEmptyStack.empty(), true);
+	EXPECT_EQ(doubleFilledStack.empty(), false);
+
+	EXPECT_EQ(stringEmptyStack.empty(), true);
+	EXPECT_EQ(stringFilledStack.empty(), false);
 }
 
 TEST_F(ftStackTest, pushInEmptyStack)

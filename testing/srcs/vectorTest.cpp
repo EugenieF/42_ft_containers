@@ -26,6 +26,21 @@ TEST_F(stdVectorTest, initSizeVector)
 	EXPECT_EQ(stringFilledVector.size(), expectedFilledMapSize);
 }
 
+TEST_F(stdVectorTest, isEmptyVector)
+{
+	EXPECT_EQ(intEmptyVector.empty(), true);
+	EXPECT_EQ(intFilledVector.empty(), false);
+
+	EXPECT_EQ(floatEmptyVector.empty(), true);
+	EXPECT_EQ(floatFilledVector.empty(), false);
+
+	EXPECT_EQ(doubleEmptyVector.empty(), true);
+	EXPECT_EQ(doubleFilledVector.empty(), false);
+
+	EXPECT_EQ(stringEmptyVector.empty(), true);
+	EXPECT_EQ(stringFilledVector.empty(), false);
+}
+
 TEST_F(stdVectorTest, push_backInEmptyVector)
 {
 	for (int i = 0; i < 10; i++)
@@ -91,6 +106,21 @@ TEST_F(ftVectorTest, initSizeVector)
 
 	EXPECT_EQ(stringEmptyVector.size(), expectedEmptyMapSize);
 	EXPECT_EQ(stringFilledVector.size(), expectedFilledMapSize);
+}
+
+TEST_F(ftVectorTest, isEmptyVector)
+{
+	EXPECT_EQ(intEmptyVector.empty(), true);
+	EXPECT_EQ(intFilledVector.empty(), false);
+
+	EXPECT_EQ(floatEmptyVector.empty(), true);
+	EXPECT_EQ(floatFilledVector.empty(), false);
+
+	EXPECT_EQ(doubleEmptyVector.empty(), true);
+	EXPECT_EQ(doubleFilledVector.empty(), false);
+
+	EXPECT_EQ(stringEmptyVector.empty(), true);
+	EXPECT_EQ(stringFilledVector.empty(), false);
 }
 
 TEST_F(ftVectorTest, push_backInEmptyVector)
