@@ -154,12 +154,12 @@ TEST_F(stdMapTest, insertRangeInEmptyMap)
 
 TEST_F(stdMapTest, insertRangeInFilledMap)
 {
-	size_t	expectedSize = (size_t)10;
+	size_t	expectedSize = (size_t)15;
 
-	intIntFilledMap.insert(intIntFilledMap.begin(), intIntFilledMap.end());
-	intFloatFilledMap.insert(intFloatFilledMap.begin(), intFloatFilledMap.end());
-	intDoubleFilledMap.insert(intDoubleFilledMap.begin(), intDoubleFilledMap.end());
-	intStringFilledMap.insert(intStringFilledMap.begin(), intStringFilledMap.end());
+	intIntFilledMap.insert(intIntToInsertMap.begin(), intIntToInsertMap.end());
+	intFloatFilledMap.insert(intFloatToInsertMap.begin(), intFloatToInsertMap.end());
+	intDoubleFilledMap.insert(intDoubleToInsertMap.begin(), intDoubleToInsertMap.end());
+	intStringFilledMap.insert(intStringToInsertMap.begin(), intStringToInsertMap.end());
 
 	EXPECT_EQ(intIntFilledMap.size(), expectedSize);
 	EXPECT_EQ(intFloatFilledMap.size(), expectedSize);
@@ -172,6 +172,13 @@ TEST_F(stdMapTest, insertRangeInFilledMap)
 		EXPECT_EQ(intFloatFilledMap[intX[i]], floatX[i]);
 		EXPECT_EQ(intDoubleFilledMap[intX[i]], doubleX[i]);
 		EXPECT_EQ(intStringFilledMap[intX[i]], stringX[i]);
+	}
+	for (int i = 0; i < 5; i++)
+	{
+		EXPECT_EQ(intIntFilledMap[intY[i]], intY[i]);
+		EXPECT_EQ(intFloatFilledMap[intY[i]], floatY[i]);
+		EXPECT_EQ(intDoubleFilledMap[intY[i]], doubleY[i]);
+		EXPECT_EQ(intStringFilledMap[intY[i]], stringY[i]);
 	}
 }
 
@@ -344,12 +351,12 @@ TEST_F(ftMapTest, insertRangeInEmptyMap)
 
 TEST_F(ftMapTest, insertRangeInFilledMap)
 {
-	size_t	expectedSize = (size_t)10;
+	size_t	expectedSize = (size_t)15;
 
-	intIntFilledMap.insert(intIntFilledMap.begin(), intIntFilledMap.end());
-	intFloatFilledMap.insert(intFloatFilledMap.begin(), intFloatFilledMap.end());
-	intDoubleFilledMap.insert(intDoubleFilledMap.begin(), intDoubleFilledMap.end());
-	intStringFilledMap.insert(intStringFilledMap.begin(), intStringFilledMap.end());
+	intIntFilledMap.insert(intIntToInsertMap.begin(), intIntToInsertMap.end());
+	intFloatFilledMap.insert(intFloatToInsertMap.begin(), intFloatToInsertMap.end());
+	intDoubleFilledMap.insert(intDoubleToInsertMap.begin(), intDoubleToInsertMap.end());
+	intStringFilledMap.insert(intStringToInsertMap.begin(), intStringToInsertMap.end());
 
 	EXPECT_EQ(intIntFilledMap.size(), expectedSize);
 	EXPECT_EQ(intFloatFilledMap.size(), expectedSize);
@@ -362,6 +369,13 @@ TEST_F(ftMapTest, insertRangeInFilledMap)
 		EXPECT_EQ(intFloatFilledMap[intX[i]], floatX[i]);
 		EXPECT_EQ(intDoubleFilledMap[intX[i]], doubleX[i]);
 		EXPECT_EQ(intStringFilledMap[intX[i]], stringX[i]);
+	}
+	for (int i = 0; i < 5; i++)
+	{
+		EXPECT_EQ(intIntFilledMap[intY[i]], intY[i]);
+		EXPECT_EQ(intFloatFilledMap[intY[i]], floatY[i]);
+		EXPECT_EQ(intDoubleFilledMap[intY[i]], doubleY[i]);
+		EXPECT_EQ(intStringFilledMap[intY[i]], stringY[i]);
 	}
 }
 

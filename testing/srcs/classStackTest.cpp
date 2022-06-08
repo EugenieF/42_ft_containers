@@ -1,7 +1,7 @@
 #include "mainTests.hpp"
 
 /**************************************************************/
-/*                      CLASS STACK TEST                      */
+/*                    CLASS STD::STACK TEST                   */
 /**************************************************************/
 
 class stdStackTest: public ::testing::Test, public globalVarTest
@@ -30,6 +30,10 @@ class stdStackTest: public ::testing::Test, public globalVarTest
 			}
 		}
 };
+
+/**************************************************************/
+/*                    CLASS FT::STACK TEST                    */
+/**************************************************************/
 
 class ftStackTest: public ::testing::Test, public globalVarTest
 {

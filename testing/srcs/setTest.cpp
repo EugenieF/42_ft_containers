@@ -123,12 +123,12 @@ TEST_F(stdSetTest, insertRangeInEmptySet)
 
 TEST_F(stdSetTest, insertRangeInFilledSet)
 {
-	size_t	expectedSize = (size_t)10;
+	size_t	expectedSize = (size_t)15;
 
-	intFilledSet.insert(intFilledSet.begin(), intFilledSet.end());
-	floatFilledSet.insert(floatFilledSet.begin(), floatFilledSet.end());
-	doubleFilledSet.insert(doubleFilledSet.begin(), doubleFilledSet.end());
-	stringFilledSet.insert(stringFilledSet.begin(), stringFilledSet.end());
+	intFilledSet.insert(intToInsertSet.begin(), intToInsertSet.end());
+	floatFilledSet.insert(floatToInsertSet.begin(), floatToInsertSet.end());
+	doubleFilledSet.insert(doubleToInsertSet.begin(), doubleToInsertSet.end());
+	stringFilledSet.insert(stringToInsertSet.begin(), stringToInsertSet.end());
 
 	EXPECT_EQ(intFilledSet.size(), expectedSize);
 	EXPECT_EQ(floatFilledSet.size(), expectedSize);
@@ -273,12 +273,12 @@ TEST_F(ftSetTest, insertRangeInEmptySet)
 
 TEST_F(ftSetTest, insertRangeInFilledSet)
 {
-	size_t	expectedSize = (size_t)10;
+	size_t	expectedSize = (size_t)15;
 
-	intFilledSet.insert(intFilledSet.begin(), intFilledSet.end());
-	floatFilledSet.insert(floatFilledSet.begin(), floatFilledSet.end());
-	doubleFilledSet.insert(doubleFilledSet.begin(), doubleFilledSet.end());
-	stringFilledSet.insert(stringFilledSet.begin(), stringFilledSet.end());
+	intFilledSet.insert(intToInsertSet.begin(), intToInsertSet.end());
+	floatFilledSet.insert(floatToInsertSet.begin(), floatToInsertSet.end());
+	doubleFilledSet.insert(doubleToInsertSet.begin(), doubleToInsertSet.end());
+	stringFilledSet.insert(stringToInsertSet.begin(), stringToInsertSet.end());
 
 	EXPECT_EQ(intFilledSet.size(), expectedSize);
 	EXPECT_EQ(floatFilledSet.size(), expectedSize);

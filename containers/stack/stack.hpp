@@ -11,15 +11,12 @@ namespace ft
 	/***********************************************************************************/
 
 	template < class T, class Container = ft::vector<T> >
-	// template < class T, class Container = std::vector<T> >
 	class stack
 	{
 		public:
 			/****************          TYPEDEF         ****************/
 			typedef typename Container::value_type	value_type;
 			typedef typename Container::size_type	size_type;
-			// typedef T								value_type;
-			// typedef	size_t							size_type;
 			typedef Container						container_type;
 
 		protected:
