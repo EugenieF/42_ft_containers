@@ -180,11 +180,21 @@ void	maxSizeVector(T emptyVector, T filledVector, T toInsertVector, size_t expec
 	EXPECT_EQ(toInsertVector.max_size(), expectedSize);
 }
 
-// template <typename T>
-// void	accessElemVector(T emptyVector, T filledVector, T toInsertVector)
-// {
+template <typename T, typename U>
+void	accessElemVector(T filledVector, T toInsertVector, U varX, U varY)
+{
+	for (int i = 0; i < 10; i++)
+	{
+		EXPECT_EQ(filledVector[i], varX[i]);
+		EXPECT_EQ(filledVector.at(i), varX[i]);
+	}
 
-// }
+	for (int i = 0; i < 5; i++)
+	{
+		EXPECT_EQ(toInsertVector[i], varY[i]);
+		EXPECT_EQ(toInsertVector.at(i), varY[i]);
+	}
+}
 
 /**************************************************************/
 /*                    RUN STD::VECTOR TEST                    */
@@ -312,6 +322,14 @@ TEST_F(stdVectorTest, maxSizeVector)
 	maxSizeVector(floatEmptyVector, floatFilledVector, floatToInsertVector, MAX_SIZE_FLOAT_VECTOR);
 	maxSizeVector(doubleEmptyVector, doubleFilledVector, doubleToInsertVector, MAX_SIZE_DOUBLE_VECTOR);
 	maxSizeVector(stringEmptyVector, stringFilledVector, stringToInsertVector, MAX_SIZE_STRING_VECTOR);
+}
+
+TEST_F(stdVectorTest, accessElemVector)
+{
+	accessElemVector(intFilledVector, intToInsertVector, intX, intY);
+	accessElemVector(floatFilledVector, floatToInsertVector, floatX, floatY);
+	accessElemVector(doubleFilledVector, doubleToInsertVector, doubleX, doubleY);
+	accessElemVector(stringFilledVector, stringToInsertVector, stringX, stringY);
 }
 
 /**************************************************************/
@@ -442,3 +460,10 @@ TEST_F(ftVectorTest, maxSizeVector)
 	maxSizeVector(stringEmptyVector, stringFilledVector, stringToInsertVector, MAX_SIZE_STRING_VECTOR);
 }
 
+TEST_F(ftVectorTest, accessElemVector)
+{
+	accessElemVector(intFilledVector, intToInsertVector, intX, intY);
+	accessElemVector(floatFilledVector, floatToInsertVector, floatX, floatY);
+	accessElemVector(doubleFilledVector, doubleToInsertVector, doubleX, doubleY);
+	accessElemVector(stringFilledVector, stringToInsertVector, stringX, stringY);
+}
