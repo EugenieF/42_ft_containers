@@ -5,20 +5,19 @@
 /**************************************************************/
 
 template <typename T>
-void	initSizeVector(T emptyVector, T filledVector)
+void	initSizeVector(T emptyVector, T filledVector, T toInsertVector)
 {
-	size_t	expectedEmptySize = (size_t)0;
-	size_t	expectedFilledSize = (size_t)10;
-
-	EXPECT_EQ(emptyVector.size(), expectedEmptySize);
-	EXPECT_EQ(filledVector.size(), expectedFilledSize);
+	EXPECT_EQ(emptyVector.size(), (size_t)0);
+	EXPECT_EQ(filledVector.size(), (size_t)10);
+	EXPECT_EQ(toInsertVector.size(), (size_t)5);
 }
 
 template <typename T>
-void	isEmptyVector(T emptyVector, T filledVector)
+void	isEmptyVector(T emptyVector, T filledVector, T toInsertVector)
 {
 	EXPECT_EQ(emptyVector.empty(), true);
 	EXPECT_EQ(filledVector.empty(), false);
+	EXPECT_EQ(toInsertVector.empty(), false);
 }
 
 template <typename T, typename U>
@@ -181,7 +180,7 @@ void	maxSizeVector(T emptyVector, T filledVector, T toInsertVector, size_t expec
 }
 
 template <typename T, typename U>
-void	accessElemVector(T filledVector, T toInsertVector, U varX, U varY)
+void	accessElemVector(T emptyVector, T filledVector, T toInsertVector, U varX, U varY)
 {
 	for (int i = 0; i < 10; i++)
 	{
@@ -194,6 +193,15 @@ void	accessElemVector(T filledVector, T toInsertVector, U varX, U varY)
 		EXPECT_EQ(toInsertVector[i], varY[i]);
 		EXPECT_EQ(toInsertVector.at(i), varY[i]);
 	}
+
+	EXPECT_ANY_THROW(emptyVector.at(0));
+	EXPECT_ANY_THROW(emptyVector.at(10));
+
+	EXPECT_ANY_THROW(filledVector.at(10));
+	EXPECT_ANY_THROW(filledVector.at(100));
+
+	EXPECT_ANY_THROW(toInsertVector.at(5));
+	EXPECT_ANY_THROW(toInsertVector.at(55));
 }
 
 /**************************************************************/
@@ -206,18 +214,18 @@ TEST_F(stdVectorTest, initSizeVector)
 	std::cout << "                                      ";
 	std::cout << "         [ STD::VECTOR ] " << RESET << std::endl;
 
-	initSizeVector(intEmptyVector, intFilledVector);
-	initSizeVector(floatEmptyVector, floatFilledVector);
-	initSizeVector(doubleEmptyVector, doubleFilledVector);
-	initSizeVector(stringEmptyVector, stringFilledVector);
+	initSizeVector(intEmptyVector, intFilledVector, intToInsertVector);
+	initSizeVector(floatEmptyVector, floatFilledVector, floatToInsertVector);
+	initSizeVector(doubleEmptyVector, doubleFilledVector, doubleToInsertVector);
+	initSizeVector(stringEmptyVector, stringFilledVector, stringToInsertVector);
 }
 
 TEST_F(stdVectorTest, isEmptyVector)
 {
-	isEmptyVector(intEmptyVector, intFilledVector);
-	isEmptyVector(floatEmptyVector, floatFilledVector);
-	isEmptyVector(doubleEmptyVector, doubleFilledVector);
-	isEmptyVector(stringEmptyVector, stringFilledVector);
+	isEmptyVector(intEmptyVector, intFilledVector, intToInsertVector);
+	isEmptyVector(floatEmptyVector, floatFilledVector, floatToInsertVector);
+	isEmptyVector(doubleEmptyVector, doubleFilledVector, doubleToInsertVector);
+	isEmptyVector(stringEmptyVector, stringFilledVector, stringToInsertVector);
 }
 
 TEST_F(stdVectorTest, pushBackInEmptyVector)
@@ -326,10 +334,10 @@ TEST_F(stdVectorTest, maxSizeVector)
 
 TEST_F(stdVectorTest, accessElemVector)
 {
-	accessElemVector(intFilledVector, intToInsertVector, intX, intY);
-	accessElemVector(floatFilledVector, floatToInsertVector, floatX, floatY);
-	accessElemVector(doubleFilledVector, doubleToInsertVector, doubleX, doubleY);
-	accessElemVector(stringFilledVector, stringToInsertVector, stringX, stringY);
+	accessElemVector(intEmptyVector, intFilledVector, intToInsertVector, intX, intY);
+	accessElemVector(floatEmptyVector, floatFilledVector, floatToInsertVector, floatX, floatY);
+	accessElemVector(doubleEmptyVector, doubleFilledVector, doubleToInsertVector, doubleX, doubleY);
+	accessElemVector(stringEmptyVector, stringFilledVector, stringToInsertVector, stringX, stringY);
 }
 
 /**************************************************************/
@@ -342,18 +350,18 @@ TEST_F(ftVectorTest, initSizeVector)
 	std::cout << "                                      ";
 	std::cout << "          [ FT::VECTOR ] " << RESET << std::endl;
 
-	initSizeVector(intEmptyVector, intFilledVector);
-	initSizeVector(floatEmptyVector, floatFilledVector);
-	initSizeVector(doubleEmptyVector, doubleFilledVector);
-	initSizeVector(stringEmptyVector, stringFilledVector);
+	initSizeVector(intEmptyVector, intFilledVector, intToInsertVector);
+	initSizeVector(floatEmptyVector, floatFilledVector, floatToInsertVector);
+	initSizeVector(doubleEmptyVector, doubleFilledVector, doubleToInsertVector);
+	initSizeVector(stringEmptyVector, stringFilledVector, stringToInsertVector);
 }
 
 TEST_F(ftVectorTest, isEmptyVector)
 {
-	isEmptyVector(intEmptyVector, intFilledVector);
-	isEmptyVector(floatEmptyVector, floatFilledVector);
-	isEmptyVector(doubleEmptyVector, doubleFilledVector);
-	isEmptyVector(stringEmptyVector, stringFilledVector);
+	isEmptyVector(intEmptyVector, intFilledVector, intToInsertVector);
+	isEmptyVector(floatEmptyVector, floatFilledVector, floatToInsertVector);
+	isEmptyVector(doubleEmptyVector, doubleFilledVector, doubleToInsertVector);
+	isEmptyVector(stringEmptyVector, stringFilledVector, stringToInsertVector);
 }
 
 TEST_F(ftVectorTest, pushBackInEmptyVector)
@@ -462,8 +470,8 @@ TEST_F(ftVectorTest, maxSizeVector)
 
 TEST_F(ftVectorTest, accessElemVector)
 {
-	accessElemVector(intFilledVector, intToInsertVector, intX, intY);
-	accessElemVector(floatFilledVector, floatToInsertVector, floatX, floatY);
-	accessElemVector(doubleFilledVector, doubleToInsertVector, doubleX, doubleY);
-	accessElemVector(stringFilledVector, stringToInsertVector, stringX, stringY);
+	accessElemVector(intEmptyVector, intFilledVector, intToInsertVector, intX, intY);
+	accessElemVector(floatEmptyVector, floatFilledVector, floatToInsertVector, floatX, floatY);
+	accessElemVector(doubleEmptyVector, doubleFilledVector, doubleToInsertVector, doubleX, doubleY);
+	accessElemVector(stringEmptyVector, stringFilledVector, stringToInsertVector, stringX, stringY);
 }

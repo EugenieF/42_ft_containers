@@ -1,6 +1,44 @@
 #include "mainTests.hpp"
 
 /**************************************************************/
+/*                   		   TEST                           */
+/**************************************************************/
+
+template <typename T>
+void	initSizeStack(T emptyStack, T filledStack, T toInsertStack)
+{
+	EXPECT_EQ(emptyStack.size(), (size_t)0);
+	EXPECT_EQ(filledStack.size(), (size_t)10);
+	EXPECT_EQ(toInsertStack.size(), (size_t)5);
+}
+
+template <typename T>
+void	isEmptyStack(T emptyStack, T filledStack, T toInsertStack)
+{
+	EXPECT_EQ(emptyStack.empty(), true);
+	EXPECT_EQ(filledStack.empty(), false);
+	EXPECT_EQ(toInsertStack.empty(), false);
+}
+
+template <typename T, typename U>
+void	pushInEmptyStack(T emptyStack, U varX)
+{
+	for (int i = 0; i < 10; i++)
+	{
+		emptyStack.push(varX[i]);
+		EXPECT_EQ(emptyStack.top(), varX[i]);
+	}
+}
+
+template <typename T, typename U>
+void	popOneInFilledStack(T filledStack, U varX)
+{
+	filledStack.pop();
+	EXPECT_EQ(filledStack.top(), varX[8]);
+	EXPECT_EQ(filledStack.size(), (size_t)9);
+}
+
+/**************************************************************/
 /*                     RUN STD::STACK TEST                    */
 /**************************************************************/
 
@@ -10,72 +48,34 @@ TEST_F(stdStackTest, initSizeStack)
 	std::cout << "                                      ";
 	std::cout << "          [ STD::STACK ] " << RESET << std::endl;
 
-	size_t	expectedEmptyMapSize = (size_t)0;
-	size_t	expectedFilledMapSize = (size_t)10;
-
-	EXPECT_EQ(intEmptyStack.size(), expectedEmptyMapSize);
-	EXPECT_EQ(intFilledStack.size(), expectedFilledMapSize);
-
-	EXPECT_EQ(floatEmptyStack.size(), expectedEmptyMapSize);
-	EXPECT_EQ(floatFilledStack.size(), expectedFilledMapSize);
-
-	EXPECT_EQ(doubleEmptyStack.size(), expectedEmptyMapSize);
-	EXPECT_EQ(doubleFilledStack.size(), expectedFilledMapSize);
-
-	EXPECT_EQ(stringEmptyStack.size(), expectedEmptyMapSize);
-	EXPECT_EQ(stringFilledStack.size(), expectedFilledMapSize);
+	initSizeStack(intEmptyStack, intFilledStack, intToInsertStack);
+	initSizeStack(floatEmptyStack, floatFilledStack, floatToInsertStack);
+	initSizeStack(doubleEmptyStack, doubleFilledStack, doubleToInsertStack);
+	initSizeStack(stringEmptyStack, stringFilledStack, stringToInsertStack);
 }
 
 TEST_F(stdStackTest, isEmptyStack)
 {
-	EXPECT_EQ(intEmptyStack.empty(), true);
-	EXPECT_EQ(intFilledStack.empty(), false);
-
-	EXPECT_EQ(floatEmptyStack.empty(), true);
-	EXPECT_EQ(floatFilledStack.empty(), false);
-
-	EXPECT_EQ(doubleEmptyStack.empty(), true);
-	EXPECT_EQ(doubleFilledStack.empty(), false);
-
-	EXPECT_EQ(stringEmptyStack.empty(), true);
-	EXPECT_EQ(stringFilledStack.empty(), false);
+	isEmptyStack(intEmptyStack, intFilledStack, intToInsertStack);
+	isEmptyStack(floatEmptyStack, floatFilledStack, floatToInsertStack);
+	isEmptyStack(doubleEmptyStack, doubleFilledStack, doubleToInsertStack);
+	isEmptyStack(stringEmptyStack, stringFilledStack, stringToInsertStack);
 }
 
 TEST_F(stdStackTest, pushInEmptyStack)
 {
-	for (int i = 0; i < 10; i++)
-	{
-		intEmptyStack.push(intX[i]);
-		EXPECT_EQ(intEmptyStack.top(), intX[i]);
-	
-		floatEmptyStack.push(floatX[i]);
-		EXPECT_EQ(floatEmptyStack.top(), floatX[i]);
-
-		doubleEmptyStack.push(doubleX[i]);
-		EXPECT_EQ(doubleEmptyStack.top(), doubleX[i]);
-
-		stringEmptyStack.push(stringX[i]);
-		EXPECT_EQ(stringEmptyStack.top(), stringX[i]);
-	}
+	pushInEmptyStack(intEmptyStack, intX);
+	pushInEmptyStack(floatEmptyStack, floatX);
+	pushInEmptyStack(doubleEmptyStack, doubleX);
+	pushInEmptyStack(stringEmptyStack, stringX);
 }
 
 TEST_F(stdStackTest, popOneInFilledStack)
 {
-	intFilledStack.pop();
-	EXPECT_EQ(intFilledStack.top(), intX[8]);
-	EXPECT_EQ(intFilledStack.size(), (size_t)9);
-
-	floatFilledStack.pop();
-	EXPECT_EQ(floatFilledStack.top(), floatX[8]);
-	EXPECT_EQ(floatFilledStack.size(), (size_t)9);
-	
-	doubleFilledStack.pop();
-	EXPECT_EQ(doubleFilledStack.top(), doubleX[8]);
-	EXPECT_EQ(doubleFilledStack.size(), (size_t)9);
-	
-	stringFilledStack.pop();
-	EXPECT_EQ(stringFilledStack.top(), stringX[8]);
-	EXPECT_EQ(stringFilledStack.size(), (size_t)9);
+	popOneInFilledStack(intFilledStack, intX);
+	popOneInFilledStack(floatFilledStack, floatX);
+	popOneInFilledStack(doubleFilledStack, doubleX);
+	popOneInFilledStack(stringFilledStack, stringX);
 }
 
 /**************************************************************/
@@ -88,72 +88,34 @@ TEST_F(ftStackTest, initSizeStack)
 	std::cout << "                                      ";
 	std::cout << "           [ FT::STACK ] " << RESET << std::endl;
 
-	size_t	expectedEmptyMapSize = (size_t)0;
-	size_t	expectedFilledMapSize = (size_t)10;
-
-	EXPECT_EQ(intEmptyStack.size(), expectedEmptyMapSize);
-	EXPECT_EQ(intFilledStack.size(), expectedFilledMapSize);
-
-	EXPECT_EQ(floatEmptyStack.size(), expectedEmptyMapSize);
-	EXPECT_EQ(floatFilledStack.size(), expectedFilledMapSize);
-
-	EXPECT_EQ(doubleEmptyStack.size(), expectedEmptyMapSize);
-	EXPECT_EQ(doubleFilledStack.size(), expectedFilledMapSize);
-
-	EXPECT_EQ(stringEmptyStack.size(), expectedEmptyMapSize);
-	EXPECT_EQ(stringFilledStack.size(), expectedFilledMapSize);
+	initSizeStack(intEmptyStack, intFilledStack, intToInsertStack);
+	initSizeStack(floatEmptyStack, floatFilledStack, floatToInsertStack);
+	initSizeStack(doubleEmptyStack, doubleFilledStack, doubleToInsertStack);
+	initSizeStack(stringEmptyStack, stringFilledStack, stringToInsertStack);
 }
 
 TEST_F(ftStackTest, isEmptyStack)
 {
-	EXPECT_EQ(intEmptyStack.empty(), true);
-	EXPECT_EQ(intFilledStack.empty(), false);
-
-	EXPECT_EQ(floatEmptyStack.empty(), true);
-	EXPECT_EQ(floatFilledStack.empty(), false);
-
-	EXPECT_EQ(doubleEmptyStack.empty(), true);
-	EXPECT_EQ(doubleFilledStack.empty(), false);
-
-	EXPECT_EQ(stringEmptyStack.empty(), true);
-	EXPECT_EQ(stringFilledStack.empty(), false);
+	isEmptyStack(intEmptyStack, intFilledStack, intToInsertStack);
+	isEmptyStack(floatEmptyStack, floatFilledStack, floatToInsertStack);
+	isEmptyStack(doubleEmptyStack, doubleFilledStack, doubleToInsertStack);
+	isEmptyStack(stringEmptyStack, stringFilledStack, stringToInsertStack);
 }
 
 TEST_F(ftStackTest, pushInEmptyStack)
 {
-	for (int i = 0; i < 10; i++)
-	{
-		intEmptyStack.push(intX[i]);
-		EXPECT_EQ(intEmptyStack.top(), intX[i]);
-
-		floatEmptyStack.push(floatX[i]);
-		EXPECT_EQ(floatEmptyStack.top(), floatX[i]);
-
-		doubleEmptyStack.push(doubleX[i]);
-		EXPECT_EQ(doubleEmptyStack.top(), doubleX[i]);
-
-		stringEmptyStack.push(stringX[i]);
-		EXPECT_EQ(stringEmptyStack.top(), stringX[i]);
-	}
+	pushInEmptyStack(intEmptyStack, intX);
+	pushInEmptyStack(floatEmptyStack, floatX);
+	pushInEmptyStack(doubleEmptyStack, doubleX);
+	pushInEmptyStack(stringEmptyStack, stringX);
 }
 
 TEST_F(ftStackTest, popOneInFilledStack)
 {
-	intFilledStack.pop();
-	EXPECT_EQ(intFilledStack.top(), intX[8]);
-	EXPECT_EQ(intFilledStack.size(), (size_t)9);
-
-	floatFilledStack.pop();
-	EXPECT_EQ(floatFilledStack.top(), floatX[8]);
-	EXPECT_EQ(floatFilledStack.size(), (size_t)9);
-	
-	doubleFilledStack.pop();
-	EXPECT_EQ(doubleFilledStack.top(), doubleX[8]);
-	EXPECT_EQ(doubleFilledStack.size(), (size_t)9);
-	
-	stringFilledStack.pop();
-	EXPECT_EQ(stringFilledStack.top(), stringX[8]);
-	EXPECT_EQ(stringFilledStack.size(), (size_t)9);
+	popOneInFilledStack(intFilledStack, intX);
+	popOneInFilledStack(floatFilledStack, floatX);
+	popOneInFilledStack(doubleFilledStack, doubleX);
+	popOneInFilledStack(stringFilledStack, stringX);
 }
 
 /*************    Int test    *************/

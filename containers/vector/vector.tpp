@@ -187,10 +187,11 @@ void	vector<T, Allocator>::reserve (typename vector<T, Allocator>::size_type new
 
 /****************      ELEMENT ACCESS       ***************/
 
+/* No bounds checking is performed */
 template <class T, class Allocator>
 typename vector<T, Allocator>::reference	vector<T, Allocator>::operator[](typename vector<T, Allocator>::size_type pos)
 {
-	return (this->_data[pos]);						/* No bounds checking is performed */
+	return (this->_data[pos]);
 }
 
 template <class T, class Allocator>
@@ -199,10 +200,11 @@ typename vector<T, Allocator>::const_reference		vector<T, Allocator>::operator[]
 	return (this->_data[pos]);
 }
 
+/* Bounds checking is performed */
 template <class T, class Allocator>
 typename vector<T, Allocator>::reference	vector<T, Allocator>::at(typename vector<T, Allocator>::size_type pos)
 {
-	if (pos >= this->size())						/* Bounds checking is performed */
+	if (pos >= this->size())
 		throw(std::out_of_range("vector::at"));
 	return (this->_data[pos]);
 }
