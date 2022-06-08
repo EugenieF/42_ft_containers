@@ -28,4 +28,9 @@ class	globalVarTest
 # include "classMapTest.cpp"
 # include "classSetTest.cpp"
 
+# define MAX_SIZE_INT_VECTOR (size_t)4611686018427387903
+# define MAX_SIZE_FLOAT_VECTOR (size_t)4611686018427387903
+# define MAX_SIZE_DOUBLE_VECTOR (size_t)2305843009213693951
+# define MAX_SIZE_STRING_VECTOR (size_t)768614336404564650
+
 #endif

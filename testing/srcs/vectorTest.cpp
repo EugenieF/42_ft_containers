@@ -5,7 +5,7 @@
 /**************************************************************/
 
 template <typename T>
-void	checkInitSize(T emptyVector, T filledVector)
+void	initSizeVector(T emptyVector, T filledVector)
 {
 	size_t	expectedEmptySize = (size_t)0;
 	size_t	expectedFilledSize = (size_t)10;
@@ -15,30 +15,176 @@ void	checkInitSize(T emptyVector, T filledVector)
 }
 
 template <typename T>
-void	checkIsEmpty(T emptyVector, T filledVector)
+void	isEmptyVector(T emptyVector, T filledVector)
 {
 	EXPECT_EQ(emptyVector.empty(), true);
 	EXPECT_EQ(filledVector.empty(), false);
 }
 
 template <typename T, typename U>
-void	pushBackInEmptyVector(T emptyVector, U x)
+void	pushBackInEmptyVector(T emptyVector, U varX)
 {
 	for (int i = 0; i < 10; i++)
 	{
-		emptyVector.push_back(x[i]);
-		EXPECT_EQ(emptyVector.back(), x[i]);
+		emptyVector.push_back(varX[i]);
+		EXPECT_EQ(emptyVector.back(), varX[i]);
 	}
-	EXPECT_EQ(emptyVector.front(), x[0]);
+	EXPECT_EQ(emptyVector.front(), varX[0]);
 }
 
 template <typename T, typename U>
-void	popBackOneInFilledVector(T filledVector, U x)
+void	popBackOneInFilledVector(T filledVector, U varX)
 {
 	filledVector.pop_back();
-	EXPECT_EQ(filledVector.back(), x[8]);
+	EXPECT_EQ(filledVector.back(), varX[8]);
 	EXPECT_EQ(filledVector.size(), (size_t)9);
 }
+
+template <typename T, typename U>
+void	insertInEmptyVector(T emptyVector, U varX)
+{
+	size_t	expectedSize = (size_t)10;
+
+	for (int i = 0; i < 10; i++)
+	{
+		emptyVector.insert(emptyVector.end(), varX[i]);
+		EXPECT_EQ(emptyVector.back(), varX[i]);
+	}
+	EXPECT_EQ(emptyVector.size(), expectedSize);
+}
+
+template <typename T, typename U>
+void	insertWithSizeInEmptyVector(T emptyVector, U varX)
+{
+	size_t	expectedSize = (size_t)6;
+
+	emptyVector.insert(emptyVector.end(), 6, varX[3]);
+	EXPECT_EQ(emptyVector.back(), varX[3]);
+	EXPECT_EQ(emptyVector.front(), varX[3]);
+	EXPECT_EQ(emptyVector.size(), expectedSize);
+}
+
+template <typename T, typename U>
+void	insertRangeInEmptyVector(T emptyVector, T filledVector, U varX)
+{
+	size_t	expectedSize = (size_t)10;
+
+	emptyVector.insert(emptyVector.begin(), filledVector.begin(), filledVector.end());
+	EXPECT_EQ(emptyVector.size(), expectedSize);
+	EXPECT_EQ(emptyVector.front(), varX[0]);
+	EXPECT_EQ(emptyVector.back(), varX[9]);
+}
+
+template <typename T, typename U>
+void	insertRangeInFilledVector(T filledVector, T toInsertVector, U varX, U varY)
+{
+	size_t	expectedSize = (size_t)15;
+
+	filledVector.insert(filledVector.end(), toInsertVector.begin(), toInsertVector.end());
+	EXPECT_EQ(filledVector.size(), expectedSize);
+	EXPECT_EQ(filledVector.front(), varX[0]);
+	EXPECT_EQ(filledVector.back(), varY[4]);
+}
+
+template <typename T, typename U>
+void	eraseInFilledVector(T filledVector, U varX)
+{
+	filledVector.erase(filledVector.begin() + 3);
+	EXPECT_EQ(filledVector.size(), (size_t)9);
+
+	for (int i = 0; i < 3; i++)
+		filledVector.erase(filledVector.begin());
+
+	EXPECT_EQ(filledVector.size(), (size_t)6);
+	EXPECT_EQ(filledVector.front(), varX[4]);
+	EXPECT_EQ(filledVector.back(), varX[9]);
+}
+
+template <typename T, typename U>
+void	eraseRangeInFilledVector(T filledVector, T toInsertVector, U varX)
+{
+	filledVector.erase(filledVector.begin(), filledVector.begin() + 2);
+	EXPECT_EQ(filledVector.size(), (size_t)8);
+	EXPECT_EQ(filledVector.front(), varX[2]);
+
+	filledVector.erase(filledVector.begin() + 4, filledVector.end());
+	EXPECT_EQ(filledVector.size(), (size_t)4);
+	EXPECT_EQ(filledVector.back(), varX[5]);
+
+	filledVector.erase(filledVector.begin(), filledVector.begin() + 4);
+	EXPECT_EQ(filledVector.size(), (size_t)0);
+
+	toInsertVector.erase(toInsertVector.begin(), toInsertVector.end());
+	EXPECT_EQ(toInsertVector.size(), (size_t)0);
+}
+
+template <typename T>
+void	clearVector(T emptyVector, T filledVector)
+{
+	emptyVector.clear();
+	EXPECT_EQ(emptyVector.size(), (size_t)0);
+
+	filledVector.clear();
+	EXPECT_EQ(filledVector.size(), (size_t)0);
+}
+
+template <typename T, typename U>
+void	swapVector(T emptyVector, T filledVector, T toInsertVector, U varX, U varY)
+{
+	emptyVector.swap(filledVector);
+	for (int i = 0; i < 10; i++)
+		EXPECT_EQ(emptyVector[i], varX[i]);
+	EXPECT_EQ(emptyVector.size(), (size_t)10);
+	EXPECT_EQ(filledVector.size(), (size_t)0);
+
+	filledVector.swap(toInsertVector);
+	for (int i = 0; i < 5; i++)
+		EXPECT_EQ(filledVector[i], varY[i]);
+	EXPECT_EQ(filledVector.size(), (size_t)5);
+	EXPECT_EQ(toInsertVector.size(), (size_t)0);
+}
+
+template <typename T, typename U>
+void	assignValueVector(T emptyVector, T filledVector, U varX, U varY)
+{
+	emptyVector.assign(15, varX[7]);
+	EXPECT_EQ(emptyVector.size(), (size_t)15);
+	for (int i = 0; i < 15; i++)
+		EXPECT_EQ(emptyVector[i], varX[7]);
+
+	filledVector.assign(9, varY[4]);
+	EXPECT_EQ(filledVector.size(), (size_t)9);
+	for (int i = 0; i < 9; i++)
+		EXPECT_EQ(filledVector[i], varY[4]);
+}
+
+template <typename T, typename U>
+void	assignRangeVector(T emptyVector, T filledVector, T toInsertVector, U varX, U varY)
+{
+	emptyVector.assign(filledVector.begin() + 3, filledVector.begin() + 7);
+	EXPECT_EQ(emptyVector.size(), (size_t)4);
+	for (int i = 0; i < 4; i++)
+		EXPECT_EQ(emptyVector[i], varX[i + 3]);
+
+	filledVector.assign(toInsertVector.begin() + 1, toInsertVector.begin() + 4);
+	EXPECT_EQ(filledVector.size(), (size_t)3);
+	for (int i = 0; i < 3; i++)
+		EXPECT_EQ(filledVector[i], varY[i + 1]);
+}
+
+template <typename T>
+void	maxSizeVector(T emptyVector, T filledVector, T toInsertVector, size_t expectedSize)
+{
+	EXPECT_EQ(emptyVector.max_size(), expectedSize);
+	EXPECT_EQ(filledVector.max_size(), expectedSize);
+	EXPECT_EQ(toInsertVector.max_size(), expectedSize);
+}
+
+// template <typename T>
+// void	accessElemVector(T emptyVector, T filledVector, T toInsertVector)
+// {
+
+// }
 
 /**************************************************************/
 /*                    RUN STD::VECTOR TEST                    */
@@ -50,18 +196,18 @@ TEST_F(stdVectorTest, initSizeVector)
 	std::cout << "                                      ";
 	std::cout << "         [ STD::VECTOR ] " << RESET << std::endl;
 
-	checkInitSize(intEmptyVector, intFilledVector);
-	checkInitSize(floatEmptyVector, floatFilledVector);
-	checkInitSize(doubleEmptyVector, doubleFilledVector);
-	checkInitSize(stringEmptyVector, stringFilledVector);
+	initSizeVector(intEmptyVector, intFilledVector);
+	initSizeVector(floatEmptyVector, floatFilledVector);
+	initSizeVector(doubleEmptyVector, doubleFilledVector);
+	initSizeVector(stringEmptyVector, stringFilledVector);
 }
 
 TEST_F(stdVectorTest, isEmptyVector)
 {
-	checkIsEmpty(intEmptyVector, intFilledVector);
-	checkIsEmpty(floatEmptyVector, floatFilledVector);
-	checkIsEmpty(doubleEmptyVector, doubleFilledVector);
-	checkIsEmpty(stringEmptyVector, stringFilledVector);
+	isEmptyVector(intEmptyVector, intFilledVector);
+	isEmptyVector(floatEmptyVector, floatFilledVector);
+	isEmptyVector(doubleEmptyVector, doubleFilledVector);
+	isEmptyVector(stringEmptyVector, stringFilledVector);
 }
 
 TEST_F(stdVectorTest, pushBackInEmptyVector)
@@ -82,102 +228,90 @@ TEST_F(stdVectorTest, popBackOneInFilledVector)
 
 TEST_F(stdVectorTest, insertInEmptyVector)
 {
-	size_t	expectedSize = (size_t)10;
-
-	for (int i = 0; i < 10; i++)
-	{
-		intEmptyVector.insert(intEmptyVector.end(), intX[i]);
-		EXPECT_EQ(intEmptyVector.back(), intX[i]);
-
-		floatEmptyVector.insert(floatEmptyVector.end(), floatX[i]);
-		EXPECT_EQ(floatEmptyVector.back(), floatX[i]);
-
-		doubleEmptyVector.insert(doubleEmptyVector.end(), doubleX[i]);
-		EXPECT_EQ(doubleEmptyVector.back(), doubleX[i]);
-
-		stringEmptyVector.insert(stringEmptyVector.end(), stringX[i]);
-		EXPECT_EQ(stringEmptyVector.back(), stringX[i]);
-	}
-	EXPECT_EQ(intEmptyVector.size(), expectedSize);
-	EXPECT_EQ(floatEmptyVector.size(), expectedSize);
-	EXPECT_EQ(doubleEmptyVector.size(), expectedSize);
-	EXPECT_EQ(stringEmptyVector.size(), expectedSize);
+	insertInEmptyVector(intEmptyVector, intX);
+	insertInEmptyVector(floatEmptyVector, floatX);
+	insertInEmptyVector(doubleEmptyVector, doubleX);
+	insertInEmptyVector(stringEmptyVector, stringX);
 }
 
 TEST_F(stdVectorTest, insertWithSizeInEmptyVector)
 {
-	size_t	expectedSize = (size_t)6;
-
-
-	intEmptyVector.insert(intEmptyVector.end(), 6, intX[3]);
-	EXPECT_EQ(intEmptyVector.back(), intX[3]);
-	EXPECT_EQ(intEmptyVector.front(), intX[3]);
-	EXPECT_EQ(intEmptyVector.size(), expectedSize);
-
-	floatEmptyVector.insert(floatEmptyVector.end(), 6, floatX[3]);
-	EXPECT_EQ(floatEmptyVector.back(), floatX[3]);
-	EXPECT_EQ(floatEmptyVector.front(), floatX[3]);
-	EXPECT_EQ(floatEmptyVector.size(), expectedSize);
-
-	doubleEmptyVector.insert(doubleEmptyVector.end(), 6, doubleX[3]);
-	EXPECT_EQ(doubleEmptyVector.back(), doubleX[3]);
-	EXPECT_EQ(doubleEmptyVector.front(), doubleX[3]);
-	EXPECT_EQ(doubleEmptyVector.size(), expectedSize);
-
-	stringEmptyVector.insert(stringEmptyVector.end(), 6, stringX[3]);
-	EXPECT_EQ(stringEmptyVector.back(), stringX[3]);
-	EXPECT_EQ(stringEmptyVector.front(), stringX[3]);
-	EXPECT_EQ(stringEmptyVector.size(), expectedSize);
+	insertWithSizeInEmptyVector(intEmptyVector, intX);
+	insertWithSizeInEmptyVector(floatEmptyVector, floatX);
+	insertWithSizeInEmptyVector(doubleEmptyVector, doubleX);
+	insertWithSizeInEmptyVector(stringEmptyVector, stringX);
 }
 
 TEST_F(stdVectorTest, insertRangeInEmptyVector)
 {
-	size_t	expectedSize = (size_t)10;
-
-	intEmptyVector.insert(intEmptyVector.begin(), intFilledVector.begin(), intFilledVector.end());
-	EXPECT_EQ(intEmptyVector.size(), expectedSize);
-	EXPECT_EQ(intEmptyVector.front(), intX[0]);
-	EXPECT_EQ(intEmptyVector.back(), intX[9]);
-
-	floatEmptyVector.insert(floatEmptyVector.begin(), floatFilledVector.begin(), floatFilledVector.end());
-	EXPECT_EQ(floatEmptyVector.size(), expectedSize);
-	EXPECT_EQ(floatEmptyVector.front(), floatX[0]);
-	EXPECT_EQ(floatEmptyVector.back(), floatX[9]);
-
-	doubleEmptyVector.insert(doubleEmptyVector.begin(), doubleFilledVector.begin(), doubleFilledVector.end());
-	EXPECT_EQ(doubleEmptyVector.size(), expectedSize);
-	EXPECT_EQ(doubleEmptyVector.front(), doubleX[0]);
-	EXPECT_EQ(doubleEmptyVector.back(), doubleX[9]);
-
-	stringEmptyVector.insert(stringEmptyVector.begin(), stringFilledVector.begin(), stringFilledVector.end());
-	EXPECT_EQ(stringEmptyVector.size(), expectedSize);
-	EXPECT_EQ(stringEmptyVector.front(), stringX[0]);
-	EXPECT_EQ(stringEmptyVector.back(), stringX[9]);
+	insertRangeInEmptyVector(intEmptyVector, intFilledVector, intX);
+	insertRangeInEmptyVector(floatEmptyVector, floatFilledVector, floatX);
+	insertRangeInEmptyVector(doubleEmptyVector, doubleFilledVector, doubleX);
+	insertRangeInEmptyVector(stringEmptyVector, stringFilledVector, stringX);
 }
 
 TEST_F(stdVectorTest, insertRangeInFilledVector)
 {
-	size_t	expectedSize = (size_t)15;
+	insertRangeInFilledVector(intFilledVector, intToInsertVector, intX, intY);
+	insertRangeInFilledVector(floatFilledVector, floatToInsertVector, floatX, floatY);
+	insertRangeInFilledVector(doubleFilledVector, doubleToInsertVector, doubleX, doubleY);
+	insertRangeInFilledVector(stringFilledVector, stringToInsertVector, stringX, stringY);
+}
 
-	intFilledVector.insert(intFilledVector.end(), intToInsertVector.begin(), intToInsertVector.end());
-	EXPECT_EQ(intFilledVector.size(), expectedSize);
-	EXPECT_EQ(intFilledVector.front(), intX[0]);
-	EXPECT_EQ(intFilledVector.back(), intY[4]);
+TEST_F(stdVectorTest, eraseInFilledVector)
+{
+	eraseInFilledVector(intFilledVector, intX);
+	eraseInFilledVector(floatFilledVector, floatX);
+	eraseInFilledVector(doubleFilledVector, doubleX);
+	eraseInFilledVector(stringFilledVector, stringX);
+}
 
-	floatFilledVector.insert(floatFilledVector.end(), floatToInsertVector.begin(), floatToInsertVector.end());
-	EXPECT_EQ(floatFilledVector.size(), expectedSize);
-	EXPECT_EQ(floatFilledVector.front(), floatX[0]);
-	EXPECT_EQ(floatFilledVector.back(), floatY[4]);
+TEST_F(stdVectorTest, eraseRangeInFilledVector)
+{
+	eraseRangeInFilledVector(intFilledVector, intToInsertVector, intX);
+	eraseRangeInFilledVector(floatFilledVector, floatToInsertVector, floatX);
+	eraseRangeInFilledVector(doubleFilledVector, doubleToInsertVector, doubleX);
+	eraseRangeInFilledVector(stringFilledVector, stringToInsertVector, stringX);
+}
 
-	doubleFilledVector.insert(doubleFilledVector.end(), doubleToInsertVector.begin(), doubleToInsertVector.end());
-	EXPECT_EQ(doubleFilledVector.size(), expectedSize);
-	EXPECT_EQ(doubleFilledVector.front(), doubleX[0]);
-	EXPECT_EQ(doubleFilledVector.back(), doubleY[4]);
+TEST_F(stdVectorTest, clearVector)
+{
+	clearVector(intEmptyVector, intFilledVector);
+	clearVector(floatEmptyVector, floatFilledVector);
+	clearVector(doubleEmptyVector, doubleFilledVector);
+	clearVector(stringEmptyVector, stringFilledVector);
+}
 
-	stringFilledVector.insert(stringFilledVector.end(), stringToInsertVector.begin(), stringToInsertVector.end());
-	EXPECT_EQ(stringFilledVector.size(), expectedSize);
-	EXPECT_EQ(stringFilledVector.front(), stringX[0]);
-	EXPECT_EQ(stringFilledVector.back(), stringY[4]);
+TEST_F(stdVectorTest, swapVector)
+{
+	swapVector(intEmptyVector, intFilledVector, intToInsertVector, intX, intY);
+	swapVector(floatEmptyVector, floatFilledVector, floatToInsertVector, floatX, floatY);
+	swapVector(doubleEmptyVector, doubleFilledVector, doubleToInsertVector, doubleX, doubleY);
+	swapVector(stringEmptyVector, stringFilledVector, stringToInsertVector, stringX, stringY);
+}
+
+TEST_F(stdVectorTest, assignValueVector)
+{
+	assignValueVector(intEmptyVector, intFilledVector, intX, intY);
+	assignValueVector(floatEmptyVector, floatFilledVector, floatX, floatY);
+	assignValueVector(doubleEmptyVector, doubleFilledVector, doubleX, doubleY);
+	assignValueVector(stringEmptyVector, stringFilledVector, stringX, stringY);
+}
+
+TEST_F(stdVectorTest, assignRangeVector)
+{
+	assignRangeVector(intEmptyVector, intFilledVector, intToInsertVector, intX, intY);
+	assignRangeVector(floatEmptyVector, floatFilledVector, floatToInsertVector, floatX, floatY);
+	assignRangeVector(doubleEmptyVector, doubleFilledVector, doubleToInsertVector, doubleX, doubleY);
+	assignRangeVector(stringEmptyVector, stringFilledVector, stringToInsertVector, stringX, stringY);
+}
+
+TEST_F(stdVectorTest, maxSizeVector)
+{
+	maxSizeVector(intEmptyVector, intFilledVector, intToInsertVector, MAX_SIZE_INT_VECTOR);
+	maxSizeVector(floatEmptyVector, floatFilledVector, floatToInsertVector, MAX_SIZE_FLOAT_VECTOR);
+	maxSizeVector(doubleEmptyVector, doubleFilledVector, doubleToInsertVector, MAX_SIZE_DOUBLE_VECTOR);
+	maxSizeVector(stringEmptyVector, stringFilledVector, stringToInsertVector, MAX_SIZE_STRING_VECTOR);
 }
 
 /**************************************************************/
@@ -190,18 +324,18 @@ TEST_F(ftVectorTest, initSizeVector)
 	std::cout << "                                      ";
 	std::cout << "          [ FT::VECTOR ] " << RESET << std::endl;
 
-	checkInitSize(intEmptyVector, intFilledVector);
-	checkInitSize(floatEmptyVector, floatFilledVector);
-	checkInitSize(doubleEmptyVector, doubleFilledVector);
-	checkInitSize(stringEmptyVector, stringFilledVector);
+	initSizeVector(intEmptyVector, intFilledVector);
+	initSizeVector(floatEmptyVector, floatFilledVector);
+	initSizeVector(doubleEmptyVector, doubleFilledVector);
+	initSizeVector(stringEmptyVector, stringFilledVector);
 }
 
 TEST_F(ftVectorTest, isEmptyVector)
 {
-	checkIsEmpty(intEmptyVector, intFilledVector);
-	checkIsEmpty(floatEmptyVector, floatFilledVector);
-	checkIsEmpty(doubleEmptyVector, doubleFilledVector);
-	checkIsEmpty(stringEmptyVector, stringFilledVector);
+	isEmptyVector(intEmptyVector, intFilledVector);
+	isEmptyVector(floatEmptyVector, floatFilledVector);
+	isEmptyVector(doubleEmptyVector, doubleFilledVector);
+	isEmptyVector(stringEmptyVector, stringFilledVector);
 }
 
 TEST_F(ftVectorTest, pushBackInEmptyVector)
@@ -222,101 +356,89 @@ TEST_F(ftVectorTest, popBackOneInFilledVector)
 
 TEST_F(ftVectorTest, insertInEmptyVector)
 {
-	size_t	expectedSize = (size_t)10;
-
-	for (int i = 0; i < 10; i++)
-	{
-		intEmptyVector.insert(intEmptyVector.end(), intX[i]);
-		EXPECT_EQ(intEmptyVector.back(), intX[i]);
-
-		floatEmptyVector.insert(floatEmptyVector.end(), floatX[i]);
-		EXPECT_EQ(floatEmptyVector.back(), floatX[i]);
-
-		doubleEmptyVector.insert(doubleEmptyVector.end(), doubleX[i]);
-		EXPECT_EQ(doubleEmptyVector.back(), doubleX[i]);
-
-		stringEmptyVector.insert(stringEmptyVector.end(), stringX[i]);
-		EXPECT_EQ(stringEmptyVector.back(), stringX[i]);
-	}
-	EXPECT_EQ(intEmptyVector.size(), expectedSize);
-	EXPECT_EQ(floatEmptyVector.size(), expectedSize);
-	EXPECT_EQ(doubleEmptyVector.size(), expectedSize);
-	EXPECT_EQ(stringEmptyVector.size(), expectedSize);
+	insertInEmptyVector(intEmptyVector, intX);
+	insertInEmptyVector(floatEmptyVector, floatX);
+	insertInEmptyVector(doubleEmptyVector, doubleX);
+	insertInEmptyVector(stringEmptyVector, stringX);
 }
 
 TEST_F(ftVectorTest, insertWithSizeInEmptyVector)
 {
-	size_t	expectedSize = (size_t)6;
-
-
-	intEmptyVector.insert(intEmptyVector.end(), 6, intX[3]);
-	EXPECT_EQ(intEmptyVector.back(), intX[3]);
-	EXPECT_EQ(intEmptyVector.front(), intX[3]);
-	EXPECT_EQ(intEmptyVector.size(), expectedSize);
-
-	floatEmptyVector.insert(floatEmptyVector.end(), 6, floatX[3]);
-	EXPECT_EQ(floatEmptyVector.back(), floatX[3]);
-	EXPECT_EQ(floatEmptyVector.front(), floatX[3]);
-	EXPECT_EQ(floatEmptyVector.size(), expectedSize);
-
-	doubleEmptyVector.insert(doubleEmptyVector.end(), 6, doubleX[3]);
-	EXPECT_EQ(doubleEmptyVector.back(), doubleX[3]);
-	EXPECT_EQ(doubleEmptyVector.front(), doubleX[3]);
-	EXPECT_EQ(doubleEmptyVector.size(), expectedSize);
-
-	stringEmptyVector.insert(stringEmptyVector.end(), 6, stringX[3]);
-	EXPECT_EQ(stringEmptyVector.back(), stringX[3]);
-	EXPECT_EQ(stringEmptyVector.front(), stringX[3]);
-	EXPECT_EQ(stringEmptyVector.size(), expectedSize);
+	insertWithSizeInEmptyVector(intEmptyVector, intX);
+	insertWithSizeInEmptyVector(floatEmptyVector, floatX);
+	insertWithSizeInEmptyVector(doubleEmptyVector, doubleX);
+	insertWithSizeInEmptyVector(stringEmptyVector, stringX);
 }
 
 TEST_F(ftVectorTest, insertRangeInEmptyVector)
 {
-	size_t	expectedSize = (size_t)10;
-
-	intEmptyVector.insert(intEmptyVector.begin(), intFilledVector.begin(), intFilledVector.end());
-	EXPECT_EQ(intEmptyVector.size(), expectedSize);
-	EXPECT_EQ(intEmptyVector.front(), intX[0]);
-	EXPECT_EQ(intEmptyVector.back(), intX[9]);
-
-	floatEmptyVector.insert(floatEmptyVector.begin(), floatFilledVector.begin(), floatFilledVector.end());
-	EXPECT_EQ(floatEmptyVector.size(), expectedSize);
-	EXPECT_EQ(floatEmptyVector.front(), floatX[0]);
-	EXPECT_EQ(floatEmptyVector.back(), floatX[9]);
-
-	doubleEmptyVector.insert(doubleEmptyVector.begin(), doubleFilledVector.begin(), doubleFilledVector.end());
-	EXPECT_EQ(doubleEmptyVector.size(), expectedSize);
-	EXPECT_EQ(doubleEmptyVector.front(), doubleX[0]);
-	EXPECT_EQ(doubleEmptyVector.back(), doubleX[9]);
-
-	stringEmptyVector.insert(stringEmptyVector.begin(), stringFilledVector.begin(), stringFilledVector.end());
-	EXPECT_EQ(stringEmptyVector.size(), expectedSize);
-	EXPECT_EQ(stringEmptyVector.front(), stringX[0]);
-	EXPECT_EQ(stringEmptyVector.back(), stringX[9]);
+	insertRangeInEmptyVector(intEmptyVector, intFilledVector, intX);
+	insertRangeInEmptyVector(floatEmptyVector, floatFilledVector, floatX);
+	insertRangeInEmptyVector(doubleEmptyVector, doubleFilledVector, doubleX);
+	insertRangeInEmptyVector(stringEmptyVector, stringFilledVector, stringX);	
 }
 
 TEST_F(ftVectorTest, insertRangeInFilledVector)
 {
-	size_t	expectedSize = (size_t)15;
+	insertRangeInFilledVector(intFilledVector, intToInsertVector, intX, intY);
+	insertRangeInFilledVector(floatFilledVector, floatToInsertVector, floatX, floatY);
+	insertRangeInFilledVector(doubleFilledVector, doubleToInsertVector, doubleX, doubleY);
+	insertRangeInFilledVector(stringFilledVector, stringToInsertVector, stringX, stringY);
+}
 
-	intFilledVector.insert(intFilledVector.end(), intToInsertVector.begin(), intToInsertVector.end());
-	EXPECT_EQ(intFilledVector.size(), expectedSize);
-	EXPECT_EQ(intFilledVector.front(), intX[0]);
-	EXPECT_EQ(intFilledVector.back(), intY[4]);
+TEST_F(ftVectorTest, eraseInFilledVector)
+{
+	eraseInFilledVector(intFilledVector, intX);
+	eraseInFilledVector(floatFilledVector, floatX);
+	eraseInFilledVector(doubleFilledVector, doubleX);
+	eraseInFilledVector(stringFilledVector, stringX);
+}
 
-	floatFilledVector.insert(floatFilledVector.end(), floatToInsertVector.begin(), floatToInsertVector.end());
-	EXPECT_EQ(floatFilledVector.size(), expectedSize);
-	EXPECT_EQ(floatFilledVector.front(), floatX[0]);
-	EXPECT_EQ(floatFilledVector.back(), floatY[4]);
+TEST_F(ftVectorTest, eraseRangeInFilledVector)
+{
+	eraseRangeInFilledVector(intFilledVector, intToInsertVector, intX);
+	eraseRangeInFilledVector(floatFilledVector, floatToInsertVector, floatX);
+	eraseRangeInFilledVector(doubleFilledVector, doubleToInsertVector, doubleX);
+	eraseRangeInFilledVector(stringFilledVector, stringToInsertVector, stringX);
+}
 
-	doubleFilledVector.insert(doubleFilledVector.end(), doubleToInsertVector.begin(), doubleToInsertVector.end());
-	EXPECT_EQ(doubleFilledVector.size(), expectedSize);
-	EXPECT_EQ(doubleFilledVector.front(), doubleX[0]);
-	EXPECT_EQ(doubleFilledVector.back(), doubleY[4]);
+TEST_F(ftVectorTest, clearVector)
+{
+	clearVector(intEmptyVector, intFilledVector);
+	clearVector(floatEmptyVector, floatFilledVector);
+	clearVector(doubleEmptyVector, doubleFilledVector);
+	clearVector(stringEmptyVector, stringFilledVector);
+}
 
-	stringFilledVector.insert(stringFilledVector.end(), stringToInsertVector.begin(), stringToInsertVector.end());
-	EXPECT_EQ(stringFilledVector.size(), expectedSize);
-	EXPECT_EQ(stringFilledVector.front(), stringX[0]);
-	EXPECT_EQ(stringFilledVector.back(), stringY[4]);
+TEST_F(ftVectorTest, swapVector)
+{
+	swapVector(intEmptyVector, intFilledVector, intToInsertVector, intX, intY);
+	swapVector(floatEmptyVector, floatFilledVector, floatToInsertVector, floatX, floatY);
+	swapVector(doubleEmptyVector, doubleFilledVector, doubleToInsertVector, doubleX, doubleY);
+	swapVector(stringEmptyVector, stringFilledVector, stringToInsertVector, stringX, stringY);
+}
+
+TEST_F(ftVectorTest, assignValueVector)
+{
+	assignValueVector(intEmptyVector, intFilledVector, intX, intY);
+	assignValueVector(floatEmptyVector, floatFilledVector, floatX, floatY);
+	assignValueVector(doubleEmptyVector, doubleFilledVector, doubleX, doubleY);
+	assignValueVector(stringEmptyVector, stringFilledVector, stringX, stringY);
+}
+
+TEST_F(ftVectorTest, assignRangeVector)
+{
+	assignRangeVector(intEmptyVector, intFilledVector, intToInsertVector, intX, intY);
+	assignRangeVector(floatEmptyVector, floatFilledVector, floatToInsertVector, floatX, floatY);
+	assignRangeVector(doubleEmptyVector, doubleFilledVector, doubleToInsertVector, doubleX, doubleY);
+	assignRangeVector(stringEmptyVector, stringFilledVector, stringToInsertVector, stringX, stringY);
+}
+
+TEST_F(ftVectorTest, maxSizeVector)
+{
+	maxSizeVector(intEmptyVector, intFilledVector, intToInsertVector, MAX_SIZE_INT_VECTOR);
+	maxSizeVector(floatEmptyVector, floatFilledVector, floatToInsertVector, MAX_SIZE_FLOAT_VECTOR);
+	maxSizeVector(doubleEmptyVector, doubleFilledVector, doubleToInsertVector, MAX_SIZE_DOUBLE_VECTOR);
+	maxSizeVector(stringEmptyVector, stringFilledVector, stringToInsertVector, MAX_SIZE_STRING_VECTOR);
 }
 

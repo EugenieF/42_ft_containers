@@ -101,7 +101,7 @@ namespace ft
 
 			/****************         TO DEBUG         ****************/
 		public:
-			void											print(void);
+			void					print(void);
 	};
 
 	/**************    NON-MEMBER FUNCTION OVERLOADS     **************/

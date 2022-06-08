@@ -81,5 +81,6 @@ class ftVectorTest: public ::testing::Test, public globalVarTest
 				doubleToInsertVector.push_back(doubleY[i]);
 				stringToInsertVector.push_back(stringY[i]);
 			}
-		}	
+		}
+
 };
