@@ -22,7 +22,8 @@ CXXFLAGS += $(INCLUDE)
 
 MAIN		= $(SRCS_DIR)/gtest_main.cpp
 
-FILES		= stackTest vectorTest # setTest # mapTest 
+FILES		= mapTest # setTest # vectorTest # stackTest # 
+
 
 FILES_PATH	= $(addprefix $(SRCS_DIR)/, $(FILES))
 SRCS 		= $(addsuffix .cpp, $(FILES_PATH))
@@ -38,8 +39,8 @@ all: $(NAME)
 ifeq ($(UNAME), Darwin)
 	@./$(NAME)
 else
-	@./$(NAME)
-# valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME)
+#	@./$(NAME)
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --log-file=valgrind-out.txt ./$(NAME)
 endif
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.cpp

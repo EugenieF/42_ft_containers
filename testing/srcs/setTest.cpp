@@ -4,7 +4,126 @@
 /*       			           TEST      		        	     */
 /*****************************************************************/
 
+template <typename T>
+void	initSizeSet(T emptySet, T filledSet, T toInsertSet)
+{
+	EXPECT_EQ(emptySet.size(), (size_t)0);
+	EXPECT_EQ(filledSet.size(), (size_t)10);
+	EXPECT_EQ(toInsertSet.size(), (size_t)5);
+}
 
+template <typename T>
+void	isEmptySet(T emptySet, T filledSet, T toInsertSet)
+{
+	EXPECT_EQ(emptySet.empty(), true);
+	EXPECT_EQ(filledSet.empty(), false);
+	EXPECT_EQ(toInsertSet.empty(), false);
+}
+
+template <typename T, typename U>
+void	insertInEmptySet(T emptySet, U varX)
+{
+	size_t	expectedSize = 1;
+
+	for (int i = 0; i < 10; i++, expectedSize++)
+	{
+		emptySet.insert(varX[i]);
+		EXPECT_EQ(emptySet.size(), expectedSize);
+	}
+}
+
+template <typename T, typename U>
+void	insertExistingKeyInFilledSet(T filledSet, U varX)
+{
+	size_t	expectedSize = (size_t)10;
+
+	for (int i = 0; i < 10; i++)
+	{
+		filledSet.insert(varX[i]);
+		EXPECT_EQ(filledSet.size(), expectedSize);
+	}
+}
+
+template <typename T, typename U>
+void	eraseOneInFilledSet(T filledSet, U varX)
+{
+	size_t	ret;
+	size_t	expectedRet = (size_t)1;
+	size_t	expectedSize = (size_t)9;
+
+	ret = filledSet.erase(varX[2]);
+	EXPECT_EQ(ret, expectedRet);
+	EXPECT_EQ(filledSet.size(), expectedSize);
+}
+
+template <typename T, typename U>
+void	eraseOneInEmptySet(T emptySet, U varX)
+{
+	size_t	ret;
+	size_t	expectedRet = (size_t)0;
+
+	ret = emptySet.erase(varX[0]);	
+	EXPECT_EQ(ret, expectedRet);
+	EXPECT_EQ(emptySet.empty(), true);
+}
+
+template <typename T>
+void	insertRangeInEmptySet(T emptySet, T filledSet)
+{
+	size_t	expectedSize = (size_t)10;
+
+	emptySet.insert(filledSet.begin(), filledSet.end());
+	EXPECT_EQ(filledSet.size(), expectedSize);
+}
+
+template <typename T>
+void	insertRangeInFilledSet(T filledSet, T toInsertSet)
+{
+	size_t	expectedSize = (size_t)15;
+
+	filledSet.insert(toInsertSet.begin(), toInsertSet.end());
+	EXPECT_EQ(filledSet.size(), expectedSize);
+}
+
+template <typename T>
+void	eraseRangeInFilledSet(T filledSet)
+{
+	size_t	expectedSize = (size_t)0;
+
+	filledSet.erase(filledSet.begin(), filledSet.end());
+	EXPECT_EQ(filledSet.size(), expectedSize);
+}
+
+template <typename T>
+void	clearSet(T emptySet, T filledSet)
+{
+	emptySet.clear();
+	EXPECT_EQ(emptySet.size(), (size_t)0);
+
+	filledSet.clear();
+	EXPECT_EQ(filledSet.size(), (size_t)0);
+}
+
+template <typename T>
+void	swapSet(T emptySet, T filledSet, T toInsertSet)
+{
+	emptySet.swap(filledSet);
+	EXPECT_EQ(emptySet.size(), (size_t)10);
+	EXPECT_EQ(filledSet.size(), (size_t)0);
+
+	filledSet.swap(toInsertSet);
+	EXPECT_EQ(filledSet.size(), (size_t)5);
+	EXPECT_EQ(toInsertSet.size(), (size_t)0);
+}
+
+
+template <typename T>
+void	maxSizeSet(T emptySet, T filledSet, T toInsertSet, size_t expectedSize)
+{
+	EXPECT_EQ(emptySet.max_size(), expectedSize);
+	EXPECT_EQ(filledSet.max_size(), expectedSize);
+	EXPECT_EQ(toInsertSet.max_size(), expectedSize);
+}
 
 /*****************************************************************/
 /*       			     RUN STD::SET TEST      			     */
@@ -16,145 +135,98 @@ TEST_F(stdSetTest, initSizeSet)
 	std::cout << "                                        ";
 	std::cout << "          [ STD::SET ] " << RESET << std::endl;
 
-	size_t	expectedEmptySetSize = (size_t)0;
-	size_t	expectedFilledSetSize = (size_t)10;
-
-	EXPECT_EQ(intEmptySet.size(), expectedEmptySetSize);
-	EXPECT_EQ(intFilledSet.size(), expectedFilledSetSize);
-
-	EXPECT_EQ(floatEmptySet.size(), expectedEmptySetSize);
-	EXPECT_EQ(floatFilledSet.size(), expectedFilledSetSize);
-
-	EXPECT_EQ(doubleEmptySet.size(), expectedEmptySetSize);
-	EXPECT_EQ(doubleFilledSet.size(), expectedFilledSetSize);
-
-	EXPECT_EQ(stringEmptySet.size(), expectedEmptySetSize);
-	EXPECT_EQ(stringFilledSet.size(), expectedFilledSetSize);
+	initSizeSet(intEmptySet, intFilledSet, intToInsertSet);
+	initSizeSet(floatEmptySet, floatFilledSet, floatToInsertSet);
+	initSizeSet(doubleEmptySet, doubleFilledSet, doubleToInsertSet);
+	initSizeSet(stringEmptySet, stringFilledSet, stringToInsertSet);
 }
 
 TEST_F(stdSetTest, isEmptySet)
 {
-	EXPECT_EQ(intEmptySet.empty(), true);
-	EXPECT_EQ(intFilledSet.empty(), false);
-
-	EXPECT_EQ(floatEmptySet.empty(), true);
-	EXPECT_EQ(floatFilledSet.empty(), false);
-
-	EXPECT_EQ(doubleEmptySet.empty(), true);
-	EXPECT_EQ(doubleFilledSet.empty(), false);
-
-	EXPECT_EQ(stringEmptySet.empty(), true);
-	EXPECT_EQ(stringFilledSet.empty(), false);
+	isEmptySet(intEmptySet, intFilledSet, intToInsertSet);
+	isEmptySet(floatEmptySet, floatFilledSet, floatToInsertSet);
+	isEmptySet(doubleEmptySet, doubleFilledSet, doubleToInsertSet);
+	isEmptySet(stringEmptySet, stringFilledSet, stringToInsertSet);
 }
 
 TEST_F(stdSetTest, insertInEmptySet)
 {
-	// typedef typename ft::set<Key, Compare, Allocator>::iterator	iterator;
-	size_t	expectedSize = 1;
-
-	for (int i = 0; i < 10; i++, expectedSize++)
-	{
-		intEmptySet.insert(intX[i]);
-		EXPECT_EQ(intEmptySet.size(), expectedSize);
-
-		floatEmptySet.insert(floatX[i]);
-		EXPECT_EQ(floatEmptySet.size(), expectedSize);
-
-		doubleEmptySet.insert(doubleX[i]);
-		EXPECT_EQ(doubleEmptySet.size(), expectedSize);
-
-		stringEmptySet.insert(stringX[i]);
-		EXPECT_EQ(stringEmptySet.size(), expectedSize);
-	}
+	insertInEmptySet(intEmptySet, intX);
+	insertInEmptySet(floatEmptySet, floatX);
+	insertInEmptySet(doubleEmptySet, doubleX);
+	insertInEmptySet(stringEmptySet, stringX);
 }
 
 TEST_F(stdSetTest, insertExistingKeyInFilledSet)
 {
-	size_t	expectedSize = (size_t)10;
-
-	for (int i = 0; i < 10; i++)
-	{
-		intFilledSet.insert(intX[i]);
-		EXPECT_EQ(intFilledSet.size(), expectedSize);
-
-		floatFilledSet.insert(floatX[i]);
-		EXPECT_EQ(floatFilledSet.size(), expectedSize);
-
-		doubleFilledSet.insert(doubleX[i]);
-		EXPECT_EQ(doubleFilledSet.size(), expectedSize);
-
-		stringFilledSet.insert(stringX[i]);
-		EXPECT_EQ(stringFilledSet.size(), expectedSize);
-	}
+	insertExistingKeyInFilledSet(intFilledSet, intX);
+	insertExistingKeyInFilledSet(floatFilledSet, floatX);
+	insertExistingKeyInFilledSet(doubleFilledSet, doubleX);
+	insertExistingKeyInFilledSet(stringFilledSet, stringX);
 }
 
 TEST_F(stdSetTest, eraseOneInFilledSet)
 {
-	size_t	ret;
-	size_t	expectedRet = (size_t)1;
-	size_t	expectedSize = (size_t)9;
+	eraseOneInFilledSet(intFilledSet, intX);
+	eraseOneInFilledSet(floatFilledSet,floatX);
+	eraseOneInFilledSet(doubleFilledSet, doubleX);
+	eraseOneInFilledSet(stringFilledSet, stringX);
+}
 
-
-	ret = intFilledSet.erase(intX[2]);
-	EXPECT_EQ(ret, expectedRet);
-	EXPECT_EQ(intFilledSet.size(), expectedSize);
-
-	ret = floatFilledSet.erase(floatX[2]);
-	EXPECT_EQ(ret, expectedRet);
-	EXPECT_EQ(floatFilledSet.size(), expectedSize);
-
-	ret = doubleFilledSet.erase(doubleX[2]);
-	EXPECT_EQ(ret, expectedRet);
-	EXPECT_EQ(doubleFilledSet.size(), expectedSize);
-
-	ret = stringFilledSet.erase(stringX[2]);
-	EXPECT_EQ(ret, expectedRet);
-	EXPECT_EQ(stringFilledSet.size(), expectedSize);
+TEST_F(stdSetTest, eraseOneInEmptySet)
+{
+	eraseOneInEmptySet(intEmptySet, intX);
+	eraseOneInEmptySet(floatEmptySet, floatX);
+	eraseOneInEmptySet(doubleEmptySet, doubleX);
+	eraseOneInEmptySet(stringEmptySet, stringX);
 }
 
 TEST_F(stdSetTest, insertRangeInEmptySet)
 {
-	size_t	expectedSize = (size_t)10;
-
-	intEmptySet.insert(intFilledSet.begin(), intFilledSet.end());
-	floatEmptySet.insert(floatFilledSet.begin(), floatFilledSet.end());
-	doubleEmptySet.insert(doubleFilledSet.begin(), doubleFilledSet.end());
-	stringEmptySet.insert(stringFilledSet.begin(), stringFilledSet.end());
-
-	EXPECT_EQ(intFilledSet.size(), expectedSize);
-	EXPECT_EQ(floatFilledSet.size(), expectedSize);
-	EXPECT_EQ(doubleFilledSet.size(), expectedSize);
-	EXPECT_EQ(stringFilledSet.size(), expectedSize);
+	insertRangeInEmptySet(intEmptySet, intFilledSet);
+	insertRangeInEmptySet(floatEmptySet, floatFilledSet);
+	insertRangeInEmptySet(doubleEmptySet, doubleFilledSet);
+	insertRangeInEmptySet(stringEmptySet, stringFilledSet);
 }
 
 TEST_F(stdSetTest, insertRangeInFilledSet)
 {
-	size_t	expectedSize = (size_t)15;
-
-	intFilledSet.insert(intToInsertSet.begin(), intToInsertSet.end());
-	floatFilledSet.insert(floatToInsertSet.begin(), floatToInsertSet.end());
-	doubleFilledSet.insert(doubleToInsertSet.begin(), doubleToInsertSet.end());
-	stringFilledSet.insert(stringToInsertSet.begin(), stringToInsertSet.end());
-
-	EXPECT_EQ(intFilledSet.size(), expectedSize);
-	EXPECT_EQ(floatFilledSet.size(), expectedSize);
-	EXPECT_EQ(doubleFilledSet.size(), expectedSize);
-	EXPECT_EQ(stringFilledSet.size(), expectedSize);
+	insertRangeInFilledSet(intFilledSet, intToInsertSet);
+	insertRangeInFilledSet(floatFilledSet, floatToInsertSet);
+	insertRangeInFilledSet(doubleFilledSet, doubleToInsertSet);
+	insertRangeInFilledSet(stringFilledSet, stringToInsertSet);
 }
 
 TEST_F(stdSetTest, eraseRangeInFilledSet)
 {
-	size_t	expectedSize = (size_t)0;
+	eraseRangeInFilledSet(intFilledSet);
+	eraseRangeInFilledSet(floatFilledSet);
+	eraseRangeInFilledSet(doubleFilledSet);
+	eraseRangeInFilledSet(stringFilledSet);
+}
 
-	intFilledSet.erase(intFilledSet.begin(), intFilledSet.end());
-	floatFilledSet.erase(floatFilledSet.begin(), floatFilledSet.end());
-	doubleFilledSet.erase(doubleFilledSet.begin(), doubleFilledSet.end());
-	stringFilledSet.erase(stringFilledSet.begin(), stringFilledSet.end());
+TEST_F(stdSetTest, clearSet)
+{
+	clearSet(intEmptySet, intFilledSet);
+	clearSet(floatEmptySet, floatFilledSet);
+	clearSet(doubleEmptySet, doubleFilledSet);
+	clearSet(stringEmptySet, stringFilledSet);
+}
 
-	EXPECT_EQ(intFilledSet.size(), expectedSize);
-	EXPECT_EQ(floatFilledSet.size(), expectedSize);
-	EXPECT_EQ(doubleFilledSet.size(), expectedSize);
-	EXPECT_EQ(stringFilledSet.size(), expectedSize);
+TEST_F(stdSetTest, swapSet)
+{
+	swapSet(intEmptySet, intFilledSet, intToInsertSet);
+	swapSet(floatEmptySet, floatFilledSet, floatToInsertSet);
+	swapSet(doubleEmptySet, doubleFilledSet, doubleToInsertSet);
+	swapSet(stringEmptySet, stringFilledSet, stringToInsertSet);
+}
+
+TEST_F(stdSetTest, maxSizeTest)
+{
+	maxSizeSet(intEmptySet, intFilledSet, intToInsertSet, MAX_SIZE_INT_SET);
+	maxSizeSet(floatEmptySet, floatFilledSet, floatToInsertSet, MAX_SIZE_FLOAT_SET);
+	maxSizeSet(doubleEmptySet, doubleFilledSet, doubleToInsertSet, MAX_SIZE_DOUBLE_SET);
+	maxSizeSet(stringEmptySet, stringFilledSet, stringToInsertSet, MAX_SIZE_STRING_SET);
 }
 
 /*****************************************************************/
@@ -167,142 +239,96 @@ TEST_F(ftSetTest, initSizeSet)
 	std::cout << "                                        ";
 	std::cout << "           [ FT::SET ] " << RESET << std::endl;
 
-	size_t	expectedEmptySetSize = (size_t)0;
-	size_t	expectedFilledSetSize = (size_t)10;
-
-	EXPECT_EQ(intEmptySet.size(), expectedEmptySetSize);
-	EXPECT_EQ(intFilledSet.size(), expectedFilledSetSize);
-
-	EXPECT_EQ(floatEmptySet.size(), expectedEmptySetSize);
-	EXPECT_EQ(floatFilledSet.size(), expectedFilledSetSize);
-
-	EXPECT_EQ(doubleEmptySet.size(), expectedEmptySetSize);
-	EXPECT_EQ(doubleFilledSet.size(), expectedFilledSetSize);
-
-	EXPECT_EQ(stringEmptySet.size(), expectedEmptySetSize);
-	EXPECT_EQ(stringFilledSet.size(), expectedFilledSetSize);
+	initSizeSet(intEmptySet, intFilledSet, intToInsertSet);
+	initSizeSet(floatEmptySet, floatFilledSet, floatToInsertSet);
+	initSizeSet(doubleEmptySet, doubleFilledSet, doubleToInsertSet);
+	initSizeSet(stringEmptySet, stringFilledSet, stringToInsertSet);
 }
 
 TEST_F(ftSetTest, isEmptySet)
 {
-	EXPECT_EQ(intEmptySet.empty(), true);
-	EXPECT_EQ(intFilledSet.empty(), false);
-
-	EXPECT_EQ(floatEmptySet.empty(), true);
-	EXPECT_EQ(floatFilledSet.empty(), false);
-
-	EXPECT_EQ(doubleEmptySet.empty(), true);
-	EXPECT_EQ(doubleFilledSet.empty(), false);
-
-	EXPECT_EQ(stringEmptySet.empty(), true);
-	EXPECT_EQ(stringFilledSet.empty(), false);
+	isEmptySet(intEmptySet, intFilledSet, intToInsertSet);
+	isEmptySet(floatEmptySet, floatFilledSet, floatToInsertSet);
+	isEmptySet(doubleEmptySet, doubleFilledSet, doubleToInsertSet);
+	isEmptySet(stringEmptySet, stringFilledSet, stringToInsertSet);
 }
 
 TEST_F(ftSetTest, insertInEmptySet)
 {
-	size_t	expectedSize = 1;
-
-	for (int i = 0; i < 10; i++, expectedSize++)
-	{
-		intEmptySet.insert(intX[i]);
-		EXPECT_EQ(intEmptySet.size(), expectedSize);
-
-		floatEmptySet.insert(floatX[i]);
-		EXPECT_EQ(floatEmptySet.size(), expectedSize);
-
-		doubleEmptySet.insert(doubleX[i]);
-		EXPECT_EQ(doubleEmptySet.size(), expectedSize);
-
-		stringEmptySet.insert(stringX[i]);
-		EXPECT_EQ(stringEmptySet.size(), expectedSize);
-	}
+	insertInEmptySet(intEmptySet, intX);
+	insertInEmptySet(floatEmptySet, floatX);
+	insertInEmptySet(doubleEmptySet, doubleX);
+	insertInEmptySet(stringEmptySet, stringX);
 }
 
 TEST_F(ftSetTest, insertExistingKeyInFilledSet)
 {
-	size_t	expectedSize = (size_t)10;
-
-	for (int i = 0; i < 10; i++)
-	{
-		intFilledSet.insert(intX[i]);
-		EXPECT_EQ(intFilledSet.size(), expectedSize);
-
-		floatFilledSet.insert(floatX[i]);
-		EXPECT_EQ(floatFilledSet.size(), expectedSize);
-
-		doubleFilledSet.insert(doubleX[i]);
-		EXPECT_EQ(doubleFilledSet.size(), expectedSize);
-
-		stringFilledSet.insert(stringX[i]);
-		EXPECT_EQ(stringFilledSet.size(), expectedSize);
-	}
+	insertExistingKeyInFilledSet(intFilledSet, intX);
+	insertExistingKeyInFilledSet(floatFilledSet, floatX);
+	insertExistingKeyInFilledSet(doubleFilledSet, doubleX);
+	insertExistingKeyInFilledSet(stringFilledSet, stringX);
 }
 
 TEST_F(ftSetTest, eraseOneInFilledSet)
 {
-	size_t	ret;
-	size_t	expectedRet = (size_t)1;
-	size_t	expectedSize = (size_t)9;
+	eraseOneInFilledSet(intFilledSet, intX);
+	eraseOneInFilledSet(floatFilledSet,floatX);
+	eraseOneInFilledSet(doubleFilledSet, doubleX);
+	eraseOneInFilledSet(stringFilledSet, stringX);
+}
 
-	ret = intFilledSet.erase(intX[5]);
-	EXPECT_EQ(ret, expectedRet);
-	EXPECT_EQ(intFilledSet.size(), expectedSize);
-
-	ret = floatFilledSet.erase(floatX[2]);
-	EXPECT_EQ(ret, expectedRet);
-	EXPECT_EQ(floatFilledSet.size(), expectedSize);
-
-	ret = doubleFilledSet.erase(doubleX[2]);
-	EXPECT_EQ(ret, expectedRet);
-	EXPECT_EQ(doubleFilledSet.size(), expectedSize);
-
-	// stringFilledSet.print();
-	ret = stringFilledSet.erase(stringX[2]);
-	EXPECT_EQ(ret, expectedRet);
-	EXPECT_EQ(stringFilledSet.size(), expectedSize);
+TEST_F(ftSetTest, eraseOneInEmptySet)
+{
+	eraseOneInEmptySet(intEmptySet, intX);
+	eraseOneInEmptySet(floatEmptySet, floatX);
+	eraseOneInEmptySet(doubleEmptySet, doubleX);
+	eraseOneInEmptySet(stringEmptySet, stringX);
 }
 
 TEST_F(ftSetTest, insertRangeInEmptySet)
 {
-	size_t	expectedSize = (size_t)10;
-
-	intEmptySet.insert(intFilledSet.begin(), intFilledSet.end());
-	floatEmptySet.insert(floatFilledSet.begin(), floatFilledSet.end());
-	doubleEmptySet.insert(doubleFilledSet.begin(), doubleFilledSet.end());
-	stringEmptySet.insert(stringFilledSet.begin(), stringFilledSet.end());
-
-	EXPECT_EQ(intFilledSet.size(), expectedSize);
-	EXPECT_EQ(floatFilledSet.size(), expectedSize);
-	EXPECT_EQ(doubleFilledSet.size(), expectedSize);
-	EXPECT_EQ(stringFilledSet.size(), expectedSize);
+	insertRangeInEmptySet(intEmptySet, intFilledSet);
+	insertRangeInEmptySet(floatEmptySet, floatFilledSet);
+	insertRangeInEmptySet(doubleEmptySet, doubleFilledSet);
+	insertRangeInEmptySet(stringEmptySet, stringFilledSet);
 }
 
 TEST_F(ftSetTest, insertRangeInFilledSet)
 {
-	size_t	expectedSize = (size_t)15;
-
-	intFilledSet.insert(intToInsertSet.begin(), intToInsertSet.end());
-	floatFilledSet.insert(floatToInsertSet.begin(), floatToInsertSet.end());
-	doubleFilledSet.insert(doubleToInsertSet.begin(), doubleToInsertSet.end());
-	stringFilledSet.insert(stringToInsertSet.begin(), stringToInsertSet.end());
-
-	EXPECT_EQ(intFilledSet.size(), expectedSize);
-	EXPECT_EQ(floatFilledSet.size(), expectedSize);
-	EXPECT_EQ(doubleFilledSet.size(), expectedSize);
-	EXPECT_EQ(stringFilledSet.size(), expectedSize);
+	insertRangeInFilledSet(intFilledSet, intToInsertSet);
+	insertRangeInFilledSet(floatFilledSet, floatToInsertSet);
+	insertRangeInFilledSet(doubleFilledSet, doubleToInsertSet);
+	insertRangeInFilledSet(stringFilledSet, stringToInsertSet);
 }
 
 TEST_F(ftSetTest, eraseRangeInFilledSet)
 {
-	size_t	expectedSize = (size_t)0;
+	eraseRangeInFilledSet(intFilledSet);
+	eraseRangeInFilledSet(floatFilledSet);
+	eraseRangeInFilledSet(doubleFilledSet);
+	eraseRangeInFilledSet(stringFilledSet);
+}
 
-	intFilledSet.erase(intFilledSet.begin(), intFilledSet.end());
-	floatFilledSet.erase(floatFilledSet.begin(), floatFilledSet.end());
-	doubleFilledSet.erase(doubleFilledSet.begin(), doubleFilledSet.end());
-	stringFilledSet.erase(stringFilledSet.begin(), stringFilledSet.end());
+TEST_F(ftSetTest, clearSet)
+{
+	clearSet(intEmptySet, intFilledSet);
+	clearSet(floatEmptySet, floatFilledSet);
+	clearSet(doubleEmptySet, doubleFilledSet);
+	clearSet(stringEmptySet, stringFilledSet);
+}
 
-	EXPECT_EQ(intFilledSet.size(), expectedSize);
-	EXPECT_EQ(floatFilledSet.size(), expectedSize);
-	EXPECT_EQ(doubleFilledSet.size(), expectedSize);
-	EXPECT_EQ(stringFilledSet.size(), expectedSize);
+TEST_F(ftSetTest, swapSet)
+{
+	swapSet(intEmptySet, intFilledSet, intToInsertSet);
+	swapSet(floatEmptySet, floatFilledSet, floatToInsertSet);
+	swapSet(doubleEmptySet, doubleFilledSet, doubleToInsertSet);
+	swapSet(stringEmptySet, stringFilledSet, stringToInsertSet);
+}
+
+TEST_F(ftSetTest, maxSizeTest)
+{
+	// maxSizeSet(intEmptySet, intFilledSet, intToInsertSet, MAX_SIZE_INT_SET);
+	// maxSizeSet(floatEmptySet, floatFilledSet, floatToInsertSet, MAX_SIZE_FLOAT_SET);
+	maxSizeSet(doubleEmptySet, doubleFilledSet, doubleToInsertSet, MAX_SIZE_DOUBLE_SET);
+	maxSizeSet(stringEmptySet, stringFilledSet, stringToInsertSet, MAX_SIZE_STRING_SET);
 }
