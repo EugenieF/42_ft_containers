@@ -137,6 +137,7 @@ void	maxSizeMap(T emptyMap, T filledMap, T toInsertMap)
 	(void)filledMap;
 	(void)toInsertMap;
 	std::cout << "MaxSize: " << emptyMap.max_size() << std::endl;
+	// EXPECT_EQ(emptyMap.max_size(), (size_t)(115292150460684697 * sizeof(int)));
 }
 
 template <typename T, typename U, typename V>
@@ -169,7 +170,7 @@ void	constFindMap(T emptyMap, T filledMap, T toInsertMap, U varX1, U varY1, V va
 
 	typedef typename T::const_iterator	const_iterator;
 
-	const_iterator		const_it;
+	const_iterator	const_it;
 
 	for (int i = 0; i < 10; i++)
 	{
@@ -447,13 +448,13 @@ TEST_F(ftMapTest, findMap)
 	findMap(intStringEmptyMap, intStringFilledMap, intStringToInsertMap, intX, intY, stringX, stringY);
 }
 
-// TEST_F(ftMapTest, constFindMap)
-// {
-// 	constFindMap(intIntEmptyMap, intIntFilledMap, intIntToInsertMap, intX, intY, intX, intY);
-// 	constFindMap(intFloatEmptyMap, intFloatFilledMap, intFloatToInsertMap, intX, intY, floatX, floatY);
-// 	constFindMap(intDoubleEmptyMap, intDoubleFilledMap, intDoubleToInsertMap, intX, intY, doubleX, doubleY);
-// 	constFindMap(intStringEmptyMap, intStringFilledMap, intStringToInsertMap, intX, intY, stringX, stringY);
-// }
+TEST_F(ftMapTest, constFindMap)
+{
+	constFindMap(intIntEmptyMap, intIntFilledMap, intIntToInsertMap, intX, intY, intX, intY);
+	constFindMap(intFloatEmptyMap, intFloatFilledMap, intFloatToInsertMap, intX, intY, floatX, floatY);
+	constFindMap(intDoubleEmptyMap, intDoubleFilledMap, intDoubleToInsertMap, intX, intY, doubleX, doubleY);
+	constFindMap(intStringEmptyMap, intStringFilledMap, intStringToInsertMap, intX, intY, stringX, stringY);
+}
 
 TEST_F(ftMapTest, countMap)
 {

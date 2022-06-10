@@ -99,6 +99,12 @@ rbtree_iterator<T, Node>  	rbtree_iterator<T, Node>::operator--(int)
 	return (prev);
 }
 
+template <class T, class Node>
+rbtree_iterator<T, Node>::operator	rbtree_iterator<T const, Node>(void) const		// to investigate ?
+{
+	return (rbtree_iterator<T const, Node>(this->current, this->_root, this->_nil));
+}
+
 // template <class T, class Node>
 // bool	rbtree_iterator<T, Node>::operator== (const rbtree_iterator<T, Node>& rhs)
 // {

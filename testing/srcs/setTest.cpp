@@ -124,6 +124,67 @@ void	maxSizeSet(T emptySet, T filledSet, T toInsertSet, size_t expectedSize)
 	EXPECT_EQ(toInsertSet.max_size(), expectedSize);
 }
 
+template <typename T, typename U>
+void	findSet(T emptySet, T filledSet, T toInsertSet, U varX, U varY)
+{
+	(void)emptySet;
+
+	typedef typename T::iterator	iterator;
+
+	iterator				it;
+
+	for (int i = 0; i < 10; i++)
+	{
+		it = filledSet.find(varX[i]);
+		EXPECT_EQ(it.current->data, varX[i]);
+	}
+	for (int i = 0; i < 5; i++)
+	{
+		it = toInsertSet.find(varY[i]);
+		EXPECT_EQ(it.current->data, varY[i]);
+	}
+}
+
+template <typename T, typename U>
+void	constFindSet(T emptySet, T filledSet, T toInsertSet, U varX, U varY)
+{
+	(void)emptySet;	// test with emptySet
+
+	typedef typename T::const_iterator	const_iterator;
+
+	const_iterator	const_it;
+
+	for (int i = 0; i < 10; i++)
+	{
+		const_it = filledSet.find(varX[i]);
+		EXPECT_EQ(const_it.current->data, varX[i]);
+	}
+	for (int i = 0; i < 5; i++)
+	{
+		const_it = toInsertSet.find(varY[i]);
+		EXPECT_EQ(const_it.current->data, varY[i]);
+	}
+}
+
+template <typename T, typename U>
+void	countSet(T emptySet, T filledSet, T toInsertSet, U varX, U varY)
+{
+	for (int i = 0; i < 10; i++)
+		EXPECT_EQ(emptySet.count(varX[i]), (size_t)0);
+	for (int i = 0; i < 5; i++)
+		EXPECT_EQ(emptySet.count(varY[i]), (size_t)0);
+
+	for (int i = 0; i < 10; i++)
+		EXPECT_EQ(filledSet.count(varX[i]), (size_t)1);
+	for (int i = 0; i < 5; i++)
+		EXPECT_EQ(filledSet.count(varY[i]), (size_t)0);
+
+	for (int i = 0; i < 10; i++)
+		EXPECT_EQ(toInsertSet.count(varX[i]), (size_t)0);
+	for (int i = 0; i < 5; i++)
+		EXPECT_EQ(toInsertSet.count(varY[i]), (size_t)1);
+}
+
 /*****************************************************************/
 /*       			     RUN STD::SET TEST      			     */
 /*****************************************************************/
@@ -220,12 +281,20 @@ TEST_F(stdSetTest, swapSet)
 	swapSet(stringEmptySet, stringFilledSet, stringToInsertSet);
 }
 
-TEST_F(stdSetTest, maxSizeTest)
+// TEST_F(stdSetTest, maxSizeTest)
+// {
+// 	maxSizeSet(intEmptySet, intFilledSet, intToInsertSet, MAX_SIZE_INT_SET);
+// 	maxSizeSet(floatEmptySet, floatFilledSet, floatToInsertSet, MAX_SIZE_FLOAT_SET);
+// 	maxSizeSet(doubleEmptySet, doubleFilledSet, doubleToInsertSet, MAX_SIZE_DOUBLE_SET);
+// 	maxSizeSet(stringEmptySet, stringFilledSet, stringToInsertSet, MAX_SIZE_STRING_SET);
+// }
+
+TEST_F(stdSetTest, countSet)
 {
-	maxSizeSet(intEmptySet, intFilledSet, intToInsertSet, MAX_SIZE_INT_SET);
-	maxSizeSet(floatEmptySet, floatFilledSet, floatToInsertSet, MAX_SIZE_FLOAT_SET);
-	maxSizeSet(doubleEmptySet, doubleFilledSet, doubleToInsertSet, MAX_SIZE_DOUBLE_SET);
-	maxSizeSet(stringEmptySet, stringFilledSet, stringToInsertSet, MAX_SIZE_STRING_SET);
+	countSet(intEmptySet, intFilledSet, intToInsertSet, intX, intY);
+	countSet(floatEmptySet, floatFilledSet, floatToInsertSet, floatX, floatY);
+	countSet(doubleEmptySet, doubleFilledSet, doubleToInsertSet, doubleX, doubleY);
+	countSet(stringEmptySet, stringFilledSet, stringToInsertSet, stringX, stringY);
 }
 
 /*****************************************************************/
@@ -324,10 +393,34 @@ TEST_F(ftSetTest, swapSet)
 	swapSet(stringEmptySet, stringFilledSet, stringToInsertSet);
 }
 
-TEST_F(ftSetTest, maxSizeTest)
+// TEST_F(ftSetTest, maxSizeTest)
+// {
+// 	// maxSizeSet(intEmptySet, intFilledSet, intToInsertSet, MAX_SIZE_INT_SET);
+// 	// maxSizeSet(floatEmptySet, floatFilledSet, floatToInsertSet, MAX_SIZE_FLOAT_SET);
+// 	maxSizeSet(doubleEmptySet, doubleFilledSet, doubleToInsertSet, MAX_SIZE_DOUBLE_SET);
+// 	maxSizeSet(stringEmptySet, stringFilledSet, stringToInsertSet, MAX_SIZE_STRING_SET);
+// }
+
+TEST_F(ftSetTest, findSet)
 {
-	// maxSizeSet(intEmptySet, intFilledSet, intToInsertSet, MAX_SIZE_INT_SET);
-	// maxSizeSet(floatEmptySet, floatFilledSet, floatToInsertSet, MAX_SIZE_FLOAT_SET);
-	maxSizeSet(doubleEmptySet, doubleFilledSet, doubleToInsertSet, MAX_SIZE_DOUBLE_SET);
-	maxSizeSet(stringEmptySet, stringFilledSet, stringToInsertSet, MAX_SIZE_STRING_SET);
+	findSet(intEmptySet, intFilledSet, intToInsertSet, intX, intY);
+	findSet(floatEmptySet, floatFilledSet, floatToInsertSet, floatX, floatY);
+	findSet(doubleEmptySet, doubleFilledSet, doubleToInsertSet, doubleX, doubleY);
+	findSet(stringEmptySet, stringFilledSet, stringToInsertSet, stringX, stringY);
+}
+
+TEST_F(ftSetTest, constFindSet)
+{
+	constFindSet(intEmptySet, intFilledSet, intToInsertSet, intX, intY);
+	constFindSet(floatEmptySet, floatFilledSet, floatToInsertSet, floatX, floatY);
+	constFindSet(doubleEmptySet, doubleFilledSet, doubleToInsertSet, doubleX, doubleY);
+	constFindSet(stringEmptySet, stringFilledSet, stringToInsertSet, stringX, stringY);
+}
+
+TEST_F(ftSetTest, countSet)
+{
+	countSet(intEmptySet, intFilledSet, intToInsertSet, intX, intY);
+	countSet(floatEmptySet, floatFilledSet, floatToInsertSet, floatX, floatY);
+	countSet(doubleEmptySet, doubleFilledSet, doubleToInsertSet, doubleX, doubleY);
+	countSet(stringEmptySet, stringFilledSet, stringToInsertSet, stringX, stringY);
 }

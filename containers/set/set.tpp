@@ -222,9 +222,9 @@ typename set<Key, Compare, Allocator>::const_iterator	set<Key, Compare, Allocato
 template< class Key, class Compare, class Allocator >
 size_t	set<Key, Compare, Allocator>::count (const Key& key) const
 {
-	typedef typename set<Key, Compare, Allocator>::iterator	iterator;
+	typedef typename set<Key, Compare, Allocator>::const_iterator	const_iterator;
 
-	iterator	node_position;
+	const_iterator	node_position;
 
 	node_position = this->find(key);
 	if (node_position == this->end())

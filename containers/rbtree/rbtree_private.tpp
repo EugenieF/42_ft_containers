@@ -369,6 +369,7 @@ void	red_black_tree<T, Allocator, Compare>::_rbtree_fix_deletion(
 	node->color = BLACK;
 }
 
+/************************************       SEARCH       ************************************/
 
 template <class T, class Allocator, class Compare>
 typename red_black_tree<T, Allocator, Compare>::iterator	red_black_tree<T, Allocator, Compare>::_rbtree_search_node(
@@ -393,8 +394,6 @@ typename red_black_tree<T, Allocator, Compare>::iterator	red_black_tree<T, Alloc
 	node_position = iterator(current_node, this->get_root(), this->get_nil());
 	return (node_position);
 }
-
-/************************************       SEARCH       ************************************/
 
 template <class T, class Allocator, class Compare>
 typename red_black_tree<T, Allocator, Compare>::const_iterator	red_black_tree<T, Allocator, Compare>::_rbtree_search_node(

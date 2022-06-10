@@ -234,7 +234,7 @@ typename map<Key, T, Compare, Allocator>::value_compare		map<Key, T, Compare, Al
 /*****************************        OPERATIONS        *****************************/
 
 template <class Key, class T, class Compare, class Allocator>
-typename map<Key, T, Compare, Allocator>::iterator  map<Key, T, Compare, Allocator>::find (const Key& key)
+typename map<Key, T, Compare, Allocator>::iterator  map<Key, T, Compare, Allocator>::find (Key const& key)
 {
 	typedef typename map<Key, T, Compare, Allocator>::iterator	iterator;
 
@@ -246,7 +246,7 @@ typename map<Key, T, Compare, Allocator>::iterator  map<Key, T, Compare, Allocat
 }
 
 template <class Key, class T, class Compare, class Allocator>
-typename map<Key, T, Compare, Allocator>::const_iterator	map<Key, T, Compare, Allocator>::find (const Key& key) const
+typename map<Key, T, Compare, Allocator>::const_iterator	map<Key, T, Compare, Allocator>::find (Key const& key) const
 {
 	typedef typename map<Key, T, Compare, Allocator>::const_iterator	const_iterator;
 
@@ -254,6 +254,7 @@ typename map<Key, T, Compare, Allocator>::const_iterator	map<Key, T, Compare, Al
 
 	node_position = this->_rbtree.search_node(this->_get_value_type(key));
 	return (node_position);
+	// return (this->_rbtree.search_node(this->_get_value_type(key)));
 }
 
 template <class Key, class T, class Compare, class Allocator>
