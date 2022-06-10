@@ -116,7 +116,6 @@ void	swapSet(T emptySet, T filledSet, T toInsertSet)
 	EXPECT_EQ(toInsertSet.size(), (size_t)0);
 }
 
-
 template <typename T>
 void	maxSizeSet(T emptySet, T filledSet, T toInsertSet, size_t expectedSize)
 {

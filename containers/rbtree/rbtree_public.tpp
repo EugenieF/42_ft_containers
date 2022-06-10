@@ -242,17 +242,8 @@ void	red_black_tree<T, Allocator, Compare>::swap (red_black_tree<T, Allocator, C
 template <class T, class Allocator, class Compare>
 void	red_black_tree<T, Allocator, Compare>::clear()
 {
-	typedef	typename red_black_tree<T, Allocator, Compare>::iterator	iterator;
-	
-	iterator	ptr;
-
-	ptr = this->begin();
-	for (; ptr != this->end(); ptr++)
-	{
-		// this->erase(ptr);
-		// std::cout << "IN CLEAR: " << ptr.current->data << std::endl;
-		this->_delete_node(ptr.current);
-	}
+	while (this->get_root() != this->get_nil())
+		this->_delete_node(this->get_root());
 }
 
 /**********************          OPERATIONS          **********************/

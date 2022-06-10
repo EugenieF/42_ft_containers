@@ -131,6 +131,96 @@ void	swapMap(T emptyMap, T filledMap, T toInsertMap, U varX1, U varY1, V varX2, 
 	EXPECT_EQ(toInsertMap.size(), (size_t)0);
 }
 
+template <typename T>
+void	maxSizeMap(T emptyMap, T filledMap, T toInsertMap)
+{
+	(void)filledMap;
+	(void)toInsertMap;
+	std::cout << "MaxSize: " << emptyMap.max_size() << std::endl;
+}
+
+template <typename T, typename U, typename V>
+void	findMap(T emptyMap, T filledMap, T toInsertMap, U varX1, U varY1, V varX2, V varY2)
+{
+	(void)emptyMap;
+
+	typedef typename T::iterator	iterator;
+
+	iterator				it;
+
+	for (int i = 0; i < 10; i++)
+	{
+		it = filledMap.find(varX1[i]);
+		EXPECT_EQ(it.current->data.first, varX1[i]);
+		EXPECT_EQ(it.current->data.second, varX2[i]);
+	}
+	for (int i = 0; i < 5; i++)
+	{
+		it = toInsertMap.find(varY1[i]);
+		EXPECT_EQ(it.current->data.first, varY1[i]);
+		EXPECT_EQ(it.current->data.second, varY2[i]);
+	}
+}
+
+template <typename T, typename U, typename V>
+void	constFindMap(T emptyMap, T filledMap, T toInsertMap, U varX1, U varY1, V varX2, V varY2)
+{
+	(void)emptyMap;	// test with emptyMap
+
+	typedef typename T::const_iterator	const_iterator;
+
+	const_iterator		const_it;
+
+	for (int i = 0; i < 10; i++)
+	{
+		const_it = filledMap.find(varX1[i]);
+		EXPECT_EQ(const_it.current->data.first, varX1[i]);
+		EXPECT_EQ(const_it.current->data.second, varX2[i]);
+	}
+	for (int i = 0; i < 5; i++)
+	{
+		const_it = toInsertMap.find(varY1[i]);
+		EXPECT_EQ(const_it.current->data.first, varY1[i]);
+		EXPECT_EQ(const_it.current->data.second, varY2[i]);
+	}
+}
+
+template <typename T, typename U>
+void	countMap(T emptyMap, T filledMap, T toInsertMap, U varX, U varY)
+{
+	for (int i = 0; i < 10; i++)
+		EXPECT_EQ(emptyMap.count(varX[i]), (size_t)0);
+	for (int i = 0; i < 5; i++)
+		EXPECT_EQ(emptyMap.count(varY[i]), (size_t)0);
+
+	for (int i = 0; i < 10; i++)
+		EXPECT_EQ(filledMap.count(varX[i]), (size_t)1);
+	for (int i = 0; i < 5; i++)
+		EXPECT_EQ(filledMap.count(varY[i]), (size_t)0);
+
+	for (int i = 0; i < 10; i++)
+		EXPECT_EQ(toInsertMap.count(varX[i]), (size_t)0);
+	for (int i = 0; i < 5; i++)
+		EXPECT_EQ(toInsertMap.count(varY[i]), (size_t)1);
+}
+
+// template <typename T, typename U, typename V>
+// void	lowerBoundMap(T emptyMap, T filledMap, T toInsertMap, U varX1, U varY1, V varX2, V varY2)
+// {
+
+// }
+
+// template <typename T, typename U, typename V>
+// void	upperBoundMap(T emptyMap, T filledMap, T toInsertMap, U varX1, U varY1, V varX2, V varY2)
+// {
+
+// }
+
+// template <typename T, typename U, typename V>
+// void	equalRangeMap(T emptyMap, T filledMap, T toInsertMap, U varX1, U varY1, V varX2, V varY2)
+// {
+
+// }
 
 /*****************************************************************/
 /*       			     RUN STD::MAP TEST      			     */
@@ -226,6 +316,22 @@ TEST_F(stdMapTest, swapMap)
 	swapMap(intFloatEmptyMap, intFloatFilledMap, intFloatToInsertMap, intX, intY, floatX, floatY);
 	swapMap(intDoubleEmptyMap, intDoubleFilledMap, intDoubleToInsertMap, intX, intY, doubleX, doubleY);
 	swapMap(intStringEmptyMap, intStringFilledMap, intStringToInsertMap, intX, intY, stringX, stringY);
+}
+
+TEST_F(stdMapTest, maxSizeMap)
+{
+	maxSizeMap(intIntEmptyMap, intIntFilledMap, intIntToInsertMap);
+	maxSizeMap(intFloatEmptyMap, intFloatFilledMap, intFloatToInsertMap);
+	maxSizeMap(intDoubleEmptyMap, intDoubleFilledMap, intDoubleToInsertMap);
+	maxSizeMap(intStringEmptyMap, intStringFilledMap, intStringToInsertMap);
+}
+
+TEST_F(stdMapTest, countMap)
+{
+	countMap(intIntEmptyMap, intIntFilledMap, intIntToInsertMap, intX, intY);
+	countMap(intFloatEmptyMap, intFloatFilledMap, intFloatToInsertMap, intX, intY);
+	countMap(intDoubleEmptyMap, intDoubleFilledMap, intDoubleToInsertMap, intX, intY);
+	countMap(intStringEmptyMap, intStringFilledMap, intStringToInsertMap, intX, intY);
 }
 
 /*****************************************************************/
@@ -324,6 +430,39 @@ TEST_F(ftMapTest, swapMap)
 	swapMap(intDoubleEmptyMap, intDoubleFilledMap, intDoubleToInsertMap, intX, intY, doubleX, doubleY);
 	swapMap(intStringEmptyMap, intStringFilledMap, intStringToInsertMap, intX, intY, stringX, stringY);
 }
+
+TEST_F(ftMapTest, maxSizeMap)
+{
+	maxSizeMap(intIntEmptyMap, intIntFilledMap, intIntToInsertMap);
+	maxSizeMap(intFloatEmptyMap, intFloatFilledMap, intFloatToInsertMap);
+	maxSizeMap(intDoubleEmptyMap, intDoubleFilledMap, intDoubleToInsertMap);
+	maxSizeMap(intStringEmptyMap, intStringFilledMap, intStringToInsertMap);
+}
+
+TEST_F(ftMapTest, findMap)
+{
+	findMap(intIntEmptyMap, intIntFilledMap, intIntToInsertMap, intX, intY, intX, intY);
+	findMap(intFloatEmptyMap, intFloatFilledMap, intFloatToInsertMap, intX, intY, floatX, floatY);
+	findMap(intDoubleEmptyMap, intDoubleFilledMap, intDoubleToInsertMap, intX, intY, doubleX, doubleY);
+	findMap(intStringEmptyMap, intStringFilledMap, intStringToInsertMap, intX, intY, stringX, stringY);
+}
+
+// TEST_F(ftMapTest, constFindMap)
+// {
+// 	constFindMap(intIntEmptyMap, intIntFilledMap, intIntToInsertMap, intX, intY, intX, intY);
+// 	constFindMap(intFloatEmptyMap, intFloatFilledMap, intFloatToInsertMap, intX, intY, floatX, floatY);
+// 	constFindMap(intDoubleEmptyMap, intDoubleFilledMap, intDoubleToInsertMap, intX, intY, doubleX, doubleY);
+// 	constFindMap(intStringEmptyMap, intStringFilledMap, intStringToInsertMap, intX, intY, stringX, stringY);
+// }
+
+TEST_F(ftMapTest, countMap)
+{
+	countMap(intIntEmptyMap, intIntFilledMap, intIntToInsertMap, intX, intY);
+	countMap(intFloatEmptyMap, intFloatFilledMap, intFloatToInsertMap, intX, intY);
+	countMap(intDoubleEmptyMap, intDoubleFilledMap, intDoubleToInsertMap, intX, intY);
+	countMap(intStringEmptyMap, intStringFilledMap, intStringToInsertMap, intX, intY);
+}
+
 
 // TEST_F(ftMapTest, eraseRangeInEmptyMap)
 // {

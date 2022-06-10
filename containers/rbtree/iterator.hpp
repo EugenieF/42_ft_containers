@@ -45,10 +45,13 @@ namespace ft
 			rbtree_iterator& 							operator--();
 			rbtree_iterator  							operator--(int);
 
-			operator	rbtree_iterator<value_type const, Node>(void) const
-			{
-				return (rbtree_iterator<value_type const, Node>(this->current, this->_root, this->_nil));
-			}
+			// operator	rbtree_iterator<value_type const, Node>(void) const		// to investigate ?
+			// {
+			// 	return (rbtree_iterator<value_type const, Node>(this->current, this->_root, this->_nil));
+			// }
+
+			// bool					operator== (const rbtree_iterator& rhs);
+ 			// bool					operator!= (const rbtree_iterator& rhs);
 
 		private:
 			node_ptr									_get_root() const;

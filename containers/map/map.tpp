@@ -236,18 +236,19 @@ typename map<Key, T, Compare, Allocator>::value_compare		map<Key, T, Compare, Al
 template <class Key, class T, class Compare, class Allocator>
 typename map<Key, T, Compare, Allocator>::iterator  map<Key, T, Compare, Allocator>::find (const Key& key)
 {
-	typedef typename red_black_tree<T, Compare, Allocator>::iterator	iterator;
+	typedef typename map<Key, T, Compare, Allocator>::iterator	iterator;
 
 	iterator	node_position;
 
 	node_position = this->_rbtree.search_node(this->_get_value_type(key));
 	return (node_position);
+	// return (this->_rbtree.search_node(this->_get_value_type(key)));
 }
 
 template <class Key, class T, class Compare, class Allocator>
 typename map<Key, T, Compare, Allocator>::const_iterator	map<Key, T, Compare, Allocator>::find (const Key& key) const
 {
-	typedef typename red_black_tree<T, Compare, Allocator>::const_iterator	const_iterator;
+	typedef typename map<Key, T, Compare, Allocator>::const_iterator	const_iterator;
 
 	const_iterator	node_position;
 
@@ -258,11 +259,9 @@ typename map<Key, T, Compare, Allocator>::const_iterator	map<Key, T, Compare, Al
 template <class Key, class T, class Compare, class Allocator>
 size_t  map<Key, T, Compare, Allocator>::count (const Key& key) const
 {
-	typedef typename red_black_tree<T, Compare, Allocator>::iterator	iterator;
+	typedef typename map<Key, T, Compare, Allocator>::const_iterator	const_iterator;
 
-	iterator	node_position;
-
-	node_position = this->find(key);
+	const_iterator	node_position = this->find(key);
 	if (node_position == this->end())
 		return (0);
 	return (1);
