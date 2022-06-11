@@ -25,7 +25,7 @@ namespace ft
 	/*                                  ITERATOR TRAITS 	                           */
 	/***********************************************************************************/
 
-	template< class Iterator >
+	template <class Iterator>
 	struct iterator_traits
 	{
 		/***********************          TYPEDEF         ***********************/
@@ -36,8 +36,8 @@ namespace ft
 		typedef typename Iterator::iterator_category			iterator_category;
 	};
 
-	template< class T >
-	struct iterator_traits < T* >
+	template <class T>
+	struct iterator_traits <T*>
 	{
 		/***********************          TYPEDEF         ***********************/
 		typedef	ptrdiff_t										difference_type;
@@ -47,8 +47,8 @@ namespace ft
 		typedef std::random_access_iterator_tag					iterator_category;
 	};
 
-	template< class T >
-	struct iterator_traits < const T* >
+	template <class T>
+	struct iterator_traits <const T*>
 	{
 		/***********************          TYPEDEF         ***********************/
 		typedef	ptrdiff_t										difference_type;
@@ -126,6 +126,6 @@ namespace ft
 	typename reverse_iterator<Iterator>::difference_type					operator- (const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs);
 }
 
-// # include "iterator.tpp"
+# include "iterator.tpp"
 
 #endif

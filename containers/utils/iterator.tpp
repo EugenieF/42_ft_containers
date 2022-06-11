@@ -4,20 +4,20 @@ using namespace ft;
 /****************           MAIN           ****************/
 
 template <class Iterator>
-reverse_iterator<Iterator>::reverse_iterator(): _current(NULL) {}
+reverse_iterator<Iterator>::reverse_iterator(): _current() {}
 
 template <class Iterator>
-reverse_iterator<Iterator>::reverse_iterator (iterator_type it): _current(it) {}
+reverse_iterator<Iterator>::reverse_iterator (Iterator it): _current(it) {}
 
 template <class Iterator>
-reverse_iterator<Iterator>::reverse_iterator (const reverse_iterator<Iter>& rev_it):
+reverse_iterator<Iterator>::reverse_iterator (const reverse_iterator<Iterator>& rev_it):
 	_current(rev_it._current) {}
 
 template <class Iterator>
 reverse_iterator<Iterator>::~reverse_iterator() {}
 
 template <class Iterator>
-reverse_iterator<Iterator>&		reverse_iterator<Iterator>::operator=( const reverse_iterator<Iterator>& other )
+reverse_iterator<Iterator>&		reverse_iterator<Iterator>::operator=(const reverse_iterator<Iterator>& other)
 {
 	if (this != &other)
 		this->_current = other._current;
@@ -25,7 +25,7 @@ reverse_iterator<Iterator>&		reverse_iterator<Iterator>::operator=( const revers
 }
 
 template <class Iterator>
-iterator_type	reverse_iterator<Iterator>::base() const
+Iterator	reverse_iterator<Iterator>::base() const
 {
 	return (this->_current);
 }
@@ -33,79 +33,88 @@ iterator_type	reverse_iterator<Iterator>::base() const
 /****************          ACCESS OPERATORS         ***************/
 
 template <class Iterator>
-reference	reverse_iterator<Iterator>::operator*() const
+typename reverse_iterator<Iterator>::reference	reverse_iterator<Iterator>::operator*() const
 {
-	return (*this->_current);
+	Iterator	tmp;
+
+	tmp = this->_current;
+	--tmp;
+	return (*tmp);
 }
 
 template <class Iterator>
-pointer		reverse_iterator<Iterator>::operator->() const
+typename reverse_iterator<Iterator>::pointer		reverse_iterator<Iterator>::operator->() const
 {
-	return (this->_current);
+	return (&(this->operator*()));
 }
 
 template <class Iterator>
-reference	reverse_iterator<Iterator>::operator[] (difference_type n) const
+typename reverse_iterator<Iterator>::reference	reverse_iterator<Iterator>::operator[] (
+	typename reverse_iterator<Iterator>::difference_type n) const
 {
-	return (this->current[-n - 1]);
+	return (this->base()[-n - 1]);
 }
 
 /**************       MEMBER FUNCTION OVERLOADS       **************/
 
 template <class Iterator>
-reverse_iterator&	reverse_iterator<Iterator>::operator++()		// ++i : Prefix increment operator
+reverse_iterator<Iterator>&	reverse_iterator<Iterator>::operator++()		// ++i : Prefix increment operator
 {
 	this->_current -= 1;
 	return (*this);
 }
 
 template <class Iterator>
-reverse_iterator	reverse_iterator<Iterator>::operator++(int)		// i++ : Postfix increment operator
+reverse_iterator<Iterator>	reverse_iterator<Iterator>::operator++(int)		// i++ : Postfix increment operator
 {
-	vector_iterator<T> prev = *this;
-	this->_current -= 1;
+	reverse_iterator<Iterator> prev = *this;
+	this->_current--;
 	return (prev);
 }
 
 template <class Iterator>
-reverse_iterator& 	reverse_iterator<Iterator>::operator+= (typename reverse_iterator<Iterator>::difference_type n)
+reverse_iterator<Iterator>& 	reverse_iterator<Iterator>::operator+= (
+	typename reverse_iterator<Iterator>::difference_type n)
 {
 	this->_current -= n;
 	return (*this);
 }
 
 template <class Iterator>
-reverse_iterator	reverse_iterator<Iterator>::operator+ (typename reverse_iterator<Iterator>::difference_type n) const
+reverse_iterator<Iterator>	reverse_iterator<Iterator>::operator+ (
+	typename reverse_iterator<Iterator>::difference_type n) const
 {
-	return (reverse_iterator(this->_current - n));
+	return (reverse_iterator<Iterator>(this->_current - n));
 }
 
 template <class Iterator>
-reverse_iterator& 	reverse_iterator<Iterator>::operator--()		// --i : Prefix decrement operator
+reverse_iterator<Iterator>& 	reverse_iterator<Iterator>::operator--()		// --i : Prefix decrement operator
 {
-	this->_current += 1;
+	this->_current++;
 	return (*this);
 }
 
 template <class Iterator>
-reverse_iterator  	reverse_iterator<Iterator>::operator--(int)		// i-- : Postfix decrement operator
+reverse_iterator<Iterator>  	reverse_iterator<Iterator>::operator--(int)		// i-- : Postfix decrement operator
 {
-	vector_iterator<T> prev = *this;
-	this->_current += 1;
+	reverse_iterator<Iterator> prev = *this;
+	this->_current++;
 	return (prev);
 }
 
 template <class Iterator>
-reverse_iterator&	reverse_iterator<Iterator>::operator-= (typename reverse_iterator<Iterator>::difference_type n)
+reverse_iterator<Iterator>&	reverse_iterator<Iterator>::operator-= (
+	typename reverse_iterator<Iterator>::difference_type n)
 {
 	this->_current += n;
 	return (*this);
 }
 
 template <class Iterator>
-reverse_iterator 	reverse_iterator<Iterator>::operator- (typename reverse_iterator<Iterator>::difference_type n) const
+reverse_iterator<Iterator> 	reverse_iterator<Iterator>::operator- (
+	typename reverse_iterator<Iterator>::difference_type n) const
 {
-	return (reverse_iterator(this->_current + n));
+	return (reverse_iterator<Iterator>(this->_current + n));
 }
 
 /**************    NON-MEMBER FUNCTION OVERLOADS     **************/

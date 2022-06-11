@@ -16,8 +16,8 @@
 # include <cstddef>
 # include <iterator>
 
-# include "utils/algorithm.hpp"
 # include "utils/iterator.hpp"
+# include "utils/algorithm.hpp"
 # include "utils/type_traits.hpp"
 # include "utils/utility.hpp"
 # include "vector/iterator.hpp"
