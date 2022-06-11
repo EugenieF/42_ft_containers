@@ -145,21 +145,30 @@ void	findMap(T emptyMap, T filledMap, T toInsertMap, U varX1, U varY1, V varX2, 
 {
 	(void)emptyMap;
 
-	typedef typename T::iterator	iterator;
-
-	iterator				it;
+	typename T::iterator	it;
 
 	for (int i = 0; i < 10; i++)
 	{
 		it = filledMap.find(varX1[i]);
-		EXPECT_EQ(it.current->data.first, varX1[i]);
-		EXPECT_EQ(it.current->data.second, varX2[i]);
+		EXPECT_EQ(it->first, varX1[i]);
+		EXPECT_EQ(it->second, varX2[i]);
 	}
 	for (int i = 0; i < 5; i++)
 	{
+		it = filledMap.find(varY1[i]);
+		EXPECT_EQ(it, filledMap.end());
+	}
+
+	for (int i = 0; i < 5; i++)
+	{
 		it = toInsertMap.find(varY1[i]);
-		EXPECT_EQ(it.current->data.first, varY1[i]);
-		EXPECT_EQ(it.current->data.second, varY2[i]);
+		EXPECT_EQ(it->first, varY1[i]);
+		EXPECT_EQ(it->second, varY2[i]);
+	}
+	for (int i = 0; i < 10; i++)
+	{
+		it = toInsertMap.find(varX1[i]);
+		EXPECT_EQ(it, toInsertMap.end());
 	}
 }
 
@@ -168,21 +177,30 @@ void	constFindMap(T emptyMap, T filledMap, T toInsertMap, U varX1, U varY1, V va
 {
 	(void)emptyMap;	// test with emptyMap
 
-	typedef typename T::const_iterator	const_iterator;
-
-	const_iterator	const_it;
+	typename T::const_iterator	const_it;
 
 	for (int i = 0; i < 10; i++)
 	{
 		const_it = filledMap.find(varX1[i]);
-		EXPECT_EQ(const_it.current->data.first, varX1[i]);
-		EXPECT_EQ(const_it.current->data.second, varX2[i]);
+		EXPECT_EQ(const_it->first, varX1[i]);
+		EXPECT_EQ(const_it->second, varX2[i]);
 	}
 	for (int i = 0; i < 5; i++)
 	{
+		const_it = filledMap.find(varY1[i]);
+		EXPECT_EQ(const_it, filledMap.end());
+	}
+
+	for (int i = 0; i < 5; i++)
+	{
 		const_it = toInsertMap.find(varY1[i]);
-		EXPECT_EQ(const_it.current->data.first, varY1[i]);
-		EXPECT_EQ(const_it.current->data.second, varY2[i]);
+		EXPECT_EQ(const_it->first, varY1[i]);
+		EXPECT_EQ(const_it->second, varY2[i]);
+	}
+	for (int i = 0; i < 10; i++)
+	{
+		const_it = toInsertMap.find(varX1[i]);
+		EXPECT_EQ(const_it, toInsertMap.end());
 	}
 }
 
@@ -205,23 +223,368 @@ void	countMap(T emptyMap, T filledMap, T toInsertMap, U varX, U varY)
 		EXPECT_EQ(toInsertMap.count(varY[i]), (size_t)1);
 }
 
-// template <typename T, typename U, typename V>
-// void	lowerBoundMap(T emptyMap, T filledMap, T toInsertMap, U varX1, U varY1, V varX2, V varY2)
-// {
+template <typename T, typename U, typename V>
+void	lowerBoundMap(T filledMap, T toInsertMap, U varX1, U varY1, V varX2, V varY2)
+{
+	typename T::iterator	it;
 
-// }
+	for (int i = 0; i < 10; i++)
+	{
+		it = filledMap.lower_bound(varX1[i]);
+		EXPECT_EQ(it->first, varX1[i]);
+		EXPECT_EQ(it->second, varX2[i]);
+	}
+	for (int i = 0; i < 5; i++)
+	{
+		it = filledMap.lower_bound(varY1[i]);
+		EXPECT_EQ(it, filledMap.end());
+	}
 
-// template <typename T, typename U, typename V>
-// void	upperBoundMap(T emptyMap, T filledMap, T toInsertMap, U varX1, U varY1, V varX2, V varY2)
-// {
+	for (int i = 0; i < 5; i++)
+	{
+		it = toInsertMap.lower_bound(varY1[i]);
+		EXPECT_EQ(it->first, varY1[i]);
+		EXPECT_EQ(it->second, varY2[i]);
+	}
+	for (int i = 0; i < 10; i++)
+	{
+		it = toInsertMap.lower_bound(varX1[i]);
+		EXPECT_EQ(it->first, varY1[0]);
+		EXPECT_EQ(it->second, varY2[0]);
+	}
+}
 
-// }
+template <typename T, typename U, typename V>
+void	constLowerBoundMap(T filledMap, T toInsertMap, U varX1, U varY1, V varX2, V varY2)
+{
+	typename T::const_iterator	const_it;
 
-// template <typename T, typename U, typename V>
-// void	equalRangeMap(T emptyMap, T filledMap, T toInsertMap, U varX1, U varY1, V varX2, V varY2)
-// {
+	for (int i = 0; i < 10; i++)
+	{
+		const_it = filledMap.lower_bound(varX1[i]);
+		EXPECT_EQ(const_it->first, varX1[i]);
+		EXPECT_EQ(const_it->second, varX2[i]);
+	}
+	for (int i = 0; i < 5; i++)
+	{
+		const_it = filledMap.lower_bound(varY1[i]);
+		EXPECT_EQ(const_it, filledMap.end());
+	}
 
-// }
+	for (int i = 0; i < 5; i++)
+	{
+		const_it = toInsertMap.lower_bound(varY1[i]);
+		EXPECT_EQ(const_it->first, varY1[i]);
+		EXPECT_EQ(const_it->second, varY2[i]);
+	}
+	for (int i = 0; i < 10; i++)
+	{
+		const_it = toInsertMap.lower_bound(varX1[i]);
+		EXPECT_EQ(const_it->first, varY1[0]);
+		EXPECT_EQ(const_it->second, varY2[0]);
+	}
+}
+
+template <typename T, typename U, typename V>
+void	upperBoundMap(T filledMap, T toInsertMap, U varX1, U varY1, V varX2, V varY2)
+{
+	typename T::iterator	it;
+
+	for (int i = 0; i < 9; i++)
+	{
+		it = filledMap.upper_bound(varX1[i]);
+		EXPECT_EQ(it->first, varX1[i + 1]);
+		EXPECT_EQ(it->second, varX2[i + 1]);
+	}
+	it = filledMap.upper_bound(varX1[9]);
+	EXPECT_EQ(it, filledMap.end());
+	for (int i = 0; i < 5; i++)
+	{
+		it = filledMap.upper_bound(varY1[i]);
+		EXPECT_EQ(it, filledMap.end());
+	}
+
+	for (int i = 0; i < 4; i++)
+	{
+		it = toInsertMap.upper_bound(varY1[i]);
+		EXPECT_EQ(it->first, varY1[i + 1]);
+		EXPECT_EQ(it->second, varY2[i + 1]);
+	}
+	it = toInsertMap.upper_bound(varY1[4]);
+	EXPECT_EQ(it, toInsertMap.end());
+	for (int i = 0; i < 5; i++)
+	{
+		it = toInsertMap.upper_bound(varX1[i]);
+		EXPECT_EQ(it->first, varY1[0]);
+		EXPECT_EQ(it->second, varY2[0]);
+	}
+}
+
+template <typename T, typename U, typename V>
+void	constUpperBoundMap(T filledMap, T toInsertMap, U varX1, U varY1, V varX2, V varY2)
+{
+	typename T::const_iterator	const_it;
+
+	for (int i = 0; i < 9; i++)
+	{
+		const_it = filledMap.upper_bound(varX1[i]);
+		EXPECT_EQ(const_it->first, varX1[i + 1]);
+		EXPECT_EQ(const_it->second, varX2[i + 1]);
+	}
+	const_it = filledMap.upper_bound(varX1[9]);
+	EXPECT_EQ(const_it, filledMap.end());
+	EXPECT_EQ(const_it, filledMap.end());
+	for (int i = 0; i < 5; i++)
+	{
+		const_it = filledMap.upper_bound(varY1[i]);
+		EXPECT_EQ(const_it, filledMap.end());
+	}
+
+	for (int i = 0; i < 4; i++)
+	{
+		const_it = toInsertMap.upper_bound(varY1[i]);
+		EXPECT_EQ(const_it->first, varY1[i + 1]);
+		EXPECT_EQ(const_it->second, varY2[i + 1]);
+	}
+	const_it = toInsertMap.upper_bound(varY1[4]);
+	EXPECT_EQ(const_it, toInsertMap.end());
+	for (int i = 0; i < 5; i++)
+	{
+		const_it = toInsertMap.upper_bound(varX1[i]);
+		EXPECT_EQ(const_it->first, varY1[0]);
+		EXPECT_EQ(const_it->second, varY2[0]);
+	}
+}
+
+template <typename T, typename U, typename V>
+void	equalRangeMap(T filledMap, T toInsertMap, U varX1, U varY1, V varX2, V varY2)
+{
+	typename T::iterator	itLower;
+	typename T::iterator	itUpper;
+
+	for (int i = 0; i < 10; i++)
+	{
+		itLower = filledMap.equal_range(varX1[i]).first;
+		itUpper = filledMap.equal_range(varX1[i]).second;
+		EXPECT_EQ(itLower->first, varX1[i]);
+		EXPECT_EQ(itLower->second, varX2[i]);
+		if (i < 9)
+		{
+			EXPECT_EQ(itUpper->first, varX1[i + 1]);
+			EXPECT_EQ(itUpper->second, varX2[i + 1]);
+		}
+		else
+			EXPECT_EQ(itUpper, filledMap.end());
+	}
+	for (int i = 0; i < 5; i++)
+	{
+		itLower = filledMap.equal_range(varY1[i]).first;
+		itUpper = filledMap.equal_range(varY1[i]).second;
+		EXPECT_EQ(itLower, filledMap.end());
+		EXPECT_EQ(itUpper, filledMap.end());
+	}
+
+	for (int i = 0; i < 5; i++)
+	{
+		itLower = toInsertMap.equal_range(varY1[i]).first;
+		itUpper = toInsertMap.equal_range(varY1[i]).second;
+		EXPECT_EQ(itLower->first, varY1[i]);
+		EXPECT_EQ(itLower->second, varY2[i]);
+		if (i < 4)
+		{
+			EXPECT_EQ(itUpper->first, varY1[i + 1]);
+			EXPECT_EQ(itUpper->second, varY2[i + 1]);
+		}
+		else
+			EXPECT_EQ(itUpper, toInsertMap.end());
+	}
+	for (int i = 0; i < 10; i++)
+	{
+		itLower = toInsertMap.equal_range(varX1[i]).first;
+		itUpper = toInsertMap.equal_range(varX1[i]).second;
+		EXPECT_EQ(itLower->first, varY1[0]);
+		EXPECT_EQ(itLower->second, varY2[0]);
+		EXPECT_EQ(itUpper->first, varY1[0]);
+		EXPECT_EQ(itUpper->second, varY2[0]);
+	}
+}
+
+template <typename T, typename U, typename V>
+void	constEqualRangeMap(T filledMap, T toInsertMap, U varX1, U varY1, V varX2, V varY2)
+{
+	typename T::const_iterator	constItLower;
+	typename T::const_iterator	constItUpper;
+
+	for (int i = 0; i < 10; i++)
+	{
+		constItLower = filledMap.equal_range(varX1[i]).first;
+		constItUpper = filledMap.equal_range(varX1[i]).second;
+		EXPECT_EQ(constItLower->first, varX1[i]);
+		EXPECT_EQ(constItLower->second, varX2[i]);
+		if (i < 9)
+		{
+			EXPECT_EQ(constItUpper->first, varX1[i + 1]);
+			EXPECT_EQ(constItUpper->second, varX2[i + 1]);
+		}
+		else
+			EXPECT_EQ(constItUpper, filledMap.end());
+	}
+	for (int i = 0; i < 5; i++)
+	{
+		constItLower = filledMap.equal_range(varY1[i]).first;
+		constItUpper = filledMap.equal_range(varY1[i]).second;
+		EXPECT_EQ(constItLower, filledMap.end());
+		EXPECT_EQ(constItUpper, filledMap.end());
+	}
+
+	for (int i = 0; i < 5; i++)
+	{
+		constItLower = toInsertMap.equal_range(varY1[i]).first;
+		constItUpper = toInsertMap.equal_range(varY1[i]).second;
+		EXPECT_EQ(constItLower->first, varY1[i]);
+		EXPECT_EQ(constItLower->second, varY2[i]);
+		if (i < 4)
+		{
+			EXPECT_EQ(constItUpper->first, varY1[i + 1]);
+			EXPECT_EQ(constItUpper->second, varY2[i + 1]);
+		}
+		else
+			EXPECT_EQ(constItUpper, toInsertMap.end());
+	}
+	for (int i = 0; i < 10; i++)
+	{
+		constItLower = toInsertMap.equal_range(varX1[i]).first;
+		constItUpper = toInsertMap.equal_range(varX1[i]).second;
+		EXPECT_EQ(constItLower->first, varY1[0]);
+		EXPECT_EQ(constItLower->second, varY2[0]);
+		EXPECT_EQ(constItUpper->first, varY1[0]);
+		EXPECT_EQ(constItUpper->second, varY2[0]);
+	}
+}
+
+template <typename T, typename U, typename V>
+void	iteratorMap(T filledMap, T toInsertMap, U varX1, U varY1, V varX2, V varY2)
+{
+	typename T::iterator			it;
+	typename T::reverse_iterator	rev_it;
+
+	it = filledMap.begin();
+	for (int i = 0; i < 10; i++, it++)
+	{
+		EXPECT_EQ(it->first, varX1[i]);
+		EXPECT_EQ(it->second, varX2[i]);
+	}
+	it = filledMap.end();
+	it--;
+	for (int i = 9; i <= 0; i--, it--)
+	{
+		EXPECT_EQ(it->first, varX1[i]);
+		EXPECT_EQ(it->second, varX2[i]);
+	}
+
+	rev_it = filledMap.rbegin();
+	for (int i = 9; i <= 0; i--, rev_it++)
+	{
+		EXPECT_EQ(rev_it->first, varX1[i]);
+		EXPECT_EQ(rev_it->second, varX2[i]);
+	}
+	rev_it = filledMap.rend();
+	rev_it--;
+	for (int i = 0; i < 9; i++, rev_it--)
+	{
+		EXPECT_EQ(rev_it->first, varX1[i]);
+		EXPECT_EQ(rev_it->second, varX2[i]);
+	}
+	it = toInsertMap.begin();
+	for (int i = 0; i < 5; i++, it++)
+	{
+		EXPECT_EQ(it->first, varY1[i]);
+		EXPECT_EQ(it->second, varY2[i]);
+	}
+	it = toInsertMap.end();
+	it--;
+	for (int i = 4; i <= 0; i++, it--)
+	{
+		EXPECT_EQ(it->first, varY1[i]);
+		EXPECT_EQ(it->second, varY2[i]);
+	}
+
+	rev_it = toInsertMap.rbegin();
+	for (int i = 4; i <= 0; i--, rev_it++)
+	{
+		EXPECT_EQ(rev_it->first, varY1[i]);
+		EXPECT_EQ(rev_it->second, varY2[i]);
+	}
+	rev_it = toInsertMap.rend();
+	rev_it--;
+	for (int i = 0; i < 4; i++, rev_it--)
+	{
+		EXPECT_EQ(rev_it->first, varY1[i]);
+		EXPECT_EQ(rev_it->second, varY2[i]);
+	}
+}
+
+template <typename T, typename U, typename V>
+void	constIteratorMap(T filledMap, T toInsertMap, U varX1, U varY1, V varX2, V varY2)
+{
+	typename T::const_iterator			const_it;
+	typename T::const_reverse_iterator	const_rev_it;
+
+	const_it = filledMap.begin();
+	for (int i = 0; i < 10; i++, const_it++)
+	{
+		EXPECT_EQ(const_it->first, varX1[i]);
+		EXPECT_EQ(const_it->second, varX2[i]);
+	}
+	const_it = filledMap.end();
+	const_it--;
+	for (int i = 9; i <= 0; i--, const_it--)
+	{
+		EXPECT_EQ(const_it->first, varX1[i]);
+		EXPECT_EQ(const_it->second, varX2[i]);
+	}
+
+	const_rev_it = filledMap.rbegin();
+	for (int i = 9; i <= 0; i--, const_rev_it++)
+	{
+		EXPECT_EQ(const_rev_it->first, varX1[i]);
+		EXPECT_EQ(const_rev_it->second, varX2[i]);
+	}
+	const_rev_it = filledMap.rend();
+	const_rev_it--;
+	for (int i = 0; i < 9; i++, const_rev_it--)
+	{
+		EXPECT_EQ(const_rev_it->first, varX1[i]);
+		EXPECT_EQ(const_rev_it->second, varX2[i]);
+	}
+	const_it = toInsertMap.begin();
+	for (int i = 0; i < 5; i++, const_it++)
+	{
+		EXPECT_EQ(const_it->first, varY1[i]);
+		EXPECT_EQ(const_it->second, varY2[i]);
+	}
+	const_it = toInsertMap.end();
+	const_it--;
+	for (int i = 4; i <= 0; i++, const_it--)
+	{
+		EXPECT_EQ(const_it->first, varY1[i]);
+		EXPECT_EQ(const_it->second, varY2[i]);
+	}
+
+	const_rev_it = toInsertMap.rbegin();
+	for (int i = 4; i <= 0; i--, const_rev_it++)
+	{
+		EXPECT_EQ(const_rev_it->first, varY1[i]);
+		EXPECT_EQ(const_rev_it->second, varY2[i]);
+	}
+	const_rev_it = toInsertMap.rend();
+	const_rev_it--;
+	for (int i = 0; i < 4; i++, const_rev_it--)
+	{
+		EXPECT_EQ(const_rev_it->first, varY1[i]);
+		EXPECT_EQ(const_rev_it->second, varY2[i]);
+	}
+}
 
 /*****************************************************************/
 /*       			     RUN STD::MAP TEST      			     */
@@ -319,12 +682,28 @@ TEST_F(stdMapTest, swapMap)
 	swapMap(intStringEmptyMap, intStringFilledMap, intStringToInsertMap, intX, intY, stringX, stringY);
 }
 
-TEST_F(stdMapTest, maxSizeMap)
+// TEST_F(stdMapTest, maxSizeMap)
+// {
+// 	maxSizeMap(intIntEmptyMap, intIntFilledMap, intIntToInsertMap);
+// 	maxSizeMap(intFloatEmptyMap, intFloatFilledMap, intFloatToInsertMap);
+// 	maxSizeMap(intDoubleEmptyMap, intDoubleFilledMap, intDoubleToInsertMap);
+// 	maxSizeMap(intStringEmptyMap, intStringFilledMap, intStringToInsertMap);
+// }
+
+TEST_F(stdMapTest, findMap)
 {
-	maxSizeMap(intIntEmptyMap, intIntFilledMap, intIntToInsertMap);
-	maxSizeMap(intFloatEmptyMap, intFloatFilledMap, intFloatToInsertMap);
-	maxSizeMap(intDoubleEmptyMap, intDoubleFilledMap, intDoubleToInsertMap);
-	maxSizeMap(intStringEmptyMap, intStringFilledMap, intStringToInsertMap);
+	findMap(intIntEmptyMap, intIntFilledMap, intIntToInsertMap, intX, intY, intX, intY);
+	findMap(intFloatEmptyMap, intFloatFilledMap, intFloatToInsertMap, intX, intY, floatX, floatY);
+	findMap(intDoubleEmptyMap, intDoubleFilledMap, intDoubleToInsertMap, intX, intY, doubleX, doubleY);
+	findMap(intStringEmptyMap, intStringFilledMap, intStringToInsertMap, intX, intY, stringX, stringY);
+}
+
+TEST_F(stdMapTest, constFindMap)
+{
+	constFindMap(intIntEmptyMap, intIntFilledMap, intIntToInsertMap, intX, intY, intX, intY);
+	constFindMap(intFloatEmptyMap, intFloatFilledMap, intFloatToInsertMap, intX, intY, floatX, floatY);
+	constFindMap(intDoubleEmptyMap, intDoubleFilledMap, intDoubleToInsertMap, intX, intY, doubleX, doubleY);
+	constFindMap(intStringEmptyMap, intStringFilledMap, intStringToInsertMap, intX, intY, stringX, stringY);
 }
 
 TEST_F(stdMapTest, countMap)
@@ -333,6 +712,70 @@ TEST_F(stdMapTest, countMap)
 	countMap(intFloatEmptyMap, intFloatFilledMap, intFloatToInsertMap, intX, intY);
 	countMap(intDoubleEmptyMap, intDoubleFilledMap, intDoubleToInsertMap, intX, intY);
 	countMap(intStringEmptyMap, intStringFilledMap, intStringToInsertMap, intX, intY);
+}
+
+TEST_F(stdMapTest, lowerBoundMap)
+{
+	lowerBoundMap(intIntFilledMap, intIntToInsertMap, intX, intY, intX, intY);
+	lowerBoundMap(intFloatFilledMap, intFloatToInsertMap, intX, intY, floatX, floatY);
+	lowerBoundMap(intDoubleFilledMap, intDoubleToInsertMap, intX, intY, doubleX, doubleY);
+	lowerBoundMap(intStringFilledMap, intStringToInsertMap, intX, intY, stringX, stringY);
+}
+
+TEST_F(stdMapTest, constLowerBoundMap)
+{
+	constLowerBoundMap(intIntFilledMap, intIntToInsertMap, intX, intY, intX, intY);
+	constLowerBoundMap(intFloatFilledMap, intFloatToInsertMap, intX, intY, floatX, floatY);
+	constLowerBoundMap(intDoubleFilledMap, intDoubleToInsertMap, intX, intY, doubleX, doubleY);
+	constLowerBoundMap(intStringFilledMap, intStringToInsertMap, intX, intY, stringX, stringY);
+}
+
+TEST_F(stdMapTest, upperBoundMap)
+{
+	upperBoundMap(intIntFilledMap, intIntToInsertMap, intX, intY, intX, intY);
+	upperBoundMap(intFloatFilledMap, intFloatToInsertMap, intX, intY, floatX, floatY);
+	upperBoundMap(intDoubleFilledMap, intDoubleToInsertMap, intX, intY, doubleX, doubleY);
+	upperBoundMap(intStringFilledMap, intStringToInsertMap, intX, intY, stringX, stringY);
+}
+
+TEST_F(stdMapTest, constUpperBoundMap)
+{
+	constUpperBoundMap(intIntFilledMap, intIntToInsertMap, intX, intY, intX, intY);
+	constUpperBoundMap(intFloatFilledMap, intFloatToInsertMap, intX, intY, floatX, floatY);
+	constUpperBoundMap(intDoubleFilledMap, intDoubleToInsertMap, intX, intY, doubleX, doubleY);
+	constUpperBoundMap(intStringFilledMap, intStringToInsertMap, intX, intY, stringX, stringY);
+}
+
+TEST_F(stdMapTest, equalRangeMap)
+{
+	equalRangeMap(intIntFilledMap, intIntToInsertMap, intX, intY, intX, intY);
+	equalRangeMap(intFloatFilledMap, intFloatToInsertMap, intX, intY, floatX, floatY);
+	equalRangeMap(intDoubleFilledMap, intDoubleToInsertMap, intX, intY, doubleX, doubleY);
+	equalRangeMap(intStringFilledMap, intStringToInsertMap, intX, intY, stringX, stringY);
+}
+
+TEST_F(stdMapTest, constEqualRangeMap)
+{
+	constEqualRangeMap(intIntFilledMap, intIntToInsertMap, intX, intY, intX, intY);
+	constEqualRangeMap(intFloatFilledMap, intFloatToInsertMap, intX, intY, floatX, floatY);
+	constEqualRangeMap(intDoubleFilledMap, intDoubleToInsertMap, intX, intY, doubleX, doubleY);
+	constEqualRangeMap(intStringFilledMap, intStringToInsertMap, intX, intY, stringX, stringY);
+}
+
+TEST_F(stdMapTest, iteratorMap)
+{
+	iteratorMap(intIntFilledMap, intIntToInsertMap, intX, intY, intX, intY);
+	iteratorMap(intFloatFilledMap, intFloatToInsertMap, intX, intY, floatX, floatY);
+	iteratorMap(intDoubleFilledMap, intDoubleToInsertMap, intX, intY, doubleX, doubleY);
+	iteratorMap(intStringFilledMap, intStringToInsertMap, intX, intY, stringX, stringY);
+}
+
+TEST_F(stdMapTest, constIteratorMap)
+{
+	constIteratorMap(intIntFilledMap, intIntToInsertMap, intX, intY, intX, intY);
+	constIteratorMap(intFloatFilledMap, intFloatToInsertMap, intX, intY, floatX, floatY);
+	constIteratorMap(intDoubleFilledMap, intDoubleToInsertMap, intX, intY, doubleX, doubleY);
+	constIteratorMap(intStringFilledMap, intStringToInsertMap, intX, intY, stringX, stringY);
 }
 
 /*****************************************************************/
@@ -432,13 +875,13 @@ TEST_F(ftMapTest, swapMap)
 	swapMap(intStringEmptyMap, intStringFilledMap, intStringToInsertMap, intX, intY, stringX, stringY);
 }
 
-TEST_F(ftMapTest, maxSizeMap)
-{
-	maxSizeMap(intIntEmptyMap, intIntFilledMap, intIntToInsertMap);
-	maxSizeMap(intFloatEmptyMap, intFloatFilledMap, intFloatToInsertMap);
-	maxSizeMap(intDoubleEmptyMap, intDoubleFilledMap, intDoubleToInsertMap);
-	maxSizeMap(intStringEmptyMap, intStringFilledMap, intStringToInsertMap);
-}
+// TEST_F(ftMapTest, maxSizeMap)
+// {
+// 	maxSizeMap(intIntEmptyMap, intIntFilledMap, intIntToInsertMap);
+// 	maxSizeMap(intFloatEmptyMap, intFloatFilledMap, intFloatToInsertMap);
+// 	maxSizeMap(intDoubleEmptyMap, intDoubleFilledMap, intDoubleToInsertMap);
+// 	maxSizeMap(intStringEmptyMap, intStringFilledMap, intStringToInsertMap);
+// }
 
 TEST_F(ftMapTest, findMap)
 {
@@ -464,10 +907,66 @@ TEST_F(ftMapTest, countMap)
 	countMap(intStringEmptyMap, intStringFilledMap, intStringToInsertMap, intX, intY);
 }
 
+TEST_F(ftMapTest, lowerBoundMap)
+{
+	lowerBoundMap(intIntFilledMap, intIntToInsertMap, intX, intY, intX, intY);
+	lowerBoundMap(intFloatFilledMap, intFloatToInsertMap, intX, intY, floatX, floatY);
+	lowerBoundMap(intDoubleFilledMap, intDoubleToInsertMap, intX, intY, doubleX, doubleY);
+	lowerBoundMap(intStringFilledMap, intStringToInsertMap, intX, intY, stringX, stringY);
+}
 
-// TEST_F(ftMapTest, eraseRangeInEmptyMap)
+TEST_F(ftMapTest, constLowerBoundMap)
+{
+	constLowerBoundMap(intIntFilledMap, intIntToInsertMap, intX, intY, intX, intY);
+	constLowerBoundMap(intFloatFilledMap, intFloatToInsertMap, intX, intY, floatX, floatY);
+	constLowerBoundMap(intDoubleFilledMap, intDoubleToInsertMap, intX, intY, doubleX, doubleY);
+	constLowerBoundMap(intStringFilledMap, intStringToInsertMap, intX, intY, stringX, stringY);
+}
+
+TEST_F(ftMapTest, upperBoundMap)
+{
+	upperBoundMap(intIntFilledMap, intIntToInsertMap, intX, intY, intX, intY);
+	upperBoundMap(intFloatFilledMap, intFloatToInsertMap, intX, intY, floatX, floatY);
+	upperBoundMap(intDoubleFilledMap, intDoubleToInsertMap, intX, intY, doubleX, doubleY);
+	upperBoundMap(intStringFilledMap, intStringToInsertMap, intX, intY, stringX, stringY);
+}
+
+TEST_F(ftMapTest, constUpperBoundMap)
+{
+	constUpperBoundMap(intIntFilledMap, intIntToInsertMap, intX, intY, intX, intY);
+	constUpperBoundMap(intFloatFilledMap, intFloatToInsertMap, intX, intY, floatX, floatY);
+	constUpperBoundMap(intDoubleFilledMap, intDoubleToInsertMap, intX, intY, doubleX, doubleY);
+	constUpperBoundMap(intStringFilledMap, intStringToInsertMap, intX, intY, stringX, stringY);
+}
+
+TEST_F(ftMapTest, equalRangeMap)
+{
+	equalRangeMap(intIntFilledMap, intIntToInsertMap, intX, intY, intX, intY);
+	equalRangeMap(intFloatFilledMap, intFloatToInsertMap, intX, intY, floatX, floatY);
+	equalRangeMap(intDoubleFilledMap, intDoubleToInsertMap, intX, intY, doubleX, doubleY);
+	equalRangeMap(intStringFilledMap, intStringToInsertMap, intX, intY, stringX, stringY);
+}
+
+TEST_F(ftMapTest, constEqualRangeMap)
+{
+	constEqualRangeMap(intIntFilledMap, intIntToInsertMap, intX, intY, intX, intY);
+	constEqualRangeMap(intFloatFilledMap, intFloatToInsertMap, intX, intY, floatX, floatY);
+	constEqualRangeMap(intDoubleFilledMap, intDoubleToInsertMap, intX, intY, doubleX, doubleY);
+	constEqualRangeMap(intStringFilledMap, intStringToInsertMap, intX, intY, stringX, stringY);
+}
+
+TEST_F(ftMapTest, iteratorMap)
+{
+	iteratorMap(intIntFilledMap, intIntToInsertMap, intX, intY, intX, intY);
+	iteratorMap(intFloatFilledMap, intFloatToInsertMap, intX, intY, floatX, floatY);
+	iteratorMap(intDoubleFilledMap, intDoubleToInsertMap, intX, intY, doubleX, doubleY);
+	iteratorMap(intStringFilledMap, intStringToInsertMap, intX, intY, stringX, stringY);
+}
+
+// TEST_F(ftMapTest, constIteratorMap)
 // {
-// 	// size_t	expectedSize = (size_t)0;
-
-// 	intIntEmptyMap.erase(intIntFilledMap.begin(), intIntFilledMap.end());
+// 	constIteratorMap(intIntFilledMap, intIntToInsertMap, intX, intY, intX, intY);
+// 	constIteratorMap(intFloatFilledMap, intFloatToInsertMap, intX, intY, floatX, floatY);
+// 	constIteratorMap(intDoubleFilledMap, intDoubleToInsertMap, intX, intY, doubleX, doubleY);
+// 	constIteratorMap(intStringFilledMap, intStringToInsertMap, intX, intY, stringX, stringY);
 // }

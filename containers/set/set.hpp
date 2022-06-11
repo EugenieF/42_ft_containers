@@ -26,14 +26,19 @@ namespace ft
 			typedef red_black_tree<value_type, allocator_type, value_compare>	tree_type;
 
 		public:
-			typedef	typename Allocator::reference			reference;
-			typedef typename Allocator::const_reference		const_reference;
-			typedef	typename Allocator::pointer				pointer;
-			typedef	typename Allocator::const_pointer		const_pointer;
-			typedef typename tree_type::iterator			iterator;
-			typedef typename tree_type::const_iterator		const_iterator;
-			typedef ft::reverse_iterator<iterator>			reverse_iterator;
-			typedef ft::reverse_iterator<const_iterator>	const_reverse_iterator;
+			typedef	typename Allocator::reference				reference;
+			typedef typename Allocator::const_reference			const_reference;
+			typedef	typename Allocator::pointer					pointer;
+			typedef	typename Allocator::const_pointer			const_pointer;
+
+			typedef typename tree_type::const_iterator			iterator;
+			typedef typename tree_type::const_iterator			const_iterator;
+			typedef typename tree_type::const_reverse_iterator	reverse_iterator;
+			typedef typename tree_type::const_reverse_iterator	const_reverse_iterator;
+			// typedef typename tree_type::iterator				iterator;
+			// typedef typename tree_type::const_iterator		const_iterator;
+			// typedef ft::reverse_iterator<iterator>			reverse_iterator;
+			// typedef ft::reverse_iterator<const_iterator>		const_reverse_iterator;
 
 		private:
 			tree_type										_rbtree;

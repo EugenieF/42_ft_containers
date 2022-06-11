@@ -129,19 +129,28 @@ void	findSet(T emptySet, T filledSet, T toInsertSet, U varX, U varY)
 {
 	(void)emptySet;
 
-	typedef typename T::iterator	iterator;
-
-	iterator				it;
+	typename T::iterator	it;
 
 	for (int i = 0; i < 10; i++)
 	{
 		it = filledSet.find(varX[i]);
-		EXPECT_EQ(it.current->data, varX[i]);
+		EXPECT_EQ(*it, varX[i]);
 	}
 	for (int i = 0; i < 5; i++)
 	{
+		it = filledSet.find(varY[i]);
+		EXPECT_EQ(it, filledSet.end());
+	}
+
+	for (int i = 0; i < 5; i++)
+	{
 		it = toInsertSet.find(varY[i]);
-		EXPECT_EQ(it.current->data, varY[i]);
+		EXPECT_EQ(*it, varY[i]);
+	}
+	for (int i = 0; i < 10; i++)
+	{
+		it = toInsertSet.find(varX[i]);
+		EXPECT_EQ(it, toInsertSet.end());
 	}
 }
 
@@ -150,19 +159,28 @@ void	constFindSet(T emptySet, T filledSet, T toInsertSet, U varX, U varY)
 {
 	(void)emptySet;	// test with emptySet
 
-	typedef typename T::const_iterator	const_iterator;
-
-	const_iterator	const_it;
+	typename T::const_iterator	const_it;
 
 	for (int i = 0; i < 10; i++)
 	{
 		const_it = filledSet.find(varX[i]);
-		EXPECT_EQ(const_it.current->data, varX[i]);
+		EXPECT_EQ(*const_it, varX[i]);
 	}
 	for (int i = 0; i < 5; i++)
 	{
+		const_it = filledSet.find(varY[i]);
+		EXPECT_EQ(const_it, filledSet.end());
+	}
+
+	for (int i = 0; i < 5; i++)
+	{
 		const_it = toInsertSet.find(varY[i]);
-		EXPECT_EQ(const_it.current->data, varY[i]);
+		EXPECT_EQ(*const_it, varY[i]);
+	}
+	for (int i = 0; i < 10; i++)
+	{
+		const_it = toInsertSet.find(varX[i]);
+		EXPECT_EQ(const_it, toInsertSet.end());
 	}
 }
 
@@ -183,6 +201,290 @@ void	countSet(T emptySet, T filledSet, T toInsertSet, U varX, U varY)
 		EXPECT_EQ(toInsertSet.count(varX[i]), (size_t)0);
 	for (int i = 0; i < 5; i++)
 		EXPECT_EQ(toInsertSet.count(varY[i]), (size_t)1);
+}
+
+template <typename T, typename U>
+void	lowerBoundSet(T filledSet, T toInsertSet, U varX, U varY)
+{
+	typename T::iterator	it;
+
+	for (int i = 0; i < 10; i++)
+	{
+		it = filledSet.lower_bound(varX[i]);
+		EXPECT_EQ(*it, varX[i]);
+	}
+	for (int i = 0; i < 5; i++)
+	{
+		it = filledSet.lower_bound(varY[i]);
+		EXPECT_EQ(it, filledSet.end());
+	}
+
+	for (int i = 0; i < 5; i++)
+	{
+		it = toInsertSet.lower_bound(varY[i]);
+		EXPECT_EQ(*it, varY[i]);
+	}
+	for (int i = 0; i < 10; i++)
+	{
+		it = toInsertSet.lower_bound(varX[i]);
+		EXPECT_EQ(*it, varY[0]);
+	}
+}
+
+template <typename T, typename U>
+void	constLowerBoundSet(T filledSet, T toInsertSet, U varX, U varY)
+{
+	typename T::const_iterator	const_it;
+
+	for (int i = 0; i < 10; i++)
+	{
+		const_it = filledSet.lower_bound(varX[i]);
+		EXPECT_EQ(*const_it, varX[i]);
+	}
+	for (int i = 0; i < 5; i++)
+	{
+		const_it = filledSet.lower_bound(varY[i]);
+		EXPECT_EQ(const_it, filledSet.end());
+	}
+
+	for (int i = 0; i < 5; i++)
+	{
+		const_it = toInsertSet.lower_bound(varY[i]);
+		EXPECT_EQ(*const_it, varY[i]);
+	}
+	for (int i = 0; i < 10; i++)
+	{
+		const_it = toInsertSet.lower_bound(varX[i]);
+		EXPECT_EQ(*const_it, varY[0]);
+	}
+}
+
+template <typename T, typename U>
+void	upperBoundSet(T filledSet, T toInsertSet, U varX, U varY)
+{
+	typename T::iterator	it;
+
+	for (int i = 0; i < 9; i++)
+	{
+		it = filledSet.upper_bound(varX[i]);
+		EXPECT_EQ(*it, varX[i + 1]);
+	}
+	it = filledSet.upper_bound(varX[9]);
+	EXPECT_EQ(it, filledSet.end());
+	for (int i = 0; i < 5; i++)
+	{
+		it = filledSet.upper_bound(varY[i]);
+		EXPECT_EQ(it, filledSet.end());
+	}
+
+	for (int i = 0; i < 4; i++)
+	{
+		it = toInsertSet.upper_bound(varY[i]);
+		EXPECT_EQ(*it, varY[i + 1]);
+	}
+	it = toInsertSet.upper_bound(varY[4]);
+	EXPECT_EQ(it, toInsertSet.end());
+	for (int i = 0; i < 5; i++)
+	{
+		it = toInsertSet.upper_bound(varX[i]);
+		EXPECT_EQ(*it, varY[0]);
+	}
+}
+
+template <typename T, typename U>
+void	constUpperBoundSet(T filledSet, T toInsertSet, U varX, U varY)
+{
+	typename T::const_iterator	const_it;
+
+	for (int i = 0; i < 9; i++)
+	{
+		const_it = filledSet.upper_bound(varX[i]);
+		EXPECT_EQ(*const_it, varX[i + 1]);
+	}
+	const_it = filledSet.upper_bound(varX[9]);
+	EXPECT_EQ(const_it, filledSet.end());
+	for (int i = 0; i < 5; i++)
+	{
+		const_it = filledSet.upper_bound(varY[i]);
+		EXPECT_EQ(const_it, filledSet.end());
+	}
+
+	for (int i = 0; i < 4; i++)
+	{
+		const_it = toInsertSet.upper_bound(varY[i]);
+		EXPECT_EQ(*const_it, varY[i + 1]);
+	}
+	const_it = toInsertSet.upper_bound(varY[4]);
+	EXPECT_EQ(const_it, toInsertSet.end());
+	for (int i = 0; i < 5; i++)
+	{
+		const_it = toInsertSet.upper_bound(varX[i]);
+		EXPECT_EQ(*const_it, varY[0]);
+	}
+}
+
+template <typename T, typename U>
+void	equalRangeSet(T filledSet, T toInsertSet, U varX, U varY)
+{
+	typename T::iterator	itLower;
+	typename T::iterator	itUpper;
+
+	for (int i = 0; i < 10; i++)
+	{
+		itLower = filledSet.equal_range(varX[i]).first;
+		itUpper = filledSet.equal_range(varX[i]).second;
+		EXPECT_EQ(*itLower, varX[i]);
+		if (i < 9)
+			EXPECT_EQ(*itUpper, varX[i + 1]);
+		else
+			EXPECT_EQ(itUpper, filledSet.end());
+	}
+	for (int i = 0; i < 5; i++)
+	{
+		itLower = filledSet.equal_range(varY[i]).first;
+		itUpper = filledSet.equal_range(varY[i]).second;
+		EXPECT_EQ(itLower, filledSet.end());
+		EXPECT_EQ(itUpper, filledSet.end());
+	}
+
+	for (int i = 0; i < 5; i++)
+	{
+		itLower = toInsertSet.equal_range(varY[i]).first;
+		itUpper = toInsertSet.equal_range(varY[i]).second;
+		EXPECT_EQ(*itLower, varY[i]);
+		if (i < 4)
+			EXPECT_EQ(*itUpper, varY[i + 1]);
+		else
+			EXPECT_EQ(itUpper, toInsertSet.end());
+	}
+	for (int i = 0; i < 10; i++)
+	{
+		itLower = toInsertSet.equal_range(varX[i]).first;
+		itUpper = toInsertSet.equal_range(varX[i]).second;
+		EXPECT_EQ(*itLower, varY[0]);
+		EXPECT_EQ(*itUpper, varY[0]);
+	}
+}
+
+template <typename T, typename U>
+void	constEqualRangeSet(T filledSet, T toInsertSet, U varX, U varY)
+{
+	typename T::const_iterator	constItLower;
+	typename T::const_iterator	constItUpper;
+
+	for (int i = 0; i < 10; i++)
+	{
+		constItLower = filledSet.equal_range(varX[i]).first;
+		constItUpper = filledSet.equal_range(varX[i]).second;
+		EXPECT_EQ(*constItLower, varX[i]);
+		if (i < 9)
+			EXPECT_EQ(*constItUpper, varX[i + 1]);
+		else
+			EXPECT_EQ(constItUpper, filledSet.end());
+	}
+	for (int i = 0; i < 5; i++)
+	{
+		constItLower = filledSet.equal_range(varY[i]).first;
+		constItUpper = filledSet.equal_range(varY[i]).second;
+		EXPECT_EQ(constItLower, filledSet.end());
+		EXPECT_EQ(constItUpper, filledSet.end());
+	}
+
+	for (int i = 0; i < 5; i++)
+	{
+		constItLower = toInsertSet.equal_range(varY[i]).first;
+		constItUpper = toInsertSet.equal_range(varY[i]).second;
+		EXPECT_EQ(*constItLower, varY[i]);
+		if (i < 4)
+			EXPECT_EQ(*constItUpper, varY[i + 1]);
+		else
+			EXPECT_EQ(constItUpper, toInsertSet.end());
+	}
+	for (int i = 0; i < 10; i++)
+	{
+		constItLower = toInsertSet.equal_range(varX[i]).first;
+		constItUpper = toInsertSet.equal_range(varX[i]).second;
+		EXPECT_EQ(*constItLower, varY[0]);
+		EXPECT_EQ(*constItUpper, varY[0]);
+	}
+}
+
+template <typename T, typename U>
+void	iteratorSet(T filledSet, T toInsertSet, U varX, U varY)
+{
+	typename T::iterator			it;
+	typename T::reverse_iterator	rev_it;
+
+	it = filledSet.begin();
+	for (int i = 0; i < 10; i++, it++)
+		EXPECT_EQ(*it, varX[i]);
+	it = filledSet.end();
+	it--;
+	for (int i = 9; i <= 0; i--, it--)
+		EXPECT_EQ(*it, varX[i]);
+
+	rev_it = filledSet.rbegin();
+	for (int i = 9; i <= 0; i--, rev_it++)
+		EXPECT_EQ(*rev_it, varX[i]);
+	rev_it = filledSet.rend();
+	rev_it--;
+	for (int i = 0; i < 9; i++, rev_it--)
+		EXPECT_EQ(*rev_it, varX[i]);
+
+	it = toInsertSet.begin();
+	for (int i = 0; i < 5; i++, it++)
+		EXPECT_EQ(*it, varY[i]);
+	it = toInsertSet.end();
+	it--;
+	for (int i = 4; i <= 0; i++, it--)
+		EXPECT_EQ(*it, varY[i]);
+
+	rev_it = toInsertSet.rbegin();
+	for (int i = 4; i <= 0; i--, rev_it++)
+		EXPECT_EQ(*rev_it, varY[i]);
+	rev_it = toInsertSet.rend();
+	rev_it--;
+	for (int i = 0; i < 4; i++, rev_it--)
+		EXPECT_EQ(*rev_it, varY[i]);
+}
+
+template <typename T, typename U>
+void	constIteratorsSet(T filledSet, T toInsertSet, U varX, U varY)
+{
+	typename T::const_iterator			const_it;
+	typename T::const_reverse_iterator	const_rev_it;
+
+	const_it = filledSet.begin();
+	for (int i = 0; i < 10; i++, const_it++)
+		EXPECT_EQ(*const_it, varX[i]);
+	const_it = filledSet.end();
+	const_it--;
+	for (int i = 9; i <= 0; i--, const_it--)
+		EXPECT_EQ(*const_it, varX[i]);
+
+	const_rev_it = filledSet.rbegin();
+	for (int i = 9; i <= 0; i--, const_rev_it++)
+		EXPECT_EQ(*const_rev_it, varX[i]);
+	const_rev_it = filledSet.rend();
+	const_rev_it--;
+	for (int i = 0; i < 9; i++, const_rev_it--)
+		EXPECT_EQ(*const_rev_it, varX[i]);
+
+	const_it = toInsertSet.begin();
+	for (int i = 0; i < 5; i++, const_it++)
+		EXPECT_EQ(*const_it, varY[i]);
+	const_it = toInsertSet.end();
+	const_it--;
+	for (int i = 4; i <= 0; i++, const_it--)
+		EXPECT_EQ(*const_it, varY[i]);
+
+	const_rev_it = toInsertSet.rbegin();
+	for (int i = 4; i <= 0; i--, const_rev_it++)
+		EXPECT_EQ(*const_rev_it, varY[i]);
+	const_rev_it = toInsertSet.rend();
+	const_rev_it--;
+	for (int i = 0; i < 4; i++, const_rev_it--)
+		EXPECT_EQ(*const_rev_it, varY[i]);
 }
 
 /*****************************************************************/
@@ -289,12 +591,92 @@ TEST_F(stdSetTest, swapSet)
 // 	maxSizeSet(stringEmptySet, stringFilledSet, stringToInsertSet, MAX_SIZE_STRING_SET);
 // }
 
+TEST_F(stdSetTest, findSet)
+{
+	findSet(intEmptySet, intFilledSet, intToInsertSet, intX, intY);
+	findSet(floatEmptySet, floatFilledSet, floatToInsertSet, floatX, floatY);
+	findSet(doubleEmptySet, doubleFilledSet, doubleToInsertSet, doubleX, doubleY);
+	findSet(stringEmptySet, stringFilledSet, stringToInsertSet, stringX, stringY);
+}
+
+TEST_F(stdSetTest, constFindSet)
+{
+	constFindSet(intEmptySet, intFilledSet, intToInsertSet, intX, intY);
+	constFindSet(floatEmptySet, floatFilledSet, floatToInsertSet, floatX, floatY);
+	constFindSet(doubleEmptySet, doubleFilledSet, doubleToInsertSet, doubleX, doubleY);
+	constFindSet(stringEmptySet, stringFilledSet, stringToInsertSet, stringX, stringY);
+}
+
 TEST_F(stdSetTest, countSet)
 {
 	countSet(intEmptySet, intFilledSet, intToInsertSet, intX, intY);
 	countSet(floatEmptySet, floatFilledSet, floatToInsertSet, floatX, floatY);
 	countSet(doubleEmptySet, doubleFilledSet, doubleToInsertSet, doubleX, doubleY);
 	countSet(stringEmptySet, stringFilledSet, stringToInsertSet, stringX, stringY);
+}
+
+TEST_F(stdSetTest, lowerBoundSet)
+{
+	lowerBoundSet(intFilledSet, intToInsertSet, intX, intY);
+	lowerBoundSet(floatFilledSet, floatToInsertSet, floatX, floatY);
+	lowerBoundSet(doubleFilledSet, doubleToInsertSet, doubleX, doubleY);
+	lowerBoundSet(stringFilledSet, stringToInsertSet, stringX, stringY);
+}
+
+TEST_F(stdSetTest, constLowerBoundSet)
+{
+	lowerBoundSet(intFilledSet, intToInsertSet, intX, intY);
+	lowerBoundSet(floatFilledSet, floatToInsertSet, floatX, floatY);
+	lowerBoundSet(doubleFilledSet, doubleToInsertSet, doubleX, doubleY);
+	lowerBoundSet(stringFilledSet, stringToInsertSet, stringX, stringY);
+}
+
+TEST_F(stdSetTest, upperBoundSet)
+{
+	upperBoundSet(intFilledSet, intToInsertSet, intX, intY);
+	upperBoundSet(floatFilledSet, floatToInsertSet, floatX, floatY);
+	upperBoundSet(doubleFilledSet, doubleToInsertSet, doubleX, doubleY);
+	upperBoundSet(stringFilledSet, stringToInsertSet, stringX, stringY);
+}
+
+TEST_F(stdSetTest, constUpperBoundSet)
+{
+	constUpperBoundSet(intFilledSet, intToInsertSet, intX, intY);
+	constUpperBoundSet(floatFilledSet, floatToInsertSet, floatX, floatY);
+	constUpperBoundSet(doubleFilledSet, doubleToInsertSet, doubleX, doubleY);
+	constUpperBoundSet(stringFilledSet, stringToInsertSet, stringX, stringY);
+}
+
+TEST_F(stdSetTest, equalRangeSet)
+{
+	equalRangeSet(intFilledSet, intToInsertSet, intX, intY);
+	equalRangeSet(floatFilledSet, floatToInsertSet, floatX, floatY);
+	equalRangeSet(doubleFilledSet, doubleToInsertSet, doubleX, doubleY);
+	equalRangeSet(stringFilledSet, stringToInsertSet, stringX, stringY);
+}
+
+TEST_F(stdSetTest, constEqualRangeSet)
+{
+	constEqualRangeSet(intFilledSet, intToInsertSet, intX, intY);
+	constEqualRangeSet(floatFilledSet, floatToInsertSet, floatX, floatY);
+	constEqualRangeSet(doubleFilledSet, doubleToInsertSet, doubleX, doubleY);
+	constEqualRangeSet(stringFilledSet, stringToInsertSet, stringX, stringY);
+}
+
+TEST_F(stdSetTest, iteratorSet)
+{
+	iteratorSet(intFilledSet, intToInsertSet, intX, intY);
+	iteratorSet(floatFilledSet, floatToInsertSet, floatX, floatY);
+	iteratorSet(doubleFilledSet, doubleToInsertSet, doubleX, doubleY);
+	iteratorSet(stringFilledSet, stringToInsertSet, stringX, stringY);
+}
+
+TEST_F(stdSetTest, constIteratorSet)
+{
+	iteratorSet(intFilledSet, intToInsertSet, intX, intY);
+	iteratorSet(floatFilledSet, floatToInsertSet, floatX, floatY);
+	iteratorSet(doubleFilledSet, doubleToInsertSet, doubleX, doubleY);
+	iteratorSet(stringFilledSet, stringToInsertSet, stringX, stringY);
 }
 
 /*****************************************************************/
@@ -424,3 +806,67 @@ TEST_F(ftSetTest, countSet)
 	countSet(doubleEmptySet, doubleFilledSet, doubleToInsertSet, doubleX, doubleY);
 	countSet(stringEmptySet, stringFilledSet, stringToInsertSet, stringX, stringY);
 }
+
+TEST_F(ftSetTest, lowerBoundSet)
+{
+	lowerBoundSet(intFilledSet, intToInsertSet, intX, intY);
+	lowerBoundSet(floatFilledSet, floatToInsertSet, floatX, floatY);
+	lowerBoundSet(doubleFilledSet, doubleToInsertSet, doubleX, doubleY);
+	lowerBoundSet(stringFilledSet, stringToInsertSet, stringX, stringY);
+}
+
+TEST_F(ftSetTest, constLowerBoundSet)
+{
+	lowerBoundSet(intFilledSet, intToInsertSet, intX, intY);
+	lowerBoundSet(floatFilledSet, floatToInsertSet, floatX, floatY);
+	lowerBoundSet(doubleFilledSet, doubleToInsertSet, doubleX, doubleY);
+	lowerBoundSet(stringFilledSet, stringToInsertSet, stringX, stringY);
+}
+
+TEST_F(ftSetTest, upperBoundSet)
+{
+	upperBoundSet(intFilledSet, intToInsertSet, intX, intY);
+	upperBoundSet(floatFilledSet, floatToInsertSet, floatX, floatY);
+	upperBoundSet(doubleFilledSet, doubleToInsertSet, doubleX, doubleY);
+	upperBoundSet(stringFilledSet, stringToInsertSet, stringX, stringY);
+}
+
+TEST_F(ftSetTest, constUpperBoundSet)
+{
+	constUpperBoundSet(intFilledSet, intToInsertSet, intX, intY);
+	constUpperBoundSet(floatFilledSet, floatToInsertSet, floatX, floatY);
+	constUpperBoundSet(doubleFilledSet, doubleToInsertSet, doubleX, doubleY);
+	constUpperBoundSet(stringFilledSet, stringToInsertSet, stringX, stringY);
+}
+
+TEST_F(ftSetTest, equalRangeSet)
+{
+	equalRangeSet(intFilledSet, intToInsertSet, intX, intY);
+	equalRangeSet(floatFilledSet, floatToInsertSet, floatX, floatY);
+	equalRangeSet(doubleFilledSet, doubleToInsertSet, doubleX, doubleY);
+	equalRangeSet(stringFilledSet, stringToInsertSet, stringX, stringY);
+}
+
+TEST_F(ftSetTest, constEqualRangeSet)
+{
+	constEqualRangeSet(intFilledSet, intToInsertSet, intX, intY);
+	constEqualRangeSet(floatFilledSet, floatToInsertSet, floatX, floatY);
+	constEqualRangeSet(doubleFilledSet, doubleToInsertSet, doubleX, doubleY);
+	constEqualRangeSet(stringFilledSet, stringToInsertSet, stringX, stringY);
+}
+
+// TEST_F(ftSetTest, iteratorSet)
+// {
+// 	iteratorSet(intFilledSet, intToInsertSet, intX, intY);
+// 	iteratorSet(floatFilledSet, floatToInsertSet, floatX, floatY);
+// 	iteratorSet(doubleFilledSet, doubleToInsertSet, doubleX, doubleY);
+// 	iteratorSet(stringFilledSet, stringToInsertSet, stringX, stringY);
+// }
+
+// TEST_F(ftSetTest, constIteratorSet)
+// {
+// 	iteratorSet(intFilledSet, intToInsertSet, intX, intY);
+// 	iteratorSet(floatFilledSet, floatToInsertSet, floatX, floatY);
+// 	iteratorSet(doubleFilledSet, doubleToInsertSet, doubleX, doubleY);
+// 	iteratorSet(stringFilledSet, stringToInsertSet, stringX, stringY);
+// }
