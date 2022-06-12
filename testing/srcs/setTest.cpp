@@ -855,18 +855,18 @@ TEST_F(ftSetTest, constEqualRangeSet)
 	constEqualRangeSet(stringFilledSet, stringToInsertSet, stringX, stringY);
 }
 
-// TEST_F(ftSetTest, iteratorSet)
-// {
-// 	iteratorSet(intFilledSet, intToInsertSet, intX, intY);
-// 	iteratorSet(floatFilledSet, floatToInsertSet, floatX, floatY);
-// 	iteratorSet(doubleFilledSet, doubleToInsertSet, doubleX, doubleY);
-// 	iteratorSet(stringFilledSet, stringToInsertSet, stringX, stringY);
-// }
+TEST_F(ftSetTest, iteratorSet)
+{
+	iteratorSet(intFilledSet, intToInsertSet, intX, intY);
+	iteratorSet(floatFilledSet, floatToInsertSet, floatX, floatY);
+	iteratorSet(doubleFilledSet, doubleToInsertSet, doubleX, doubleY);
+	iteratorSet(stringFilledSet, stringToInsertSet, stringX, stringY);
+}
 
-// TEST_F(ftSetTest, constIteratorSet)
-// {
-// 	iteratorSet(intFilledSet, intToInsertSet, intX, intY);
-// 	iteratorSet(floatFilledSet, floatToInsertSet, floatX, floatY);
-// 	iteratorSet(doubleFilledSet, doubleToInsertSet, doubleX, doubleY);
-// 	iteratorSet(stringFilledSet, stringToInsertSet, stringX, stringY);
-// }
+TEST_F(ftSetTest, constIteratorSet)
+{
+	iteratorSet(intFilledSet, intToInsertSet, intX, intY);
+	iteratorSet(floatFilledSet, floatToInsertSet, floatX, floatY);
+	iteratorSet(doubleFilledSet, doubleToInsertSet, doubleX, doubleY);
+	iteratorSet(stringFilledSet, stringToInsertSet, stringX, stringY);
+}

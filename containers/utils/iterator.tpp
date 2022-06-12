@@ -10,17 +10,18 @@ template <class Iterator>
 reverse_iterator<Iterator>::reverse_iterator (Iterator it): _current(it) {}
 
 template <class Iterator>
-reverse_iterator<Iterator>::reverse_iterator (const reverse_iterator<Iterator>& rev_it):
+template <class U>
+reverse_iterator<Iterator>::reverse_iterator (const reverse_iterator<U>& rev_it):
 	_current(rev_it._current) {}
 
 template <class Iterator>
 reverse_iterator<Iterator>::~reverse_iterator() {}
 
 template <class Iterator>
-reverse_iterator<Iterator>&		reverse_iterator<Iterator>::operator=(const reverse_iterator<Iterator>& other)
+template <class U>
+reverse_iterator<Iterator>&		reverse_iterator<Iterator>::operator=(const reverse_iterator<U>& other)
 {
-	if (this != &other)
-		this->_current = other._current;
+	this->_current = other.base();
 	return (*this);
 }
 
@@ -115,6 +116,12 @@ reverse_iterator<Iterator> 	reverse_iterator<Iterator>::operator- (
 	typename reverse_iterator<Iterator>::difference_type n) const
 {
 	return (reverse_iterator<Iterator>(this->_current + n));
+}
+
+template <class Iterator>
+reverse_iterator<Iterator>::operator	reverse_iterator<const Iterator>(void) const
+{
+	return (reverse_iterator<const Iterator>(this->base()));
 }
 
 /**************    NON-MEMBER FUNCTION OVERLOADS     **************/

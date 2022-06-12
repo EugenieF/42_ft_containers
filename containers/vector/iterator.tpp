@@ -108,6 +108,11 @@ vector_iterator<T> 		vector_iterator<T>::operator- (typename vector_iterator<T>:
 	return (vector_iterator(this->_current - n));
 }
 
+template <class T>
+vector_iterator<T>::operator	vector_iterator<const T>(void) const
+{
+	return (vector_iterator<const T>(this->base()));
+}
 
 /**************    NON-MEMBER FUNCTION OVERLOADS     **************/
 

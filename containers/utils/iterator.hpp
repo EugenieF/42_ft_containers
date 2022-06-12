@@ -82,9 +82,11 @@ namespace ft
 		public:
 			reverse_iterator();
 			explicit reverse_iterator (iterator_type it);
-  			reverse_iterator (const reverse_iterator& rev_it);
+			template <class U>
+  			reverse_iterator (const reverse_iterator<U>& rev_it);
 			~reverse_iterator();
-			reverse_iterator&												operator=( const reverse_iterator& other );
+			template <class U>
+			reverse_iterator&												operator=(const reverse_iterator<U>& other);
 			iterator_type													base() const;
 			reference														operator*() const;
 			pointer															operator->() const;
@@ -97,6 +99,8 @@ namespace ft
 			reverse_iterator  												operator--(int);
 			reverse_iterator&												operator-= (difference_type n);
 			reverse_iterator 												operator- (difference_type n) const;
+
+			operator														reverse_iterator<iterator_type const>(void) const;
 	};
 
 	/**************    NON-MEMBER FUNCTION OVERLOADS     **************/

@@ -45,7 +45,7 @@ namespace ft
 			rbtree_iterator& 							operator--();
 			rbtree_iterator  							operator--(int);
 
-			operator	rbtree_iterator<value_type const, Node>(void) const;	// to investigate ?
+			operator									rbtree_iterator<value_type const, Node>(void) const;	// to investigate ?
 			
 			// bool					operator== (const rbtree_iterator& rhs);
  			// bool					operator!= (const rbtree_iterator& rhs);

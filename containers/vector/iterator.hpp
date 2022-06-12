@@ -39,6 +39,8 @@ namespace ft
 			vector_iterator&							operator-= (difference_type n);
 			vector_iterator 							operator- (difference_type n) const;
 
+			operator									vector_iterator<const value_type>(void) const;
+
 		private:
 			pointer										_current;
 	};

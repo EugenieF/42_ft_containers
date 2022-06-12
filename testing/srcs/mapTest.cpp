@@ -966,7 +966,7 @@ TEST_F(ftMapTest, iteratorMap)
 TEST_F(ftMapTest, constIteratorMap)
 {
 	constIteratorMap(intIntFilledMap, intIntToInsertMap, intX, intY, intX, intY);
-	// constIteratorMap(intFloatFilledMap, intFloatToInsertMap, intX, intY, floatX, floatY);
-	// constIteratorMap(intDoubleFilledMap, intDoubleToInsertMap, intX, intY, doubleX, doubleY);
-	// constIteratorMap(intStringFilledMap, intStringToInsertMap, intX, intY, stringX, stringY);
+	constIteratorMap(intFloatFilledMap, intFloatToInsertMap, intX, intY, floatX, floatY);
+	constIteratorMap(intDoubleFilledMap, intDoubleToInsertMap, intX, intY, doubleX, doubleY);
+	constIteratorMap(intStringFilledMap, intStringToInsertMap, intX, intY, stringX, stringY);
 }
