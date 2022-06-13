@@ -33,9 +33,9 @@ template <class T, class Allocator, class Compare>
 red_black_tree<T, Allocator, Compare>&	red_black_tree<T, Allocator, Compare>::operator=(
 	red_black_tree<T, Allocator, Compare> const& other)
 {
-	typedef typename red_black_tree<T, Allocator, Compare>::iterator	iterator;
+	typedef typename red_black_tree<T, Allocator, Compare>::const_iterator	const_iterator;
 	
-	iterator	ptr;
+	const_iterator	ptr;
 
 	if (this != &other)
 	{

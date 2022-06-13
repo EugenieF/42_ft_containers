@@ -449,7 +449,7 @@ void	iteratorSet(T filledSet, T toInsertSet, U varX, U varY)
 }
 
 template <typename T, typename U>
-void	constIteratorsSet(T filledSet, T toInsertSet, U varX, U varY)
+void	constIteratorSet(T filledSet, T toInsertSet, U varX, U varY)
 {
 	typename T::const_iterator			const_it;
 	typename T::const_reverse_iterator	const_rev_it;
@@ -485,6 +485,203 @@ void	constIteratorsSet(T filledSet, T toInsertSet, U varX, U varY)
 	const_rev_it--;
 	for (int i = 0; i < 4; i++, const_rev_it--)
 		EXPECT_EQ(*const_rev_it, varY[i]);
+}
+
+template <typename T>
+void	operatorEqualSet(T emptySet, T filledSet, T toInsertSet)
+{
+	T	copyFilledSet(filledSet);
+
+	EXPECT_EQ(emptySet == emptySet, true);
+	EXPECT_EQ(emptySet == filledSet, false);
+	EXPECT_EQ(emptySet == toInsertSet, false);
+	EXPECT_EQ(filledSet == toInsertSet, false);
+
+	EXPECT_EQ(filledSet == copyFilledSet, true);
+	EXPECT_EQ(copyFilledSet == filledSet, true);
+	copyFilledSet.erase(copyFilledSet.begin());
+	EXPECT_EQ(filledSet == copyFilledSet, false);
+	EXPECT_EQ(copyFilledSet == filledSet, false);
+}
+
+template <typename T>
+void	operatorNotEqualSet(T emptySet, T filledSet, T toInsertSet)
+{
+	T	copyFilledSet(filledSet);
+
+	EXPECT_EQ(emptySet != emptySet, false);
+	EXPECT_EQ(emptySet != filledSet, true);
+	EXPECT_EQ(emptySet != toInsertSet, true);
+	EXPECT_EQ(filledSet != toInsertSet, true);
+
+	EXPECT_EQ(filledSet != copyFilledSet, false);
+	EXPECT_EQ(copyFilledSet != filledSet, false);
+	copyFilledSet.erase(copyFilledSet.begin());
+	EXPECT_EQ(filledSet != copyFilledSet, true);
+	EXPECT_EQ(copyFilledSet != filledSet, true);
+}
+
+template <typename T>
+void	operatorSupEqualSet(T emptySet, T filledSet, T toInsertSet)
+{
+	T	copyFilledSet(filledSet);
+	T	copyBisFilledSet(filledSet);
+
+	EXPECT_EQ(emptySet >= emptySet, true);
+	EXPECT_EQ(emptySet >= filledSet, false);
+	EXPECT_EQ(emptySet >= toInsertSet, false);
+	EXPECT_EQ(filledSet >= toInsertSet, false);
+	EXPECT_EQ(filledSet >= emptySet, true);
+	EXPECT_EQ(toInsertSet >= emptySet, true);
+	EXPECT_EQ(toInsertSet >= filledSet, true);
+
+	EXPECT_EQ(filledSet >= copyFilledSet, true);
+	EXPECT_EQ(copyFilledSet >= filledSet, true);
+	copyFilledSet.erase(copyFilledSet.begin());
+	EXPECT_EQ(filledSet >= copyFilledSet, false);
+	EXPECT_EQ(copyFilledSet >= filledSet, true);
+	copyBisFilledSet.erase(--copyBisFilledSet.end());
+	EXPECT_EQ(filledSet >= copyBisFilledSet, true);
+	EXPECT_EQ(copyBisFilledSet >= filledSet, false);
+}
+
+template <typename T>
+void	operatorSupSet(T emptySet, T filledSet, T toInsertSet)
+{
+	T	copyFilledSet(filledSet);
+	T	copyBisFilledSet(filledSet);
+
+	EXPECT_EQ(emptySet > emptySet, false);
+	EXPECT_EQ(emptySet > filledSet, false);
+	EXPECT_EQ(emptySet > toInsertSet, false);
+	EXPECT_EQ(filledSet > toInsertSet, false);
+	EXPECT_EQ(filledSet > emptySet, true);
+	EXPECT_EQ(toInsertSet > emptySet, true);
+	EXPECT_EQ(toInsertSet > filledSet, true);
+
+	EXPECT_EQ(filledSet > copyFilledSet, false);
+	EXPECT_EQ(copyFilledSet > filledSet, false);
+	copyFilledSet.erase(copyFilledSet.begin());
+	EXPECT_EQ(filledSet > copyFilledSet, false);
+	EXPECT_EQ(copyFilledSet > filledSet, true);
+	copyBisFilledSet.erase(--copyBisFilledSet.end());
+	EXPECT_EQ(filledSet > copyBisFilledSet, true);
+	EXPECT_EQ(copyBisFilledSet > filledSet, false);
+}
+
+template <typename T>
+void	operatorInfEqualSet(T emptySet, T filledSet, T toInsertSet)
+{
+	T	copyFilledSet(filledSet);
+	T	copyBisFilledSet(filledSet);
+
+	EXPECT_EQ(emptySet <= emptySet, true);
+	EXPECT_EQ(emptySet <= filledSet, true);
+	EXPECT_EQ(emptySet <= toInsertSet, true);
+	EXPECT_EQ(filledSet <= toInsertSet, true);
+	EXPECT_EQ(filledSet <= emptySet, false);
+	EXPECT_EQ(toInsertSet <= emptySet, false);
+	EXPECT_EQ(toInsertSet <= filledSet, false);
+
+	EXPECT_EQ(filledSet <= copyFilledSet, true);
+	EXPECT_EQ(copyFilledSet <= filledSet, true);
+	copyFilledSet.erase(copyFilledSet.begin());
+	EXPECT_EQ(filledSet <= copyFilledSet, true);
+	EXPECT_EQ(copyFilledSet <= filledSet, false);
+	copyBisFilledSet.erase(--copyBisFilledSet.end());
+	EXPECT_EQ(filledSet <= copyBisFilledSet, false);
+	EXPECT_EQ(copyBisFilledSet <= filledSet, true);
+}
+
+template <typename T>
+void	operatorInfSet(T emptySet, T filledSet, T toInsertSet)
+{
+	T	copyFilledSet(filledSet);
+	T	copyBisFilledSet(filledSet);
+
+	EXPECT_EQ(emptySet < emptySet, false);
+	EXPECT_EQ(emptySet < filledSet, true);
+	EXPECT_EQ(emptySet < toInsertSet, true);
+	EXPECT_EQ(filledSet < toInsertSet, true);
+	EXPECT_EQ(filledSet < emptySet, false);
+	EXPECT_EQ(toInsertSet < emptySet, false);
+	EXPECT_EQ(toInsertSet < filledSet, false);
+
+	EXPECT_EQ(filledSet < copyFilledSet, false);
+	EXPECT_EQ(copyFilledSet < filledSet, false);
+	copyFilledSet.erase(copyFilledSet.begin());
+	EXPECT_EQ(filledSet < copyFilledSet, true);
+	EXPECT_EQ(copyFilledSet < filledSet, false);
+	copyBisFilledSet.erase(--copyBisFilledSet.end());
+	EXPECT_EQ(filledSet < copyBisFilledSet, false);
+	EXPECT_EQ(copyBisFilledSet < filledSet, true);
+}
+
+template <typename T, typename U>
+void	constructorSet(T emptySet, T filledSet, T toInsertSet, U varX)
+{
+	typename T::iterator	it;
+
+	T	newEmptySet;
+	EXPECT_EQ(newEmptySet.empty(), true);
+	EXPECT_EQ(emptySet == newEmptySet, true);
+
+	T	copyEmptySet(emptySet);
+	EXPECT_EQ(copyEmptySet.empty(), true);
+	EXPECT_EQ(emptySet == copyEmptySet, true);
+
+	T	copyToInsertSet(toInsertSet);
+	EXPECT_EQ(copyToInsertSet.empty(), false);
+	EXPECT_EQ(toInsertSet == copyToInsertSet, true);
+
+	T	newFilledSet(filledSet.begin(), filledSet.end());
+	EXPECT_EQ(newFilledSet.size(), (size_t)10);
+	EXPECT_EQ(filledSet == newFilledSet, true);
+
+	T	otherFilledSet(++filledSet.begin(), --filledSet.end());
+	EXPECT_EQ(otherFilledSet.size(), (size_t)8);
+	it = otherFilledSet.begin();
+	for (int i = 1; it != otherFilledSet.end(); it++, i++)
+		EXPECT_EQ(*it, varX[i]);
+}
+
+template <typename T>
+void	operatorEgalSet(T emptySet, T filledSet, T toInsertSet)
+{
+	T newSet;
+
+	newSet = filledSet;
+	EXPECT_EQ(newSet.empty(), false);
+	EXPECT_EQ(newSet == filledSet, true);
+
+	newSet = emptySet;
+	EXPECT_EQ(newSet.empty(), true);
+	EXPECT_EQ(newSet == filledSet, false);
+	EXPECT_EQ(newSet == emptySet, true);
+
+	newSet = toInsertSet;
+	EXPECT_EQ(newSet.empty(), false);
+	EXPECT_EQ(newSet == emptySet, false);
+	EXPECT_EQ(newSet == toInsertSet, true);
+}
+
+template <typename T, typename U>
+void	nonMemberSwapSet(
+	T emptySet, T filledSet, T toInsertSet, U varX, U varY, void (*swap)(T& x, T& y))
+{
+	typename T::iterator	it;
+
+	swap(emptySet, filledSet);
+	EXPECT_EQ(emptySet.empty(), false);
+	EXPECT_EQ(filledSet.empty(), true);
+	it = emptySet.begin();
+	for (int i = 0; it != emptySet.end(); it++, i++)
+		EXPECT_EQ(*it, varX[i]);
+
+	swap(emptySet, toInsertSet);
+	it = emptySet.begin();
+	for (int i = 0; it != emptySet.end(); it++, i++)
+		EXPECT_EQ(*it, varY[i]);
 }
 
 /*****************************************************************/
@@ -673,10 +870,82 @@ TEST_F(stdSetTest, iteratorSet)
 
 TEST_F(stdSetTest, constIteratorSet)
 {
-	iteratorSet(intFilledSet, intToInsertSet, intX, intY);
-	iteratorSet(floatFilledSet, floatToInsertSet, floatX, floatY);
-	iteratorSet(doubleFilledSet, doubleToInsertSet, doubleX, doubleY);
-	iteratorSet(stringFilledSet, stringToInsertSet, stringX, stringY);
+	constIteratorSet(intFilledSet, intToInsertSet, intX, intY);
+	constIteratorSet(floatFilledSet, floatToInsertSet, floatX, floatY);
+	constIteratorSet(doubleFilledSet, doubleToInsertSet, doubleX, doubleY);
+	constIteratorSet(stringFilledSet, stringToInsertSet, stringX, stringY);
+}
+
+TEST_F(stdSetTest, operatorEqualSet)
+{
+	operatorEqualSet(intEmptySet, intFilledSet, intToInsertSet);
+	operatorEqualSet(floatEmptySet, floatFilledSet, floatToInsertSet);
+	operatorEqualSet(doubleEmptySet, doubleFilledSet, doubleToInsertSet);
+	operatorEqualSet(stringEmptySet, stringFilledSet, stringToInsertSet);
+}
+
+TEST_F(stdSetTest, operatorNotEqualSet)
+{
+	operatorNotEqualSet(intEmptySet, intFilledSet, intToInsertSet);
+	operatorNotEqualSet(floatEmptySet, floatFilledSet, floatToInsertSet);
+	operatorNotEqualSet(doubleEmptySet, doubleFilledSet, doubleToInsertSet);
+	operatorNotEqualSet(stringEmptySet, stringFilledSet, stringToInsertSet);
+}
+
+TEST_F(stdSetTest, operatorSupEqualSet)
+{
+	operatorSupEqualSet(intEmptySet, intFilledSet, intToInsertSet);
+	operatorSupEqualSet(floatEmptySet, floatFilledSet, floatToInsertSet);
+	operatorSupEqualSet(doubleEmptySet, doubleFilledSet, doubleToInsertSet);
+	operatorSupEqualSet(stringEmptySet, stringFilledSet, stringToInsertSet);
+}
+
+TEST_F(stdSetTest, operatorSupSet)
+{
+	operatorSupSet(intEmptySet, intFilledSet, intToInsertSet);
+	operatorSupSet(floatEmptySet, floatFilledSet, floatToInsertSet);
+	operatorSupSet(doubleEmptySet, doubleFilledSet, doubleToInsertSet);
+	operatorSupSet(stringEmptySet, stringFilledSet, stringToInsertSet);
+}
+
+TEST_F(stdSetTest, operatorInfEqualSet)
+{
+	operatorInfEqualSet(intEmptySet, intFilledSet, intToInsertSet);
+	operatorInfEqualSet(floatEmptySet, floatFilledSet, floatToInsertSet);
+	operatorInfEqualSet(doubleEmptySet, doubleFilledSet, doubleToInsertSet);
+	operatorInfEqualSet(stringEmptySet, stringFilledSet, stringToInsertSet);
+}
+
+TEST_F(stdSetTest, operatorInfSet)
+{
+	operatorInfSet(intEmptySet, intFilledSet, intToInsertSet);
+	operatorInfSet(floatEmptySet, floatFilledSet, floatToInsertSet);
+	operatorInfSet(doubleEmptySet, doubleFilledSet, doubleToInsertSet);
+	operatorInfSet(stringEmptySet, stringFilledSet, stringToInsertSet);
+}
+
+TEST_F(stdSetTest, constructorSet)
+{
+	constructorSet(intEmptySet, intFilledSet, intToInsertSet, intX);
+	constructorSet(floatEmptySet, floatFilledSet, floatToInsertSet, floatX);
+	constructorSet(doubleEmptySet, doubleFilledSet, doubleToInsertSet, doubleX);
+	constructorSet(stringEmptySet, stringFilledSet, stringToInsertSet, stringX);
+}
+
+TEST_F(stdSetTest, operatorEgalSet)
+{
+	operatorEgalSet(intEmptySet, intFilledSet, intToInsertSet);
+	operatorEgalSet(floatEmptySet, floatFilledSet, floatToInsertSet);
+	operatorEgalSet(doubleEmptySet, doubleFilledSet, doubleToInsertSet);
+	operatorEgalSet(stringEmptySet, stringFilledSet, stringToInsertSet);
+}
+
+TEST_F(stdSetTest, nonMemberSwapSet)
+{
+	nonMemberSwapSet(intEmptySet, intFilledSet, intToInsertSet, intX, intY, &std::swap);
+	nonMemberSwapSet(floatEmptySet, floatFilledSet, floatToInsertSet, floatX, floatY, &std::swap);
+	nonMemberSwapSet(doubleEmptySet, doubleFilledSet, doubleToInsertSet, doubleX, doubleY, &std::swap);
+	nonMemberSwapSet(stringEmptySet, stringFilledSet, stringToInsertSet, stringX, stringY, &std::swap);
 }
 
 /*****************************************************************/
@@ -865,8 +1134,81 @@ TEST_F(ftSetTest, iteratorSet)
 
 TEST_F(ftSetTest, constIteratorSet)
 {
-	iteratorSet(intFilledSet, intToInsertSet, intX, intY);
-	iteratorSet(floatFilledSet, floatToInsertSet, floatX, floatY);
-	iteratorSet(doubleFilledSet, doubleToInsertSet, doubleX, doubleY);
-	iteratorSet(stringFilledSet, stringToInsertSet, stringX, stringY);
+	constIteratorSet(intFilledSet, intToInsertSet, intX, intY);
+	constIteratorSet(floatFilledSet, floatToInsertSet, floatX, floatY);
+	constIteratorSet(doubleFilledSet, doubleToInsertSet, doubleX, doubleY);
+	constIteratorSet(stringFilledSet, stringToInsertSet, stringX, stringY);
+}
+
+
+TEST_F(ftSetTest, operatorEqualSet)
+{
+	operatorEqualSet(intEmptySet, intFilledSet, intToInsertSet);
+	operatorEqualSet(floatEmptySet, floatFilledSet, floatToInsertSet);
+	operatorEqualSet(doubleEmptySet, doubleFilledSet, doubleToInsertSet);
+	operatorEqualSet(stringEmptySet, stringFilledSet, stringToInsertSet);
+}
+
+TEST_F(ftSetTest, operatorNotEqualSet)
+{
+	operatorNotEqualSet(intEmptySet, intFilledSet, intToInsertSet);
+	operatorNotEqualSet(floatEmptySet, floatFilledSet, floatToInsertSet);
+	operatorNotEqualSet(doubleEmptySet, doubleFilledSet, doubleToInsertSet);
+	operatorNotEqualSet(stringEmptySet, stringFilledSet, stringToInsertSet);
+}
+
+TEST_F(ftSetTest, operatorSupEqualSet)
+{
+	operatorSupEqualSet(intEmptySet, intFilledSet, intToInsertSet);
+	operatorSupEqualSet(floatEmptySet, floatFilledSet, floatToInsertSet);
+	operatorSupEqualSet(doubleEmptySet, doubleFilledSet, doubleToInsertSet);
+	operatorSupEqualSet(stringEmptySet, stringFilledSet, stringToInsertSet);
+}
+
+TEST_F(ftSetTest, operatorSupSet)
+{
+	operatorSupSet(intEmptySet, intFilledSet, intToInsertSet);
+	operatorSupSet(floatEmptySet, floatFilledSet, floatToInsertSet);
+	operatorSupSet(doubleEmptySet, doubleFilledSet, doubleToInsertSet);
+	operatorSupSet(stringEmptySet, stringFilledSet, stringToInsertSet);
+}
+
+TEST_F(ftSetTest, operatorInfEqualSet)
+{
+	operatorInfEqualSet(intEmptySet, intFilledSet, intToInsertSet);
+	operatorInfEqualSet(floatEmptySet, floatFilledSet, floatToInsertSet);
+	operatorInfEqualSet(doubleEmptySet, doubleFilledSet, doubleToInsertSet);
+	operatorInfEqualSet(stringEmptySet, stringFilledSet, stringToInsertSet);
+}
+
+TEST_F(ftSetTest, operatorInfSet)
+{
+	operatorInfSet(intEmptySet, intFilledSet, intToInsertSet);
+	operatorInfSet(floatEmptySet, floatFilledSet, floatToInsertSet);
+	operatorInfSet(doubleEmptySet, doubleFilledSet, doubleToInsertSet);
+	operatorInfSet(stringEmptySet, stringFilledSet, stringToInsertSet);
+}
+
+TEST_F(ftSetTest, constructorSet)
+{
+	constructorSet(intEmptySet, intFilledSet, intToInsertSet, intX);
+	constructorSet(floatEmptySet, floatFilledSet, floatToInsertSet, floatX);
+	constructorSet(doubleEmptySet, doubleFilledSet, doubleToInsertSet, doubleX);
+	constructorSet(stringEmptySet, stringFilledSet, stringToInsertSet, stringX);
+}
+
+TEST_F(ftSetTest, operatorEgalSet)
+{
+	operatorEgalSet(intEmptySet, intFilledSet, intToInsertSet);
+	operatorEgalSet(floatEmptySet, floatFilledSet, floatToInsertSet);
+	operatorEgalSet(doubleEmptySet, doubleFilledSet, doubleToInsertSet);
+	operatorEgalSet(stringEmptySet, stringFilledSet, stringToInsertSet);
+}
+
+TEST_F(ftSetTest, nonMemberSwapSet)
+{
+	nonMemberSwapSet(intEmptySet, intFilledSet, intToInsertSet, intX, intY, &ft::swap);
+	nonMemberSwapSet(floatEmptySet, floatFilledSet, floatToInsertSet, floatX, floatY, &ft::swap);
+	nonMemberSwapSet(doubleEmptySet, doubleFilledSet, doubleToInsertSet, doubleX, doubleY, &ft::swap);
+	nonMemberSwapSet(stringEmptySet, stringFilledSet, stringToInsertSet, stringX, stringY, &ft::swap);
 }

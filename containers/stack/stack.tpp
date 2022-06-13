@@ -4,7 +4,18 @@ using namespace ft;
 /****************           MAIN           ****************/
 
 template <class T, class Container>
-stack<T, Container>::stack (const typename stack<T, Container>::container_type& ctnr): c(ctnr) {}
+stack<T, Container>::stack (const typename stack<T, Container>::container_type& cont): c(cont) {}
+
+template <class T, class Container>
+stack<T, Container>&	stack<T, Container>::operator=(const stack<T, Container>& other)
+{
+	if (this != &other)
+		this->c = other.c;
+	return (*this);
+}
+
+template <class T, class Container>
+stack<T, Container>::~stack() {}
 
 /****************         CAPACITY         ****************/
 
@@ -59,7 +70,7 @@ bool ft::operator== (const stack<T, Container>& lhs, const stack<T, Container>& 
 template <class T, class Container>
 bool ft::operator!= (const stack<T,Container>& lhs, const stack<T,Container>& rhs)
 {
-	return (lhs.c != rhs.c);
+	return (!(lhs == rhs));
 }
 
 template <class T, class Container>
@@ -71,19 +82,19 @@ bool ft::operator<  (const stack<T,Container>& lhs, const stack<T,Container>& rh
 template <class T, class Container>
 bool ft::operator<= (const stack<T,Container>& lhs, const stack<T,Container>& rhs)
 {
-	return (lhs.c <= rhs.c);
+	return (lhs < rhs || lhs == rhs);
 }
 
 template <class T, class Container>
 bool ft::operator>  (const stack<T,Container>& lhs, const stack<T,Container>& rhs)
 {
-	return (lhs.c > rhs.c);
+	return (rhs < lhs);
 }
 
 template <class T, class Container>
 bool ft::operator>= (const stack<T,Container>& lhs, const stack<T,Container>& rhs)
 {
-	return (lhs.c >= rhs.c);
+	return (lhs > rhs || lhs == rhs);
 }
 
 /*********************         	 PRINT          *********************/

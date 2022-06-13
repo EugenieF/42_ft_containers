@@ -7,21 +7,21 @@
 class stdVectorTest: public ::testing::Test, public globalVarTest
 {
 	protected:
-		std::vector<int> intEmptyVector;
-		std::vector<int> intFilledVector;
-		std::vector<int> intToInsertVector;
+		std::vector<int> 				intEmptyVector;
+		std::vector<int> 				intFilledVector;
+		std::vector<int> 				intToInsertVector;
 
-		std::vector<float> floatEmptyVector;
-		std::vector<float> floatFilledVector;
-		std::vector<float> floatToInsertVector;
+		std::vector<float> 				floatEmptyVector;
+		std::vector<float> 				floatFilledVector;
+		std::vector<float> 				floatToInsertVector;
 
-		std::vector<double> doubleEmptyVector;
-		std::vector<double> doubleFilledVector;
-		std::vector<double> doubleToInsertVector;
+		std::vector<double> 			doubleEmptyVector;
+		std::vector<double> 			doubleFilledVector;
+		std::vector<double> 			doubleToInsertVector;
 
-		std::vector<std::string> stringEmptyVector;
-		std::vector<std::string> stringFilledVector;
-		std::vector<std::string> stringToInsertVector;
+		std::vector<std::string> 		stringEmptyVector;
+		std::vector<std::string> 		stringFilledVector;
+		std::vector<std::string> 		stringToInsertVector;
 
 		void	SetUp() override
 		{

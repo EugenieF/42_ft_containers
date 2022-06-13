@@ -22,7 +22,7 @@ CXXFLAGS += $(INCLUDE)
 
 MAIN		= $(SRCS_DIR)/gtest_main.cpp
 
-FILES		= setTest # mapTest # vectorTest # stackTest # 
+FILES		= mapTest # stackTest # vectorTest # setTest #  
 
 
 FILES_PATH	= $(addprefix $(SRCS_DIR)/, $(FILES))

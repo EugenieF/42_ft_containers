@@ -144,7 +144,7 @@ void	set<Key, Compare, Allocator>::insert (InputIterator first, InputIterator la
 template< class Key, class Compare, class Allocator >
 void	set<Key, Compare, Allocator>::erase (typename set<Key, Compare, Allocator>::iterator position)
 {
-	this->_rbtree.erase(position);
+	this->_rbtree.erase(*position);
 }
 
 template< class Key, class Compare, class Allocator >
@@ -165,7 +165,7 @@ void	set<Key, Compare, Allocator>::erase (
 	{
 		to_erase = first;
 		first++;
-		this->_rbtree.erase(to_erase);
+		this->_rbtree.erase(*to_erase);
 	}
 }
 

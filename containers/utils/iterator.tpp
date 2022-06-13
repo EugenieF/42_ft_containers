@@ -12,7 +12,7 @@ reverse_iterator<Iterator>::reverse_iterator (Iterator it): _current(it) {}
 template <class Iterator>
 template <class U>
 reverse_iterator<Iterator>::reverse_iterator (const reverse_iterator<U>& rev_it):
-	_current(rev_it._current) {}
+	_current(rev_it.base()) {}
 
 template <class Iterator>
 reverse_iterator<Iterator>::~reverse_iterator() {}

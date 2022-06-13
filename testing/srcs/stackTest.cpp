@@ -38,6 +38,194 @@ void	popOneInFilledStack(T filledStack, U varX)
 	EXPECT_EQ(filledStack.size(), (size_t)9);
 }
 
+template <typename T, typename U>
+void	constructorStack(T emptyStack, T filledStack, T toInsertStack, U varX, U varY)
+{
+	T	newEmptyStack;
+	EXPECT_EQ(newEmptyStack.empty(), true);
+	EXPECT_EQ(emptyStack == newEmptyStack, true);
+
+	T	copyEmptyStack(emptyStack);
+	EXPECT_EQ(copyEmptyStack.empty(), true);
+	EXPECT_EQ(emptyStack == copyEmptyStack, true);
+
+	T	copyFilledStack(filledStack);
+	EXPECT_EQ(copyFilledStack.size(), (size_t)10);
+	EXPECT_EQ(copyFilledStack.top(), varX[9]);
+	EXPECT_EQ(filledStack == copyFilledStack, true);
+
+	T	copyToInsertStack(toInsertStack);
+	EXPECT_EQ(copyToInsertStack.size(), (size_t)5);
+	EXPECT_EQ(copyToInsertStack.top(), varY[4]);
+	EXPECT_EQ(toInsertStack == copyToInsertStack, true);
+}
+
+template <typename T>
+void	operatorEgalStack(T emptyStack, T filledStack, T toInsertStack)
+{
+	T newStack;
+
+	newStack = filledStack;
+	EXPECT_EQ(newStack.empty(), false);
+	EXPECT_EQ(newStack == filledStack, true);
+
+	newStack = emptyStack;
+	EXPECT_EQ(newStack.empty(), true);
+	EXPECT_EQ(newStack == filledStack, false);
+	EXPECT_EQ(newStack == emptyStack, true);
+
+	newStack = toInsertStack;
+	EXPECT_EQ(newStack.empty(), false);
+	EXPECT_EQ(newStack == emptyStack, false);
+	EXPECT_EQ(newStack == toInsertStack, true);
+}
+
+template <typename T>
+void	operatorEqualStack(T emptyStack, T filledStack, T toInsertStack)
+{
+	T	copyFilledStack(filledStack);
+
+	EXPECT_EQ(emptyStack == emptyStack, true);
+	EXPECT_EQ(emptyStack == filledStack, false);
+	EXPECT_EQ(emptyStack == toInsertStack, false);
+	EXPECT_EQ(filledStack == toInsertStack, false);
+
+	EXPECT_EQ(filledStack == copyFilledStack, true);
+	EXPECT_EQ(copyFilledStack == filledStack, true);
+	copyFilledStack.pop();
+	EXPECT_EQ(filledStack == copyFilledStack, false);
+	EXPECT_EQ(copyFilledStack == filledStack, false);
+}
+
+template <typename T>
+void	operatorNotEqualStack(T emptyStack, T filledStack, T toInsertStack)
+{
+	T	copyFilledStack(filledStack);
+
+	EXPECT_EQ(emptyStack != emptyStack, false);
+	EXPECT_EQ(emptyStack != filledStack, true);
+	EXPECT_EQ(emptyStack != toInsertStack, true);
+	EXPECT_EQ(filledStack != toInsertStack, true);
+
+	EXPECT_EQ(filledStack != copyFilledStack, false);
+	EXPECT_EQ(copyFilledStack != filledStack, false);
+	copyFilledStack.pop();
+	EXPECT_EQ(filledStack != copyFilledStack, true);
+	EXPECT_EQ(copyFilledStack != filledStack, true);
+}
+
+template <typename T>
+void	operatorSupEqualStack(T emptyStack, T filledStack, T toInsertStack)
+{
+	T	copyFilledStack(filledStack);
+
+	EXPECT_EQ(emptyStack >= emptyStack, true);
+	EXPECT_EQ(emptyStack >= filledStack, false);
+	EXPECT_EQ(emptyStack >= toInsertStack, false);
+	EXPECT_EQ(filledStack >= toInsertStack, false);
+	EXPECT_EQ(filledStack >= emptyStack, true);
+	EXPECT_EQ(toInsertStack >= emptyStack, true);
+	EXPECT_EQ(toInsertStack >= filledStack, true);
+
+	EXPECT_EQ(filledStack >= copyFilledStack, true);
+	EXPECT_EQ(copyFilledStack >= filledStack, true);
+	copyFilledStack.pop();
+	EXPECT_EQ(filledStack >= copyFilledStack, true);
+	EXPECT_EQ(copyFilledStack >= filledStack, false);
+	filledStack.pop();
+	filledStack.pop();
+	EXPECT_EQ(filledStack >= copyFilledStack, false);
+	EXPECT_EQ(copyFilledStack >= filledStack, true);
+}
+
+template <typename T>
+void	operatorSupStack(T emptyStack, T filledStack, T toInsertStack)
+{
+	T	copyFilledStack(filledStack);
+
+	EXPECT_EQ(emptyStack > emptyStack, false);
+	EXPECT_EQ(emptyStack > filledStack, false);
+	EXPECT_EQ(emptyStack > toInsertStack, false);
+	EXPECT_EQ(filledStack > toInsertStack, false);
+	EXPECT_EQ(filledStack > emptyStack, true);
+	EXPECT_EQ(toInsertStack > emptyStack, true);
+	EXPECT_EQ(toInsertStack > filledStack, true);
+
+	EXPECT_EQ(filledStack > copyFilledStack, false);
+	EXPECT_EQ(copyFilledStack > filledStack, false);
+	copyFilledStack.pop();
+	EXPECT_EQ(filledStack > copyFilledStack, true);
+	EXPECT_EQ(copyFilledStack > filledStack, false);
+	filledStack.pop();
+	filledStack.pop();
+	EXPECT_EQ(filledStack > copyFilledStack, false);
+	EXPECT_EQ(copyFilledStack > filledStack, true);
+}
+
+template <typename T>
+void	operatorInfEqualStack(T emptyStack, T filledStack, T toInsertStack)
+{
+	T	copyFilledStack(filledStack);
+
+	EXPECT_EQ(emptyStack <= emptyStack, true);
+	EXPECT_EQ(emptyStack <= filledStack, true);
+	EXPECT_EQ(emptyStack <= toInsertStack, true);
+	EXPECT_EQ(filledStack <= toInsertStack, true);
+	EXPECT_EQ(filledStack <= emptyStack, false);
+	EXPECT_EQ(toInsertStack <= emptyStack, false);
+	EXPECT_EQ(toInsertStack <= filledStack, false);
+
+	EXPECT_EQ(filledStack <= copyFilledStack, true);
+	EXPECT_EQ(copyFilledStack <= filledStack, true);
+	copyFilledStack.pop();
+	EXPECT_EQ(filledStack <= copyFilledStack, false);
+	EXPECT_EQ(copyFilledStack <= filledStack, true);
+	filledStack.pop();
+	filledStack.pop();
+	EXPECT_EQ(filledStack <= copyFilledStack, true);
+	EXPECT_EQ(copyFilledStack <= filledStack, false);
+}
+
+template <typename T>
+void	operatorInfStack(T emptyStack, T filledStack, T toInsertStack)
+{
+	T	copyFilledStack(filledStack);
+	T	copyBisFilledStack(filledStack);
+
+	EXPECT_EQ(emptyStack < emptyStack, false);
+	EXPECT_EQ(emptyStack < filledStack, true);
+	EXPECT_EQ(emptyStack < toInsertStack, true);
+	EXPECT_EQ(filledStack < toInsertStack, true);
+	EXPECT_EQ(filledStack < emptyStack, false);
+	EXPECT_EQ(toInsertStack < emptyStack, false);
+	EXPECT_EQ(toInsertStack < filledStack, false);
+
+	EXPECT_EQ(filledStack < copyFilledStack, false);
+	EXPECT_EQ(copyFilledStack < filledStack, false);
+	copyFilledStack.pop();
+	EXPECT_EQ(filledStack < copyFilledStack, false);
+	EXPECT_EQ(copyFilledStack < filledStack, true);
+	filledStack.pop();
+	filledStack.pop();
+	EXPECT_EQ(filledStack < copyFilledStack, true);
+	EXPECT_EQ(copyFilledStack < filledStack, false);
+}
+
+template <typename T, typename U>
+void	topStack(T filledStack, T toInsertStack, U varX, U varY)
+{
+	for (int i = 9; i >= 0; i--)
+	{
+		EXPECT_EQ(filledStack.top(), varX[i]);
+		filledStack.pop();
+	}
+	for (int i = 4; i >= 0; i--)
+	{
+		EXPECT_EQ(toInsertStack.top(), varY[i]);
+		toInsertStack.pop();
+	}
+}
+
 /**************************************************************/
 /*                     RUN STD::STACK TEST                    */
 /**************************************************************/
@@ -76,6 +264,78 @@ TEST_F(stdStackTest, popOneInFilledStack)
 	popOneInFilledStack(floatFilledStack, floatX);
 	popOneInFilledStack(doubleFilledStack, doubleX);
 	popOneInFilledStack(stringFilledStack, stringX);
+}
+
+TEST_F(stdStackTest, constructorStack)
+{
+	constructorStack(intEmptyStack, intFilledStack, intToInsertStack, intX, intY);
+	constructorStack(floatEmptyStack, floatFilledStack, floatToInsertStack, floatX, floatY);
+	constructorStack(doubleEmptyStack, doubleFilledStack, doubleToInsertStack, doubleX, doubleY);
+	constructorStack(stringEmptyStack, stringFilledStack, stringToInsertStack, stringX, stringY);
+}
+
+TEST_F(stdStackTest, operatorEgalStack)
+{
+	operatorEgalStack(intEmptyStack, intFilledStack, intToInsertStack);
+	operatorEgalStack(floatEmptyStack, floatFilledStack, floatToInsertStack);
+	operatorEgalStack(doubleEmptyStack, doubleFilledStack, doubleToInsertStack);
+	operatorEgalStack(stringEmptyStack, stringFilledStack, stringToInsertStack);
+}
+
+TEST_F(stdStackTest, operatorEqualStack)
+{
+	operatorEqualStack(intEmptyStack, intFilledStack, intToInsertStack);
+	operatorEqualStack(floatEmptyStack, floatFilledStack, floatToInsertStack);
+	operatorEqualStack(doubleEmptyStack, doubleFilledStack, doubleToInsertStack);
+	operatorEqualStack(stringEmptyStack, stringFilledStack, stringToInsertStack);
+}
+
+TEST_F(stdStackTest, operatorNotEqualStack)
+{
+	operatorNotEqualStack(intEmptyStack, intFilledStack, intToInsertStack);
+	operatorNotEqualStack(floatEmptyStack, floatFilledStack, floatToInsertStack);
+	operatorNotEqualStack(doubleEmptyStack, doubleFilledStack, doubleToInsertStack);
+	operatorNotEqualStack(stringEmptyStack, stringFilledStack, stringToInsertStack);
+}
+
+TEST_F(stdStackTest, operatorSupEqualStack)
+{
+	operatorSupEqualStack(intEmptyStack, intFilledStack, intToInsertStack);
+	operatorSupEqualStack(floatEmptyStack, floatFilledStack, floatToInsertStack);
+	operatorSupEqualStack(doubleEmptyStack, doubleFilledStack, doubleToInsertStack);
+	operatorSupEqualStack(stringEmptyStack, stringFilledStack, stringToInsertStack);
+}
+
+TEST_F(stdStackTest, operatorSupStack)
+{
+	operatorSupStack(intEmptyStack, intFilledStack, intToInsertStack);
+	operatorSupStack(floatEmptyStack, floatFilledStack, floatToInsertStack);
+	operatorSupStack(doubleEmptyStack, doubleFilledStack, doubleToInsertStack);
+	operatorSupStack(stringEmptyStack, stringFilledStack, stringToInsertStack);
+}
+
+TEST_F(stdStackTest, operatorInfEqualStack)
+{
+	operatorInfEqualStack(intEmptyStack, intFilledStack, intToInsertStack);
+	operatorInfEqualStack(floatEmptyStack, floatFilledStack, floatToInsertStack);
+	operatorInfEqualStack(doubleEmptyStack, doubleFilledStack, doubleToInsertStack);
+	operatorInfEqualStack(stringEmptyStack, stringFilledStack, stringToInsertStack);
+}
+
+TEST_F(stdStackTest, operatorInfStack)
+{
+	operatorInfStack(intEmptyStack, intFilledStack, intToInsertStack);
+	operatorInfStack(floatEmptyStack, floatFilledStack, floatToInsertStack);
+	operatorInfStack(doubleEmptyStack, doubleFilledStack, doubleToInsertStack);
+	operatorInfStack(stringEmptyStack, stringFilledStack, stringToInsertStack);
+}
+
+TEST_F(stdStackTest, topStack)
+{
+	topStack(intFilledStack, intToInsertStack, intX, intY);
+	topStack(floatFilledStack, floatToInsertStack, floatX, floatY);
+	topStack(doubleFilledStack, doubleToInsertStack, doubleX, doubleY);
+	topStack(stringFilledStack, stringToInsertStack, stringX, stringY);
 }
 
 /**************************************************************/
@@ -118,222 +378,74 @@ TEST_F(ftStackTest, popOneInFilledStack)
 	popOneInFilledStack(stringFilledStack, stringX);
 }
 
-/*************    Int test    *************/
+TEST_F(ftStackTest, constructorStack)
+{
+	constructorStack(intEmptyStack, intFilledStack, intToInsertStack, intX, intY);
+	constructorStack(floatEmptyStack, floatFilledStack, floatToInsertStack, floatX, floatY);
+	constructorStack(doubleEmptyStack, doubleFilledStack, doubleToInsertStack, doubleX, doubleY);
+	constructorStack(stringEmptyStack, stringFilledStack, stringToInsertStack, stringX, stringY);
+}
 
-// template < class T, class U >
-// void	popAndTopTest(T stack, U x, U y)
-// {
-// 	for (int i = 1; i < 10; i++)
-// 	{
-// 		x += y;
-// 		stack.push(x);
-// 	}
-// 	EXPECT_EQ(stack.top(), x);
-// 	for (int i = 1; i < 5; i++)
-// 	{
-// 		x -= y;
-// 		stack.pop();
-// 	}
-// 	EXPECT_EQ(stack.top(), x);
-// }
+TEST_F(ftStackTest, operatorEgalStack)
+{
+	operatorEgalStack(intEmptyStack, intFilledStack, intToInsertStack);
+	operatorEgalStack(floatEmptyStack, floatFilledStack, floatToInsertStack);
+	operatorEgalStack(doubleEmptyStack, doubleFilledStack, doubleToInsertStack);
+	operatorEgalStack(stringEmptyStack, stringFilledStack, stringToInsertStack);
+}
 
-// template < class T, class U >
-// void	popAndTopStringTest(T stack, U x, U y)
-// {
-// 	for (int i = 1; i < 10; i++)
-// 	{
-// 		x += y;
-// 		stack.push(x);
-// 	}
-// 	EXPECT_EQ(stack.top(), x);
-// 	for (int i = 1; i < 5; i++)
-// 	{
-// 		stack.pop();
-// 	}
-// 	EXPECT_EQ(stack.top(), "Test ! ! ! ! !");
-// }
+TEST_F(ftStackTest, operatorEqualStack)
+{
+	operatorEqualStack(intEmptyStack, intFilledStack, intToInsertStack);
+	operatorEqualStack(floatEmptyStack, floatFilledStack, floatToInsertStack);
+	operatorEqualStack(doubleEmptyStack, doubleFilledStack, doubleToInsertStack);
+	operatorEqualStack(stringEmptyStack, stringFilledStack, stringToInsertStack);
+}
 
-// template < class T, class U >
-// void	sizeTest(T stack, U x)
-// {
-// 	EXPECT_EQ(stack.size(), (unsigned long)0);
-// 	stack.push(x);
-// 	EXPECT_EQ(stack.size(), (unsigned long)1);
-// 	for (int i = 2; i < 6; i++)
-// 		stack.push(x);
-// 	EXPECT_EQ(stack.size(), (unsigned long)5);
-// 	for (int i = 6; i < 21; i++)
-// 		stack.push(x);
-// 	EXPECT_EQ(stack.size(), (unsigned long)20);
-// 	for (int i = 21; i < 101; i++)
-// 		stack.push(x);
-// 	EXPECT_EQ(stack.size(), (unsigned long)100);
-// 	for (int i = 1; i < 101; i++)
-// 		stack.pop();
-// 	EXPECT_EQ(stack.size(), (unsigned long)0);
-// }
+TEST_F(ftStackTest, operatorNotEqualStack)
+{
+	operatorNotEqualStack(intEmptyStack, intFilledStack, intToInsertStack);
+	operatorNotEqualStack(floatEmptyStack, floatFilledStack, floatToInsertStack);
+	operatorNotEqualStack(doubleEmptyStack, doubleFilledStack, doubleToInsertStack);
+	operatorNotEqualStack(stringEmptyStack, stringFilledStack, stringToInsertStack);
+}
 
-// template < class T, class U >
-// void	emptyTest(T stack, U x)
-// {
-// 	EXPECT_EQ(stack.empty(), true);
-// 	for (int i = 1; i < 101; i++)
-// 		stack.push(x);
-// 	EXPECT_EQ(stack.empty(), false);
-// 	for (int i = 1; i < 101; i++)
-// 		stack.pop();
-// 	EXPECT_EQ(stack.empty(), true);
-// 	stack.push(x);
-// 	EXPECT_EQ(stack.empty(), false);
-// }
+TEST_F(ftStackTest, operatorSupEqualStack)
+{
+	operatorSupEqualStack(intEmptyStack, intFilledStack, intToInsertStack);
+	operatorSupEqualStack(floatEmptyStack, floatFilledStack, floatToInsertStack);
+	operatorSupEqualStack(doubleEmptyStack, doubleFilledStack, doubleToInsertStack);
+	operatorSupEqualStack(stringEmptyStack, stringFilledStack, stringToInsertStack);
+}
 
-// template < class T, class U >
-// void	constructorTest(T stack, U x)
-// {
-// 	stack.push(x);
-// 	T	copy(stack);
-// 	EXPECT_EQ(copy.top(), x);
-// 	EXPECT_EQ(copy.size(), (unsigned long)1);
-// 	EXPECT_EQ(copy.empty(), false);
-// }
+TEST_F(ftStackTest, operatorSupStack)
+{
+	operatorSupStack(intEmptyStack, intFilledStack, intToInsertStack);
+	operatorSupStack(floatEmptyStack, floatFilledStack, floatToInsertStack);
+	operatorSupStack(doubleEmptyStack, doubleFilledStack, doubleToInsertStack);
+	operatorSupStack(stringEmptyStack, stringFilledStack, stringToInsertStack);
+}
 
-// template < class T, class U >
-// void	operatorEqualTest(T stack, U x)
-// {
-// 	for (int i = 0; i < 30; i++)
-// 		stack.push(x);
-// 	T	copy(stack);
-// 	EXPECT_EQ(stack == stack, true);
-// 	EXPECT_EQ(stack == copy, true);
-// 	copy.push(x);
-// 	EXPECT_EQ(stack == copy, false);
-// }
+TEST_F(ftStackTest, operatorInfEqualStack)
+{
+	operatorInfEqualStack(intEmptyStack, intFilledStack, intToInsertStack);
+	operatorInfEqualStack(floatEmptyStack, floatFilledStack, floatToInsertStack);
+	operatorInfEqualStack(doubleEmptyStack, doubleFilledStack, doubleToInsertStack);
+	operatorInfEqualStack(stringEmptyStack, stringFilledStack, stringToInsertStack);
+}
 
-// template < class T, class U >
-// void	operatorNotEqualTest(T stack, U x)
-// {
-// 	for (int i = 0; i < 30; i++)
-// 		stack.push(x);
-// 	T	copy(stack);
-// 	EXPECT_EQ(stack != stack, false);
-// 	EXPECT_EQ(stack != copy, false);
-// 	copy.push(x);
-// 	EXPECT_EQ(stack != copy, true);
-// }
+TEST_F(ftStackTest, operatorInfStack)
+{
+	operatorInfStack(intEmptyStack, intFilledStack, intToInsertStack);
+	operatorInfStack(floatEmptyStack, floatFilledStack, floatToInsertStack);
+	operatorInfStack(doubleEmptyStack, doubleFilledStack, doubleToInsertStack);
+	operatorInfStack(stringEmptyStack, stringFilledStack, stringToInsertStack);
+}
 
-// template < class T, class U >
-// void	operatorSupEqualTest(T stack, U x)
-// {
-// 	for (int i = 0; i < 30; i++)
-// 		stack.push(x);
-// 	T	copy(stack);
-// 	EXPECT_EQ(stack >= stack, true);
-// 	EXPECT_EQ(stack >= copy, true);
-// 	copy.push(x);
-// 	EXPECT_EQ(stack >= copy, false);
-// }
-
-// template < class T, class U >
-// void	operatorSupTest(T stack, U x)
-// {
-// 	for (int i = 0; i < 30; i++)
-// 		stack.push(x);
-// 	T	copy(stack);
-// 	EXPECT_EQ(stack > stack, false);
-// 	EXPECT_EQ(stack > copy, false);
-// 	copy.push(x);
-// 	EXPECT_EQ(stack > copy, false);
-// }
-
-// template < class T, class U >
-// void	operatorInfEqualTest(T stack, U x)
-// {
-// 	for (int i = 0; i < 30; i++)
-// 		stack.push(x);
-// 	T	copy(stack);
-// 	EXPECT_EQ(stack <= stack, true);
-// 	EXPECT_EQ(stack <= copy, true);
-// 	copy.push(x);
-// 	EXPECT_EQ(stack <= copy, true);
-// }
-
-// template < class T, class U >
-// void	operatorInfTest(T stack, U x)
-// {
-// 	for (int i = 0; i < 30; i++)
-// 		stack.push(x);
-// 	T	copy(stack);
-// 	EXPECT_EQ(stack < stack, false);
-// 	EXPECT_EQ(stack < copy, false);
-// 	copy.push(x);
-// 	EXPECT_EQ(stack < copy, true);
-// }
-
-// /*************  Run test   *************/
-
-// template < class T >
-// void	runIntTests(T &stack)
-// {
-// 	pushAndTopTest(stack, 0, 1);
-// 	popAndTopTest(stack, 0, 1);
-// 	sizeTest(stack, 2);
-// 	emptyTest(stack, 3);
-// 	constructorTest(stack, 4);
-// 	operatorEqualTest(stack, 5);
-// 	operatorNotEqualTest(stack, 6);
-// 	operatorSupEqualTest(stack, 7);
-// 	operatorSupTest(stack, 8);
-// 	operatorInfEqualTest(stack, 9);
-// 	operatorInfTest(stack, 10);
-// }
-
-// template < class T >
-// void	runFloatTests(T &stack)
-// {
-// 	pushAndTopTest(stack, 0.0f, 0.5f);
-// 	popAndTopTest(stack, 0.001f, 1.1f);
-// 	sizeTest(stack, 2.0f);
-// 	emptyTest(stack, 3.000f);
-// 	constructorTest(stack, 4.0432f);
-// 	operatorEqualTest(stack, 5.0020f);
-// 	operatorNotEqualTest(stack, 6.322f);
-// 	operatorSupEqualTest(stack, 7.002135f);
-// 	operatorSupTest(stack, 8.0f);
-// 	operatorInfEqualTest(stack, 9.555f);
-// 	operatorInfTest(stack, 10.1f);
-// }
-
-// template < class T >
-// void	runDoubleTests(T &stack)
-// {
-// 	pushAndTopTest(stack, 1.0001, 0.0001);
-// 	popAndTopTest(stack, 2.00034, 3.3425);
-// 	sizeTest(stack, 3.452);
-// 	emptyTest(stack, 4.454);
-// 	constructorTest(stack, 5.42131);
-// 	operatorEqualTest(stack, 6.655342);
-// 	operatorNotEqualTest(stack, 7.2342);
-// 	operatorSupEqualTest(stack, 8.54);
-// 	operatorSupTest(stack, 9.0);
-// 	operatorInfEqualTest(stack, 10.234451);
-// 	operatorInfTest(stack, 11.01);
-// }
-
-// template < class T >
-// void	runStringTests(T &stack)
-// {
-// 	std::string testX = "Test";
-// 	std::string testY = " !";
-
-// 	pushAndTopTest(stack, testX, testY);
-// 	popAndTopStringTest(stack, testX, testY);
-// 	sizeTest(stack, testX);
-// 	emptyTest(stack, testX);
-// 	constructorTest(stack, testX);
-// 	operatorEqualTest(stack, testX);
-// 	operatorNotEqualTest(stack, testX);
-// 	operatorSupEqualTest(stack, testX);
-// 	operatorSupTest(stack, testX);
-// 	operatorInfEqualTest(stack, testX);
-// 	operatorInfTest(stack, testX);
-// }
+TEST_F(ftStackTest, topStack)
+{
+	topStack(intFilledStack, intToInsertStack, intX, intY);
+	topStack(floatFilledStack, floatToInsertStack, floatX, floatY);
+	topStack(doubleFilledStack, doubleToInsertStack, doubleX, doubleY);
+	topStack(stringFilledStack, stringToInsertStack, stringX, stringY);
+}

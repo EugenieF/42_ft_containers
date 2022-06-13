@@ -24,7 +24,9 @@ namespace ft
 
 		public:
 			/****************           MAIN           ****************/
-			explicit								stack (const container_type& ctnr = Container());
+			explicit								stack (const container_type& cont = Container());
+			stack&									operator=(const stack& other);
+			~stack();
 
 			/****************         CAPACITY         ****************/
 			bool									empty() const;
@@ -43,19 +45,7 @@ namespace ft
 			friend bool operator== (const stack<Tx, ContainerX>& lhs, const stack<Tx, ContainerX>& rhs);
 
 			template <class Tx, class ContainerX>
-			friend bool operator!= (const stack<Tx, ContainerX>& lhs, const stack<Tx, ContainerX>& rhs);
-
-			template <class Tx, class ContainerX>
 			friend bool operator< (const stack<Tx, ContainerX>& lhs, const stack<Tx, ContainerX>& rhs);
-
-			template <class Tx, class ContainerX>
-			friend bool operator<= (const stack<Tx, ContainerX>& lhs, const stack<Tx, ContainerX>& rhs);
-
-			template <class Tx, class ContainerX>
-			friend bool operator> (const stack<Tx, ContainerX>& lhs, const stack<Tx, ContainerX>& rhs);
-
-			template <class Tx, class ContainerX>
-			friend bool operator>= (const stack<Tx, ContainerX>& lhs, const stack<Tx, ContainerX>& rhs);
 
 			/*********************         TO DEBUG         *********************/
 			void											print(void);
