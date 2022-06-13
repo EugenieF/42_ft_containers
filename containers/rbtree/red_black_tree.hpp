@@ -1,7 +1,15 @@
 #ifndef __RED_BLACK_TREE__
 # define __RED_BLACK_TREE__
 
-#include "main.hpp"
+// #include "main.hpp"
+
+# include <memory>
+# include <string>
+# include <sstream>
+# include "iterator.hpp"
+# include "../utils/iterator.hpp"
+# include "../utils/utility.hpp"
+# include "../utils/type_traits.hpp"
 
 namespace ft
 {
@@ -16,7 +24,7 @@ namespace ft
 			- Both children of a red node are black i.e., there can't be consecutive red nodes.
 			- All the simple paths from a node to descendant leaves contain the same number of black nodes. */
 
-	template <class T,  class Allocator, class Compare = std::less<T>>
+	template <class T,  class Allocator, class Compare = std::less<T> >
 	class	red_black_tree
 	{
 		public:

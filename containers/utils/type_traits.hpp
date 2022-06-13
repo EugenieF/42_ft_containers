@@ -1,7 +1,7 @@
 #ifndef __TYPE_TRAITS_HPP__
 # define __TYPE_TRAITS_HPP__
 
-#include "main.hpp"
+// #include "main.hpp"
 
 namespace ft
 {

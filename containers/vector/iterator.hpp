@@ -1,7 +1,10 @@
 #ifndef __VECTOR_ITERATOR_HPP__
 # define __VECTOR_ITERATOR_HPP__
 
-#include "main.hpp"
+// #include "main.hpp"
+
+# include <iostream>
+# include <memory>
 
 namespace ft
 {
@@ -34,10 +37,12 @@ namespace ft
 			vector_iterator								operator++(int);
 			vector_iterator& 							operator+= (difference_type n);
 			vector_iterator								operator+ (difference_type n) const;
+			difference_type								operator+ (const vector_iterator<T>& it) const;
 			vector_iterator& 							operator--();
 			vector_iterator  							operator--(int);
 			vector_iterator&							operator-= (difference_type n);
 			vector_iterator 							operator- (difference_type n) const;
+			difference_type								operator- (const vector_iterator<T>& it) const;
 
 			operator									vector_iterator<const value_type>(void) const;
 
@@ -67,6 +72,12 @@ namespace ft
 
 	template <class T>
 	vector_iterator<T>								operator+ (typename vector_iterator<T>::difference_type n, const vector_iterator<T>& vec_it);
+
+	template <class T>
+	typename vector_iterator<T>::difference_type	operator+ (const vector_iterator<T>& lhs, const vector_iterator<T>& rhs);
+
+	template <class T>
+	vector_iterator<T>								operator- (typename vector_iterator<T>::difference_type n, const vector_iterator<T>& vec_it);
 
 	template <class T>
 	typename vector_iterator<T>::difference_type	operator- (const vector_iterator<T>& lhs, const vector_iterator<T>& rhs);

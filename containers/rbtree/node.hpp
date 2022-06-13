@@ -1,7 +1,7 @@
 #ifndef __RBTREE_NODE__
 # define __RBTREE_NODE__
 
-#include "main.hpp"
+#include <iostream>
 
 namespace ft
 {

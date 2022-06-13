@@ -33,10 +33,17 @@ class	globalVarTest
 		const std::string	constStringY[5] = {"10_ten", "11_eleven", "12_twelve", "13_thirteen", "14_forteen"};
 };
 
-# include "classStackTest.cpp"
-# include "classVectorTest.cpp"
-# include "classMapTest.cpp"
-# include "classSetTest.cpp"
+# include "stack/classStackTest.cpp"
+# include "stack/stackTest.cpp"
+
+# include "vector/classVectorTest.cpp"
+# include "vector/vectorTest.cpp"
+
+# include "map/classMapTest.cpp"
+# include "map/mapTest.cpp"
+
+# include "set/classSetTest.cpp"
+# include "set/setTest.cpp"
 
 // MAC :
 

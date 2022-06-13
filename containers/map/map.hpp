@@ -1,7 +1,18 @@
 #ifndef __MAP_HPP__
 # define __MAP_HPP__
 
-#include "main.hpp"
+// #include "main.hpp"
+
+# include <memory>
+# include <iostream>
+# include <sstream>
+# include <string>
+# include <limits>
+# include <stddef.h>
+# include "../utils/iterator.hpp"
+# include "../utils/algorithm.hpp"
+# include "../utils/utility.hpp"
+# include "../rbtree/red_black_tree.hpp"
 
 namespace ft
 {
@@ -30,7 +41,7 @@ namespace ft
 
 				protected:
 					key_compare		comp;
-					value_compare(key_compare c);
+					value_compare(key_compare c = key_compare());
 
 				public:
 					bool operator()(const value_type& lhs, const value_type& rhs) const;

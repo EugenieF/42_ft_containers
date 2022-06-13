@@ -1,9 +1,15 @@
 #ifndef __VECTOR_HPP__
 # define __VECTOR_HPP__
 
-#include "main.hpp"
+// #include "main.hpp"
 
-#include <type_traits> // to test
+# include <iostream>
+# include <sstream>
+# include <string>
+# include <limits>
+#include "iterator.hpp"
+#include "../utils/iterator.hpp"
+#include "../utils/algorithm.hpp"
 
 namespace ft
 {

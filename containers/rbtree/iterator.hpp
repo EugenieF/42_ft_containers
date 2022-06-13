@@ -1,7 +1,7 @@
 #ifndef __RBTREE_ITERATOR_HPP__
 # define __RBTREE_ITERATOR_HPP__
 
-#include "main.hpp"
+#include "node.hpp"
 
 namespace ft
 {

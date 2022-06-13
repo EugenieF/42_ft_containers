@@ -1,7 +1,9 @@
 #ifndef __UTILITY_HPP__
 # define __UTILITY_HPP__
 
-# include "main.hpp"
+// # include "main.hpp"
+
+#include <ostream>
 
 namespace ft
 {
@@ -24,7 +26,8 @@ namespace ft
 		pair(const first_type& x, const second_type& y);
 		template <class U, class V>
 		pair(const pair<U, V>& pr);
-		pair& operator=(const pair& other) = default;
+		// pair& operator=(const pair& other) = default;
+		pair& operator=(const pair& other);
 		operator pair<const T1, const T2>(void) const;
 	};
 

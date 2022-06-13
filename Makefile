@@ -6,13 +6,13 @@
 #    By: efrancon <efrancon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/01 18:11:52 by efrancon          #+#    #+#              #
-#    Updated: 2022/05/17 12:04:33 by efrancon         ###   ########.fr        #
+#    Updated: 2022/06/13 17:57:06 by efrancon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME    		= ft_containers
 
-SRCS_DIR		= ./srcs
+SRCS_DIR		= .
 
 SRCS			= main.cpp
 

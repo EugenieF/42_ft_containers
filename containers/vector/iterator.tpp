@@ -47,7 +47,7 @@ typename vector_iterator<T>::pointer	vector_iterator<T>::operator->() const
 template <class T>
 typename vector_iterator<T>::reference	vector_iterator<T>::operator[] (typename vector_iterator<T>::difference_type n) const
 {
-	return (this->current[n]);
+	return (this->_current[n]);
 }
 
 /**************       MEMBER FUNCTION OVERLOADS       **************/
@@ -77,7 +77,13 @@ vector_iterator<T>& 	vector_iterator<T>::operator+= (typename vector_iterator<T>
 template <class T>
 vector_iterator<T>		vector_iterator<T>::operator+ (typename vector_iterator<T>::difference_type n) const
 {
-	return (vector_iterator(this->_current + n));
+	return (vector_iterator(this->base() + n));
+}
+
+template <class T>
+typename vector_iterator<T>::difference_type		vector_iterator<T>::operator+ (const vector_iterator<T>& it) const
+{
+	return (this->base() + it.base());
 }
 
 template <class T>
@@ -106,6 +112,12 @@ template <class T>
 vector_iterator<T> 		vector_iterator<T>::operator- (typename vector_iterator<T>::difference_type n) const
 {
 	return (vector_iterator(this->_current - n));
+}
+
+template <class T>
+typename vector_iterator<T>::difference_type		vector_iterator<T>::operator- (const vector_iterator<T>& it) const
+{
+	return (this->base() - it.base());
 }
 
 template <class T>
@@ -156,6 +168,18 @@ template <class T>
 vector_iterator<T> ft::operator+ (typename vector_iterator<T>::difference_type n, const vector_iterator<T>& vec_it)
 {
 	return (vec_it + n);
+}
+
+template <class T>
+typename vector_iterator<T>::difference_type	ft::operator+ (const vector_iterator<T>& lhs, const vector_iterator<T>& rhs)
+{
+	return (lhs.base() + rhs.base());
+}
+
+template <class T>
+vector_iterator<T> ft::operator- (typename vector_iterator<T>::difference_type n, const vector_iterator<T>& vec_it)
+{
+	return (vec_it - n);
 }
 
 template <class T>

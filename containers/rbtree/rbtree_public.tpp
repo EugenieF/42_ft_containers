@@ -324,7 +324,7 @@ pair<typename red_black_tree<T, Allocator, Compare>::iterator,typename red_black
 template <class T, class Allocator, class Compare>
 pair<typename red_black_tree<T, Allocator, Compare>::const_iterator,typename red_black_tree<T, Allocator, Compare>::const_iterator>		red_black_tree<T, Allocator, Compare>::equal_range (const T& value) const
 {
-	typedef typename red_black_tree<T, Allocator, Compare>::iterator	const_iterator;
+	typedef typename red_black_tree<T, Allocator, Compare>::const_iterator	const_iterator;
 
 	const_iterator	lower_bound;
 	const_iterator	upper_bound;

@@ -1,7 +1,11 @@
 #ifndef __ITERATOR_HPP__
 # define __ITERATOR_HPP__
 
-# include "main.hpp"
+// # include "main.hpp"
+
+# include <string>
+# include <stddef.h>
+# include "type_traits.hpp"
 
 namespace ft
 {
@@ -95,10 +99,12 @@ namespace ft
 			reverse_iterator												operator++(int);
 			reverse_iterator& 												operator+= (difference_type n);
 			reverse_iterator												operator+ (difference_type n) const;
+			difference_type													operator+ (const reverse_iterator<Iterator>& rev_it) const;
 			reverse_iterator& 												operator--();
 			reverse_iterator  												operator--(int);
 			reverse_iterator&												operator-= (difference_type n);
 			reverse_iterator 												operator- (difference_type n) const;
+			difference_type													operator- (const reverse_iterator<Iterator>& rev_it) const;
 
 			operator														reverse_iterator<iterator_type const>(void) const;
 	};
@@ -125,6 +131,12 @@ namespace ft
 
 	template <class Iterator>
 	reverse_iterator<Iterator>												operator+ (typename reverse_iterator<Iterator>::difference_type n, const reverse_iterator<Iterator>& rev_it);
+
+	template <class Iterator>
+	typename reverse_iterator<Iterator>::difference_type					operator+ (const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs);
+
+	template <class Iterator>
+	reverse_iterator<Iterator>												operator- (typename reverse_iterator<Iterator>::difference_type n, const reverse_iterator<Iterator>& rev_it);
 
 	template <class Iterator>
 	typename reverse_iterator<Iterator>::difference_type					operator- (const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs);

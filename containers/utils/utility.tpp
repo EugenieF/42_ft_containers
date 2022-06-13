@@ -13,16 +13,16 @@ template <class T1, class T2>
 template <class U1, class U2>
 pair<T1, T2>::pair (const pair<U1, U2>& p): first(p.first), second(p.second) {}
 
-// template <class T1, class T2>
-// pair<T1, T2>& pair<T1, T2>::operator= (const pair<T1, T2>& other)	// is depreciated, why ?
-// {
-//     if (this != &other)
-//     {
-//         this->first = other.first;
-//         this->second = other.second;
-//     }
-//     return (*this);
-// }
+template <class T1, class T2>
+pair<T1, T2>& pair<T1, T2>::operator= (const pair<T1, T2>& other)	// is depreciated, why ?
+{
+    if (this != &other)
+    {
+        this->first = other.first;
+        this->second = other.second;
+    }
+    return (*this);
+}
 
 template <class T1, class T2>
 pair<T1, T2>::operator pair<const T1, const T2>(void) const
