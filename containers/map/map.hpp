@@ -3,15 +3,10 @@
 
 // #include "main.hpp"
 
-# include <memory>
 # include <iostream>
-# include <sstream>
-# include <string>
 # include <limits>
-# include <stddef.h>
-# include "../utils/iterator.hpp"
+# include <cstddef>
 # include "../utils/algorithm.hpp"
-# include "../utils/utility.hpp"
 # include "../rbtree/red_black_tree.hpp"
 
 namespace ft
@@ -72,7 +67,7 @@ namespace ft
 
 			explicit map (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type());
 			template <class InputIterator>
-  			map (InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type());
+  			map (InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type(), typename ft::enable_if<!(ft::is_integral<InputIterator>::value)>::type* = NULL);
 			map (const map& other);
 			~map();
 			map& operator= (const map& other);
@@ -100,7 +95,8 @@ namespace ft
 			ft::pair<iterator,bool>							insert (const value_type& val);
 			iterator										insert (iterator position, const value_type& val);
 			template <class InputIterator>
-			void											insert (InputIterator first, InputIterator last);
+			typename ft::enable_if<!(ft::is_integral<InputIterator>::value), void>::type
+															insert (InputIterator first, InputIterator last);
 			void											erase (iterator position);
 			size_type										erase (const key_type& key);
 			void											erase (iterator first, iterator last);

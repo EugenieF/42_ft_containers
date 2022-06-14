@@ -6,6 +6,14 @@ using namespace ft;
 /***********************************************************************************/
 
 template <class T, class Allocator, class Compare>
+red_black_tree<T, Allocator, Compare>::red_black_tree():
+	_root(NULL), _nil(NULL), _size(0), _alloc(Allocator()), _key_comp(Compare())
+{
+	this->_init_nil();
+	this->_root = this->_nil;
+}
+
+template <class T, class Allocator, class Compare>
 red_black_tree<T, Allocator, Compare>::red_black_tree(const typename red_black_tree<T, Allocator, Compare>::allocator_type& alloc, const Compare& comp):
 	_root(NULL), _nil(NULL), _size(0), _alloc(alloc), _key_comp(comp)
 {

@@ -161,7 +161,7 @@ bool	ft::operator<  (const reverse_iterator<Iterator1>& lhs, const reverse_itera
 template <class Iterator1, class Iterator2>
 bool	ft::operator<= (const reverse_iterator<Iterator1>& lhs, const reverse_iterator<Iterator2>& rhs)
 {
-	return (lhs.base() <= rhs.base());
+	return (lhs.base() >= rhs.base());
 }
 
 template <class Iterator1, class Iterator2>
@@ -173,7 +173,7 @@ bool	ft::operator>  (const reverse_iterator<Iterator1>& lhs, const reverse_itera
 template <class Iterator1, class Iterator2>
 bool	ft::operator>= (const reverse_iterator<Iterator1>& lhs, const reverse_iterator<Iterator2>& rhs)
 {
-	return (lhs.base() >= rhs.base());
+	return (lhs.base() <= rhs.base());
 }
 
 template <class Iterator>

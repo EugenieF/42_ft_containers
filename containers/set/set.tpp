@@ -123,7 +123,11 @@ template< class Key, class Compare, class Allocator >
 ft::pair<typename set<Key, Compare, Allocator>::iterator,bool>		set<Key, Compare, Allocator>::insert (
 	const typename set<Key, Compare, Allocator>::value_type& value)
 {
-	return (this->_rbtree.insert(value));
+	ft::pair<typename set<Key, Compare, Allocator>::iterator, bool> pair;
+	pair = this->_rbtree.insert(value);
+	return (pair);
+
+	// return (this->_rbtree.insert(value));
 }
 
 template< class Key, class Compare, class Allocator >

@@ -294,7 +294,7 @@ typename ft::enable_if<!(ft::is_integral<InputIterator>::value), void>::type
 	typename vector<T, Allocator>::difference_type	insert_size;
 
 	index = std::distance(this->begin(), position);
-	insert_size = last - first;
+	insert_size = std::distance(first, last);
 	this->_manage_capacity(insert_size);
 
 	ptr = typename vector<T, Allocator>::iterator(&this->_data[index]);

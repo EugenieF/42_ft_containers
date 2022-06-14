@@ -24,6 +24,7 @@ namespace ft
 			- Both children of a red node are black i.e., there can't be consecutive red nodes.
 			- All the simple paths from a node to descendant leaves contain the same number of black nodes. */
 
+	// template <class T,  class Allocator = std::allocator<ft::node<T> >, class Compare = std::less<T> >
 	template <class T,  class Allocator, class Compare = std::less<T> >
 	class	red_black_tree
 	{
@@ -49,6 +50,7 @@ namespace ft
 
 		public:
 		/****************           MAIN           ****************/
+			red_black_tree();
 			explicit red_black_tree(const allocator_type& alloc = allocator_type(), const key_compare& comp = key_compare());
 			red_black_tree(red_black_tree const& other);
 			~red_black_tree();

@@ -9,7 +9,7 @@ map<Key, T, Compare, Allocator>::map (const Compare& comp, const Allocator& allo
 
 template <class Key, class T, class Compare, class Allocator>
 template <class InputIterator>
-map<Key, T, Compare, Allocator>::map (InputIterator first, InputIterator last, const Compare& comp, const Allocator& alloc):
+map<Key, T, Compare, Allocator>::map (InputIterator first, InputIterator last, const Compare& comp, const Allocator& alloc, typename ft::enable_if<!(ft::is_integral<InputIterator>::value)>::type*):
     _rbtree(alloc, comp), _key_comp(comp), _alloc(alloc)
 {
     this->insert(first, last);
@@ -165,7 +165,7 @@ typename map<Key, T, Compare, Allocator>::iterator	map<Key, T, Compare, Allocato
 
 template <class Key, class T, class Compare, class Allocator>
 template <class InputIterator>
-void	map<Key, T, Compare, Allocator>::insert (InputIterator first, InputIterator last)
+typename ft::enable_if<!(ft::is_integral<InputIterator>::value), void>::type	map<Key, T, Compare, Allocator>::insert (InputIterator first, InputIterator last)
 {
 	for (; first != last; first++)
 		this->_rbtree.insert(*first);
