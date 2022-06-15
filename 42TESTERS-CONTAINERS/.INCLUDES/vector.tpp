@@ -168,8 +168,8 @@ void	ft::vector<T, Allocator>::reserve (typename ft::vector<T, Allocator>::size_
 	typename ft::vector<T, Allocator>::pointer	new_data = NULL;
 
 	if (new_cap > this->max_size())
-		throw(std::length_error("allocator<T>::allocate(size_t n) 'n' exceeds maximum supported size"));
-		// throw(std::length_error("vector::reserve"));
+		throw(std::length_error("vector::reserve"));	// sur LINUX
+		// throw(std::length_error("allocator<T>::allocate(size_t n) 'n' exceeds maximum supported size"));		// sur MACOS
 	if (new_cap <= this->_capacity)
 		return ;
 	new_data = this->_alloc.allocate(new_cap);
