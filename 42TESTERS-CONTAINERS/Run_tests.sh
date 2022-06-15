@@ -33,7 +33,7 @@ then
 		PATH_TO_REPO="$(cat .path 2> /dev/null)"
 		INCLUDE_PATH="$(cat .include_path 2> /dev/null)"
 	fi
-	cp "$PATH_TO_REPO"/**/*.hpp .INCLUDES 2> /dev/null
+	cp "$PATH_TO_REPO"/**/*.hpp "$PATH_TO_REPO"/**/*.tpp .INCLUDES 2> /dev/null
 	for file in .INCLUDES/*.hpp
 	do
 		NAME="${file%.*}"
@@ -84,4 +84,4 @@ elif [[ "$OSTYPE" == "darwin"* ]]
 then
 	echo "Valgrind deprecated on MacOS, please check leaks yourself"
 fi
-rm -rf .INCLUDES 2> /dev/null
+#rm -rf .INCLUDES 2> /dev/null

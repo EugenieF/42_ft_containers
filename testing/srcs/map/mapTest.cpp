@@ -775,3 +775,49 @@ void	nonMemberSwapMap(
 	for (int i = 0; i < 5; i++)
 		EXPECT_EQ(emptyMap[varY1[i]], varY2[i]);
 }
+
+template <typename T, typename U, typename V, typename W>
+void	insertHintMap(T emptyMap, U varX1, V varX2, W pairType)
+{
+	(void)pairType;
+
+	emptyMap.insert(W(varX1[0], varX2[0]));
+	emptyMap.insert(emptyMap.end(), W(varX1[4], varX2[4]));
+
+	emptyMap.insert(emptyMap.begin(), W(varX1[1], varX2[1]));
+	emptyMap.insert(emptyMap.begin(), W(varX1[2], varX2[2]));
+	emptyMap.insert(emptyMap.begin(), W(varX1[3], varX2[3]));
+	
+	typename T::iterator it;
+	int i;
+	for (it = emptyMap.begin(), i = 0; it != emptyMap.end(); ++it, i++)
+	{
+		EXPECT_EQ(it->first, varX1[i]);
+		EXPECT_EQ(it->second, varX2[i]);
+		// std::cout << it->first << " => " << it->second << '\n';
+	}
+}
+
+template <typename T, typename U, typename V, typename W>
+void	insertHintTrickyMap(T emptyMap, U varX1, V varX2, W pairType)
+{
+	(void)pairType;
+	emptyMap[varX1[4]];
+
+	emptyMap.insert(W(varX1[0], varX2[0]));
+	emptyMap.insert(emptyMap.end(), W(varX1[3], varX2[3]));
+
+	emptyMap.insert(emptyMap.begin(), W(varX1[3], varX2[1]));
+	emptyMap.insert(emptyMap.begin(), W(varX1[1], varX2[1]));
+	emptyMap.insert(emptyMap.begin(), W(varX1[2], varX2[2]));
+	
+	typename T::iterator it;
+	int i;
+	for (it = emptyMap.begin(), i = 0; i < 5; ++it, i++)
+	{
+		EXPECT_EQ(it->first, varX1[i]);
+		if (i < 4)
+			EXPECT_EQ(it->second, varX2[i]);
+		// std::cout << it->first << " => " << it->second << '\n';
+	}
+}

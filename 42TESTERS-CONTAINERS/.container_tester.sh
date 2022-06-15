@@ -42,7 +42,7 @@ run_tests ()
 		else
 			rm logs/"$1"_ft.error.log
 			./bin/"$1"_std > out/"$1"_std.log 2> stderror/"$1"_std 
-			timeout 5 ./bin/"$1"_ft > out/"$1"_ft.log 2> stderror/"$1"_ft
+			gtimeout 5 ./bin/"$1"_ft > out/"$1"_ft.log 2> stderror/"$1"_ft
 			RET=$?
 			diff out/"$1"_std.log out/"$1"_ft.log > diff/"$1".diff
 			#echo "ret:$RET"

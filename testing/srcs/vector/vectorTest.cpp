@@ -499,3 +499,32 @@ void	resizeVector(T emptyVector, T filledVector, T toInsertVector, U varX, U var
 			EXPECT_EQ(toInsertVector[i], varX[1]);
 	}
 }
+
+template <typename T, typename U>
+void	insertSizeVector(T emptyVector, U varX)
+{
+	typename T::iterator	it;
+
+	emptyVector.insert(emptyVector.begin(), 3, varX[1]);
+	
+	it = emptyVector.begin();
+	it = emptyVector.insert (it, varX[2]);
+	for (int i = 0; i < 4; i++)
+	{
+		if (i < 1)
+			EXPECT_EQ(emptyVector[i], varX[2]);
+		else
+			EXPECT_EQ(emptyVector[i], varX[1]);
+	}
+	EXPECT_EQ(*it, varX[2]);
+	emptyVector.insert(it, 2, varX[3]);
+	for (int i = 0; i < 6; i++)
+	{
+		if (i < 2)
+			EXPECT_EQ(emptyVector[i], varX[3]);
+		else if (i < 3)
+			EXPECT_EQ(emptyVector[i], varX[2]);
+		else
+			EXPECT_EQ(emptyVector[i], varX[1]);
+	}
+}
