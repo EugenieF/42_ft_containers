@@ -115,8 +115,6 @@ typename ft::red_black_tree<T, Allocator, Compare>::node_ptr	ft::red_black_tree<
 	typename ft::red_black_tree<T, Allocator, Compare>::node_ptr hint, const T& value)
 {
 	if (hint == this->get_nil()
-		// || !(this->_key_comp(hint->left->data, value) == true && this->_key_comp(value, hint->parent->data) == true))
-		// || !(this->_key_comp(value, hint->right->data) == true && this->_key_comp(hint->parent->data, value) == true)
 		|| (this->_key_comp(hint->left->data, value) && this->_key_comp(value, hint->parent->data))	== false	// smaller than left and parent
 		|| (this->_key_comp(value, hint->right->data) && this->_key_comp(hint->parent->data, value)) == false)	// greater than right and parent
 		return (this->_root);

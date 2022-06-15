@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   insert_main.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efrancon <efrancon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbaudet <hbaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 13:07:06 by hbaudet           #+#    #+#             */
-/*   Updated: 2022/06/15 15:15:49 by efrancon         ###   ########.fr       */
+/*   Updated: 2021/01/18 16:07:22 by hbaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int main ()
 
   myvector.insert (it,2,300);
 
-//   "it" no longer valid, get a new one:
+  // "it" no longer valid, get a new one:
   it = myvector.begin();
 
   vector<int> anothervector (2,400);

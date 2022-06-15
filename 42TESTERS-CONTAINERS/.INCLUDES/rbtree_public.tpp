@@ -217,7 +217,7 @@ typename ft::red_black_tree<T, Allocator, Compare>::iterator	ft::red_black_tree<
 
 template <class T, class Allocator, class Compare>
 typename ft::red_black_tree<T, Allocator, Compare>::const_iterator	ft::red_black_tree<T, Allocator, Compare>::insert (
-	typename ft::red_black_tree<T, Allocator, Compare>::const_iterator position, const T& value) const
+	typename ft::red_black_tree<T, Allocator, Compare>::const_iterator position, const T& value)
 {
 	typedef typename ft::red_black_tree<T, Allocator, Compare>::const_iterator	const_iterator;
 	typedef typename ft::red_black_tree<T, Allocator, Compare>::node_ptr		node_ptr;

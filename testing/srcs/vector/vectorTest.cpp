@@ -528,3 +528,52 @@ void	insertSizeVector(T emptyVector, U varX)
 			EXPECT_EQ(emptyVector[i], varX[1]);
 	}
 }
+
+template <typename T, typename U>
+void	capacityVector(T emptyVector, U varX)
+{
+	size_t	sz;
+	T		bar(emptyVector);
+
+	sz = emptyVector.capacity();
+	for (int i = 0; i < 100; ++i)
+	{
+		emptyVector.push_back(varX[i]);
+    	if (sz != emptyVector.capacity())
+		{
+			sz = emptyVector.capacity();
+			std::cout << "capacity changed: " << sz << '\n';
+		}
+	}
+
+	sz = bar.capacity();
+	bar.reserve(100);   // this is the only difference with foo above
+	for (int i=0; i<100; ++i)
+	{
+		bar.push_back(varX[i]);
+    	if (sz!=bar.capacity())
+		{
+			sz = bar.capacity();
+			std::cout << "capacity changed: " << sz << '\n';
+    	}
+	}
+}
+
+template <typename T, typename U>
+void	resizeCapacityVector(T emptyVector, U varX)
+{
+	(void)emptyVector;
+	(void)varX;
+	T test(12, 12);
+
+	test.resize(72);
+	std::cout << "s: " << test.size() << ", c: " << test.capacity() << std::endl;
+	test.resize(100);
+	std::cout << "s: " << test.size() << ", c: " << test.capacity() << std::endl;
+	test.resize(4170);
+	std::cout << "s: " << test.size() << ", c: " << test.capacity() << std::endl;
+	test.resize(171, 12);
+	std::cout << "s: " << test.size() << ", c: " << test.capacity() << std::endl;
+	test.resize(62);
+	std::cout << "s: " << test.size() << ", c: " << test.capacity() << std::endl;
+}

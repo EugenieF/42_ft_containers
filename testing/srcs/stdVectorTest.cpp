@@ -232,10 +232,26 @@ TEST_F(stdVectorTest, initSizeVector)
 // 	resizeVector(stringEmptyVector, stringFilledVector, stringToInsertVector, stringX, stringY);
 // }
 
-TEST_F(stdVectorTest, insertSizeVector)
+// TEST_F(stdVectorTest, insertSizeVector)
+// {
+// 	insertSizeVector(intEmptyVector, intX);
+// 	insertSizeVector(floatEmptyVector, floatX);
+// 	insertSizeVector(doubleEmptyVector, doubleX);
+// 	insertSizeVector(stringEmptyVector, stringX);
+// }
+
+TEST_F(stdVectorTest, capacityVector)
 {
-	insertSizeVector(intEmptyVector, intX);
-	insertSizeVector(floatEmptyVector, floatX);
-	insertSizeVector(doubleEmptyVector, doubleX);
-	insertSizeVector(stringEmptyVector, stringX);
+	capacityVector(intEmptyVector, intX);
+	// insertSizeVector(floatEmptyVector, floatX);
+	// insertSizeVector(doubleEmptyVector, doubleX);
+	// insertSizeVector(stringEmptyVector, stringX);
+}
+
+TEST_F(stdVectorTest, resizeCapacityVector)
+{
+	resizeCapacityVector(intEmptyVector, intX);
+	// resizeCapacityVector(floatEmptyVector, floatX);
+	// resizeCapacityVector(doubleEmptyVector, doubleX);
+	// resizeCapacityVector(stringEmptyVector, stringX);
 }

@@ -357,17 +357,21 @@ template <class T, class Allocator>
 void	ft::vector<T, Allocator>::_manage_capacity(size_t extra_size)
 {
 	typename ft::vector<T, Allocator>::size_type	new_capacity;
+	typename ft::vector<T, Allocator>::size_type	total_size;
 
-	if (this->_size + extra_size < this->_capacity)
+	total_size = this->size() + extra_size;
+	if (total_size < this->capacity())
 		return ;
-	new_capacity = this->_capacity;
-	while (this->_size + extra_size > new_capacity)
+	new_capacity = this->capacity();
+	if (new_capacity < total_size)
 	{
 		if (!new_capacity)
 			new_capacity = 1;
 		else
-			new_capacity *= 2;
-	}	
+			new_capacity = this->size() * 2;
+		if (new_capacity < total_size)
+			new_capacity = total_size;
+	}
 	this->reserve(new_capacity);
 }
 

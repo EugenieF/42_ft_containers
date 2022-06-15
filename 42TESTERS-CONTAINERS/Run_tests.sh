@@ -84,4 +84,4 @@ elif [[ "$OSTYPE" == "darwin"* ]]
 then
 	echo "Valgrind deprecated on MacOS, please check leaks yourself"
 fi
-#rm -rf .INCLUDES 2> /dev/null
+rm -rf .INCLUDES 2> /dev/null

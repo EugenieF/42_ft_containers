@@ -80,7 +80,7 @@ namespace ft
 		/****************        MODIFIERS         ****************/
 			ft::pair<iterator,bool>						insert (const value_type& value);
 			iterator									insert (iterator position, const value_type& value);
-			const_iterator								insert (const_iterator position, const value_type& value) const;
+			const_iterator								insert (const_iterator position, const value_type& value);
 			void										erase (iterator position);
 			size_type									erase (const value_type& value);
 			void										swap (red_black_tree& x);

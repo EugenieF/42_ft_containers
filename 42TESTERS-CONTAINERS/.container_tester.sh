@@ -42,7 +42,7 @@ run_tests ()
 		else
 			rm logs/"$1"_ft.error.log
 			./bin/"$1"_std > out/"$1"_std.log 2> stderror/"$1"_std 
-			timeout 5 ./bin/"$1"_ft > out/"$1"_ft.log 2> stderror/"$1"_ft
+			gtimeout 5 ./bin/"$1"_ft > out/"$1"_ft.log 2> stderror/"$1"_ft
 			RET=$?
 			diff out/"$1"_std.log out/"$1"_ft.log > diff/"$1".diff
 			#echo "ret:$RET"
@@ -60,7 +60,6 @@ run_tests ()
 				if [[ "$OSTYPE" == "linux-gnu"* ]]
 				then
 					valgrind ./bin/"$1"_ft > /dev/null 2> leak/"$1"_leak
-					# valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./bin/"$1"_ft > /dev/null 2> leak/"$1"_leak
 					if [ "$(grep "All heap blocks were freed -- no leaks are possible" leak/"$1"_leak)" = "" ]
 					then
 						echo -e "$RED$NOPE\t$1 test seems to leak (shame!), or it crashed (shame shame!)$RESET"
