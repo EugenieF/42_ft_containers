@@ -12,10 +12,17 @@ namespace ft
 	/***********************************************************************************/
 
 	template <class T>
+	// class vector_iterator : public std::iterator<std::random_access_iterator_tag, T>
 	class vector_iterator
 	{
 		public:
 			/****************          TYPEDEF         ****************/
+			// typedef	vector_iterator::difference_type	difference_type;
+			// typedef	vector_iterator::value_type			value_type;
+			// typedef	vector_iterator::pointer			pointer;
+			// typedef	vector_iterator::reference			reference;
+			// typedef	vector_iterator::iterator_category	iterator_category;
+
 			typedef	ptrdiff_t							difference_type;
 			typedef T									value_type;
 			typedef T*									pointer;

@@ -24,22 +24,20 @@ namespace ft
 			- Both children of a red node are black i.e., there can't be consecutive red nodes.
 			- All the simple paths from a node to descendant leaves contain the same number of black nodes. */
 
-	// template <class T,  class Allocator = std::allocator<ft::node<T> >, class Compare = std::less<T> >
 	template <class T,  class Allocator, class Compare = std::less<T> >
 	class	red_black_tree
 	{
 		public:
-			typedef T										value_type;
-			typedef ft::node<T>								node;
-			typedef ft::node<T>*							node_ptr;
-			typedef Compare									key_compare;
-			// typedef Allocator								allocator_type;
+			typedef T												value_type;
+			typedef ft::node<T>										node;
+			typedef ft::node<T>*									node_ptr;
+			typedef Compare											key_compare;
 			typedef typename Allocator::template rebind<ft::node<value_type> >::other	allocator_type;
-			typedef	size_t									size_type;
+			typedef	std::size_t										size_type;
 			typedef typename ft::rbtree_iterator<T, node>			iterator;
 			typedef typename ft::rbtree_iterator<T const, node>		const_iterator;
-			typedef ft::reverse_iterator<iterator>			reverse_iterator;
-			typedef ft::reverse_iterator<const_iterator>	const_reverse_iterator;
+			typedef ft::reverse_iterator<iterator>					reverse_iterator;
+			typedef ft::reverse_iterator<const_iterator>			const_reverse_iterator;
 
 		private:
 			node_ptr										_root;

@@ -11,26 +11,25 @@ namespace ft
 
 	typedef enum e_color
 	{
-		RED		= 0,
-		BLACK	= 1,
+		RED		= false,
+		BLACK	= true,
 	}	t_color;
 
 	template <class T>
-	class	node
+	struct	node
 	{
 		public:
 			typedef T										value_type;
 			typedef node*									pointer;
-			typedef node const*								const_pointer;
 			typedef node&									reference;
 			typedef node const&								const_reference;
 
 			value_type										data;
-			int												color;
 			pointer											left;
 			pointer											right;
 			pointer											parent;
-
+			bool											color;
+			
 			node();
 			node(const value_type& value);
 			node(const value_type& value, int color, pointer left, pointer right, pointer parent);
