@@ -577,3 +577,21 @@ void	resizeCapacityVector(T emptyVector, U varX)
 	test.resize(62);
 	std::cout << "s: " << test.size() << ", c: " << test.capacity() << std::endl;
 }
+
+void	leaksVector()
+{
+	ft::vector<std::string> JOHN;
+	ft::vector<std::string> BOB(5, "Hello");
+	ft::vector<std::string> MIKE(BOB);
+
+	// RESIZE
+	size_t	bob_resize = 2;
+	BOB.resize(bob_resize);
+
+	size_t	mike_resize = 9;
+	bob_resize = 0;
+	
+	BOB.resize(bob_resize);
+	MIKE.resize(mike_resize, "juste some random string"); // Leaks here: problem resize() !!	
+}
+

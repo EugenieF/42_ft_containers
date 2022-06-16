@@ -8,7 +8,7 @@ ft::map<Key, T, Compare, Allocator>::map (const Compare& comp, const Allocator& 
 
 template <class Key, class T, class Compare, class Allocator>
 template <class InputIterator>
-ft::map<Key, T, Compare, Allocator>::map (InputIterator first, InputIterator last, const Compare& comp, const Allocator& alloc, typename ft::enable_if<!(ft::is_integral<InputIterator>::value)>::type*):
+ft::map<Key, T, Compare, Allocator>::map (InputIterator first, InputIterator last, const Compare& comp, const Allocator& alloc):
     _rbtree(alloc, comp), _key_comp(comp), _alloc(alloc)
 {
     this->insert(first, last);
@@ -166,7 +166,7 @@ typename ft::map<Key, T, Compare, Allocator>::iterator	ft::map<Key, T, Compare, 
 
 template <class Key, class T, class Compare, class Allocator>
 template <class InputIterator>
-typename ft::enable_if<!(ft::is_integral<InputIterator>::value), void>::type	ft::map<Key, T, Compare, Allocator>::insert (InputIterator first, InputIterator last)
+void	ft::map<Key, T, Compare, Allocator>::insert (InputIterator first, InputIterator last)
 {
 	for (; first != last; first++)
 		this->_rbtree.insert(*first);
@@ -362,7 +362,7 @@ ft::pair<const Key, T>	ft::map<Key, T, Compare, Allocator>::_get_value_type(cons
 	return (ft::make_pair(key, mapped_type()));
 }
 
-/************************************       DEBUG       ************************************/
+/*********************************         PRINT        **********************************/
 
 template <class Key, class T, class Compare, class Allocator>
 void	ft::map<Key, T, Compare, Allocator>::print(void)

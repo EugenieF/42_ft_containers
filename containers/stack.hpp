@@ -13,44 +13,48 @@ namespace ft
 	class stack
 	{
 		public:
-			/****************          TYPEDEF         ****************/
+			/********************      MEMBER TYPES     **************************/
+
 			typedef typename Container::value_type	value_type;
 			typedef typename Container::size_type	size_type;
 			typedef Container						container_type;
 
 		protected:
+			/*********************    MEMBER VARIABLES   ********************/
 			Container								c;
 
 		public:
-			/****************           MAIN           ****************/
+			/*******************      MEMBER FUNCTIONS     *******************/
+
+							/*-----------   MAIN   -----------*/
 			explicit								stack (const container_type& cont = Container());
 			stack&									operator=(const stack& other);
 			~stack();
 
-			/****************         CAPACITY         ****************/
+							/*----------  CAPACITY  ----------*/
 			bool									empty() const;
 			size_type								size() const;
 
-			/****************      ELEMENT ACCESS       ***************/
+							/*-------  ELEMENT ACCESS  -------*/
 			value_type&								top();
 			const value_type&						top() const;
 
-			/****************        MODIFIERS         ****************/
+							/*----------  MODIFIERS  ---------*/
 			void									push (const value_type& val);
 			void									pop();
 
-			/****************     FRIEND FUNCTIONS     ****************/
+			/*******************      FRIEND FUNCTIONS     *******************/
 			template <class Tx, class ContainerX>
 			friend bool operator== (const stack<Tx, ContainerX>& lhs, const stack<Tx, ContainerX>& rhs);
 
 			template <class Tx, class ContainerX>
 			friend bool operator< (const stack<Tx, ContainerX>& lhs, const stack<Tx, ContainerX>& rhs);
 
-			/*********************         TO DEBUG         *********************/
+			/*******************             PRINT            *******************/
 			void											print(void);
 	};
 
-	/**************    NON-MEMBER FUNCTION OVERLOADS     **************/
+	/************************     NON-MEMBER FUNCTION OVERLOADS     ************************/
 
 	template <class T, class Container>
 	bool operator== (const stack<T,Container>& lhs, const stack<T,Container>& rhs);

@@ -321,7 +321,7 @@ void	ft::swap( ft::set<Key,Compare,Allocator>& lhs, ft::set<Key,Compare,Allocato
 	lhs.swap(rhs);
 }
 
-/************************************       DEBUG       ************************************/
+/************************************        PRINT        ************************************/
 
 template< class Key, class Compare, class Allocator >
 void	ft::set<Key, Compare, Allocator>::print(void)

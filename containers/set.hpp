@@ -19,7 +19,7 @@ namespace ft
 	class set
 	{
 		public:
-			/********************      MEMBER TYPES     **************************/
+			/**********************      MEMBER TYPES     **********************/
 			typedef Key										key_type;
 			typedef Key										value_type;
 			typedef Compare									key_compare;
@@ -37,13 +37,13 @@ namespace ft
 			typedef	typename Allocator::pointer					pointer;
 			typedef	typename Allocator::const_pointer			const_pointer;
 
-			// typedef typename tree_type::iterator				iterator;
 			typedef typename tree_type::const_iterator			iterator;
 			typedef typename tree_type::const_iterator			const_iterator;
 			typedef ft::reverse_iterator<iterator>				reverse_iterator;
 			typedef ft::reverse_iterator<const_iterator>		const_reverse_iterator;
 
 		private:
+			/*********************    MEMBER VARIABLES   ********************/
 			tree_type										_rbtree;
 			key_compare										_key_comp;
 			allocator_type									_alloc;
@@ -102,7 +102,7 @@ namespace ft
 			ft::pair<iterator,iterator>						equal_range (const key_type& key);
 			ft::pair<const_iterator,const_iterator>			equal_range (const key_type& key) const;
 
-			/*********************         TO DEBUG         *********************/
+			/*********************           PRINT           *********************/
 		public:
 			void											print(void);
 	};

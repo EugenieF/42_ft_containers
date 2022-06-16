@@ -277,11 +277,7 @@ void	ft::vector<T, Allocator>::insert (typename ft::vector<T, Allocator>::iterat
 	this->_size += n;
 
 	for (size_t i = 0; i < n; i++, ptr++)
-	{
 		this->_alloc.construct(&(*ptr), value);
-		// std::cout << "value = " << value << std::endl;
-	}
-	// std::cout << "HELLO: data[0] = " << this->_data[0] << std::endl;
 }
 
 template <class T, class Allocator>
@@ -321,7 +317,8 @@ typename ft::vector<T, Allocator>::iterator	ft::vector<T, Allocator>::erase (typ
 	erase_size = std::distance(first, last);
 	if (erase_size > 0)
 	{
-		this->_relocate_range(last, last - erase_size);		// Really not sure about this...
+		this->_destroy_range(first, last);				// leaks came from here ?
+		this->_relocate_range(last, last - erase_size);
 		this->_size -= erase_size;
 	}
 	return (first);
@@ -339,7 +336,6 @@ template <class T, class Allocator>
 void	ft::vector<T, Allocator>::clear()
 {
 	this->erase(this->begin(), this->end());
-	// this->_data = NULL;    is it useful ???
 }
 
 /**************          PRIVATE FUNCTIONS           **************/
@@ -385,7 +381,10 @@ void	ft::vector<T, Allocator>::_relocate_range(typename ft::vector<T, Allocator>
 	ft::vector<T>	tmp(position, this->end());
 	this->_destroy_range(position, this->end());
 	for (ptr = tmp.begin(); ptr != tmp.end(); ptr++, relocation++)
+	{
 		this->_alloc.construct(&(*relocation), *ptr);
+		this->_alloc.destroy(&(*ptr));
+	}
 }
 
 /**************    NON-MEMBER FUNCTION OVERLOADS     **************/

@@ -21,7 +21,7 @@ namespace ft
 	class	vector
 	{
 		public:
-			/****************          TYPEDEF         ****************/
+			/********************      MEMBER TYPES     **********************/
 			typedef T										value_type;
 			typedef Allocator								allocator_type;
 			typedef	size_t									size_type;
@@ -32,19 +32,20 @@ namespace ft
 			typedef	typename Allocator::const_pointer		const_pointer;
 			typedef ft::vector_iterator<T>					iterator;
 			typedef ft::vector_iterator<T const>			const_iterator;
-			// typedef T *										iterator;
-			// typedef T const *								const_iterator;
 			typedef ft::reverse_iterator<iterator>			reverse_iterator;
 			typedef ft::reverse_iterator<const_iterator>	const_reverse_iterator;
 
 		private:
+			/*********************    MEMBER VARIABLES   ********************/
 			pointer											_data;
 			size_type										_size;
 			size_type										_capacity;
 			allocator_type									_alloc;
 
 		public:
-			/****************           MAIN           ****************/
+			/*******************      MEMBER FUNCTIONS     *******************/
+
+							/*-----------   MAIN   -----------*/
 			explicit 				vector (const allocator_type& alloc = allocator_type());
 			explicit 				vector (size_type n, const value_type& value = value_type(), const allocator_type& alloc = allocator_type());
 			template <class InputIterator>
@@ -58,7 +59,7 @@ namespace ft
 									assign(InputIterator first, InputIterator last);
 			allocator_type			get_allocator() const;
 
-			/****************        ITERATORS         ****************/
+							/*---------  ITERATORS  ----------*/
 			iterator				begin();
 			const_iterator			begin() const;
 			iterator				end();
@@ -67,16 +68,16 @@ namespace ft
 			const_reverse_iterator	rbegin() const;
 			reverse_iterator		rend();
 			const_reverse_iterator	rend() const;
-
-			/****************         CAPACITY         ****************/
 			size_type				size() const;
+
+							/*----------  CAPACITY  ----------*/
 			size_type				max_size() const;
 			void					resize (size_type n, value_type val = value_type());
 			size_type	 			capacity() const;
 			bool 					empty() const;
 			void					reserve (size_type n);
 
-			/****************      ELEMENT ACCESS       ***************/
+							/*-------  ELEMENT ACCESS  -------*/
 			reference				operator[](size_type pos);
 			const_reference			operator[] (size_type pos) const;
 			reference				at(size_type pos);
@@ -86,7 +87,7 @@ namespace ft
 			reference				back();
 			const_reference			back() const;
 			
-			/****************        MODIFIERS         ****************/
+							/*----------  MODIFIERS  ---------*/
 			void					push_back (const value_type& val);
 			void					pop_back();
 			iterator				insert (iterator position, const value_type& val);	
@@ -100,13 +101,13 @@ namespace ft
 			void					clear();
 
 		private:
-			/****************    PRIVATE FUNCTIONS    ****************/
+			/*******************       PRIVATE FUNCTIONS      *******************/
 			void					_manage_capacity(size_type insert_size);
 			void					_destroy_range(iterator first, iterator last);
 			void					_relocate_range(iterator position, iterator relocation);
 
-			/****************         TO DEBUG         ****************/
 		public:
+			/*********************           PRINT          *********************/
 			void					print(void);
 	};
 

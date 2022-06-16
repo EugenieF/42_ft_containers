@@ -28,6 +28,7 @@ namespace ft
 	class	red_black_tree
 	{
 		public:
+			/********************      MEMBER TYPES     ***********************/
 			typedef T												value_type;
 			typedef ft::node<T>										node;
 			typedef ft::node<T>*									node_ptr;
@@ -40,6 +41,7 @@ namespace ft
 			typedef ft::reverse_iterator<const_iterator>			const_reverse_iterator;
 
 		private:
+			/*********************    MEMBER VARIABLES   ********************/
 			node_ptr										_root;
 			node_ptr										_nil;
 			size_type										_size;
@@ -47,7 +49,10 @@ namespace ft
 			key_compare										_key_comp;
 
 		public:
-		/****************           MAIN           ****************/
+			/*******************      MEMBER FUNCTIONS     *******************/
+
+							/*-----------   MAIN   -----------*/
+
 			red_black_tree();
 			explicit red_black_tree(const allocator_type& alloc = allocator_type(), const key_compare& comp = key_compare());
 			red_black_tree(red_black_tree const& other);
@@ -61,7 +66,7 @@ namespace ft
 			node_ptr									get_minimum() const;
 			node_ptr									get_maximum() const;
 
-		/****************        ITERATORS         ****************/
+							/*---------  ITERATORS  ----------*/
 			iterator									begin();
 			const_iterator								begin() const;
 			iterator									end();
@@ -71,11 +76,11 @@ namespace ft
 			reverse_iterator							rend();
 			const_reverse_iterator						rend() const;
 
-		/****************         CAPACITY         ****************/
+							/*----------  CAPACITY  ----------*/
 			size_type									size() const;
 			size_type									max_size() const;
 
-		/****************        MODIFIERS         ****************/
+							/*----------  MODIFIERS  ---------*/
 			ft::pair<iterator,bool>						insert (const value_type& value);
 			iterator									insert (iterator position, const value_type& value);
 			const_iterator								insert (const_iterator position, const value_type& value);
@@ -84,7 +89,7 @@ namespace ft
 			void										swap (red_black_tree& x);
 			void										clear();
 
-		/****************        OPERATIONS        ****************/
+							/*---------  OPERATIONS  ---------*/
 			iterator									search_node(const value_type& value);
 			const_iterator								search_node(const value_type& value) const;
 			iterator									lower_bound (const value_type& value);
@@ -95,7 +100,7 @@ namespace ft
 			ft::pair<iterator,iterator>             	equal_range (const value_type& value);
 
 		private:
-		/****************     PRIVATE FUNCTIONS     ****************/
+			/*******************       PRIVATE FUNCTIONS      *******************/
 			void										_init_nil();
 			node_ptr									_create_node(const value_type& value = value_type(), int color = RED);
 			void										_delete_node(node_ptr node);
@@ -115,11 +120,11 @@ namespace ft
 			const_iterator								_rbtree_search_node(node_ptr node, const value_type& value) const;
 
 
-		/*********************      TO DEBUG      *********************/
+			/*******************             PRINT            *******************/
+			void										_print(node_ptr node, std::stringstream &buffer, bool is_tail, std::string prefix);
+
 		public:
 			void										print(void);
-		private:
-			void										_print(node_ptr node, std::stringstream &buffer, bool is_tail, std::string prefix);
 	};
 }
 

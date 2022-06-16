@@ -241,18 +241,25 @@ TEST_F(ftVectorTest, initSizeVector)
 // 	insertSizeVector(stringEmptyVector, stringX);
 // }
 
-TEST_F(ftVectorTest, capacityVector)
-{
-	capacityVector(intEmptyVector, intX);
-	// insertSizeVector(floatEmptyVector, floatX);
-	// insertSizeVector(doubleEmptyVector, doubleX);
-	// insertSizeVector(stringEmptyVector, stringX);
-}
+// TEST_F(ftVectorTest, capacityVector)
+// {
+// 	capacityVector(intEmptyVector, intX);
+// 	// insertSizeVector(floatEmptyVector, floatX);
+// 	// insertSizeVector(doubleEmptyVector, doubleX);
+// 	// insertSizeVector(stringEmptyVector, stringX);
+// }
 
-TEST_F(ftVectorTest, resizeCapacityVector)
+// TEST_F(ftVectorTest, resizeCapacityVector)
+// {
+// 	resizeCapacityVector(intEmptyVector, intX);
+// 	// resizeCapacityVector(floatEmptyVector, floatX);
+// 	// resizeCapacityVector(doubleEmptyVector, doubleX);
+// 	// resizeCapacityVector(stringEmptyVector, stringX);
+// }
+
+TEST_F(ftVectorTest, leaksVector)
 {
-	resizeCapacityVector(intEmptyVector, intX);
-	// resizeCapacityVector(floatEmptyVector, floatX);
-	// resizeCapacityVector(doubleEmptyVector, doubleX);
-	// resizeCapacityVector(stringEmptyVector, stringX);
+	leaksVector();
+	while (1)
+		;
 }

@@ -17,7 +17,7 @@ namespace ft
 	class map
 	{
 		public:
-			/********************      MEMBER TYPES     **************************/
+			/********************      MEMBER TYPES     ***********************/
 			typedef Key										key_type;
 			typedef T										mapped_type;
 			typedef ft::pair<const Key, T>					value_type;
@@ -54,6 +54,7 @@ namespace ft
 			typedef ft::reverse_iterator<const_iterator>	const_reverse_iterator;
 
 		private:
+			/*********************    MEMBER VARIABLES   ********************/
 			tree_type										_rbtree;
 			key_compare										_key_comp;
 			allocator_type									_alloc;
@@ -63,14 +64,13 @@ namespace ft
 
 							/*-----------   MAIN   -----------*/
 
-			explicit map (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type());
+			explicit	map(const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type());
 			template <class InputIterator>
-  			map (InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type(),
-					typename ft::enable_if<!(ft::is_integral<InputIterator>::value)>::type* = NULL);
+  			map (InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type());
 			map (const map& other);
 			~map();
-			map& operator= (const map& other);
-			allocator_type get_allocator() const;
+			map&											operator= (const map& other);
+			allocator_type									get_allocator() const;
 
 							/*---------  ITERATORS  ----------*/
 			iterator 										begin();
@@ -94,8 +94,7 @@ namespace ft
 			ft::pair<iterator,bool>							insert (const value_type& val);
 			iterator										insert (iterator position, const value_type& val);
 			template <class InputIterator>
-			typename ft::enable_if<!(ft::is_integral<InputIterator>::value), void>::type
-															insert (InputIterator first, InputIterator last);
+			void											insert (InputIterator first, InputIterator last);
 			void											erase (iterator position);
 			size_type										erase (const key_type& key);
 			void											erase (iterator first, iterator last);
@@ -122,12 +121,12 @@ namespace ft
 			ft::pair<const key_type, mapped_type>			_get_value_type(const key_type& key) const;
 
 
-			/*********************         TO DEBUG         *********************/
+			/*******************             PRINT            *******************/
 		public:
 			void											print(void);
 	};
 
-	/********************         NON-MEMBER FUNCTION OVERLOADS          ********************/
+	/********************      NON-MEMBER FUNCTION OVERLOADS       ********************/
 	template< class Key, class T, class Compare, class Allocator >
 	bool operator==( const map<Key,T,Compare,Allocator>& lhs, const map<Key,T,Compare,Allocator>& rhs );
 

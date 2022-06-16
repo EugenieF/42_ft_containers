@@ -13,7 +13,7 @@ namespace ft
 	class	rbtree_iterator
 	{
 		public:
-			/****************          TYPEDEF         ****************/
+			/********************      MEMBER TYPES     **********************/
 			typedef	ptrdiff_t							difference_type;
 			typedef T									value_type;
 			typedef T*									pointer;
@@ -23,6 +23,7 @@ namespace ft
 			typedef std::bidirectional_iterator_tag		iterator_category;
 			typedef Node*								node_ptr;
 
+			/*********************    MEMBER VARIABLES   ********************/
 			node_ptr									current;
 
 		private:
@@ -30,7 +31,8 @@ namespace ft
 			node_ptr									_nil;
 
 		public:
-			/****************           MAIN           ****************/
+			/******************      MEMBER FUNCTIONS     ******************/
+
 			rbtree_iterator();
 			rbtree_iterator (node_ptr ptr, node_ptr root, node_ptr nil);
   			rbtree_iterator (const rbtree_iterator& rbtree_it);
@@ -45,10 +47,7 @@ namespace ft
 			rbtree_iterator& 							operator--();
 			rbtree_iterator  							operator--(int);
 
-			operator									rbtree_iterator<value_type const, Node>(void) const;	// to investigate ?
-			
-			// bool					operator== (const rbtree_iterator& rhs);
- 			// bool					operator!= (const rbtree_iterator& rhs);
+			operator									rbtree_iterator<value_type const, Node>(void) const;
 
 		private:
 			node_ptr									_get_root() const;
@@ -59,6 +58,8 @@ namespace ft
 			node_ptr									_successor(node_ptr node);
 	};
 	
+	/********************     NON-MEMBER FUNCTION OVERLOADS      ********************/
+
 	template <class Tx, class Ty, class Ux, class Uy>
 	bool												operator== (const rbtree_iterator<Tx, Ty>& lhs, const rbtree_iterator<Ux, Uy>& rhs);
 
