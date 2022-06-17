@@ -532,66 +532,60 @@ void	insertSizeVector(T emptyVector, U varX)
 template <typename T, typename U>
 void	capacityVector(T emptyVector, U varX)
 {
-	size_t	sz;
-	T		bar(emptyVector);
+	size_t	size;
+	T		copyEmptyVector(emptyVector);
+	size_t	capacity = 1;
 
-	sz = emptyVector.capacity();
-	for (int i = 0; i < 100; ++i)
+	size = emptyVector.capacity();
+	for (int i = 0; i < 100; i++)
 	{
-		emptyVector.push_back(varX[i]);
-    	if (sz != emptyVector.capacity())
+		emptyVector.push_back(varX[5]);
+    	if (size != emptyVector.capacity())
 		{
-			sz = emptyVector.capacity();
-			std::cout << "capacity changed: " << sz << '\n';
+			size = emptyVector.capacity();
+			EXPECT_EQ(emptyVector.capacity(), capacity);
+			capacity *= 2;
 		}
 	}
 
-	sz = bar.capacity();
-	bar.reserve(100);   // this is the only difference with foo above
-	for (int i=0; i<100; ++i)
+	std::cout << std::endl;
+
+	size = copyEmptyVector.capacity();
+	copyEmptyVector.reserve(100);
+	for (int i = 0; i < 100; i++)
 	{
-		bar.push_back(varX[i]);
-    	if (sz!=bar.capacity())
+		copyEmptyVector.push_back(varX[7]);
+    	if (size != copyEmptyVector.capacity())
 		{
-			sz = bar.capacity();
-			std::cout << "capacity changed: " << sz << '\n';
+			size = copyEmptyVector.capacity();
+			EXPECT_EQ(copyEmptyVector.capacity(), (size_t)100);
     	}
 	}
 }
 
 template <typename T, typename U>
-void	resizeCapacityVector(T emptyVector, U varX)
+void	resizeCapacityVector(T emptyVector, U varY)
 {
 	(void)emptyVector;
-	(void)varX;
-	T test(12, 12);
+	T testVector(12, varY[2]);
 
-	test.resize(72);
-	std::cout << "s: " << test.size() << ", c: " << test.capacity() << std::endl;
-	test.resize(100);
-	std::cout << "s: " << test.size() << ", c: " << test.capacity() << std::endl;
-	test.resize(4170);
-	std::cout << "s: " << test.size() << ", c: " << test.capacity() << std::endl;
-	test.resize(171, 12);
-	std::cout << "s: " << test.size() << ", c: " << test.capacity() << std::endl;
-	test.resize(62);
-	std::cout << "s: " << test.size() << ", c: " << test.capacity() << std::endl;
+	testVector.resize(72);
+	EXPECT_EQ(testVector.size(), (size_t)72);
+	EXPECT_EQ(testVector.capacity(), (size_t)72);
+
+	testVector.resize(100);
+	EXPECT_EQ(testVector.size(), (size_t)100);
+	EXPECT_EQ(testVector.capacity(), (size_t)144);
+
+	testVector.resize(4170);
+	EXPECT_EQ(testVector.size(), (size_t)4170);
+	EXPECT_EQ(testVector.capacity(), (size_t)4170);
+
+	testVector.resize(171, varY[2]);
+	EXPECT_EQ(testVector.size(), (size_t)171);
+	EXPECT_EQ(testVector.capacity(), (size_t)4170);
+
+	testVector.resize(62);
+	EXPECT_EQ(testVector.size(), (size_t)62);
+	EXPECT_EQ(testVector.capacity(), (size_t)4170);
 }
-
-void	leaksVector()
-{
-	ft::vector<std::string> JOHN;
-	ft::vector<std::string> BOB(5, "Hello");
-	ft::vector<std::string> MIKE(BOB);
-
-	// RESIZE
-	size_t	bob_resize = 2;
-	BOB.resize(bob_resize);
-
-	size_t	mike_resize = 9;
-	bob_resize = 0;
-	
-	BOB.resize(bob_resize);
-	MIKE.resize(mike_resize, "juste some random string"); // Leaks here: problem resize() !!	
-}
-

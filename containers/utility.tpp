@@ -13,7 +13,7 @@ template <class U1, class U2>
 ft::pair<T1, T2>::pair (const pair<U1, U2>& p): first(p.first), second(p.second) {}
 
 template <class T1, class T2>
-ft::pair<T1, T2>& ft::pair<T1, T2>::operator= (const ft::pair<T1, T2>& other)	// is depreciated, why ?
+ft::pair<T1, T2>& ft::pair<T1, T2>::operator= (const ft::pair<T1, T2>& other)
 {
     if (this != &other)
     {

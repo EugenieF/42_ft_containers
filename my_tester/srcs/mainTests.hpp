@@ -1,11 +1,14 @@
 #ifndef __MAINTESTS_HPP__
 # define __MAINTESTS_HPP__
 
-// # include "../containers/vector.hpp"
-// # include "../containers/stack.hpp"
-// # include "../containers/map.hpp"
-// # include "../containers/set.hpp"
-# include "../containers/main.hpp"
+# define BLUE_B "\033[40;1;38;5;117m"
+# define ORANGE_B "\033[40;1;38;5;216m"
+# define RESET "\033[0m"
+
+# include "../containers/vector.hpp"
+# include "../containers/stack.hpp"
+# include "../containers/map.hpp"
+# include "../containers/set.hpp"
 # include "gtest/gtest.h"
 # include <iterator>
 # include <stack>
@@ -51,26 +54,26 @@ class	globalVarTest
 
 // MAC :
 
-# define MAX_SIZE_INT_VECTOR (size_t)4611686018427387903
-# define MAX_SIZE_FLOAT_VECTOR (size_t)4611686018427387903
-# define MAX_SIZE_DOUBLE_VECTOR (size_t)2305843009213693951
-# define MAX_SIZE_STRING_VECTOR (size_t)768614336404564650
+// # define MAX_SIZE_INT_VECTOR (size_t)4611686018427387903
+// # define MAX_SIZE_FLOAT_VECTOR (size_t)4611686018427387903
+// # define MAX_SIZE_DOUBLE_VECTOR (size_t)2305843009213693951
+// # define MAX_SIZE_STRING_VECTOR (size_t)768614336404564650
 
-# define MAX_SIZE_INT_INT_MAP (size_t)461168601842738790
-# define MAX_SIZE_INT_FLOAT_MAP (size_t)461168601842738790
-# define MAX_SIZE_INT_DOUBLE_MAP (size_t)384307168202282325
-# define MAX_SIZE_INT_STRING_MAP (size_t)288230376151711743
+// # define MAX_SIZE_INT_INT_MAP (size_t)461168601842738790
+// # define MAX_SIZE_INT_FLOAT_MAP (size_t)461168601842738790
+// # define MAX_SIZE_INT_DOUBLE_MAP (size_t)384307168202282325
+// # define MAX_SIZE_INT_STRING_MAP (size_t)288230376151711743
 
 // LINUX :
 
-// # define MAX_SIZE_INT_VECTOR (size_t)2305843009213693951
-// # define MAX_SIZE_FLOAT_VECTOR (size_t)2305843009213693951
-// # define MAX_SIZE_DOUBLE_VECTOR (size_t)1152921504606846975
-// # define MAX_SIZE_STRING_VECTOR (size_t)288230376151711743
+# define MAX_SIZE_INT_VECTOR (size_t)2305843009213693951
+# define MAX_SIZE_FLOAT_VECTOR (size_t)2305843009213693951
+# define MAX_SIZE_DOUBLE_VECTOR (size_t)1152921504606846975
+# define MAX_SIZE_STRING_VECTOR (size_t)288230376151711743
 
-// # define MAX_SIZE_INT_SET (size_t)230584300921369395
-// # define MAX_SIZE_FLOAT_SET (size_t)230584300921369395
-// # define MAX_SIZE_DOUBLE_SET (size_t)230584300921369395
-// # define MAX_SIZE_STRING_SET (size_t)144115188075855871
+# define MAX_SIZE_INT_SET (size_t)230584300921369395
+# define MAX_SIZE_FLOAT_SET (size_t)230584300921369395
+# define MAX_SIZE_DOUBLE_SET (size_t)230584300921369395
+# define MAX_SIZE_STRING_SET (size_t)144115188075855871
 
 #endif

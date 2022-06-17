@@ -12,9 +12,10 @@
 	// #include <vector.hpp>
 // #endif
 
-#include "containers/map/map.hpp"
-#include "containers/stack/stack.hpp"
-#include "containers/vector/vector.hpp"
+#include "containers/stack.hpp"
+#include "containers/vector.hpp"
+#include "containers/map.hpp"
+#include "containers/set.hpp"
 
 #include <stdlib.h>
 

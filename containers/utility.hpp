@@ -24,8 +24,8 @@ namespace ft
 		pair(const first_type& x, const second_type& y);
 		template <class U, class V>
 		pair(const pair<U, V>& pr);
-		pair& operator=(const pair& other) = default;
-		// pair& operator=(const pair& other);
+		// pair& operator=(const pair& other) = default;
+		pair& operator=(const pair& other);
 		operator pair<const T1, const T2>(void) const;
 	};
 
