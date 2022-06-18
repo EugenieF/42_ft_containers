@@ -12,22 +12,22 @@ namespace ft
 	/***********************************************************************************/
 
 	template <class T>
-	// class vector_iterator : public std::iterator<std::random_access_iterator_tag, T>
-	class vector_iterator
+	// class vector_iterator
+	class vector_iterator : public std::iterator<std::random_access_iterator_tag, T>
 	{
 		public:
 			/****************          TYPEDEF         ****************/
-			// typedef	vector_iterator::difference_type	difference_type;
-			// typedef	vector_iterator::value_type			value_type;
-			// typedef	vector_iterator::pointer			pointer;
-			// typedef	vector_iterator::reference			reference;
-			// typedef	vector_iterator::iterator_category	iterator_category;
+			typedef	typename vector_iterator::difference_type	difference_type;
+			typedef	typename vector_iterator::value_type		value_type;
+			typedef	typename vector_iterator::pointer			pointer;
+			typedef	typename vector_iterator::reference			reference;
+			typedef	typename vector_iterator::iterator_category	iterator_category;
 
-			typedef	ptrdiff_t							difference_type;
-			typedef T									value_type;
-			typedef T*									pointer;
-			typedef T&									reference;
-			typedef std::random_access_iterator_tag		iterator_category;
+			// typedef	ptrdiff_t							difference_type;
+			// typedef T									value_type;
+			// typedef T*									pointer;
+			// typedef T&									reference;
+			// typedef std::random_access_iterator_tag		iterator_category;
 
 			/****************           MAIN           ****************/
 			vector_iterator();

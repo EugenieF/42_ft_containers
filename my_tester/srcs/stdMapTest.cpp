@@ -15,6 +15,7 @@ TEST_F(stdMapTest, initSizeMap)
 	initSizeMap(intDoubleEmptyMap, intDoubleFilledMap, intDoubleToInsertMap);
 	initSizeMap(intStringEmptyMap, intStringFilledMap, intStringToInsertMap);
 	initSizeMap(stringStringEmptyMap, stringStringFilledMap, stringStringToInsertMap);
+	initSizeMap(doubleIntEmptyMap, doubleIntFilledMap, doubleIntToInsertMap);
 }
 
 TEST_F(stdMapTest, isEmptyMap)
@@ -24,6 +25,7 @@ TEST_F(stdMapTest, isEmptyMap)
 	isEmptyMap(intDoubleEmptyMap, intDoubleFilledMap, intDoubleToInsertMap);
 	isEmptyMap(intStringEmptyMap, intStringFilledMap, intStringToInsertMap);
 	isEmptyMap(stringStringEmptyMap, stringStringFilledMap, stringStringToInsertMap);
+	isEmptyMap(doubleIntEmptyMap, doubleIntFilledMap, doubleIntToInsertMap);
 }
 
 TEST_F(stdMapTest, insertInEmptyMap)
@@ -33,6 +35,7 @@ TEST_F(stdMapTest, insertInEmptyMap)
 	insertInEmptyMap(intDoubleEmptyMap, intX, doubleX, std::pair<int, double>(0,0.0));
 	insertInEmptyMap(intStringEmptyMap, intX, stringX, std::pair<int, std::string>(0,""));
 	insertInEmptyMap(stringStringEmptyMap, stringX, stringX, std::pair<std::string, std::string>("",""));
+	insertInEmptyMap(doubleIntEmptyMap, doubleX, intX, std::pair<double, int>(0.0,0));
 }
 
 TEST_F(stdMapTest, insertExistingKeyInFilledMap)
@@ -42,6 +45,7 @@ TEST_F(stdMapTest, insertExistingKeyInFilledMap)
 	insertExistingKeyInFilledMap(intDoubleFilledMap, intX, doubleX, std::pair<int, double>(0,0.0));
 	insertExistingKeyInFilledMap(intStringFilledMap, intX, stringX, std::pair<int, std::string>(0,""));
 	insertExistingKeyInFilledMap(stringStringFilledMap, stringX, stringX, std::pair<std::string, std::string>("",""));
+	insertExistingKeyInFilledMap(doubleIntFilledMap, doubleX, intX, std::pair<double, int>(0.0,0));
 }
 
 TEST_F(stdMapTest, eraseOneInFilledMap)
@@ -51,6 +55,7 @@ TEST_F(stdMapTest, eraseOneInFilledMap)
 	eraseOneInFilledMap(intDoubleFilledMap, intX);
 	eraseOneInFilledMap(intStringFilledMap, intX);
 	eraseOneInFilledMap(stringStringFilledMap, stringX);
+	eraseOneInFilledMap(doubleIntFilledMap, doubleX);
 }
 
 TEST_F(stdMapTest, eraseOneInEmptyMap)
@@ -60,6 +65,7 @@ TEST_F(stdMapTest, eraseOneInEmptyMap)
 	eraseOneInEmptyMap(intDoubleEmptyMap, intX);
 	eraseOneInEmptyMap(intStringEmptyMap, intX);
 	eraseOneInEmptyMap(stringStringEmptyMap, stringX);
+	eraseOneInEmptyMap(doubleIntEmptyMap, doubleX);
 }
 
 TEST_F(stdMapTest, insertRangeInEmptyMap)
@@ -69,6 +75,7 @@ TEST_F(stdMapTest, insertRangeInEmptyMap)
 	insertRangeInEmptyMap(intDoubleEmptyMap, intDoubleFilledMap, intX, doubleX);
 	insertRangeInEmptyMap(intStringEmptyMap, intStringFilledMap, intX, stringX);
 	insertRangeInEmptyMap(stringStringEmptyMap, stringStringFilledMap, stringX, stringX);
+	insertRangeInEmptyMap(doubleIntEmptyMap, doubleIntFilledMap, doubleX, intX);
 }
 
 TEST_F(stdMapTest, insertRangeInFilledMap)
@@ -78,6 +85,7 @@ TEST_F(stdMapTest, insertRangeInFilledMap)
 	insertRangeInFilledMap(intDoubleFilledMap, intDoubleToInsertMap, intX, intY, doubleX, doubleY);
 	insertRangeInFilledMap(intStringFilledMap, intStringToInsertMap, intX, intY, stringX, stringY);
 	insertRangeInFilledMap(stringStringFilledMap, stringStringToInsertMap, stringX, stringY, stringX, stringY);
+	insertRangeInFilledMap(doubleIntFilledMap, doubleIntToInsertMap, doubleX, doubleY, intX, intY);
 }
 
 TEST_F(stdMapTest, eraseRangeInFilledMap)
@@ -87,6 +95,7 @@ TEST_F(stdMapTest, eraseRangeInFilledMap)
 	eraseRangeInFilledMap(intDoubleFilledMap);
 	eraseRangeInFilledMap(intStringFilledMap);
 	eraseRangeInFilledMap(stringStringFilledMap);
+	eraseRangeInFilledMap(doubleIntFilledMap);
 }
 
 TEST_F(stdMapTest, clearMap)
@@ -96,6 +105,7 @@ TEST_F(stdMapTest, clearMap)
 	clearMap(intDoubleEmptyMap, intDoubleFilledMap);
 	clearMap(intStringEmptyMap, intStringFilledMap);
 	clearMap(stringStringEmptyMap, stringStringFilledMap);
+	clearMap(doubleIntEmptyMap, doubleIntFilledMap);
 }
 
 TEST_F(stdMapTest, swapMap)
@@ -105,15 +115,18 @@ TEST_F(stdMapTest, swapMap)
 	swapMap(intDoubleEmptyMap, intDoubleFilledMap, intDoubleToInsertMap, intX, intY, doubleX, doubleY);
 	swapMap(intStringEmptyMap, intStringFilledMap, intStringToInsertMap, intX, intY, stringX, stringY);
 	swapMap(stringStringEmptyMap, stringStringFilledMap, stringStringToInsertMap, stringX, stringY, stringX, stringY);
+	swapMap(doubleIntEmptyMap, doubleIntFilledMap, doubleIntToInsertMap, doubleX, doubleY, intX, intY);
 }
 
-// TEST_F(stdMapTest, maxSizeMap)
-// {
-// 	maxSizeMap(intIntEmptyMap, intIntFilledMap, intIntToInsertMap);
-// 	maxSizeMap(intFloatEmptyMap, intFloatFilledMap, intFloatToInsertMap);
-// 	maxSizeMap(intDoubleEmptyMap, intDoubleFilledMap, intDoubleToInsertMap);
-// 	maxSizeMap(intStringEmptyMap, intStringFilledMap, intStringToInsertMap);
-// }
+TEST_F(stdMapTest, maxSizeMap)
+{
+	maxSizeMap(intIntEmptyMap, intIntFilledMap, intIntToInsertMap, MAX_SIZE_INT_INT_MAP);
+	maxSizeMap(intFloatEmptyMap, intFloatFilledMap, intFloatToInsertMap, MAX_SIZE_INT_FLOAT_MAP);
+	maxSizeMap(intDoubleEmptyMap, intDoubleFilledMap, intDoubleToInsertMap, MAX_SIZE_INT_DOUBLE_MAP);
+	maxSizeMap(intStringEmptyMap, intStringFilledMap, intStringToInsertMap, MAX_SIZE_INT_STRING_MAP);
+	maxSizeMap(stringStringEmptyMap, stringStringFilledMap, stringStringToInsertMap, MAX_SIZE_STRING_STRING_MAP);
+	maxSizeMap(doubleIntEmptyMap, doubleIntFilledMap, doubleIntToInsertMap, MAX_SIZE_INT_DOUBLE_MAP);
+}
 
 TEST_F(stdMapTest, findMap)
 {
@@ -122,6 +135,7 @@ TEST_F(stdMapTest, findMap)
 	findMap(intDoubleEmptyMap, intDoubleFilledMap, intDoubleToInsertMap, intX, intY, doubleX, doubleY);
 	findMap(intStringEmptyMap, intStringFilledMap, intStringToInsertMap, intX, intY, stringX, stringY);
 	findMap(stringStringEmptyMap, stringStringFilledMap, stringStringToInsertMap, stringX, stringY, stringX, stringY);
+	findMap(doubleIntEmptyMap, doubleIntFilledMap, doubleIntToInsertMap, doubleX, doubleY, intX, intY);
 }
 
 TEST_F(stdMapTest, constFindMap)
@@ -131,6 +145,7 @@ TEST_F(stdMapTest, constFindMap)
 	constFindMap(intDoubleEmptyMap, intDoubleFilledMap, intDoubleToInsertMap, intX, intY, doubleX, doubleY);
 	constFindMap(intStringEmptyMap, intStringFilledMap, intStringToInsertMap, intX, intY, stringX, stringY);
 	constFindMap(stringStringEmptyMap, stringStringFilledMap, stringStringToInsertMap, stringX, stringY, stringX, stringY);
+	constFindMap(doubleIntEmptyMap, doubleIntFilledMap, doubleIntToInsertMap, doubleX, doubleY, intX, intY);
 }
 
 TEST_F(stdMapTest, countMap)
@@ -140,6 +155,7 @@ TEST_F(stdMapTest, countMap)
 	countMap(intDoubleEmptyMap, intDoubleFilledMap, intDoubleToInsertMap, intX, intY);
 	countMap(intStringEmptyMap, intStringFilledMap, intStringToInsertMap, intX, intY);
 	countMap(stringStringEmptyMap, stringStringFilledMap, stringStringToInsertMap, stringX, stringY);
+	countMap(doubleIntEmptyMap, doubleIntFilledMap, doubleIntToInsertMap, doubleX, doubleY);
 }
 
 TEST_F(stdMapTest, lowerBoundMap)
@@ -149,6 +165,7 @@ TEST_F(stdMapTest, lowerBoundMap)
 	lowerBoundMap(intDoubleFilledMap, intDoubleToInsertMap, intX, intY, doubleX, doubleY);
 	lowerBoundMap(intStringFilledMap, intStringToInsertMap, intX, intY, stringX, stringY);
 	lowerBoundMap(stringStringFilledMap, stringStringToInsertMap, stringX, stringY, stringX, stringY);
+	lowerBoundMap(doubleIntFilledMap, doubleIntToInsertMap, doubleX, doubleY, intX, intY);
 }
 
 TEST_F(stdMapTest, constLowerBoundMap)
@@ -158,6 +175,7 @@ TEST_F(stdMapTest, constLowerBoundMap)
 	constLowerBoundMap(intDoubleFilledMap, intDoubleToInsertMap, intX, intY, doubleX, doubleY);
 	constLowerBoundMap(intStringFilledMap, intStringToInsertMap, intX, intY, stringX, stringY);
 	constLowerBoundMap(stringStringFilledMap, stringStringToInsertMap, stringX, stringY, stringX, stringY);
+	constLowerBoundMap(doubleIntFilledMap, doubleIntToInsertMap, doubleX, doubleY, intX, intY);
 }
 
 TEST_F(stdMapTest, upperBoundMap)
@@ -167,6 +185,7 @@ TEST_F(stdMapTest, upperBoundMap)
 	upperBoundMap(intDoubleFilledMap, intDoubleToInsertMap, intX, intY, doubleX, doubleY);
 	upperBoundMap(intStringFilledMap, intStringToInsertMap, intX, intY, stringX, stringY);
 	upperBoundMap(stringStringFilledMap, stringStringToInsertMap, stringX, stringY, stringX, stringY);
+	upperBoundMap(doubleIntFilledMap, doubleIntToInsertMap, doubleX, doubleY, intX, intY);
 }
 
 TEST_F(stdMapTest, constUpperBoundMap)
@@ -176,6 +195,7 @@ TEST_F(stdMapTest, constUpperBoundMap)
 	constUpperBoundMap(intDoubleFilledMap, intDoubleToInsertMap, intX, intY, doubleX, doubleY);
 	constUpperBoundMap(intStringFilledMap, intStringToInsertMap, intX, intY, stringX, stringY);
 	constUpperBoundMap(stringStringFilledMap, stringStringToInsertMap, stringX, stringY, stringX, stringY);
+	constUpperBoundMap(doubleIntFilledMap, doubleIntToInsertMap, doubleX, doubleY, intX, intY);
 }
 
 TEST_F(stdMapTest, equalRangeMap)
@@ -185,6 +205,7 @@ TEST_F(stdMapTest, equalRangeMap)
 	equalRangeMap(intDoubleFilledMap, intDoubleToInsertMap, intX, intY, doubleX, doubleY);
 	equalRangeMap(intStringFilledMap, intStringToInsertMap, intX, intY, stringX, stringY);
 	equalRangeMap(stringStringFilledMap, stringStringToInsertMap, stringX, stringY, stringX, stringY);
+	equalRangeMap(doubleIntFilledMap, doubleIntToInsertMap, doubleX, doubleY, intX, intY);
 }
 
 TEST_F(stdMapTest, constEqualRangeMap)
@@ -194,6 +215,7 @@ TEST_F(stdMapTest, constEqualRangeMap)
 	constEqualRangeMap(intDoubleFilledMap, intDoubleToInsertMap, intX, intY, doubleX, doubleY);
 	constEqualRangeMap(intStringFilledMap, intStringToInsertMap, intX, intY, stringX, stringY);
 	constEqualRangeMap(stringStringFilledMap, stringStringToInsertMap, stringX, stringY, stringX, stringY);
+	constEqualRangeMap(doubleIntFilledMap, doubleIntToInsertMap, doubleX, doubleY, intX, intY);
 }
 
 TEST_F(stdMapTest, iteratorMap)
@@ -203,6 +225,7 @@ TEST_F(stdMapTest, iteratorMap)
 	iteratorMap(intDoubleFilledMap, intDoubleToInsertMap, intX, intY, doubleX, doubleY);
 	iteratorMap(intStringFilledMap, intStringToInsertMap, intX, intY, stringX, stringY);
 	iteratorMap(stringStringFilledMap, stringStringToInsertMap, stringX, stringY, stringX, stringY);
+	iteratorMap(doubleIntFilledMap, doubleIntToInsertMap, doubleX, doubleY, intX, intY);
 }
 
 TEST_F(stdMapTest, constIteratorMap)
@@ -212,6 +235,7 @@ TEST_F(stdMapTest, constIteratorMap)
 	constIteratorMap(intDoubleFilledMap, intDoubleToInsertMap, intX, intY, doubleX, doubleY);
 	constIteratorMap(intStringFilledMap, intStringToInsertMap, intX, intY, stringX, stringY);
 	constIteratorMap(stringStringFilledMap, stringStringToInsertMap, stringX, stringY, stringX, stringY);
+	constIteratorMap(doubleIntFilledMap, doubleIntToInsertMap, doubleX, doubleY, intX, intY);
 }
 
 TEST_F(stdMapTest, operatorEqualMap)
@@ -221,6 +245,7 @@ TEST_F(stdMapTest, operatorEqualMap)
 	operatorEqualMap(intDoubleEmptyMap, intDoubleFilledMap, intDoubleToInsertMap);
 	operatorEqualMap(intStringEmptyMap, intStringFilledMap, intStringToInsertMap);
 	operatorEqualMap(stringStringEmptyMap, stringStringFilledMap, stringStringToInsertMap);
+	operatorEqualMap(doubleIntEmptyMap, doubleIntFilledMap, doubleIntToInsertMap);
 }
 
 TEST_F(stdMapTest, operatorNotEqualMap)
@@ -230,6 +255,7 @@ TEST_F(stdMapTest, operatorNotEqualMap)
 	operatorNotEqualMap(intDoubleEmptyMap, intDoubleFilledMap, intDoubleToInsertMap);
 	operatorNotEqualMap(intStringEmptyMap, intStringFilledMap, intStringToInsertMap);
 	operatorNotEqualMap(stringStringEmptyMap, stringStringFilledMap, stringStringToInsertMap);
+	operatorNotEqualMap(doubleIntEmptyMap, doubleIntFilledMap, doubleIntToInsertMap);
 }
 
 TEST_F(stdMapTest, operatorSupEqualMap)
@@ -239,6 +265,7 @@ TEST_F(stdMapTest, operatorSupEqualMap)
 	operatorSupEqualMap(intDoubleEmptyMap, intDoubleFilledMap, intDoubleToInsertMap);
 	operatorSupEqualMap(intStringEmptyMap, intStringFilledMap, intStringToInsertMap);
 	operatorSupEqualMap(stringStringEmptyMap, stringStringFilledMap, stringStringToInsertMap);
+	operatorSupEqualMap(doubleIntEmptyMap, doubleIntFilledMap, doubleIntToInsertMap);
 }
 
 TEST_F(stdMapTest, operatorSupMap)
@@ -248,6 +275,7 @@ TEST_F(stdMapTest, operatorSupMap)
 	operatorSupMap(intDoubleEmptyMap, intDoubleFilledMap, intDoubleToInsertMap);
 	operatorSupMap(intStringEmptyMap, intStringFilledMap, intStringToInsertMap);
 	operatorSupMap(stringStringEmptyMap, stringStringFilledMap, stringStringToInsertMap);
+	operatorSupMap(doubleIntEmptyMap, doubleIntFilledMap, doubleIntToInsertMap);
 }
 
 TEST_F(stdMapTest, operatorInfEqualMap)
@@ -257,6 +285,7 @@ TEST_F(stdMapTest, operatorInfEqualMap)
 	operatorInfEqualMap(intDoubleEmptyMap, intDoubleFilledMap, intDoubleToInsertMap);
 	operatorInfEqualMap(intStringEmptyMap, intStringFilledMap, intStringToInsertMap);
 	operatorInfEqualMap(stringStringEmptyMap, stringStringFilledMap, stringStringToInsertMap);
+	operatorInfEqualMap(doubleIntEmptyMap, doubleIntFilledMap, doubleIntToInsertMap);
 }
 
 TEST_F(stdMapTest, operatorInfMap)
@@ -266,6 +295,7 @@ TEST_F(stdMapTest, operatorInfMap)
 	operatorInfMap(intDoubleEmptyMap, intDoubleFilledMap, intDoubleToInsertMap);
 	operatorInfMap(intStringEmptyMap, intStringFilledMap, intStringToInsertMap);
 	operatorInfMap(stringStringEmptyMap, stringStringFilledMap, stringStringToInsertMap);
+	operatorInfMap(doubleIntEmptyMap, doubleIntFilledMap, doubleIntToInsertMap);
 }
 
 TEST_F(stdMapTest, constructorMap)
@@ -275,6 +305,7 @@ TEST_F(stdMapTest, constructorMap)
 	constructorMap(intDoubleEmptyMap, intDoubleFilledMap, intDoubleToInsertMap, intX, doubleX);
 	constructorMap(intStringEmptyMap, intStringFilledMap, intStringToInsertMap, intX, stringX);
 	constructorMap(stringStringEmptyMap, stringStringFilledMap, stringStringToInsertMap, stringX, stringX);
+	constructorMap(doubleIntEmptyMap, doubleIntFilledMap, doubleIntToInsertMap, doubleX, intX);
 }
 
 TEST_F(stdMapTest, operatorEgalMap)
@@ -284,6 +315,7 @@ TEST_F(stdMapTest, operatorEgalMap)
 	operatorEgalMap(intDoubleEmptyMap, intDoubleFilledMap, intDoubleToInsertMap);
 	operatorEgalMap(intStringEmptyMap, intStringFilledMap, intStringToInsertMap);
 	operatorEgalMap(stringStringEmptyMap, stringStringFilledMap, stringStringToInsertMap);
+	operatorEgalMap(doubleIntEmptyMap, doubleIntFilledMap, doubleIntToInsertMap);
 }
 
 TEST_F(stdMapTest, nonMemberSwapMap)
@@ -293,6 +325,7 @@ TEST_F(stdMapTest, nonMemberSwapMap)
 	nonMemberSwapMap(intDoubleEmptyMap, intDoubleFilledMap, intDoubleToInsertMap, intX, intY, doubleX, doubleY, &std::swap);
 	nonMemberSwapMap(intStringEmptyMap, intStringFilledMap, intStringToInsertMap, intX, intY, stringX, stringY, &std::swap);
 	nonMemberSwapMap(stringStringEmptyMap, stringStringFilledMap, stringStringToInsertMap, stringX, stringY, stringX, stringY, &std::swap);
+	nonMemberSwapMap(doubleIntEmptyMap, doubleIntFilledMap, doubleIntToInsertMap, doubleX, doubleY, intX, intY, &std::swap);
 }
 
 TEST_F(stdMapTest, insertHintMap)
@@ -302,6 +335,7 @@ TEST_F(stdMapTest, insertHintMap)
 	insertHintMap(intDoubleEmptyMap, intX, doubleX, std::pair<int, double>(0,0.0));
 	insertHintMap(intStringEmptyMap, intX, stringX, std::pair<int, std::string>(0,""));
 	insertHintMap(stringStringEmptyMap, stringX, stringX, std::pair<std::string, std::string>("",""));
+	insertHintMap(doubleIntEmptyMap, doubleX, intX, std::pair<double, int>(0.0,0));
 }
 
 TEST_F(stdMapTest, insertHintTrickyMap)
@@ -311,4 +345,5 @@ TEST_F(stdMapTest, insertHintTrickyMap)
 	insertHintTrickyMap(intDoubleEmptyMap, intX, doubleX, std::pair<int, double>(0,0.0));
 	insertHintTrickyMap(intStringEmptyMap, intX, stringX, std::pair<int, std::string>(0,""));
 	insertHintTrickyMap(stringStringEmptyMap, stringX, stringX, std::pair<std::string, std::string>("",""));
+	insertHintTrickyMap(doubleIntEmptyMap, doubleX, intX, std::pair<double, int>(0.0,0));
 }

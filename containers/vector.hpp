@@ -1,8 +1,6 @@
 #ifndef __VECTOR_HPP__
 # define __VECTOR_HPP__
 
-// #include "main.hpp"
-
 # include <iostream>
 # include <sstream>
 # include <string>

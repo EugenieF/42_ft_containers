@@ -120,7 +120,7 @@ typename ft::vector_iterator<T>::difference_type		ft::vector_iterator<T>::operat
 }
 
 template <class T>
-ft::vector_iterator<T>::operator	vector_iterator<const T>(void) const
+ft::vector_iterator<T>::operator	vector_iterator<const typename ft::vector_iterator<T>::value_type>(void) const
 {
 	return (vector_iterator<const T>(this->base()));
 }

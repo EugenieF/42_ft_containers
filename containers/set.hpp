@@ -1,8 +1,6 @@
 #ifndef __SET_HPP__
 # define __SET_HPP__
 
-// #include "main.hpp"
-
 # include <iostream>
 # include <limits>
 # include <cstddef>

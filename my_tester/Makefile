@@ -4,11 +4,11 @@ UNAME			= $(shell uname)
 
 CXX				= c++
 
-CXXFLAGS		= -Wall #-Wextra -std=c++11
-CXXFLAGSS		= -DGTEST_HAS_TR1_TUPLE=1 -DGTEST_USE_OWN_TR1_TUPLE=1 -DGTEST_LANG_CXX11=0 -Wall -Werror
+CXXFLAGS		= -Wall -Wextra -Werror -std=c++98
+CXXFLAGS		+= -Wno-deprecated-copy
 
-FT_NAME			= gtests_ft_containers
-STD_NAME		= gtests_std_containers
+FT_NAME			= ft_containers_gtests
+STD_NAME		= std_containers_gtests
 
 INCLUDE			= -Igtest_incs/ -pthread -I$(CONTAINERS)
 
@@ -17,6 +17,7 @@ CONTAINERS		= ../containers
 VALGRIND_FILE	= valgrind-out.txt
 
 ifeq ($(UNAME), Darwin)
+	CXXFLAGS	+= -std=c++11
 	LIBGTEST 	= gtest_incs/libgtest_mac.a
 else
 	LIBGTEST 	= gtest_incs/libgtest.a
@@ -27,9 +28,9 @@ CXXFLAGSS 		+= $(INCLUDE)
 
 MAIN			= $(SRCS_DIR)/gtest_main.cpp
 
-FT_FILES		= ftMapTest # ftVectorTest ftStackTest ftSetTest
+FT_FILES		= ftStackTest ftVectorTest ftMapTest ftSetTest
 
-STD_FILES		= stdMapTest # stdVectorTest stdStackTest stdSetTest
+STD_FILES		= stdStackTest stdVectorTest stdMapTest stdSetTest
 
 FT_FILES_PATH	= $(addprefix $(SRCS_DIR)/, $(FT_FILES))
 FT_SRCS 		= $(addsuffix .cpp, $(FT_FILES_PATH))
@@ -38,8 +39,11 @@ FT_OBJS 		= $(addprefix $(OBJS_DIR)/, $(FT_OBJ))
 
 STD_FILES_PATH	= $(addprefix $(SRCS_DIR)/, $(STD_FILES))
 STD_SRCS 		= $(addsuffix .cpp, $(STD_FILES_PATH))
-STD_OBJ 			= $(addsuffix .o, $(STD_FILES))
+STD_OBJ 		= $(addsuffix .o, $(STD_FILES))
 STD_OBJS 		= $(addprefix $(OBJS_DIR)/, $(STD_OBJ))
+
+DEP				= $(addprefix $(OBJS_DIR)/, $(FT_SRCS:.cpp=.d))
+DEP				+= $(addprefix $(OBJS_DIR)/, $(STD_SRCS:.cpp=.d))
 
 OBJS_DIR		= objs
 SRCS_DIR		= srcs
@@ -48,21 +52,19 @@ RM				= rm -rf
 
 all: $(FT_NAME) $(STD_NAME)
 
+-include $(DEP)
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.cpp
 	@mkdir -p $(OBJS_DIR)
-	@$(CXX) $(CXXFLAGSS) $(INCLUDE) -c $< -o $@
-#@$(CXX) $(CXXFLAGS)  -c $< -o $@
+	@$(CXX) $(CXXFLAGS) -MMD -MP -c $< -o $@
 
 $(FT_NAME): $(FT_OBJS)
 	@echo "$(YELLOW)🚧 Linking $(FT_NAME)...$(RESET)"
-	@$(CXX) $(CXXFLAGSS) $(MAIN) $(FT_OBJS) $(LIBGTEST) -o $(FT_NAME)
-#@$(CXX) $(CXXFLAGS) $(MAIN) $(FT_OBJS) $(LIBGTEST) -o $(FT_NAME)
+	@$(CXX) $(CXXFLAGS) $(MAIN) $(FT_OBJS) $(LIBGTEST) -o $(FT_NAME)
 	@echo "$(CUT)$(GREEN)✔ $(FT_NAME) compiled$(RESET)"
 
 $(STD_NAME): $(STD_OBJS)
 	@echo "$(YELLOW)🚧 Linking $(STD_NAME)...$(RESET)"
-	@$(CXX) $(CXXFLAGSS) $(MAIN) $(STD_OBJS) $(LIBGTEST) -o $(STD_NAME)
-#@$(CXX) $(CXXFLAGS) $(MAIN) $(STD_OBJS) $(LIBGTEST) -o $(STD_NAME)
+	@$(CXX) $(CXXFLAGS) $(MAIN) $(STD_OBJS) $(LIBGTEST) -o $(STD_NAME)
 	@echo "$(CUT)$(GREEN)✔ $(STD_NAME) compiled$(RESET)"
 
 ft:		$(FT_NAME)
@@ -81,7 +83,7 @@ valgrind: $(FT_NAME)
 clean:
 	@$(RM) $(OBJS_DIR)
 	@$(RM) $(VALGRIND_FILE) 
-	@echo "$(CUT)$(RED)[deleting objs]$(RESET)"
+	@echo "$(CUT)$(RED)[deleting gtests objs]$(RESET)"
 
 fclean: clean
 	@$(RM) $(FT_NAME) $(STD_NAME)

@@ -104,6 +104,10 @@
 //                              is "threadsafe", and can be set in
 //                              custom/gtest-port.h.
 
+//# define GTEST_HAS_TR1_TUPLE = 0
+//# define GTEST_USE_OWN_TR1_TUPLE = 1
+//# define GTEST_LANG_CXX11 = 0
+
 // Platform-indicating macros
 // --------------------------
 //

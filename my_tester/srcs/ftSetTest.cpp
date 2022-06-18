@@ -96,13 +96,13 @@ TEST_F(ftSetTest, swapSet)
 	swapSet(stringEmptySet, stringFilledSet, stringToInsertSet);
 }
 
-// TEST_F(ftSetTest, maxSizeTest)
-// {
-// 	// maxSizeSet(intEmptySet, intFilledSet, intToInsertSet, MAX_SIZE_INT_SET);
-// 	// maxSizeSet(floatEmptySet, floatFilledSet, floatToInsertSet, MAX_SIZE_FLOAT_SET);
-// 	maxSizeSet(doubleEmptySet, doubleFilledSet, doubleToInsertSet, MAX_SIZE_DOUBLE_SET);
-// 	maxSizeSet(stringEmptySet, stringFilledSet, stringToInsertSet, MAX_SIZE_STRING_SET);
-// }
+TEST_F(ftSetTest, maxSizeTest)
+{
+	// maxSizeSet(intEmptySet, intFilledSet, intToInsertSet, MAX_SIZE_INT_SET);
+	// maxSizeSet(floatEmptySet, floatFilledSet, floatToInsertSet, MAX_SIZE_FLOAT_SET);
+	maxSizeSet(doubleEmptySet, doubleFilledSet, doubleToInsertSet, MAX_SIZE_DOUBLE_SET);
+	maxSizeSet(stringEmptySet, stringFilledSet, stringToInsertSet, MAX_SIZE_STRING_SET);
+}
 
 TEST_F(ftSetTest, findSet)
 {

@@ -132,12 +132,11 @@ void	swapMap(T emptyMap, T filledMap, T toInsertMap, U varX1, U varY1, V varX2, 
 }
 
 template <typename T>
-void	maxSizeMap(T emptyMap, T filledMap, T toInsertMap)
+void	maxSizeMap(T emptyMap, T filledMap, T toInsertMap, size_t expectedSize)
 {
-	(void)filledMap;
-	(void)toInsertMap;
-	std::cout << "MaxSize: " << emptyMap.max_size() << std::endl;
-	// EXPECT_EQ(emptyMap.max_size(), (size_t)(115292150460684697 * sizeof(int)));
+	EXPECT_EQ(emptyMap.max_size(), expectedSize);
+	EXPECT_EQ(filledMap.max_size(), expectedSize);
+	EXPECT_EQ(toInsertMap.max_size(), expectedSize);
 }
 
 template <typename T, typename U, typename V>

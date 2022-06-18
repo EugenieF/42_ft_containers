@@ -6,7 +6,7 @@
 #    By: efrancon <efrancon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/01 18:11:52 by efrancon          #+#    #+#              #
-#    Updated: 2022/06/13 17:57:06 by efrancon         ###   ########.fr        #
+#    Updated: 2022/06/18 16:34:20 by efrancon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,9 +20,9 @@ OBJS_DIR		= ./objs
 
 OBJS			= $(addprefix $(OBJS_DIR)/, $(SRCS:.cpp=.o))
 
-TEST_DIR		= testing
-
 DEP				= $(addprefix $(OBJS_DIR)/, $(SRCS:.cpp=.d))
+
+TEST_DIR		= my_tester
 
 CXX				= c++
 
@@ -43,18 +43,27 @@ $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.cpp
 		@echo "$(CUT)$(BLUE)$(CXX) $(CXXFLAGS) $(RESET)$(notdir $@)"
 		@printf "$(UP)"
 
-all:		$(NAME)
+all:	$(NAME)
 
-test:	$(MAKE) --no-print-directory -C $(TEST_DIR)
+test_ft:
+		@$(MAKE) ft -sC $(TEST_DIR)
+
+test_std:
+		@$(MAKE) std -sC $(TEST_DIR)
+
+test_ft_valgrind:
+		@$(MAKE) valgrind -sC $(TEST_DIR)
 
 clean:
 		@$(RM) $(OBJS_DIR)
-		@echo "$(CUT)[deleting $(RESET)$(notdir $@)]"
+		@make clean -sC $(TEST_DIR)
+		@echo "$(CUT)[deleting objs]"
 		@printf "$(UP)"
 
 fclean:		clean
 		@$(RM) $(NAME)
-		@echo "$(CUT)[deleting $(NAME)]$(RESET)"
+		@make fclean -sC $(TEST_DIR)
+		@echo "$(CUT)[deleting $(NAME)]"
 
 re:			fclean all
 
@@ -66,6 +75,6 @@ GREEN		= \033[1;32m
 YELLOW		= \033[1;33m
 BLUE		= \033[1;34m
 WHITE		= \033[1;37m
-ORANGE		= \033[1;38;5;208m
+ORANGE		= \033[0;38;5;208m
 UP			= \033[A
 CUT			= \033[K
