@@ -27,24 +27,24 @@ namespace ft
 	{
 		public:
 			/********************      MEMBER TYPES     ***********************/
-			typedef T												value_type;
-			typedef ft::node<T>										node;
-			typedef ft::node<T>*									node_ptr;
-			typedef Compare											key_compare;
+			typedef T																	value_type;
+			typedef ft::node<T>															node;
+			typedef ft::node<T>*														node_ptr;
+			typedef Compare																key_compare;
 			typedef typename Allocator::template rebind<ft::node<value_type> >::other	allocator_type;
-			typedef	std::size_t										size_type;
-			typedef typename ft::rbtree_iterator<T, node>			iterator;
-			typedef typename ft::rbtree_iterator<T const, node>		const_iterator;
-			typedef ft::reverse_iterator<iterator>					reverse_iterator;
-			typedef ft::reverse_iterator<const_iterator>			const_reverse_iterator;
+			typedef	std::size_t															size_type;
+			typedef typename ft::rbtree_iterator<T, node>								iterator;
+			typedef typename ft::rbtree_iterator<T const, node>							const_iterator;
+			typedef ft::reverse_iterator<iterator>										reverse_iterator;
+			typedef ft::reverse_iterator<const_iterator>								const_reverse_iterator;
 
 		private:
 			/*********************    MEMBER VARIABLES   ********************/
-			node_ptr										_root;
-			node_ptr										_nil;
-			size_type										_size;
-			allocator_type									_alloc;
-			key_compare										_key_comp;
+			node_ptr									_root;
+			node_ptr									_nil;
+			size_type									_size;
+			allocator_type								_alloc;
+			key_compare									_key_comp;
 
 		public:
 			/*******************      MEMBER FUNCTIONS     *******************/

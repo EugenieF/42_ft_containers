@@ -3,14 +3,23 @@
 /****************           MAIN           ****************/
 
 template <class T1, class T2>
-ft::pair<T1, T2>::pair(): first(T1()), second(T2()) {}
+ft::pair<T1, T2>::pair():
+	first(T1()),
+	second(T2())
+{}
 
 template <class T1, class T2>
-ft::pair<T1, T2>::pair (const T1& x, const T2& y): first(x), second(y) {}
+ft::pair<T1, T2>::pair (const T1& x, const T2& y):
+	first(x),
+	second(y)
+{}
 
 template <class T1, class T2>
 template <class U1, class U2>
-ft::pair<T1, T2>::pair (const pair<U1, U2>& p): first(p.first), second(p.second) {}
+ft::pair<T1, T2>::pair (const pair<U1, U2>& p):
+	first(p.first),
+	second(p.second)
+{}
 
 template <class T1, class T2>
 ft::pair<T1, T2>& ft::pair<T1, T2>::operator= (const ft::pair<T1, T2>& other)

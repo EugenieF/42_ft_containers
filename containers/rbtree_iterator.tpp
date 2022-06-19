@@ -3,18 +3,29 @@
 /****************           MAIN           ****************/
 
 template <class T, class Node>
-ft::rbtree_iterator<T, Node>::rbtree_iterator(): current(NULL), _root(NULL), _nil(NULL) {}
+ft::rbtree_iterator<T, Node>::rbtree_iterator():
+	current(NULL),
+	_root(NULL),
+	_nil(NULL) 
+{}
 
 template <class T, class Node>
 ft::rbtree_iterator<T, Node>::rbtree_iterator (typename ft::rbtree_iterator<T, Node>::node_ptr ptr, typename ft::rbtree_iterator<T, Node>::node_ptr root, typename ft::rbtree_iterator<T, Node>::node_ptr nil):
-	current(ptr), _root(root), _nil(nil) {}
+	current(ptr),
+	_root(root),
+	_nil(nil)
+{}
 
 template <class T, class Node>
 ft::rbtree_iterator<T, Node>::rbtree_iterator (const ft::rbtree_iterator<T, Node>& it):
-	current(it.current), _root(it._root), _nil(it._nil) {}
+	current(it.current),
+	_root(it._root),
+	_nil(it._nil)
+{}
 
 template <class T, class Node>
-ft::rbtree_iterator<T, Node>::~rbtree_iterator() {}
+ft::rbtree_iterator<T, Node>::~rbtree_iterator()
+{}
 
 template <class T, class Node>
 ft::rbtree_iterator<T, Node>&	ft::rbtree_iterator<T, Node>::operator=(const ft::rbtree_iterator<T, Node>& other)
@@ -99,22 +110,10 @@ ft::rbtree_iterator<T, Node>  	ft::rbtree_iterator<T, Node>::operator--(int)
 }
 
 template <class T, class Node>
-ft::rbtree_iterator<T, Node>::operator	ft::rbtree_iterator<T const, Node>(void) const		// to investigate ?
+ft::rbtree_iterator<T, Node>::operator	ft::rbtree_iterator<T const, Node>(void) const
 {
 	return (ft::rbtree_iterator<T const, Node>(this->current, this->_root, this->_nil));
 }
-
-// template <class T, class Node>
-// bool	ft::rbtree_iterator<T, Node>::operator== (const ft::rbtree_iterator<T, Node>& rhs)
-// {
-// 	return (this->current == rhs.current);
-// }
-
-// template <class T, class Node>
-// bool	ft::rbtree_iterator<T, Node>::operator!= (const ft::rbtree_iterator<T, Node>& rhs)
-// {
-// 	return (this->current != rhs.current);
-// }
 
 /**************    NON-MEMBER FUNCTION OVERLOADS     **************/
 

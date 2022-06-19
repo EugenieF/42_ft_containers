@@ -30,15 +30,15 @@ namespace ft
 			typedef red_black_tree<value_type, allocator_type, value_compare>	tree_type;
 
 		public:
-			typedef	typename Allocator::reference				reference;
-			typedef typename Allocator::const_reference			const_reference;
-			typedef	typename Allocator::pointer					pointer;
-			typedef	typename Allocator::const_pointer			const_pointer;
+			typedef	typename Allocator::reference			reference;
+			typedef typename Allocator::const_reference		const_reference;
+			typedef	typename Allocator::pointer				pointer;
+			typedef	typename Allocator::const_pointer		const_pointer;
 
-			typedef typename tree_type::const_iterator			iterator;
-			typedef typename tree_type::const_iterator			const_iterator;
-			typedef ft::reverse_iterator<iterator>				reverse_iterator;
-			typedef ft::reverse_iterator<const_iterator>		const_reverse_iterator;
+			typedef typename tree_type::const_iterator		iterator;
+			typedef typename tree_type::const_iterator		const_iterator;
+			typedef ft::reverse_iterator<iterator>			reverse_iterator;
+			typedef ft::reverse_iterator<const_iterator>	const_reverse_iterator;
 
 		private:
 			/*********************    MEMBER VARIABLES   ********************/
@@ -51,8 +51,7 @@ namespace ft
 							/*-----------   MAIN   -----------*/
 			explicit set (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type());
 			template <class InputIterator>
-			set (InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type(),
-					typename ft::enable_if<!(ft::is_integral<InputIterator>::value)>::type* = NULL);
+			set (InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type());
 			set (const set& x);
 			~set();
 			set& operator= (const set& x);
@@ -77,8 +76,7 @@ namespace ft
 			ft::pair<iterator,bool>							insert (const value_type& val);
 			iterator										insert (iterator position, const value_type& val);
 			template <class InputIterator>
-			typename ft::enable_if<!(ft::is_integral<InputIterator>::value), void>::type
-															insert (InputIterator first, InputIterator last);
+			void											insert (InputIterator first, InputIterator last);
 			void											erase (iterator position);
 			size_type										erase (const value_type& val);
 			void											erase (iterator first, iterator last);
@@ -100,33 +98,32 @@ namespace ft
 			ft::pair<iterator,iterator>						equal_range (const key_type& key);
 			ft::pair<const_iterator,const_iterator>			equal_range (const key_type& key) const;
 
+		private:
 			/*********************           PRINT           *********************/
-		public:
-			void											print(void);
+			void											_print(void);
 	};
 
 	/**************    NON-MEMBER FUNCTION OVERLOADS     **************/
 	template< class Key, class Compare, class Allocator >
-	bool operator==( const set<Key,Compare,Allocator>& lhs, const set<Key,Compare,Allocator>& rhs );
+	bool	operator==(const set<Key,Compare,Allocator>& lhs, const set<Key,Compare,Allocator>& rhs);
 
 	template< class Key, class Compare, class Allocator >
-	bool operator!=( const set<Key,Compare,Allocator>& lhs, const set<Key,Compare,Allocator>& rhs );
+	bool	operator!=(const set<Key,Compare,Allocator>& lhs, const set<Key,Compare,Allocator>& rhs);
 
 	template< class Key, class Compare, class Allocator >
-	bool operator<( const set<Key,Compare,Allocator>& lhs, const set<Key,Compare,Allocator>& rhs );
+	bool	operator<(const set<Key,Compare,Allocator>& lhs, const set<Key,Compare,Allocator>& rhs);
 
 	template< class Key, class Compare, class Allocator >
-	bool operator<=( const set<Key,Compare,Allocator>& lhs, const set<Key,Compare,Allocator>& rhs );
+	bool	operator<=(const set<Key,Compare,Allocator>& lhs, const set<Key,Compare,Allocator>& rhs);
 
 	template< class Key, class Compare, class Allocator >
-	bool operator>( const set<Key,Compare,Allocator>& lhs, const set<Key,Compare,Allocator>& rhs );
+	bool	operator>(const set<Key,Compare,Allocator>& lhs, const set<Key,Compare,Allocator>& rhs);
 
 	template< class Key, class Compare, class Allocator >
-	bool operator>=( const set<Key,Compare,Allocator>& lhs, const set<Key,Compare,Allocator>& rhs );
+	bool	operator>=(const set<Key,Compare,Allocator>& lhs, const set<Key,Compare,Allocator>& rhs);
 
 	template< class Key, class Compare, class Allocator >
-	void swap( set<Key,Compare,Allocator>& lhs, set<Key,Compare,Allocator>& rhs );
-
+	void	swap(set<Key,Compare,Allocator>& lhs, set<Key,Compare,Allocator>& rhs);
 }
 
 # include "set.tpp"

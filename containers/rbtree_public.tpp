@@ -6,7 +6,11 @@
 
 template <class T, class Allocator, class Compare>
 ft::red_black_tree<T, Allocator, Compare>::red_black_tree():
-	_root(NULL), _nil(NULL), _size(0), _alloc(Allocator()), _key_comp(Compare())
+	_root(NULL),
+	_nil(NULL),
+	_size(0),
+	_alloc(Allocator()),
+	_key_comp(Compare())
 {
 	this->_init_nil();
 	this->_root = this->_nil;
@@ -14,7 +18,11 @@ ft::red_black_tree<T, Allocator, Compare>::red_black_tree():
 
 template <class T, class Allocator, class Compare>
 ft::red_black_tree<T, Allocator, Compare>::red_black_tree(const typename ft::red_black_tree<T, Allocator, Compare>::allocator_type& alloc, const Compare& comp):
-	_root(NULL), _nil(NULL), _size(0), _alloc(alloc), _key_comp(comp)
+	_root(NULL),
+	_nil(NULL),
+	_size(0),
+	_alloc(alloc),
+	_key_comp(comp)
 {
 	this->_init_nil();
 	this->_root = this->_nil;
@@ -22,7 +30,9 @@ ft::red_black_tree<T, Allocator, Compare>::red_black_tree(const typename ft::red
 
 template <class T, class Allocator, class Compare>
 ft::red_black_tree<T, Allocator, Compare>::red_black_tree(ft::red_black_tree<T, Allocator, Compare>const& other):
-	_size(0), _alloc(other.get_allocator()), _key_comp(other.key_comp())
+	_size(0),
+	_alloc(other.get_allocator()),
+	_key_comp(other.key_comp())
 {
 	this->_init_nil();
 	this->_root = this->_nil;
@@ -66,7 +76,7 @@ typename ft::red_black_tree<T, Allocator, Compare>::key_compare   ft::red_black_
 }
 
 template <class T, class Allocator, class Compare>
-typename ft::red_black_tree<T, Allocator, Compare>::node_ptr		ft::red_black_tree<T, Allocator, Compare>::red_black_tree::get_root() const
+typename ft::red_black_tree<T, Allocator, Compare>::node_ptr	ft::red_black_tree<T, Allocator, Compare>::red_black_tree::get_root() const
 {
 	return (this->_root);
 }
@@ -78,7 +88,7 @@ void	ft::red_black_tree<T, Allocator, Compare>::red_black_tree::set_root(typenam
 }
 
 template <class T, class Allocator, class Compare>
-typename ft::red_black_tree<T, Allocator, Compare>::node_ptr		ft::red_black_tree<T, Allocator, Compare>::red_black_tree::get_nil() const
+typename ft::red_black_tree<T, Allocator, Compare>::node_ptr	ft::red_black_tree<T, Allocator, Compare>::red_black_tree::get_nil() const
 {
 	return (this->_nil);
 }
@@ -208,9 +218,9 @@ typename ft::red_black_tree<T, Allocator, Compare>::iterator	ft::red_black_tree<
 
 	insert_pair = _get_parent(position.current, value);
 	if (insert_pair.second == false)
-		node_position = iterator(insert_pair.first, this->get_root(), this->get_nil());		// Key already exist
+		node_position = iterator(insert_pair.first, this->get_root(), this->get_nil());		/*  Key already exist  */
 	else
-		node_position = this->_rbtree_insert_node(insert_pair.first, value);				// Node was inserted
+		node_position = this->_rbtree_insert_node(insert_pair.first, value);				/*  Node was inserted  */
 	return (node_position);
 }
 
@@ -227,9 +237,9 @@ typename ft::red_black_tree<T, Allocator, Compare>::const_iterator	ft::red_black
 
 	insert_pair = _get_parent(position.current, value);
 	if (insert_pair.second == false)
-		node_position = iterator(insert_pair.first, this->get_root(), this->get_nil());		// Key already exist
+		node_position = iterator(insert_pair.first, this->get_root(), this->get_nil());		/*  Key already exist  */
 	else
-		node_position = this->_rbtree_insert_node(insert_pair.first, value);				// Node was inserted
+		node_position = this->_rbtree_insert_node(insert_pair.first, value);				/*  Node was inserted  */
 	return (node_position);
 }
 
@@ -274,8 +284,9 @@ void	ft::red_black_tree<T, Allocator, Compare>::clear()
 
 /**********************          OPERATIONS          **********************/
 
+/*  Returns an iterator pointing to the first element that is not less than (i.e. greater or equal to) key */
 template <class T, class Allocator, class Compare>
-typename ft::red_black_tree<T, Allocator, Compare>::iterator	ft::red_black_tree<T, Allocator, Compare>::lower_bound (const T& value) // greater or equal >=
+typename ft::red_black_tree<T, Allocator, Compare>::iterator	ft::red_black_tree<T, Allocator, Compare>::lower_bound (const T& value)
 {
 	typedef typename ft::red_black_tree<T, Allocator, Compare>::iterator	iterator;
 	
@@ -304,8 +315,9 @@ typename ft::red_black_tree<T, Allocator, Compare>::const_iterator		ft::red_blac
 	return (ptr);
 }
 
+/*  Returns an iterator pointing to the first element that is greater than key  */
 template <class T, class Allocator, class Compare>
-typename ft::red_black_tree<T, Allocator, Compare>::iterator	ft::red_black_tree<T, Allocator, Compare>::upper_bound (const T& value) // greater >
+typename ft::red_black_tree<T, Allocator, Compare>::iterator	ft::red_black_tree<T, Allocator, Compare>::upper_bound (const T& value)
 {
 	typedef typename ft::red_black_tree<T, Allocator, Compare>::iterator	iterator;
 	
@@ -334,6 +346,7 @@ typename ft::red_black_tree<T, Allocator, Compare>::const_iterator	ft::red_black
 	return (ptr);
 }
 
+/*  Returns a range containing all elements with the given key in the container  */
 template <class T, class Allocator, class Compare>
 ft::pair<typename ft::red_black_tree<T, Allocator, Compare>::iterator,typename ft::red_black_tree<T, Allocator, Compare>::iterator>		ft::red_black_tree<T, Allocator, Compare>::equal_range (const T& value)
 {
@@ -381,4 +394,16 @@ typename ft::red_black_tree<T, Allocator, Compare>::const_iterator	ft::red_black
 
 	node_position = this->_rbtree_search_node(this->get_root(), value);
 	return (node_position);
+}
+
+/************************************       PRINT        ************************************/
+
+template <class T, class Allocator, class Compare>
+void	ft::red_black_tree<T, Allocator, Compare>::print(void)
+{
+	if (this->size() < 1)
+		return ;
+	std::stringstream	buffer;
+	this->_print(this->_root, buffer, true, "");
+	std::cout << buffer.str() << std::endl;
 }

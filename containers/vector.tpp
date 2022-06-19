@@ -4,11 +4,18 @@
 
 template <class T, class Allocator>
 ft::vector<T, Allocator>::vector (const Allocator& alloc):
-	_data(NULL), _size(0), _capacity(0), _alloc(alloc) {}
+	_data(NULL),
+	_size(0),
+	_capacity(0),
+	_alloc(alloc)
+{}
 
 template <class T, class Allocator>
 ft::vector<T, Allocator>::vector (size_t n, const T& value, const Allocator& alloc):
-	_data(NULL), _size(0), _capacity(0), _alloc(alloc)
+	_data(NULL),
+	_size(0),
+	_capacity(0),
+	_alloc(alloc)
 {
 	this->assign(n, value);
 }
@@ -16,14 +23,20 @@ ft::vector<T, Allocator>::vector (size_t n, const T& value, const Allocator& all
 template <class T, class Allocator>
 template <class InputIterator>
 ft::vector<T, Allocator>::vector (InputIterator first, InputIterator last, const Allocator& alloc, typename ft::enable_if<!(ft::is_integral<InputIterator>::value)>::type*):
-	_data(NULL), _size(0), _capacity(0), _alloc(alloc)
+	_data(NULL),
+	_size(0),
+	_capacity(0),
+	_alloc(alloc)
 {
 	this->assign(first, last);
 }
 
 template <class T, class Allocator>
 ft::vector<T, Allocator>::vector (const ft::vector<T, Allocator>& x):
-	_data(NULL), _size(0), _capacity(0), _alloc(x._alloc)
+	_data(NULL),
+	_size(0),
+	_capacity(0),
+	_alloc(x._alloc)
 {
 	*this = x;
 }
@@ -168,8 +181,7 @@ void	ft::vector<T, Allocator>::reserve (typename ft::vector<T, Allocator>::size_
 	typename ft::vector<T, Allocator>::pointer	new_data = NULL;
 
 	if (new_cap > this->max_size())
-		throw(std::length_error("vector::reserve"));	// sur LINUX
-		// throw(std::length_error("allocator<T>::allocate(size_t n) 'n' exceeds maximum supported size"));		// sur MACOS
+		throw(std::length_error("vector::reserve"));
 	if (new_cap <= this->_capacity)
 		return ;
 	new_data = this->_alloc.allocate(new_cap);
@@ -243,16 +255,18 @@ typename ft::vector<T, Allocator>::const_reference	ft::vector<T, Allocator>::bac
 	
 /****************        MODIFIERS         ****************/
 
+/* Insert value before position */
 template <class T, class Allocator>
 void	ft::vector<T, Allocator>::push_back (typename ft::vector<T, Allocator>::value_type const &value)
 {
-	this->insert(this->end(), value);		// Insert value before position
+	this->insert(this->end(), value);
 }
 
+/* Removes the element at position */
 template <class T, class Allocator>
 void	ft::vector<T, Allocator>::pop_back()
 {
-	this->erase(this->end() - 1);			// Removes the element at position
+	this->erase(this->end() - 1);
 }
 
 template <class T, class Allocator>
@@ -317,7 +331,7 @@ typename ft::vector<T, Allocator>::iterator	ft::vector<T, Allocator>::erase (typ
 	erase_size = std::distance(first, last);
 	if (erase_size > 0)
 	{
-		this->_destroy_range(first, last);				// leaks came from here ?
+		this->_destroy_range(first, last);
 		this->_relocate_range(last, last - erase_size);
 		this->_size -= erase_size;
 	}
@@ -436,7 +450,7 @@ void	ft::swap (ft::vector<T,Allocator>& x, ft::vector<T,Allocator>& y)
 /*********************           PRINT           *********************/
 
 template <class T, class Allocator>
-void	ft::vector<T, Allocator>::print(void)
+void	ft::vector<T, Allocator>::_print(void)
 {
 	std::stringstream	buffer;
 	size_t				i;

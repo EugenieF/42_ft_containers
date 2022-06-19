@@ -120,33 +120,31 @@ namespace ft
 			/*******************       PRIVATE FUNCTIONS      *******************/
 			ft::pair<const key_type, mapped_type>			_get_value_type(const key_type& key) const;
 
-
 			/*******************             PRINT            *******************/
-		public:
-			void											print(void);
+			void											_print(void);
 	};
 
 	/********************      NON-MEMBER FUNCTION OVERLOADS       ********************/
 	template< class Key, class T, class Compare, class Allocator >
-	bool operator==( const map<Key,T,Compare,Allocator>& lhs, const map<Key,T,Compare,Allocator>& rhs );
+	bool	operator==( const map<Key,T,Compare,Allocator>& lhs, const map<Key,T,Compare,Allocator>& rhs );
 
 	template< class Key, class T, class Compare, class Allocator >
-	bool operator!=( const map<Key,T,Compare,Allocator>& lhs, const map<Key,T,Compare,Allocator>& rhs );
+	bool	operator!=( const map<Key,T,Compare,Allocator>& lhs, const map<Key,T,Compare,Allocator>& rhs );
 
 	template< class Key, class T, class Compare, class Allocator >
-	bool operator<( const map<Key,T,Compare,Allocator>& lhs, const map<Key,T,Compare,Allocator>& rhs );
+	bool	operator<( const map<Key,T,Compare,Allocator>& lhs, const map<Key,T,Compare,Allocator>& rhs );
 
 	template< class Key, class T, class Compare, class Allocator >
-	bool operator<=( const map<Key,T,Compare,Allocator>& lhs, const map<Key,T,Compare,Allocator>& rhs );
+	bool	operator<=( const map<Key,T,Compare,Allocator>& lhs, const map<Key,T,Compare,Allocator>& rhs );
 
 	template< class Key, class T, class Compare, class Allocator >
-	bool operator>( const map<Key,T,Compare,Allocator>& lhs, const map<Key,T,Compare,Allocator>& rhs );
+	bool	operator>( const map<Key,T,Compare,Allocator>& lhs, const map<Key,T,Compare,Allocator>& rhs );
 
 	template< class Key, class T, class Compare, class Allocator >
-	bool operator>=( const map<Key,T,Compare,Allocator>& lhs, const map<Key,T,Compare,Allocator>& rhs );
+	bool	operator>=( const map<Key,T,Compare,Allocator>& lhs, const map<Key,T,Compare,Allocator>& rhs );
 
 	template< class Key, class T, class Compare, class Allocator >
-	void swap( map<Key,T,Compare,Allocator>& lhs, map<Key,T,Compare,Allocator>& rhs );
+	void	swap( map<Key,T,Compare,Allocator>& lhs, map<Key,T,Compare,Allocator>& rhs );
 
 }
 

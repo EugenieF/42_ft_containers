@@ -51,15 +51,17 @@ typename ft::vector_iterator<T>::reference	ft::vector_iterator<T>::operator[] (t
 
 /**************       MEMBER FUNCTION OVERLOADS       **************/
 
+/*  ++i : Prefix increment operator  */
 template <class T>
-ft::vector_iterator<T>&		ft::vector_iterator<T>::operator++()		// ++i : Prefix increment operator
+ft::vector_iterator<T>&		ft::vector_iterator<T>::operator++()
 {
 	this->_current += 1;
 	return (*this);
 }
 
+/*  i++ : Postfix increment operator  */
 template <class T>
-ft::vector_iterator<T>		ft::vector_iterator<T>::operator++(int)		// i++ : Postfix increment operator
+ft::vector_iterator<T>		ft::vector_iterator<T>::operator++(int)
 {
 	ft::vector_iterator<T> prev = *this;
 	this->_current += 1;
@@ -80,20 +82,22 @@ ft::vector_iterator<T>		ft::vector_iterator<T>::operator+ (typename ft::vector_i
 }
 
 template <class T>
-typename ft::vector_iterator<T>::difference_type		ft::vector_iterator<T>::operator+ (const ft::vector_iterator<T>& it) const
+typename ft::vector_iterator<T>::difference_type	ft::vector_iterator<T>::operator+ (const ft::vector_iterator<T>& it) const
 {
 	return (this->base() + it.base());
 }
 
+/*  --i : Prefix decrement operator  */
 template <class T>
-ft::vector_iterator<T>&		ft::vector_iterator<T>::operator--()		// --i : Prefix decrement operator
+ft::vector_iterator<T>&		ft::vector_iterator<T>::operator--()
 {
 	this->_current -= 1;
 	return (*this);
 }
 
+/*  i-- : Postfix decrement operator  */
 template <class T>
-ft::vector_iterator<T>		ft::vector_iterator<T>::operator--(int)		// i-- : Postfix decrement operator
+ft::vector_iterator<T>		ft::vector_iterator<T>::operator--(int)
 {
 	ft::vector_iterator<T> prev = *this;
 	this->_current -= 1;
@@ -108,13 +112,13 @@ ft::vector_iterator<T>&		ft::vector_iterator<T>::operator-= (typename ft::vector
 }
 
 template <class T>
-ft::vector_iterator<T> 		ft::vector_iterator<T>::operator- (typename ft::vector_iterator<T>::difference_type n) const
+ft::vector_iterator<T>		ft::vector_iterator<T>::operator- (typename ft::vector_iterator<T>::difference_type n) const
 {
 	return (vector_iterator(this->_current - n));
 }
 
 template <class T>
-typename ft::vector_iterator<T>::difference_type		ft::vector_iterator<T>::operator- (const ft::vector_iterator<T>& it) const
+typename ft::vector_iterator<T>::difference_type	ft::vector_iterator<T>::operator- (const ft::vector_iterator<T>& it) const
 {
 	return (this->base() - it.base());
 }

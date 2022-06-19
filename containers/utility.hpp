@@ -12,14 +12,14 @@ namespace ft
 	template <class T1, class T2>
 	struct pair
 	{
-		/****************          TYPEDEF         ****************/
+			/********************      MEMBER TYPES     **********************/
 		typedef T1			first_type;
 		typedef T2			second_type;
 
 		first_type			first;
 		second_type			second;
 
-		/****************           MAIN           ****************/
+			/*******************      MEMBER FUNCTIONS     *******************/
 		pair();
 		pair(const first_type& x, const second_type& y);
 		template <class U, class V>
@@ -28,30 +28,31 @@ namespace ft
 		operator pair<const T1, const T2>(void) const;
 	};
 
-	/**************    NON-MEMBER FUNCTION OVERLOADS     **************/
-	template <class T1, class T2>
-	pair<T1,T2>				make_pair(T1 t, T2 u);
+	/********************       NON-MEMBER FUNCTION OVERLOADS       ********************/
 
 	template <class T1, class T2>
-	bool					operator==(const pair<T1,T2>& lhs, const pair<T1,T2>& rhs);
+	pair<T1,T2>		make_pair(T1 t, T2 u);
 
 	template <class T1, class T2>
-	bool					operator!=(const pair<T1,T2>& lhs, const pair<T1,T2>& rhs);
+	bool			operator==(const pair<T1,T2>& lhs, const pair<T1,T2>& rhs);
 
 	template <class T1, class T2>
-	bool					operator<(const pair<T1,T2>& lhs, const pair<T1,T2>& rhs);
+	bool			operator!=(const pair<T1,T2>& lhs, const pair<T1,T2>& rhs);
 
 	template <class T1, class T2>
-	bool					operator<=(const pair<T1,T2>& lhs, const pair<T1,T2>& rhs);
+	bool			operator<(const pair<T1,T2>& lhs, const pair<T1,T2>& rhs);
 
 	template <class T1, class T2>
-	bool					operator>(const pair<T1,T2>& lhs, const pair<T1,T2>& rhs);
+	bool			operator<=(const pair<T1,T2>& lhs, const pair<T1,T2>& rhs);
 
 	template <class T1, class T2>
-	bool					operator>=(const pair<T1,T2>& lhs, const pair<T1,T2>& rhs);
+	bool			operator>(const pair<T1,T2>& lhs, const pair<T1,T2>& rhs);
 
 	template <class T1, class T2>
-	std::ostream			&operator<<(std::ostream &out, const pair<T1, T2> &rhs);
+	bool			operator>=(const pair<T1,T2>& lhs, const pair<T1,T2>& rhs);
+
+	template <class T1, class T2>
+	std::ostream	&operator<<(std::ostream &out, const pair<T1, T2> &rhs);
 }
 
 # include "utility.tpp"

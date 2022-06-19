@@ -31,7 +31,7 @@ namespace ft
 			node_ptr									_nil;
 
 		public:
-			/******************      MEMBER FUNCTIONS     ******************/
+			/*********************    MEMBER FUNCTIONS    *******************/
 
 			rbtree_iterator();
 			rbtree_iterator (node_ptr ptr, node_ptr root, node_ptr nil);
@@ -46,7 +46,6 @@ namespace ft
 			rbtree_iterator								operator++(int);
 			rbtree_iterator& 							operator--();
 			rbtree_iterator  							operator--(int);
-
 			operator									rbtree_iterator<value_type const, Node>(void) const;
 
 		private:
@@ -61,10 +60,10 @@ namespace ft
 	/********************     NON-MEMBER FUNCTION OVERLOADS      ********************/
 
 	template <class Tx, class Ty, class Ux, class Uy>
-	bool												operator== (const rbtree_iterator<Tx, Ty>& lhs, const rbtree_iterator<Ux, Uy>& rhs);
+	bool	operator== (const rbtree_iterator<Tx, Ty>& lhs, const rbtree_iterator<Ux, Uy>& rhs);
 
 	template <class Tx, class Ty, class Ux, class Uy>
- 	bool												operator!= (const rbtree_iterator<Tx, Ty>& lhs, const rbtree_iterator<Ux, Uy>& rhs);
+ 	bool	operator!= (const rbtree_iterator<Tx, Ty>& lhs, const rbtree_iterator<Ux, Uy>& rhs);
 }
 
 # include "rbtree_iterator.tpp"

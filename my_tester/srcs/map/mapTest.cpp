@@ -174,7 +174,7 @@ void	findMap(T emptyMap, T filledMap, T toInsertMap, U varX1, U varY1, V varX2, 
 template <typename T, typename U, typename V>
 void	constFindMap(T emptyMap, T filledMap, T toInsertMap, U varX1, U varY1, V varX2, V varY2)
 {
-	(void)emptyMap;	// test with emptyMap
+	(void)emptyMap;
 
 	typename T::const_iterator	const_it;
 
@@ -793,7 +793,6 @@ void	insertHintMap(T emptyMap, U varX1, V varX2, W pairType)
 	{
 		EXPECT_EQ(it->first, varX1[i]);
 		EXPECT_EQ(it->second, varX2[i]);
-		// std::cout << it->first << " => " << it->second << '\n';
 	}
 }
 
@@ -817,6 +816,5 @@ void	insertHintTrickyMap(T emptyMap, U varX1, V varX2, W pairType)
 		EXPECT_EQ(it->first, varX1[i]);
 		if (i < 4)
 			EXPECT_EQ(it->second, varX2[i]);
-		// std::cout << it->first << " => " << it->second << '\n';
 	}
 }

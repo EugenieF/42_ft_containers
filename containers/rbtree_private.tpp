@@ -115,8 +115,8 @@ typename ft::red_black_tree<T, Allocator, Compare>::node_ptr	ft::red_black_tree<
 	typename ft::red_black_tree<T, Allocator, Compare>::node_ptr hint, const T& value)
 {
 	if (hint == this->get_nil()
-		|| (this->_key_comp(hint->left->data, value) && this->_key_comp(value, hint->parent->data))	== false	// smaller than left and parent
-		|| (this->_key_comp(value, hint->right->data) && this->_key_comp(hint->parent->data, value)) == false)	// greater than right and parent
+		|| (this->_key_comp(hint->left->data, value) && this->_key_comp(value, hint->parent->data))	== false	/*  <-- smaller than left and parent  */
+		|| (this->_key_comp(value, hint->right->data) && this->_key_comp(hint->parent->data, value)) == false)	/*  <-- greater than right and parent  */
 		return (this->_root);
 	return (hint);
 }
@@ -139,10 +139,7 @@ ft::pair<typename ft::red_black_tree<T, Allocator, Compare>::node_ptr,bool>		ft:
 		else if (this->_key_comp(current->data, value))
 			current = current->right;
 		else
-		{
-			// std::cout << "KEY ALREADY EXIST" << std::endl;
-			return (ft::make_pair(current, false));		// Key already exist !
-		}
+			return (ft::make_pair(current, false));		/*  <-- Key already exist  */
 	}
 	return (ft::make_pair(parent, true));
 }
@@ -165,7 +162,6 @@ typename ft::red_black_tree<T, Allocator, Compare>::iterator	ft::red_black_tree<
 		parent->left = insert_node;
 	else
 		parent->right = insert_node;
-	// this->print(); // print before fixation
 	this->_rbtree_fix_insertion(insert_node);
 	this->_size++;
 	node_iterator = iterator(insert_node, this->get_root(), this->get_nil());
@@ -273,7 +269,7 @@ void	ft::red_black_tree<T, Allocator, Compare>::_rbtree_delete_node(
 		node_origin_color = y->color;
 		x = y->right;
 		if (y->parent == node)
-			x->parent = y; //////
+			x->parent = y;
 		else
 		{
 			this->_rbtree_transplant(y, y->right);
@@ -286,7 +282,6 @@ void	ft::red_black_tree<T, Allocator, Compare>::_rbtree_delete_node(
 		y->color = node->color;
 	}
 	this->_size--;
-	// this->print();
 	if (node_origin_color == BLACK)
 		this->_rbtree_fix_deletion(x);
 }
@@ -420,16 +415,6 @@ typename ft::red_black_tree<T, Allocator, Compare>::const_iterator	ft::red_black
 }
 
 /************************************       PRINT        ************************************/
-
-template <class T, class Allocator, class Compare>
-void	ft::red_black_tree<T, Allocator, Compare>::print(void)
-{
-	if (this->size() < 1)
-		return ;
-	std::stringstream	buffer;
-	this->_print(this->_root, buffer, true, "");
-	std::cout << buffer.str() << std::endl;
-}
 
 template <class T, class Allocator, class Compare>
 void	ft::red_black_tree<T, Allocator, Compare>::_print(

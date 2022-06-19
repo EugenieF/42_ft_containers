@@ -6,7 +6,7 @@
 namespace ft
 {
 	/***********************************************************************************/
-	/*                                   CLASS NODE                                    */
+	/*                              RED BLACK TREE NODE                                */
 	/***********************************************************************************/
 
 	typedef enum e_color
@@ -19,17 +19,20 @@ namespace ft
 	struct	node
 	{
 		public:
-			typedef T										value_type;
-			typedef node*									pointer;
-			typedef node&									reference;
-			typedef node const&								const_reference;
+			/********************      MEMBER TYPES     ***********************/
+			typedef T					value_type;
+			typedef node*				pointer;
+			typedef node&				reference;
+			typedef node const&			const_reference;
 
-			value_type										data;
-			pointer											left;
-			pointer											right;
-			pointer											parent;
-			bool											color;
+			/*********************    MEMBER VARIABLES   ********************/
+			value_type					data;
+			pointer						left;
+			pointer						right;
+			pointer						parent;
+			bool						color;
 			
+			/********************     MEMBER FUNCTIONS    *******************/
 			node();
 			node(const value_type& value);
 			node(const value_type& value, int color, pointer left, pointer right, pointer parent);

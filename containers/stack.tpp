@@ -14,7 +14,8 @@ ft::stack<T, Container>&	ft::stack<T, Container>::operator=(const ft::stack<T, C
 }
 
 template <class T, class Container>
-ft::stack<T, Container>::~stack() {}
+ft::stack<T, Container>::~stack()
+{}
 
 /****************         CAPACITY         ****************/
 

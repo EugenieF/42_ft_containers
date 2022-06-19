@@ -57,15 +57,17 @@ typename ft::reverse_iterator<Iterator>::reference	ft::reverse_iterator<Iterator
 
 /**************       MEMBER FUNCTION OVERLOADS       **************/
 
+/*  ++i : Prefix increment operator  */
 template <class Iterator>
-ft::reverse_iterator<Iterator>&	ft::reverse_iterator<Iterator>::operator++()		// ++i : Prefix increment operator
+ft::reverse_iterator<Iterator>&	ft::reverse_iterator<Iterator>::operator++()
 {
 	this->_current--;
 	return (*this);
 }
 
+/*  i++ : Postfix increment operator  */
 template <class Iterator>
-ft::reverse_iterator<Iterator>	ft::reverse_iterator<Iterator>::operator++(int)		// i++ : Postfix increment operator
+ft::reverse_iterator<Iterator>	ft::reverse_iterator<Iterator>::operator++(int)
 {
 	ft::reverse_iterator<Iterator> prev = *this;
 	this->_current--;
@@ -94,15 +96,17 @@ typename ft::reverse_iterator<Iterator>::difference_type	ft::reverse_iterator<It
 	return (rev_it.base() + this->base());
 }
 
+/*  --i : Prefix decrement operator  */
 template <class Iterator>
-ft::reverse_iterator<Iterator>& 	ft::reverse_iterator<Iterator>::operator--()		// --i : Prefix decrement operator
+ft::reverse_iterator<Iterator>& 	ft::reverse_iterator<Iterator>::operator--()
 {
 	this->_current++;
 	return (*this);
 }
 
+/*  i-- : Postfix decrement operator  */
 template <class Iterator>
-ft::reverse_iterator<Iterator>  	ft::reverse_iterator<Iterator>::operator--(int)		// i-- : Postfix decrement operator
+ft::reverse_iterator<Iterator>  	ft::reverse_iterator<Iterator>::operator--(int)
 {
 	ft::reverse_iterator<Iterator> prev = *this;
 	this->_current++;

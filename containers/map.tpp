@@ -4,25 +4,32 @@
 
 template <class Key, class T, class Compare, class Allocator>
 ft::map<Key, T, Compare, Allocator>::map (const Compare& comp, const Allocator& alloc):
-    _rbtree(alloc, comp), _key_comp(comp), _alloc(alloc) {}
+    _rbtree(alloc, comp),
+	_key_comp(comp),
+	_alloc(alloc) {}
 
 template <class Key, class T, class Compare, class Allocator>
 template <class InputIterator>
 ft::map<Key, T, Compare, Allocator>::map (InputIterator first, InputIterator last, const Compare& comp, const Allocator& alloc):
-    _rbtree(alloc, comp), _key_comp(comp), _alloc(alloc)
+    _rbtree(alloc, comp),
+	_key_comp(comp),
+	_alloc(alloc)
 {
     this->insert(first, last);
 }
 
 template <class Key, class T, class Compare, class Allocator>
 ft::map<Key, T, Compare, Allocator>::map (const ft::map<Key, T, Compare, Allocator>& other):
-	_rbtree(other.get_allocator(), other.key_comp()), _key_comp(other.key_comp()), _alloc(other.get_allocator())
+	_rbtree(other.get_allocator(), other.key_comp()),
+	_key_comp(other.key_comp()),
+	_alloc(other.get_allocator())
 {
     this->insert(other.begin(), other.end());
 }
 
 template <class Key, class T, class Compare, class Allocator>
-ft::map<Key, T, Compare, Allocator>::~map() {}
+ft::map<Key, T, Compare, Allocator>::~map()
+{}
 
 template <class Key, class T, class Compare, class Allocator>
 ft::map<Key, T, Compare, Allocator>&    ft::map<Key, T, Compare, Allocator>::operator= (const ft::map<Key, T, Compare, Allocator>& other)
@@ -134,12 +141,12 @@ performing an insertion if such key does not already exist */
 template <class Key, class T, class Compare, class Allocator>
 T&	ft::map<Key, T, Compare, Allocator>::operator[] (const Key& key)
 {
-	typedef typename ft::map<Key, T, Compare, Allocator>::iterator		iterator;
+	typedef typename ft::map<Key, T, Compare, Allocator>::iterator	iterator;
 
 	ft::pair<iterator, bool>	insert_pair;
 
 	insert_pair = this->insert(ft::make_pair(key, mapped_type()));
-	return (insert_pair.first->second);			// To dig deeper
+	return (insert_pair.first->second);
 }
 
 /**********************************        MODIFIERS         **********************************/
@@ -148,20 +155,24 @@ template <class Key, class T, class Compare, class Allocator>
 ft::pair<typename ft::map<Key, T, Compare, Allocator>::iterator,bool>   ft::map<Key, T, Compare, Allocator>::insert (
 	const typename ft::map<Key, T, Compare, Allocator>::value_type& val)
 {
-	ft::pair<typename ft::map<Key, T, Compare, Allocator>::iterator,bool>	pair;
+	typedef typename ft::map<Key, T, Compare, Allocator>::iterator	iterator;
+
+	ft::pair<iterator,bool>		pair;
+
 	pair = this->_rbtree.insert(val);
 	return (pair);
-	// return (this->_rbtree.insert(val));
 }
 
 template <class Key, class T, class Compare, class Allocator>
 typename ft::map<Key, T, Compare, Allocator>::iterator	ft::map<Key, T, Compare, Allocator>::insert (
 	typename ft::map<Key, T, Compare, Allocator>::iterator position, const typename ft::map<Key, T, Compare, Allocator>::value_type& val)
 {
-	typename ft::map<Key, T, Compare, Allocator>::iterator it;
+	typedef typename ft::map<Key, T, Compare, Allocator>::iterator	iterator;
+
+	iterator	it;
+
 	it = this->_rbtree.insert(position, val);
 	return (it);
-	// return (this->_rbtree.insert(position, val));
 }
 
 template <class Key, class T, class Compare, class Allocator>
@@ -199,11 +210,6 @@ void	ft::map<Key, T, Compare, Allocator>::erase (
 		first++;
 		this->_rbtree.erase(to_erase);
 	}
-	// for (; first != last; first++)
-	// {
-	// 	to_erase = first;
-	// 	this->_rbtree.erase(to_erase);  // <-- does this work ?
-	// }
 }
 
 template <class Key, class T, class Compare, class Allocator>
@@ -243,7 +249,6 @@ typename ft::map<Key, T, Compare, Allocator>::iterator  ft::map<Key, T, Compare,
 
 	node_position = this->_rbtree.search_node(this->_get_value_type(key));
 	return (node_position);
-	// return (this->_rbtree.search_node(this->_get_value_type(key)));
 }
 
 template <class Key, class T, class Compare, class Allocator>
@@ -255,7 +260,6 @@ typename ft::map<Key, T, Compare, Allocator>::const_iterator	ft::map<Key, T, Com
 
 	node_position = this->_rbtree.search_node(this->_get_value_type(key));
 	return (node_position);
-	// return (this->_rbtree.search_node(this->_get_value_type(key)));
 }
 
 template <class Key, class T, class Compare, class Allocator>
@@ -304,7 +308,6 @@ ft::pair<typename ft::map<Key, T, Compare, Allocator>::iterator,typename ft::map
 {
     return (this->_rbtree.equal_range(this->_get_value_type(key)));
 }
-
 
 /***************************    NON-MEMBER FUNCTION OVERLOADS     ***************************/
 
@@ -365,7 +368,7 @@ ft::pair<const Key, T>	ft::map<Key, T, Compare, Allocator>::_get_value_type(cons
 /*********************************         PRINT        **********************************/
 
 template <class Key, class T, class Compare, class Allocator>
-void	ft::map<Key, T, Compare, Allocator>::print(void)
+void	ft::map<Key, T, Compare, Allocator>::_print(void)
 {
 	this->_rbtree.print();
 }
