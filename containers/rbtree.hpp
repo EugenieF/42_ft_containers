@@ -15,12 +15,15 @@ namespace ft
 	/*                                  RED BLACK TREE                                 */
 	/***********************************************************************************/
 
-	/*	Properties:
-			- Every node is colored either red or black.
-			- Root of the tree is black.
-			- All leaves are black.
-			- Both children of a red node are black i.e., there can't be consecutive red nodes.
-			- All the simple paths from a node to descendant leaves contain the same number of black nodes. */
+	/*	Properties :
+			- Every node is colored either red or black
+			- Root of the tree is black
+			- All leaves are black
+			- Both children of a red node are black i.e., there can't be consecutive red nodes
+			- All the simple paths from a node to descendant leaves contain the same number of black nodes
+
+		Time complexity Search / Insert / Delete : O(log n)
+	*/
 
 	template <class T,  class Allocator, class Compare = std::less<T> >
 	class	red_black_tree

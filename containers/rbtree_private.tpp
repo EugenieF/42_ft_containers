@@ -62,6 +62,15 @@ typename ft::red_black_tree<T, Allocator, Compare>::node_ptr	ft::red_black_tree<
 
 /************************************      ROTATION      ************************************/
 
+/*	Rotation doesn't violate the property of binary search trees
+
+					Y		right rotation		X
+				   / \		-------------->	   / \
+				  X	  C						  A   Y
+				 / \		<--------------	     / \
+				A   B		 left rotation		B   C
+*/
+
 template <class T, class Allocator, class Compare>
 void	ft::red_black_tree<T, Allocator, Compare>::_rbtree_left_rotate(
 	typename ft::red_black_tree<T, Allocator, Compare>::node_ptr x)
@@ -115,8 +124,8 @@ typename ft::red_black_tree<T, Allocator, Compare>::node_ptr	ft::red_black_tree<
 	typename ft::red_black_tree<T, Allocator, Compare>::node_ptr hint, const T& value)
 {
 	if (hint == this->get_nil()
-		|| (this->_key_comp(hint->left->data, value) && this->_key_comp(value, hint->parent->data))	== false	/*  <-- smaller than left and parent  */
-		|| (this->_key_comp(value, hint->right->data) && this->_key_comp(hint->parent->data, value)) == false)	/*  <-- greater than right and parent  */
+		|| (this->_key_comp(hint->left->data, value) && this->_key_comp(value, hint->parent->data))	== false	/*  <-- lower than left and parent  */
+		|| (this->_key_comp(value, hint->right->data) && this->_key_comp(hint->parent->data, value)) == false)	/*  <-- higher than right and parent  */
 		return (this->_root);
 	return (hint);
 }
@@ -168,6 +177,8 @@ typename ft::red_black_tree<T, Allocator, Compare>::iterator	ft::red_black_tree<
 	return (node_iterator);
 }
 
+/*  The property 4 will be violated when the parent of the inserted node is red.
+There can be six cases in the case of violation of the property 4  */
 template <class T, class Allocator, class Compare>
 void	ft::red_black_tree<T, Allocator, Compare>::_rbtree_fix_insertion (
 	typename ft::red_black_tree<T, Allocator, Compare>::node_ptr node)
@@ -178,10 +189,12 @@ void	ft::red_black_tree<T, Allocator, Compare>::_rbtree_fix_insertion (
 
 	while (node->parent->color == RED)
 	{
-		if (node->parent == node->parent->parent->left)		// node->parent is left child
+/*  The parent of the node is a left child of its parent  */
+		if (node->parent == node->parent->parent->left)
 		{
-			y = node->parent->parent->right;				// uncle of node
-			if (y->color == RED)							// Case 1
+			y = node->parent->parent->right;
+		/*  Case 1 : the uncle of node is red  */
+			if (y->color == RED)
 			{
 				node->parent->color = BLACK;
 				y->color = BLACK;
@@ -190,20 +203,24 @@ void	ft::red_black_tree<T, Allocator, Compare>::_rbtree_fix_insertion (
 			}
 			else
 			{
-				if (node == node->parent->right)			//Case 2
+		/*  Case 2 : the uncle of node is black and the node is the right child  */
+				if (node == node->parent->right)
 				{
 					node = node->parent;
 					this->_rbtree_left_rotate(node);
 				}
-				node->parent->color = BLACK;				//Case 3
+		/*  Case 3 : the uncle of node is black and the node is the left child  */
+				node->parent->color = BLACK;
 				node->parent->parent->color = RED;
 				this->_rbtree_right_rotate(node->parent->parent);
 			}
 		}
-		else												// node->parent is right child
+/*  The parent of the node is a right child of its parent  */
+		else
 		{
-			y = node->parent->parent->left;					// uncle of node
-			if (y->color == RED)							// Case 1
+			y = node->parent->parent->left;
+		/*  Case 1 : the uncle of node is red  */
+			if (y->color == RED)
 			{
 				node->parent->color = BLACK;
 				y->color = BLACK;
@@ -212,12 +229,14 @@ void	ft::red_black_tree<T, Allocator, Compare>::_rbtree_fix_insertion (
 			}
 			else
 			{
-				if (node == node->parent->left)				//Case 2
+		/*  Case 2 : the uncle of node is black and the node is the left child  */
+				if (node == node->parent->left)
 				{
 					node = node->parent;
 					this->_rbtree_right_rotate(node);
 				}
-				node->parent->color = BLACK;				//Case 3
+		/*  Case 3 : the uncle of node is black and the node is the right child  */
+				node->parent->color = BLACK;
 				node->parent->parent->color = RED;
 				this->_rbtree_left_rotate(node->parent->parent);
 			}
@@ -232,12 +251,15 @@ template <class T, class Allocator, class Compare>
 void	ft::red_black_tree<T, Allocator, Compare>::_rbtree_transplant(
 	typename ft::red_black_tree<T, Allocator, Compare>::node_ptr node1, typename ft::red_black_tree<T, Allocator, Compare>::node_ptr node2)
 {
-	if (node1->parent == this->get_nil())						// node1 is root
+	/*  node1 is root  */
+	if (node1->parent == this->get_nil())
 		this->_root = node2;
-	else if (node1 == node1->parent->left)				// node1 is left child
+	/*  node1 is left child  */
+	else if (node1 == node1->parent->left)
 		node1->parent->left = node2;
+	/*  node2 is right child  */
 	else
-		node1->parent->right = node2;					// node2 is right child
+		node1->parent->right = node2;
 	node2->parent = node1->parent;
 }
 
@@ -253,17 +275,20 @@ void	ft::red_black_tree<T, Allocator, Compare>::_rbtree_delete_node(
 	
 	y = node;
 	node_origin_color = node->color;
-	if (node->left == this->get_nil())							// no left child
+	/*  Has no left child  */
+	if (node->left == this->get_nil())
 	{
 		x = node->right;
 		this->_rbtree_transplant(node, node->right);
 	}
-	else if (node->right == this->get_nil())						// no right child
+	/*  Has no right child  */
+	else if (node->right == this->get_nil())
 	{
 		x = node->left;
 		this->_rbtree_transplant(node, node->left);
 	}
-	else												// has both children
+	/*  Has both children  */
+	else
 	{
 		y = this->_rbtree_get_minimum(node->right);
 		node_origin_color = y->color;
@@ -296,64 +321,72 @@ void	ft::red_black_tree<T, Allocator, Compare>::_rbtree_fix_deletion(
 
 	while (node != this->get_root() && node->color == BLACK)
 	{
+/*  The parent of the node is a left child of its parent  */
 		if (node == node->parent->left)
 		{
 			y = node->parent->right;
-			if (y->color == RED)						// Case 1
+		/*  Case 1  */
+			if (y->color == RED)
 			{
 				y->color = BLACK;
 				node->parent->color = RED;
 				this->_rbtree_left_rotate(node->parent);
 				y = node->parent->right;
 			}
-			if (y->left->color == BLACK
-				&& y->right->color == BLACK)			// Case 2
+		/*  Case 2  */
+			if (y->left->color == BLACK && y->right->color == BLACK)
 			{
 				y->color = RED;
 				node = node->parent;
 			}
 			else
 			{
-				if (y->right->color == BLACK)			// Case 3
+		/*  Case 3  */
+				if (y->right->color == BLACK)
 				{
 					y->left->color = BLACK;
 					y->color = RED;
 					this->_rbtree_right_rotate(y);
 					y = node->parent->right;
 				}
-				y->color = node->parent->color;			// Case 4
+		/*  Case 4  */
+				y->color = node->parent->color;
 				node->parent->color = BLACK;
 				y->right->color = BLACK;
 				this->_rbtree_left_rotate(node->parent);
 				node = this->get_root();
 			}
 		}
+/*  The parent of the node is a right child of its parent  */
 		else
 		{
 			y = node->parent->left;
-			if (y->color == RED)						// Case 1
+		/*  Case 1  */
+			if (y->color == RED)
 			{
 				y->color = BLACK;
 				node->parent->color = RED;
 				this->_rbtree_right_rotate(node->parent);
 				y = node->parent->left;
 			}
-			if (y->right->color == BLACK
-				&& y->left->color == BLACK)				// Case 2
+		/*  Case 2  */
+			if (y->right->color == BLACK && y->left->color == BLACK)
 			{
 				y->color = RED;
 				node = node->parent;
 			}
 			else
 			{
-				if (y->left->color == BLACK)			// Case 3
+		/*  Case 3  */
+				if (y->left->color == BLACK)
 				{
 					y->right->color = BLACK;
 					y->color = RED;
 					this->_rbtree_left_rotate(y);
 					y = node->parent->left;
 				}
-				y->color = node->parent->color;			// Case 4
+		/*  Case 4  */
+				y->color = node->parent->color;
 				node->parent->color = BLACK;
 				y->left->color = BLACK;
 				this->_rbtree_right_rotate(node->parent);

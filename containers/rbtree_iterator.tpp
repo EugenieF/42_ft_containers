@@ -109,6 +109,7 @@ ft::rbtree_iterator<T, Node>  	ft::rbtree_iterator<T, Node>::operator--(int)
 	return (prev);
 }
 
+/*  Conversion operator const  */
 template <class T, class Node>
 ft::rbtree_iterator<T, Node>::operator	ft::rbtree_iterator<T const, Node>(void) const
 {

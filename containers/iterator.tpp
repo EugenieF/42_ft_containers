@@ -135,6 +135,7 @@ typename ft::reverse_iterator<Iterator>::difference_type	ft::reverse_iterator<It
 	return (rev_it.base() - this->base());
 }
 
+/*  Conversion operator const  */
 template <class Iterator>
 ft::reverse_iterator<Iterator>::operator	ft::reverse_iterator<const Iterator>(void) const
 {

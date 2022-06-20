@@ -123,6 +123,7 @@ typename ft::vector_iterator<T>::difference_type	ft::vector_iterator<T>::operato
 	return (this->base() - it.base());
 }
 
+/*  Conversion operator const  */
 template <class T>
 ft::vector_iterator<T>::operator	vector_iterator<const typename ft::vector_iterator<T>::value_type>(void) const
 {
