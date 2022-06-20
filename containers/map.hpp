@@ -30,7 +30,7 @@ namespace ft
 			class	value_compare: public std::binary_function<value_type, value_type, bool>
 			{
 				private:
-					friend class map;
+					friend class map;	/*  <-- Allows access to the class's protected functions  */
 
 				protected:
 					key_compare		comp;

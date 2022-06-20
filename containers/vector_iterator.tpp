@@ -1,6 +1,6 @@
 #include "vector_iterator.hpp"
 
-/****************           MAIN           ****************/
+/********************           MAIN           *******************/
 
 template <class T>
 ft::vector_iterator<T>::vector_iterator(): _current(NULL) {}

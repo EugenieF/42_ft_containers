@@ -59,7 +59,7 @@ bool ft::map<Key, T, Compare, Allocator>::value_compare::operator()(
 	const typename ft::map<Key, T, Compare, Allocator>::value_type& lhs, const typename ft::map<Key, T, Compare, Allocator>::value_type& rhs) const
 {
     return (comp(lhs.first, rhs.first));
-};
+}
 
 /**********************************        ITERATORS         ***************************************/
 

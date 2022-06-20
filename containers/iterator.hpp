@@ -27,6 +27,8 @@ namespace ft
 	/*                                  ITERATOR TRAITS 	                           */
 	/***********************************************************************************/
 
+	/* 	A type trait provides additional information about a data type at compile time */
+
 	template <class Iterator>
 	struct iterator_traits
 	{
@@ -37,6 +39,8 @@ namespace ft
 		typedef typename Iterator::reference								reference;
 		typedef typename Iterator::iterator_category						iterator_category;
 	};
+
+	/* Template specialization : */
 
 	template <class T>
 	struct iterator_traits <T*>
@@ -59,7 +63,6 @@ namespace ft
 		typedef T const &													reference;
 		typedef std::random_access_iterator_tag								iterator_category;
 	};
-
 
 	/***********************************************************************************/
 	/*                                 REVERSE ITERATOR  	                           */

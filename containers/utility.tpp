@@ -1,6 +1,6 @@
 #include "utility.hpp"
 
-/****************           MAIN           ****************/
+/********************           MAIN          *******************/
 
 template <class T1, class T2>
 ft::pair<T1, T2>::pair():
@@ -32,8 +32,9 @@ ft::pair<T1, T2>& ft::pair<T1, T2>::operator= (const ft::pair<T1, T2>& other)
     return (*this);
 }
 
+/*  Conversion operator const  */
 template <class T1, class T2>
-ft::pair<T1, T2>::operator pair<const T1, const T2>(void) const
+ft::pair<T1, T2>::operator	pair<const T1, const T2>(void) const
 {
 	return (pair<const T1, const T2>(this->first, this->second));
 }

@@ -29,6 +29,8 @@ namespace ft
 		static const bool value = false;
 	};
 
+	/* Template specialization : */
+
 	template <>
 	struct is_integral<bool>
 	{

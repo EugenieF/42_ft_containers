@@ -16,23 +16,26 @@ namespace ft
 	/***********************************************************************************/
 
 	/*	
-		Red-black tree : is a self-balamcing binary search tree
+		Definition : 
+			-	Red-black tree is a self-balamcing binary search tree
 
 		Properties :
-			- Every node is colored either red or black
-			- Root of the tree is black
-			- All leaves (NIL) are black
-			- Both children of a red node are black i.e., there can't be consecutive red nodes
-			- All the simple paths from a node to descendant leaves contain the same number of black nodes
+			-	Every node is colored either red or black
+			-	Root of the tree is black
+			-	All leaves (NIL) are black
+			-	Both children of a red node are black i.e., there can't be consecutive red nodes
+			-	All the simple paths from a node to descendant leaves contain the same number of black nodes
 
-		Time complexity Search / Insert / Delete : O(log n)
+		Complexity :
+			-	Time complexity Search / Insert / Delete = O(log n)
+			-	Space complexity = O(n)
 	*/
 
 	template <class T,  class Allocator, class Compare = std::less<T> >
 	class	red_black_tree
 	{
 		public:
-			/********************      MEMBER TYPES     ***********************/
+			/********************      MEMBER TYPES     **********************/
 			typedef T																	value_type;
 			typedef ft::node<T>															node;
 			typedef ft::node<T>*														node_ptr;
