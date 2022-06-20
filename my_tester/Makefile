@@ -4,8 +4,7 @@ UNAME			= $(shell uname)
 
 CXX				= c++
 
-CXXFLAGS		= -Wall -Wextra -Werror -std=c++98
-CXXFLAGS		+= -Wno-deprecated-copy
+CXXFLAGS		= -Wall -Wextra -Werror -std=c++98 $(INCLUDE)
 
 FT_NAME			= ft_containers_gtests
 STD_NAME		= std_containers_gtests
@@ -17,14 +16,11 @@ CONTAINERS		= ../containers
 VALGRIND_FILE	= valgrind-out.txt
 
 ifeq ($(UNAME), Darwin)
-	CXXFLAGS	+= -std=c++11
 	LIBGTEST 	= gtest_incs/libgtest_mac.a
 else
 	LIBGTEST 	= gtest_incs/libgtest.a
 endif
-
-CXXFLAGS 		+= $(INCLUDE)
-CXXFLAGSS 		+= $(INCLUDE)
+CXXFLAGS		+= -std=c++11 -Wno-deprecated-copy
 
 MAIN			= $(SRCS_DIR)/gtest_main.cpp
 

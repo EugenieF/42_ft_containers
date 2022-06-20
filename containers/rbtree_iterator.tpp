@@ -1,6 +1,10 @@
 #include "rbtree_iterator.hpp"
 
-/****************           MAIN           ****************/
+/***********************************************************************************/
+/*                           RED-BLACK TREE ITERATOR                               */
+/***********************************************************************************/
+
+ /*****************************          MAIN          *****************************/
 
 template <class T, class Node>
 ft::rbtree_iterator<T, Node>::rbtree_iterator():
@@ -51,7 +55,7 @@ typename ft::rbtree_iterator<T, Node>::node_ptr		ft::rbtree_iterator<T, Node>::_
 	return (this->_nil);
 }
 
-/****************          ACCESS OPERATORS         ***************/
+/*************************          ACCESS OPERATORS        ************************/
 
 template <class T, class Node>
 typename ft::rbtree_iterator<T, Node>::reference	ft::rbtree_iterator<T, Node>::operator*()
@@ -77,7 +81,7 @@ typename ft::rbtree_iterator<T, Node>::const_pointer		ft::rbtree_iterator<T, Nod
 	return (&this->operator*());
 }
 
-/**************       MEMBER FUNCTION OVERLOADS       **************/
+/**********************       MEMBER FUNCTION OVERLOADS       **********************/
 
 template <class T, class Node>
 ft::rbtree_iterator<T, Node>&	ft::rbtree_iterator<T, Node>::operator++()
@@ -116,7 +120,7 @@ ft::rbtree_iterator<T, Node>::operator	ft::rbtree_iterator<T const, Node>(void) 
 	return (ft::rbtree_iterator<T const, Node>(this->current, this->_root, this->_nil));
 }
 
-/**************    NON-MEMBER FUNCTION OVERLOADS     **************/
+/*********************    NON-MEMBER FUNCTION OVERLOADS     **********************/
 
 template <class Tx, class Ty, class Ux, class Uy>
 bool	ft::operator== (const ft::rbtree_iterator<Tx, Ty>& lhs, const ft::rbtree_iterator<Ux, Uy>& rhs)
@@ -130,7 +134,7 @@ bool	ft::operator!= (const ft::rbtree_iterator<Tx, Ty>& lhs, const ft::rbtree_it
 	return (lhs.current != rhs.current);
 }
 
-/**************           PRIVATE FUNCTIONS          **************/
+/*********************           PRIVATE FUNCTIONS          **********************/
 
 template <class T, class Node>
 typename ft::rbtree_iterator<T, Node>::node_ptr		ft::rbtree_iterator<T, Node>::_minimum(node_ptr node)

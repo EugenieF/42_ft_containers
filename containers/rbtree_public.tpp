@@ -1,7 +1,8 @@
 #include "rbtree.hpp"
 
 /***********************************************************************************/
-/*                              CLASS RED BLACK TREE                               */
+/*                              CLASS RED-BLACK TREE                               */
+/*                                 Public functions                                */
 /***********************************************************************************/
 
 template <class T, class Allocator, class Compare>

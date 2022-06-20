@@ -12,13 +12,16 @@
 namespace ft
 {
 	/***********************************************************************************/
-	/*                                  RED BLACK TREE                                 */
+	/*                                  RED-BLACK TREE                                 */
 	/***********************************************************************************/
 
-	/*	Properties :
+	/*	
+		Red-black tree : is a self-balamcing binary search tree
+
+		Properties :
 			- Every node is colored either red or black
 			- Root of the tree is black
-			- All leaves are black
+			- All leaves (NIL) are black
 			- Both children of a red node are black i.e., there can't be consecutive red nodes
 			- All the simple paths from a node to descendant leaves contain the same number of black nodes
 
