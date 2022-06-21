@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vector.tpp                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: efrancon <efrancon@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/21 11:09:48 by efrancon          #+#    #+#             */
+/*   Updated: 2022/06/21 17:24:09 by efrancon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "vector.hpp"
 
 /****************           MAIN           ****************/
@@ -395,10 +407,7 @@ void	ft::vector<T, Allocator>::_relocate_range(typename ft::vector<T, Allocator>
 	ft::vector<T>	tmp(position, this->end());
 	this->_destroy_range(position, this->end());
 	for (ptr = tmp.begin(); ptr != tmp.end(); ptr++, relocation++)
-	{
 		this->_alloc.construct(&(*relocation), *ptr);
-		this->_alloc.destroy(&(*ptr));
-	}
 }
 
 /**************    NON-MEMBER FUNCTION OVERLOADS     **************/

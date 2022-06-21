@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   set.hpp                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: efrancon <efrancon@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/21 11:01:52 by efrancon          #+#    #+#             */
+/*   Updated: 2022/06/21 11:03:14 by efrancon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef __SET_HPP__
 # define __SET_HPP__
 
@@ -9,15 +21,15 @@
 
 namespace ft
 {
-	/***********************************************************************************/
-	/*                                      SET  	                                   */
-	/***********************************************************************************/
+	/**************************************************************************/
+	/*                                   SET  	                              */
+	/**************************************************************************/
 
 	template < class Key, class Compare = std::less<Key>, class Allocator = std::allocator<Key> >
 	class set
 	{
 		public:
-			/**********************      MEMBER TYPES     **********************/
+			/**********************      MEMBER TYPES     *********************/
 			typedef Key										key_type;
 			typedef Key										value_type;
 			typedef Compare									key_compare;
@@ -41,13 +53,13 @@ namespace ft
 			typedef ft::reverse_iterator<const_iterator>	const_reverse_iterator;
 
 		private:
-			/*********************    MEMBER VARIABLES   ********************/
+			/*********************    MEMBER VARIABLES   **********************/
 			tree_type										_rbtree;
 			key_compare										_key_comp;
 			allocator_type									_alloc;
 
 		public:
-			/*******************      MEMBER FUNCTIONS     *******************/
+			/********************      MEMBER FUNCTIONS     *******************/
 							/*-----------   MAIN   -----------*/
 			explicit set (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type());
 			template <class InputIterator>
@@ -99,11 +111,11 @@ namespace ft
 			ft::pair<const_iterator,const_iterator>			equal_range (const key_type& key) const;
 
 		private:
-			/*********************           PRINT           *********************/
+			/*********************          PRINT          *********************/
 			void											_print(void);
 	};
 
-	/**************    NON-MEMBER FUNCTION OVERLOADS     **************/
+	/******************     NON-MEMBER FUNCTION OVERLOADS     ******************/
 	template< class Key, class Compare, class Allocator >
 	bool	operator==(const set<Key,Compare,Allocator>& lhs, const set<Key,Compare,Allocator>& rhs);
 

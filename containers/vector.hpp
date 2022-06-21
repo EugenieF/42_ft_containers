@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vector.hpp                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: efrancon <efrancon@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/21 11:08:32 by efrancon          #+#    #+#             */
+/*   Updated: 2022/06/21 11:09:41 by efrancon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef __VECTOR_HPP__
 # define __VECTOR_HPP__
 
@@ -11,9 +23,9 @@
 
 namespace ft
 {
-	/***********************************************************************************/
-	/*                                      VECTOR                                     */
-	/***********************************************************************************/
+	/**************************************************************************/
+	/*                                  VECTOR                                */
+	/**************************************************************************/
 
 	template < class T, class Allocator = std::allocator<T> >
 	class	vector
@@ -34,14 +46,14 @@ namespace ft
 			typedef ft::reverse_iterator<const_iterator>	const_reverse_iterator;
 
 		private:
-			/*********************    MEMBER VARIABLES   ********************/
+			/*********************    MEMBER VARIABLES    *********************/
 			pointer											_data;
 			size_type										_size;
 			size_type										_capacity;
 			allocator_type									_alloc;
 
 		public:
-			/*******************      MEMBER FUNCTIONS     *******************/
+			/*******************      MEMBER FUNCTIONS     ********************/
 
 							/*-----------   MAIN   -----------*/
 			explicit 										vector (const allocator_type& alloc = allocator_type());

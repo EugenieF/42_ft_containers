@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   stack.tpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: efrancon <efrancon@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/21 11:04:51 by efrancon          #+#    #+#             */
+/*   Updated: 2022/06/21 11:04:53 by efrancon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "stack.hpp"
 
 /****************           MAIN           ****************/
@@ -95,12 +107,4 @@ template <class T, class Container>
 bool ft::operator>= (const ft::stack<T,Container>& lhs, const ft::stack<T,Container>& rhs)
 {
 	return (lhs > rhs || lhs == rhs);
-}
-
-/*********************         	 PRINT          *********************/
-
-template <class T, class Container>
-void	ft::stack<T, Container>::print(void)
-{
-	this->c.print();
 }

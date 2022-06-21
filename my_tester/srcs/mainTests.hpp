@@ -1,16 +1,14 @@
 #ifndef __MAINTESTS_HPP__
 # define __MAINTESTS_HPP__
 
-# define APPROVAL_TESTS_HIDE_DEPRECATED_CODE 1
-
 # define BLUE_B "\033[40;1;38;5;117m"
 # define ORANGE_B "\033[40;1;38;5;216m"
 # define RESET "\033[0m"
 
-# include "../containers/vector.hpp"
-# include "../containers/stack.hpp"
-# include "../containers/map.hpp"
-# include "../containers/set.hpp"
+# include "stack.hpp"
+# include "vector.hpp"
+# include "map.hpp"
+# include "set.hpp"
 # include "gtest/gtest.h"
 # include <iterator>
 # include <stack>

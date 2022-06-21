@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rbtree_public.tpp                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: efrancon <efrancon@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/21 10:57:38 by efrancon          #+#    #+#             */
+/*   Updated: 2022/06/21 10:58:13 by efrancon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "rbtree.hpp"
 
-/***********************************************************************************/
-/*                              CLASS RED-BLACK TREE                               */
-/*                                 Public functions                                */
-/***********************************************************************************/
+/******************************************************************************/
+/*                            CLASS RED-BLACK TREE                            */
+/*                               Public functions                             */
+/******************************************************************************/
 
 template <class T, class Allocator, class Compare>
 ft::red_black_tree<T, Allocator, Compare>::red_black_tree():
@@ -397,7 +409,7 @@ typename ft::red_black_tree<T, Allocator, Compare>::const_iterator	ft::red_black
 	return (node_position);
 }
 
-/************************************       PRINT        ************************************/
+/******************************       PRINT        ******************************/
 
 template <class T, class Allocator, class Compare>
 void	ft::red_black_tree<T, Allocator, Compare>::print(void)

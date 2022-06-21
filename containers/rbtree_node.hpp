@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rbtree_node.hpp                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: efrancon <efrancon@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/21 10:56:08 by efrancon          #+#    #+#             */
+/*   Updated: 2022/06/21 10:59:26 by efrancon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef __RBTREE_NODE_HPP__
 # define __RBTREE_NODE_HPP__
 
@@ -5,9 +17,9 @@
 
 namespace ft
 {
-	/***********************************************************************************/
-	/*                              RED-BLACK TREE NODE                                */
-	/***********************************************************************************/
+	/**************************************************************************/
+	/*                           RED-BLACK TREE NODE                          */
+	/**************************************************************************/
 
 	typedef enum e_color
 	{
@@ -25,14 +37,14 @@ namespace ft
 			typedef node&				reference;
 			typedef node const&			const_reference;
 
-			/*********************    MEMBER VARIABLES   ********************/
+			/*********************    MEMBER VARIABLES   **********************/
 			value_type					data;
 			pointer						left;
 			pointer						right;
 			pointer						parent;
 			bool						color;
 			
-			/********************     MEMBER FUNCTIONS    *******************/
+			/********************     MEMBER FUNCTIONS    *********************/
 			node();
 			node(const value_type& value);
 			node(const value_type& value, int color, pointer left, pointer right, pointer parent);

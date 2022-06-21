@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   stack.hpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: efrancon <efrancon@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/21 11:03:38 by efrancon          #+#    #+#             */
+/*   Updated: 2022/06/21 11:08:12 by efrancon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef __STACK_HPP__
 # define __STACK_HPP__
 
@@ -5,26 +17,26 @@
 
 namespace ft
 {
-	/***********************************************************************************/
-	/*                                     STACK  	                                   */
-	/***********************************************************************************/
+	/**************************************************************************/
+	/*                                  STACK  	                              */
+	/**************************************************************************/
 
 	template < class T, class Container = ft::vector<T> >
 	class stack
 	{
 		public:
-			/********************      MEMBER TYPES     **************************/
+			/********************      MEMBER TYPES     ***********************/
 
 			typedef typename Container::value_type	value_type;
 			typedef typename Container::size_type	size_type;
 			typedef Container						container_type;
 
 		protected:
-			/*********************    MEMBER VARIABLES   ********************/
+			/*********************    MEMBER VARIABLES   **********************/
 			Container								c;
 
 		public:
-			/*******************      MEMBER FUNCTIONS     *******************/
+			/*******************      MEMBER FUNCTIONS     ********************/
 
 							/*-----------   MAIN   -----------*/
 			explicit								stack (const container_type& cont = Container());
@@ -43,18 +55,15 @@ namespace ft
 			void									push (const value_type& val);
 			void									pop();
 
-			/*******************      FRIEND FUNCTIONS     *******************/
+			/********************      FRIEND FUNCTIONS     *******************/
 			template <class Tx, class ContainerX>
-			friend bool operator== (const stack<Tx, ContainerX>& lhs, const stack<Tx, ContainerX>& rhs);
+			friend bool								operator== (const stack<Tx, ContainerX>& lhs, const stack<Tx, ContainerX>& rhs);
 
 			template <class Tx, class ContainerX>
-			friend bool operator< (const stack<Tx, ContainerX>& lhs, const stack<Tx, ContainerX>& rhs);
-
-			/*******************             PRINT            *******************/
-			void											print(void);
+			friend bool								operator< (const stack<Tx, ContainerX>& lhs, const stack<Tx, ContainerX>& rhs);
 	};
 
-	/************************     NON-MEMBER FUNCTION OVERLOADS     ************************/
+	/***********************     NON-MEMBER FUNCTION OVERLOADS     **********************/
 
 	template <class T, class Container>
 	bool operator== (const stack<T,Container>& lhs, const stack<T,Container>& rhs);

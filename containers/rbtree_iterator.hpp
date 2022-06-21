@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rbtree_iterator.hpp                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: efrancon <efrancon@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/21 10:55:59 by efrancon          #+#    #+#             */
+/*   Updated: 2022/06/21 11:00:28 by efrancon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef __RBTREE_ITERATOR_HPP__
 # define __RBTREE_ITERATOR_HPP__
 
@@ -5,9 +17,9 @@
 
 namespace ft
 {
-	/***********************************************************************************/
-	/*                           RED-BLACK TREE ITERATOR                               */
-	/***********************************************************************************/
+	/**************************************************************************/
+	/*                        RED-BLACK TREE ITERATOR                         */
+	/**************************************************************************/
 
 	template <class T, class Node>
 	class	rbtree_iterator
@@ -57,7 +69,7 @@ namespace ft
 			node_ptr									_successor(node_ptr node);
 	};
 	
-	/********************     NON-MEMBER FUNCTION OVERLOADS      ********************/
+	/******************     NON-MEMBER FUNCTION OVERLOADS     ******************/
 
 	template <class Tx, class Ty, class Ux, class Uy>
 	bool	operator== (const rbtree_iterator<Tx, Ty>& lhs, const rbtree_iterator<Ux, Uy>& rhs);

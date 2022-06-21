@@ -7,10 +7,10 @@
 	#include <vector>
 	namespace ft = std;
 #else
-	#include "containers/stack.hpp"
-	#include "containers/vector.hpp"
-	#include "containers/map.hpp"
-	#include "containers/set.hpp"
+	#include "stack.hpp"
+	#include "vector.hpp"
+	#include "map.hpp"
+	#include "set.hpp"
 #endif
 
 

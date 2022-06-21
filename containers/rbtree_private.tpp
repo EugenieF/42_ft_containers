@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rbtree_private.tpp                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: efrancon <efrancon@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/21 10:56:22 by efrancon          #+#    #+#             */
+/*   Updated: 2022/06/21 10:57:34 by efrancon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "rbtree.hpp"
 
-/***********************************************************************************/
-/*                              CLASS RED-BLACK TREE                               */
-/*                                Private functions                                */
-/***********************************************************************************/
+/******************************************************************************/
+/*                            CLASS RED-BLACK TREE                            */
+/*                              Private functions                             */
+/******************************************************************************/
 
 template <class T, class Allocator, class Compare>
 void	ft::red_black_tree<T, Allocator, Compare>::_init_nil()
@@ -61,7 +73,7 @@ typename ft::red_black_tree<T, Allocator, Compare>::node_ptr	ft::red_black_tree<
 	return (node);
 }
 
-/************************************      ROTATION      ************************************/
+/******************************      ROTATION      ******************************/
 
 /*	Rotation doesn't violate the property of binary search trees:
 
@@ -118,7 +130,7 @@ void	ft::red_black_tree<T, Allocator, Compare>::_rbtree_right_rotate(
 	x->parent = y;
 }
 
-/************************************       INSERTION       ************************************/
+/*******************************       INSERTION       *******************************/
 
 template <class T, class Allocator, class Compare>
 typename ft::red_black_tree<T, Allocator, Compare>::node_ptr	ft::red_black_tree<T, Allocator, Compare>::_check_hint(
@@ -259,7 +271,7 @@ void	ft::red_black_tree<T, Allocator, Compare>::_rbtree_fix_insertion (
 	this->_root->color = BLACK;
 }
 
-/************************************      DELETION      ************************************/
+/*******************************      DELETION      *******************************/
 
 /*  Source : https://www.codesdope.com/course/data-structures-red-black-trees-deletion/ */
 
@@ -424,7 +436,7 @@ void	ft::red_black_tree<T, Allocator, Compare>::_rbtree_fix_deletion(
 	node->color = BLACK;
 }
 
-/************************************       SEARCH       ************************************/
+/*******************************       SEARCH       *******************************/
 
 template <class T, class Allocator, class Compare>
 typename ft::red_black_tree<T, Allocator, Compare>::iterator	ft::red_black_tree<T, Allocator, Compare>::_rbtree_search_node(
@@ -474,7 +486,7 @@ typename ft::red_black_tree<T, Allocator, Compare>::const_iterator	ft::red_black
 	return (node_position);
 }
 
-/************************************       PRINT        ************************************/
+/*******************************       PRINT        *******************************/
 
 template <class T, class Allocator, class Compare>
 void	ft::red_black_tree<T, Allocator, Compare>::_print(

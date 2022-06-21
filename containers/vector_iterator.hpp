@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vector_iterator.hpp                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: efrancon <efrancon@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/21 11:06:58 by efrancon          #+#    #+#             */
+/*   Updated: 2022/06/21 11:07:49 by efrancon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef __VECTOR_ITERATOR_HPP__
 # define __VECTOR_ITERATOR_HPP__
 
@@ -7,9 +19,9 @@
 
 namespace ft
 {
-	/***********************************************************************************/
-	/*                                  VECTOR ITERATOR                                */
-	/***********************************************************************************/
+	/***************************************************************************/
+	/*                              VECTOR ITERATOR                            */
+	/***************************************************************************/
 
 	template <class T>
 	class vector_iterator : public std::iterator<std::random_access_iterator_tag, T>
@@ -48,11 +60,11 @@ namespace ft
 			operator											vector_iterator<const value_type>(void) const;
 
 		private:
-			/*********************    MEMBER VARIABLES   ********************/
+			/*********************    MEMBER VARIABLES   *********************/
 			pointer												_current;
 	};
 	
-	/***********************    NON-MEMBER FUNCTION OVERLOADS     ***********************/
+	/***********************    NON-MEMBER FUNCTION OVERLOADS    ***********************/
 
 	template <class T, class U>
 	bool											operator== (const vector_iterator<T>& lhs, const vector_iterator<U>& rhs);
